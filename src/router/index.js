@@ -84,6 +84,230 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/content',
+    component: Layout,
+    redirect: '/content/appcontent',
+    meta: { 
+      title: '内容管理', 
+      icon: 'dashboard', 
+      affix: true 
+    },
+    children: [
+      {
+        path: 'appcontent',
+        component: () => import('@/views/content/AppContent'),
+        name: 'AppContent',
+        meta: { title: 'APP内容管理', icon: 'dashboard', affix: true },
+      },
+      {
+        path: 'wxcontent',
+        component: () => import('@/views/content/WxContent'),
+        name: 'WxContent',
+        meta: { title: '小程序内容管理', icon: 'dashboard', affix: true },
+      }
+    ]
+  },
+  {
+    path: '/content/appcontent',
+    component: Layout,
+    hidden: true,
+    meta:{title: '内容管理/App内容管理'},
+    children: [
+      {
+        hidden: true,
+        path: 'appdetail',
+        component: () => import('@/views/content/components/AppDetail'),
+        name: 'AppDetail',
+        meta: { title: 'App详情', icon: 'dashboard', affix: true, activeMenu: '/content/appcontent'},
+
+        props(route){
+          return{
+            appid:route.query.appid,
+            appname:route.query.appname,
+          }
+        }
+        
+      }
+    ]
+  },
+  {
+    path: '/content/wxcontent',
+    component: Layout,
+    hidden: true,
+    meta:{title: '内容管理/小程序内容管理'},
+    children: [
+      {
+        hidden: true,
+        path: 'wxdetail',
+        component: () => import('@/views/content/components/WxDetail'),
+        name: 'WxDetail',
+        meta: { title: '小程序详情', icon: 'dashboard', affix: true, activeMenu: '/content/wxcontent'},
+
+        props(route){
+          return{
+            appid:route.query.appid,
+            appname:route.query.appname,
+          }
+        }
+        
+      }
+    ]
+  },
+  {
+    path: '/content/wxcontent',
+    component: Layout,
+    hidden: true,
+    meta:{title: '内容管理/小程序内容管理'},
+    children: [
+      {
+        hidden: true,
+        path: 'memedetail',
+        component: () => import('@/views/content/components/MemeDetail'),
+        name: 'MemeDetail',
+        meta: { title: '小程序详情(表情包详情）', icon: 'dashboard', affix: true, activeMenu: '/content/wxcontent'},
+
+        props(route){
+          return{
+            appid:route.query.appid,
+            appname:route.query.appname,
+          }
+        }
+        
+      }
+    ]
+  },
+
+  {
+    path: '/content/wxcontent',
+    component: Layout,
+    hidden: true,
+    meta:{title: '小程序内容管理'},
+    children: [
+      {
+        hidden: true,
+        path: 'detailaddimgonly',
+        component: () => import('@/views/content-detail/DetailAddImgOnly'),
+        name: 'DetailAddImgOnly',
+        meta: { title: '详情-添加单张图片', icon: 'dashboard', activeMenu: '/content/wxcontent' },
+
+        props(route){
+          return{
+            detailid:route.query.detailid,
+            detailname:route.query.detailname,
+          }
+        }
+        
+      }
+    ]
+  },
+
+  {
+    path: '/content/wxcontent',
+    component: Layout,
+    hidden: true,
+    meta:{title: '小程序内容管理'},
+    children: [
+      {
+        hidden: true,
+        path: 'detailcheckimgs',
+        component: () => import('@/views/content-detail/DetailCheckImgs'),
+        name: 'DetailCheckImgs',
+        meta: { title: '详情-查看仅多张图片', icon: 'dashboard',activeMenu: '/content/wxcontent'},
+
+        props(route){
+          return{
+            detailid:route.query.detailid,
+            detailname:route.query.detailname,
+          }
+        }
+        
+      }
+    ]
+  },
+
+  {
+    path: '/content/wxcontent',
+    component: Layout,
+    hidden: true,
+    meta:{title: '小程序内容管理'},
+    children: [
+      {
+        hidden: true,
+        path: 'detailaddimgset',
+        component: () => import('@/views/content-detail/DetailAddImgset'),
+        name: 'DetailAddImgset',
+        meta: { title: '详情-添加多张图片', icon: 'dashboard', activeMenu: '/content/wxcontent' },
+
+        props(route){
+          return{
+            detailid:route.query.detailid,
+            detailname:route.query.detailname,
+          }
+        }
+      }
+    ]
+  },
+
+  {
+    path: '/content/appcontent/appdetail',
+    component: Layout,
+    children: [
+      {
+        hidden: true,
+        path: 'detailadd',
+        component: () => import('@/views/content-detail/DetailAdd'),
+        name: 'DetailAdd',
+        meta: { title: '详情-添加富文本编辑器', icon: 'dashboard', activeMenu: '/content/appcontent' },
+
+        props(route){
+          return{
+            detailid:route.query.detailid,
+            detailname:route.query.detailname,
+          }
+        }
+        
+      }
+    ]
+  },
+
+  {
+    path: '/content/appcontent/appdetail/DetailCheckVideo',
+    component: Layout,
+    children: [
+      {
+        hidden: true,
+        path: '',
+        component: () => import('@/views/content-detail/DetailCheckVideo'),
+        name: 'DetailCheckVideo',
+        meta: { title: '详情-查看视频', icon: 'dashboard'},
+
+        props(route){
+          return{
+            detailid:route.query.detailid,
+            detailname:route.query.detailname,
+          }
+        }
+        
+      }
+    ]
+  },
+  {
+    path: '/new',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/new/index'),
+        name: 'New',
+        meta: { title: '新增页面', icon: 'dashboard', affix: true },
+        
+      }
+    ]
+  },
+
+
+
+  {
     path: '/documentation',
     component: Layout,
     children: [
@@ -378,7 +602,7 @@ export const asyncRoutes = [
     children: [
       {
         path: 'https://github.com/PanJiaChen/vue-element-admin',
-        meta: { title: 'External Link', icon: 'link' }
+        meta: { title: 'External Link', icon: 'link' } 
       }
     ]
   },

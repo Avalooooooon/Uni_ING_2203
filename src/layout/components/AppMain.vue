@@ -2,7 +2,9 @@
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
       <keep-alive :include="cachedViews">
-        <router-view :key="key" />
+        <!-- <router-view :key="key" /> -->
+        <!-- 解决同一路由组件传参不同页面不刷新的问题 -->
+        <router-view :key="$route.fullPath" />
       </keep-alive>
     </transition>
   </section>
@@ -29,6 +31,8 @@ export default {
   width: 100%;
   position: relative;
   overflow: hidden;
+
+  background-color: #E9EBF4;
 }
 
 .fixed-header+.app-main {

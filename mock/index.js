@@ -1,3 +1,5 @@
+// 在mock文件夹下创建index.js文件，这里就是我们注册所有mock服务的地方
+// 首先引入Mock
 const Mock = require('mockjs')
 const { param2Obj } = require('./utils')
 
