@@ -79,7 +79,7 @@
 
 <script>
 import { fetchPaperList, addPaperList } from "@/api/wxwallpaper";
-import { getToken } from "@/utils/auth";git push -u origin develop
+import { getToken } from "@/utils/auth";
 
 export default {
   name: "WxDetail",
@@ -94,9 +94,14 @@ export default {
       list: [], // 存放搜索前的所有数据
       newlist: [], // 存放搜索结果
       // 发送给后端的数据
-      paperParams: {
+      paperParamsFetch: {
         bizid: "uniwarm",
         token: getToken(),
+      },
+      paperParamsAdd: {
+        bizid: "uniwarm",
+        token: getToken(),
+        se_name: this.newSetName,
       },
       // 后端传来的数据
       modulesData: [],
@@ -124,7 +129,7 @@ export default {
   },
 
   mounted() {
-    fetchPaperList(this.paperParams)
+    fetchPaperList(this.paperParamsFetch)
       .then((response) => {
         console.log(response.data);
         this.modulesData = response.data;
@@ -143,10 +148,10 @@ export default {
       // this.$router.push({
       //   name: "DetailAddImgOnly",
       // });
-      addPaperList(this.paperParams)
+      addPaperList(this.paperParamsAdd)
         .then((response) => {
           console.log(response.data);
-          this.modulesData = response.data;
+          // this.modulesData = response.data;
         })
         .catch((err) => {
           console.log(err);
