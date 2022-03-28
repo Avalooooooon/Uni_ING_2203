@@ -16,11 +16,26 @@
         >
         </el-input>
         <i class="el-icon-sort"></i>
-        <i class="el-icon-plus" @click="adddetailimgset"></i>
-        <!-- <i class="el-icon-plus" @click="dialogVisible = true"></i> -->
+        <i class="el-icon-plus" @click="dialogVisible = true"></i>
 
         <!-- 编辑弹窗 -->
-        
+        <el-dialog title="新增系列" :visible.sync="dialogVisible">
+          <el-form :model="form">
+            <el-form-item label="系列名称：" :label-width="formLabelWidth">
+              <el-input
+                v-model="form.newSetName"
+                placeholder="请输入新系列名称（40字以内）"
+                autocomplete="off"
+              ></el-input>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="dialogVisible = false; adddetailimgset()"
+              >确 定</el-button
+            >
+          </div>
+        </el-dialog>
       </div>
     </div>
 
@@ -28,7 +43,14 @@
     <div class="main-wrapper">
       <!-- :key="item.id" -->
       <div class="module-wrapper" v-for="item in modulesData" :key="item.id">
-        <img class="appimg" :src="(item.first)?('https://www.bizspace.cn'+item.first):(images.emptyimg)"/>
+        <img
+          class="appimg"
+          :src="
+            item.first
+              ? 'https://www.bizspace.cn' + item.first
+              : images.emptyimg
+          "
+        />
         <!-- <img class="appimg" :src="imgs.emptyimg"/> -->
         <div class="textversion">{{ item.se_name }}</div>
         <div class="texttime">张三 上传时间2022/xx/xx xx:xx</div>
@@ -56,8 +78,8 @@
 </template>
 
 <script>
-import { fetchPaperList } from '@/api/wxwallpaper'
-import { getToken } from '@/utils/auth'
+import { fetchPaperList, addPaperList } from "@/api/wxwallpaper";
+import { getToken } from "@/utils/auth";git push -u origin develop
 
 export default {
   name: "WxDetail",
@@ -66,21 +88,28 @@ export default {
   data() {
     return {
       images: {
-                emptyimg:require('@/assets/empty.jpg'),
-              },
+        emptyimg: require("@/assets/empty.jpg"),
+      },
       searchKey: "", // 用户输入到搜索框中的关键字
       list: [], // 存放搜索前的所有数据
       newlist: [], // 存放搜索结果
       // 发送给后端的数据
-      paperParams:{
+      paperParams: {
         bizid: "uniwarm",
         token: getToken(),
       },
       // 后端传来的数据
-      modulesData: [
-      ],
+      modulesData: [],
 
-      dialogVisible: false,  // 弹窗显隐
+      dialogVisible: false, // 弹窗显隐
+      form: {
+        newSetName: "",
+        // delivery: false,
+        // type: [],
+        // resource: "",
+        // desc: "",
+      },
+      formLabelWidth: "120px",
     };
   },
 
@@ -94,14 +123,15 @@ export default {
     },
   },
 
-  mounted(){
-    fetchPaperList(this.paperParams).then(response => {
-      console.log(response.data)
-      this.modulesData = response.data
-      }).catch(err => {
-        console.log(err)
+  mounted() {
+    fetchPaperList(this.paperParams)
+      .then((response) => {
+        console.log(response.data);
+        this.modulesData = response.data;
       })
-  
+      .catch((err) => {
+        console.log(err);
+      });
   },
 
   methods: {
@@ -110,9 +140,17 @@ export default {
     },
 
     adddetailimgset() {
-      this.$router.push({
-        name: "DetailAddImgOnly",
-      });
+      // this.$router.push({
+      //   name: "DetailAddImgOnly",
+      // });
+      addPaperList(this.paperParams)
+        .then((response) => {
+          console.log(response.data);
+          this.modulesData = response.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
 
     // 搜索功能，绑定@input，数据变化就监测
@@ -229,7 +267,9 @@ export default {
       color: #6e6e70;
       font-size: 20px;
     }
-
+    i:hover {
+      cursor: pointer;
+    }
     ::v-deep {
       // 搜索框
       .el-input {
@@ -245,6 +285,16 @@ export default {
         height: 3.5vh;
         line-height: 3.5vh;
       }
+    }
+  }
+
+  // 弹窗样式
+  ::v-deep .el-dialog{
+    top:15%;
+    width: 45%;
+
+    .el-dialog__body{
+      padding-bottom: 0;
     }
   }
 }
@@ -277,12 +327,10 @@ export default {
       height: 85%;
     }
 
-    .textversion{
-
+    .textversion {
     }
 
-    .texttime{
-
+    .texttime {
     }
     // 当前系列的按钮
     ::v-deep .editbtn .el-button--medium {
