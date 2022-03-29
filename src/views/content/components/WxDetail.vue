@@ -264,7 +264,7 @@ export default {
 
   width: 100%;
   height: 100%;
-  margin: 0.7% 1%;
+  margin: 0 1%;
 }
 
 // 顶部区域
@@ -274,8 +274,9 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 98%;
-  height: 7vh;
-  padding: 1.4% 0% 1% 0%;
+  height: 5vh;
+  //border: 1px solid black;
+  padding: 1.4% 0 1% 0;
 
   // 返回上层
   .back {
@@ -350,6 +351,7 @@ export default {
     flex-wrap: nowrap;
     justify-content: space-between;
     align-content: flex-start;
+    //border: 1px solid black;
 
     width: 19.6%; // (100-1*2)/5，根组件的左右margin为1%
     padding: 1% 5px 0 5px;

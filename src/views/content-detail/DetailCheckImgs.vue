@@ -4,7 +4,7 @@
     <div class="topbar-wrapper">
       <div class="back" @click="toback">
         <i class="el-icon-arrow-left" />
-        具体名称: {{ detailname }}, 系列id: {{ detailid }}
+        {{ detailname }}
       </div>
       <div class="btns">
         <div class="btnsimg">
@@ -114,7 +114,6 @@ export default {
         s_id: this.detailid
       },
       url: 'https://www.bizspace.cn',
-      formData: '',
       paperParams2: {
         bizid: 'uniwarm',
         token: getToken(),
@@ -189,6 +188,7 @@ export default {
             message: '上传成功'
           })
           this.dialogVisible = false
+          this.imageUrl = ''
           this.getPaperList()
         }
       })
@@ -313,8 +313,9 @@ export default {
   align-content: flex-start;
 
   width: 100%;
-  height: 100%;
-  margin: 0.7% 1%;
+  height: calc(100vh - 50px);
+  //border: 1px solid black;
+  margin: 0 1%;
   .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
@@ -350,8 +351,8 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 98%;
-  height: 7vh;
-  padding: 1.4% 0% 1% 0%;
+  height: 5vh;
+  padding: 1.4% 0 1% 0;
 
   .back {
     color: #d79432;
@@ -424,6 +425,8 @@ export default {
 // 主要内容区域（多个）
 .images-wrapper {
   width: 100%;
+  height: 100%;
+  //border: 1px solid black;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

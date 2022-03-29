@@ -43,7 +43,7 @@ export function addPaperList(paperParams) {
 export function delPaperList(paperParams) {
   console.log(paperParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_wp_se_detail',
+    url: '/api/wechatweb/v1/service/delete_wp_se',
     method: 'get',
     params: paperParams,
     headers: {
