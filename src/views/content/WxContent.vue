@@ -1,7 +1,7 @@
 <template>
 <!-- “小程序内容管理”主界面,显示的是四个系列 -->
   <div class="content-wrapper">
-    <div class="module-wrapper" @click="toWxDetail" appid='1' appname='早安晚安'>
+    <div class="module-wrapper" @click="toMorningDetail" appid='1' appname='早安晚安'>
       <img class="appimg" src='https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png'>
       早安晚安
     </div>
@@ -13,7 +13,7 @@
       <img class="appimg" src='https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/sticker.png'>
       表情包
     </div>
-    <div class="module-wrapper" @click="toWxDetail" appid='4' appname='爱的密语'>
+    <div class="module-wrapper" @click="toSecretDetail" appid='4' appname='爱的密语'>
       <img class="appimg" src='https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/secret.png'>
       爱的密语
     </div>
@@ -25,7 +25,21 @@ export default {
   name: 'WxContent',
 
   methods:{
-    // 点击功能图片，进入该功能详情WxDetail
+    // 进入早安晚安详情
+    toMorningDetail(event){
+      let appid = event.currentTarget.getAttribute("appid")
+      let appname = event.currentTarget.getAttribute("appname")
+
+      this.$router.push({
+        name:'MorningDetail',
+        query:{
+          appid:appid,
+          appname:appname,
+          },
+      })
+    },
+
+    // 进入壁纸详情
     toWxDetail(event){
       let appid = event.currentTarget.getAttribute("appid")
       let appname = event.currentTarget.getAttribute("appname")
@@ -51,7 +65,22 @@ export default {
           appname:appname,
           },
       })
+    },
+    
+    // 进入爱的密语详情
+    toSecretDetail(event){
+      let appid = event.currentTarget.getAttribute("appid")
+      let appname = event.currentTarget.getAttribute("appname")
+
+      this.$router.push({
+        name:'SecretDetail',
+        query:{
+          appid:appid,
+          appname:appname,
+          },
+      })
     }
+
   }
 }
 </script>

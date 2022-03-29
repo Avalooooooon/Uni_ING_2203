@@ -1,18 +1,18 @@
 <template>
-  <!-- ”小程序内容管理“——壁纸 -->
+  <!-- ”小程序内容管理“——爱的密语 -->
   <div class="content-wrapper">
     <div class="topbar-wrapper">
       <div class="back" @click="toback">
         <!-- <span class="lt">&lt;&nbsp;</span>  -->
         <i class="el-icon-arrow-left"></i>
-        壁纸
+        爱的密语
       </div>
       <div class="edit" v-show="appname !== '早安晚安'">
         <!-- @input="searchEvent" -->
         <el-input
           placeholder="请输入关键词搜索"
           suffix-icon="el-icon-search"
-          v-model="searchKey"
+          v-model="searchKey"          
         >
         </el-input>
         <i class="el-icon-sort"></i>
@@ -84,11 +84,11 @@
 </template>
 
 <script>
-import { fetchPaperList, addPaperList, delPaperList } from "@/api/wxwallpaper";
+import { fetchSecretList, addSecretList, delSecretList } from "@/api/wxsecret";
 import { getToken } from "@/utils/auth";
 
 export default {
-  name: "WxDetail",
+  name: "SecretDetail",
   props: ["appid", "appname"],
 
   data() {
@@ -102,16 +102,16 @@ export default {
       // 后端传来的数据
       modulesData: [],
       // 发送给后端的数据
-      paperParamsFetch: {
+      secretParamsFetch: {
         bizid: "uniwarm",
         token: getToken(),
       },
-      paperParamsAdd: {
+      secretParamsAdd: {
         bizid: "uniwarm",
         token: getToken(),
         se_name: "",
       },
-      paperParamsDel: {
+      secretParamsDel: {
         bizid: "uniwarm",
         token: getToken(),
         se_id: "",
@@ -141,7 +141,7 @@ export default {
   },
 
   mounted() {
-    fetchPaperList(this.paperParamsFetch)
+    fetchSecretList(this.secretParamsFetch)
       .then((response) => {
         console.log(response.data);
         this.modulesData = response.data;
@@ -159,11 +159,11 @@ export default {
 
     // 添加新系列
     adddetailimgset() {
-      this.paperParamsAdd.se_name = this.form.newSetName;
-      addPaperList(this.paperParamsAdd)
+      this.secretParamsAdd.se_name = this.form.newSetName;
+      addSecretList(this.secretParamsAdd)
         .then((response) => {
           // console.log(response.data);
-          fetchPaperList(this.paperParamsFetch)
+          fetchSecretList(this.secretParamsFetch)
                 .then((response) => {
                   this.modulesData = response.data;
                 })
@@ -179,17 +179,17 @@ export default {
 
     // 删除当前系列
     deletealert(event) {
-      this.paperParamsDel.se_id = event.currentTarget.id;
+      this.secretParamsDel.se_id = event.currentTarget.id;
       this.$confirm("确定要删除该资源吗？", "提示", {
         cancelButtonText: "取消",
         confirmButtonText: "确定",
         type: "warning",
       })
         .then(() => {
-          delPaperList(this.paperParamsDel)
+          delSecretList(this.secretParamsDel)
             .then((response) => {
               console.log(response.data);
-              fetchPaperList(this.paperParamsFetch)
+              fetchSecretList(this.secretParamsFetch)
                 .then((response) => {
                   this.modulesData = response.data;
                 })
@@ -222,7 +222,7 @@ export default {
 
       this.$router.push({
         // name:'DetailAddImgset',
-        name: "DetailCheckImgs",
+        name: "DetailCheckImgsSecret",
         query: {
           detailid: detailid,
           detailname: detailname,

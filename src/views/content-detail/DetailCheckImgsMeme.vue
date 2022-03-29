@@ -1,10 +1,10 @@
 <template>
-  <!-- ”小程序内容管理“——壁纸——系列详情 -->
+  <!-- ”小程序内容管理“——表情包——系列详情 -->
   <div class="content-wrapper">
     <div class="topbar-wrapper">
       <div class="back" @click="toback">
         <i class="el-icon-arrow-left"></i>
-        壁纸,具体名称: {{ detailname }}, 系列id: {{ detailid }}
+        表情包,具体名称: {{ detailname }}, 系列id: {{ detailid }}
       </div>
       <div class="btns">
         <div class="btnsimg">
@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { fetchPaperListDetail } from '@/api/wxwallpaper'
+import { fetchMemeListDetail } from '@/api/wxmeme'
 import { getToken } from '@/utils/auth'
 
 export default {
@@ -72,7 +72,7 @@ export default {
       isDeleteing: false, // 删除状态
 
       // 发送给后端的数据
-      paperParams:{
+      memeParams:{
         bizid: "uniwarm",
         token: getToken(),
         se_id: this.detailid,
@@ -92,9 +92,9 @@ watch: {
 },
 
   mounted(){
-      console.log(this.paperParams)
+      console.log(this.memeParams)
 
-    fetchPaperListDetail(this.paperParams).then(response => {
+    fetchMemeListDetail(this.memeParams).then(response => {
       console.log(response.data)
       this.imgsData = response.data
       }).catch(err => {

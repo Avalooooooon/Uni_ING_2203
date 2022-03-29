@@ -1,10 +1,10 @@
 <template>
-  <!-- ”小程序内容管理“——壁纸——系列详情 -->
+  <!-- ”小程序内容管理“——早安晚安——系列详情 -->
   <div class="content-wrapper">
     <div class="topbar-wrapper">
       <div class="back" @click="toback">
         <i class="el-icon-arrow-left"></i>
-        壁纸,具体名称: {{ detailname }}, 系列id: {{ detailid }}
+        早安晚安,具体名称: {{ detailname }}, 系列id: {{ detailid }}
       </div>
       <div class="btns">
         <div class="btnsimg">
@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { fetchPaperListDetail } from '@/api/wxwallpaper'
+import { fetchMorningListDetail } from '@/api/wxmorning'
 import { getToken } from '@/utils/auth'
 
 export default {
@@ -72,7 +72,7 @@ export default {
       isDeleteing: false, // 删除状态
 
       // 发送给后端的数据
-      paperParams:{
+      morningParams:{
         bizid: "uniwarm",
         token: getToken(),
         se_id: this.detailid,
@@ -92,9 +92,9 @@ watch: {
 },
 
   mounted(){
-      console.log(this.paperParams)
+      console.log(this.morningParams)
 
-    fetchPaperListDetail(this.paperParams).then(response => {
+    fetchMorningListDetail(this.morningParams).then(response => {
       console.log(response.data)
       this.imgsData = response.data
       }).catch(err => {

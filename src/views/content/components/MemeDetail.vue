@@ -1,19 +1,18 @@
 <template>
-  <!-- 从”小程序内容管理“点击表情包入口图进入的表情包系列详情界面 -->
+  <!-- ”小程序内容管理“——表情包 -->
   <div class="content-wrapper">
     <div class="topbar-wrapper">
       <div class="back" @click="toback">
         <!-- <span class="lt">&lt;&nbsp;</span>  -->
         <i class="el-icon-arrow-left"></i>
-        {{ appname }}
+        表情包
       </div>
       <div class="edit" v-show="appname !== '早安晚安'">
         <!-- @input="searchEvent" -->
         <el-input
           placeholder="请输入关键词搜索"
           suffix-icon="el-icon-search"
-          v-model="searchKey"
-          
+          v-model="searchKey"  
         >
         </el-input>
         <i class="el-icon-sort"></i>
@@ -49,13 +48,17 @@
     <div class="main-wrapper">
       <!-- :key="item.id" -->
       <div class="module-wrapper" v-for="item in modulesData" :key="item.id">
-        <img
+        <!-- <img
           class="appimg"
           :src="
             item.first
               ? 'https://www.bizspace.cn' + item.first
               : images.emptyimg
           "
+        /> -->
+        <img
+          class="appimg"
+          src="@/assets/ht.jpg"
         />
         <!-- <img class="appimg" :src="imgs.emptyimg"/> -->
         <div class="textversion">{{ item.se_name }}</div>
@@ -70,6 +73,7 @@
             >查看</el-button
           >
           <el-button
+            :id="item.id"
             type="primary"
             class="deletebtn"
             @click="deletealert"
@@ -84,7 +88,7 @@
 </template>
 
 <script>
-import { fetchPaperList, addPaperList, delPaperList } from "@/api/wxwallpaper";
+import { fetchMemeList, addMemeList, delMemeList } from "@/api/wxmeme";
 import { getToken } from "@/utils/auth";
 
 export default {
@@ -102,16 +106,16 @@ export default {
       // 后端传来的数据
       modulesData: [],
       // 发送给后端的数据
-      paperParamsFetch: {
+      memeParamsFetch: {
         bizid: "uniwarm",
         token: getToken(),
       },
-      paperParamsAdd: {
+      memeParamsAdd: {
         bizid: "uniwarm",
         token: getToken(),
         se_name: "",
       },
-      paperParamsDel: {
+      memeParamsDel: {
         bizid: "uniwarm",
         token: getToken(),
         se_id: "",
@@ -141,7 +145,7 @@ export default {
   },
 
   mounted() {
-    fetchPaperList(this.paperParamsFetch)
+    fetchMemeList(this.memeParamsFetch)
       .then((response) => {
         console.log(response.data);
         this.modulesData = response.data;
@@ -159,19 +163,12 @@ export default {
 
     // 添加新系列
     adddetailimgset() {
-      // this.$router.push({
-      //   name: "DetailAddImgOnly",
-      // });
-      this.paperParamsAdd.se_name = this.form.newSetName;
-      addPaperList(this.paperParamsAdd)
+      this.memeParamsAdd.se_name = this.form.newSetName;
+      addMemeList(this.memeParamsAdd)
         .then((response) => {
           // console.log(response.data);
-          // console.log(window.data.newSetName);
-          this.modulesData = response.data;
-
-          fetchPaperList(this.paperParamsFetch)
+          fetchMemeList(this.memeParamsFetch)
                 .then((response) => {
-                  console.log(response.data);
                   this.modulesData = response.data;
                 })
                 .catch((err) => {
@@ -186,21 +183,18 @@ export default {
 
     // 删除当前系列
     deletealert(event) {
-      this.paperParamsDel.se_id = event.currentTarget.detailid;
-      // console.log(event.currentTarget.id)
+      this.memeParamsDel.se_id = event.currentTarget.id;
       this.$confirm("确定要删除该资源吗？", "提示", {
         cancelButtonText: "取消",
         confirmButtonText: "确定",
         type: "warning",
       })
         .then(() => {
-          delPaperList(this.paperParamsDel)
+          delMemeList(this.memeParamsDel)
             .then((response) => {
-              // console.log(response.data);
-              // this.modulesData = response.data;
-              fetchPaperList(this.paperParamsFetch)
+              console.log(response.data);
+              fetchMemeList(this.memeParamsFetch)
                 .then((response) => {
-                  console.log(response.data);
                   this.modulesData = response.data;
                 })
                 .catch((err) => {
@@ -224,6 +218,22 @@ export default {
         // this.$router.go(0)
 
     },
+
+    // 点击当前系列的查看按钮
+    checkdetail(event) {
+      let detailid = event.currentTarget.getAttribute("detailid");
+      let detailname = event.currentTarget.getAttribute("detailname");
+
+      this.$router.push({
+        // name:'DetailAddImgset',
+        name: "DetailCheckImgsMeme",
+        query: {
+          detailid: detailid,
+          detailname: detailname,
+        },
+      });
+    },
+
   },
 
   // 搜索功能，绑定@input，数据变化就监测
@@ -246,20 +256,7 @@ export default {
     }
   },
 
-  // 点击当前系列的查看按钮
-    checkdetail(event) {
-      let detailid = event.currentTarget.getAttribute("detailid");
-      let detailname = event.currentTarget.getAttribute("detailname");
-
-      this.$router.push({
-        // name:'DetailAddImgset',
-        name: "DetailCheckImgs",
-        query: {
-          detailid: detailid,
-          detailname: detailname,
-        },
-      });
-    },
+  
 
   // 生命周期，先给搜索结果赋值为全部数据
   created() {
@@ -378,11 +375,18 @@ export default {
       height: 85%;
     }
 
+    // 模块主图下的两行文字
     .textversion {
+      font-size: 14px;
+      font-weight: bold;
+      margin: 1.5vh 0 1vh 0;
+    }
+    .texttime {
+      font-size: 10px;
+      color: #777777;
+      margin: 0 0 1.5vh 0;
     }
 
-    .texttime {
-    }
     // 当前系列的按钮
     ::v-deep .editbtn .el-button--medium {
       font-size: 12px;
@@ -408,14 +412,4 @@ export default {
   }
 }
 
-.textversion {
-  font-size: 14px;
-  font-weight: bold;
-  margin: 1.5vh 0 1vh 0;
-}
-.texttime {
-  font-size: 10px;
-  color: #777777;
-  margin: 0 0 1.5vh 0;
-}
 </style>

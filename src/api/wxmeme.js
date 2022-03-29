@@ -1,26 +1,26 @@
-// 小程序内容管理——壁纸相关接口
+// 小程序内容管理——表情包相关接口
 import request from '@/utils/request'
 
-// 获取壁纸的系列
-export function fetchPaperList(paperParams) {
-  console.log(paperParams)
+// 获取表情包的系列
+export function fetchMemeList(memeParams) {
+  console.log(memeParams)
   return request({
     url: '/api/wechatweb/v1/service/get_wp_se',
     method: 'get',
-    params: paperParams,
+    params: memeParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
   })
 }
 
-// 获取一个壁纸系列内的图片
-export function fetchPaperListDetail(paperParams) {
-  console.log(paperParams)
+// 获取一个表情包系列内的图片
+export function fetchMemeListDetail(memeParams) {
+  console.log(memeParams)
   return request({
     url: '/api/wechatweb/v1/service/get_wp_se_detail',
     method: 'get',
-    params: paperParams,
+    params: memeParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
@@ -28,12 +28,12 @@ export function fetchPaperListDetail(paperParams) {
 }
 
 // 系列新增
-export function addPaperList(paperParams) {
-  console.log(paperParams)
+export function addMemeList(memeParams) {
+  console.log(memeParams)
   return request({
     url: '/api/wechatweb/v1/service/add_wp_se',
     method: 'get',
-    params: paperParams,
+    params: memeParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
@@ -41,12 +41,12 @@ export function addPaperList(paperParams) {
 }
 
 // 系列删除
-export function delPaperList(paperParams) {
-  console.log(paperParams)
+export function delMemeList(memeParams) {
+  console.log(memeParams)
   return request({
     url: '/api/wechatweb/v1/service/delete_wp_se',
     method: 'get',
-    params: paperParams,
+    params: memeParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
@@ -54,12 +54,12 @@ export function delPaperList(paperParams) {
 }
 
 // 系列设置封面
-export function setPaperListFirst(paperParams) {
-  console.log(paperParams)
+export function setMemeListFirst(memeParams) {
+  console.log(memeParams)
   return request({
     url: '/api/wechatweb/v1/service/get_wp_se_detail',
     method: 'get',
-    params: paperParams,
+    params: memeParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
@@ -67,12 +67,12 @@ export function setPaperListFirst(paperParams) {
 }
 
 // 系列内图片新增
-export function addPaperListDetail(paperParams) {
-  console.log(paperParams)
+export function addMemeListDetail(memeParams) {
+  console.log(memeParams)
   return request({
     url: '/api/wechatweb/v1/service/get_wp_se_detail',
     method: 'get',
-    params: paperParams,
+    params: memeParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
@@ -80,12 +80,12 @@ export function addPaperListDetail(paperParams) {
 }
 
 // 系列内图片删除
-export function delPaperListDetail(paperParams) {
-  console.log(paperParams)
+export function delMemeListDetail(memeParams) {
+  console.log(memeParams)
   return request({
     url: '/api/wechatweb/v1/service/get_wp_se_detail',
     method: 'get',
-    params: paperParams,
+    params: memeParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },

@@ -1,26 +1,26 @@
-// 小程序内容管理——壁纸相关接口
+// 小程序内容管理——爱的密语相关接口
 import request from '@/utils/request'
 
-// 获取壁纸的系列
-export function fetchPaperList(paperParams) {
-  console.log(paperParams)
+// 获取爱的密语的系列
+export function fetchSecretList(secretParams) {
+  console.log(secretParams)
   return request({
     url: '/api/wechatweb/v1/service/get_wp_se',
     method: 'get',
-    params: paperParams,
+    params: secretParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
   })
 }
 
-// 获取一个壁纸系列内的图片
-export function fetchPaperListDetail(paperParams) {
-  console.log(paperParams)
+// 获取一个爱的密语系列内的图片
+export function fetchSecretListDetail(secretParams) {
+  console.log(secretParams)
   return request({
     url: '/api/wechatweb/v1/service/get_wp_se_detail',
     method: 'get',
-    params: paperParams,
+    params: secretParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
@@ -28,12 +28,12 @@ export function fetchPaperListDetail(paperParams) {
 }
 
 // 系列新增
-export function addPaperList(paperParams) {
-  console.log(paperParams)
+export function addSecretList(secretParams) {
+  console.log(secretParams)
   return request({
     url: '/api/wechatweb/v1/service/add_wp_se',
     method: 'get',
-    params: paperParams,
+    params: secretParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
@@ -41,12 +41,12 @@ export function addPaperList(paperParams) {
 }
 
 // 系列删除
-export function delPaperList(paperParams) {
-  console.log(paperParams)
+export function delSecretList(secretParams) {
+  console.log(secretParams)
   return request({
     url: '/api/wechatweb/v1/service/delete_wp_se',
     method: 'get',
-    params: paperParams,
+    params: secretParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
@@ -54,12 +54,12 @@ export function delPaperList(paperParams) {
 }
 
 // 系列设置封面
-export function setPaperListFirst(paperParams) {
-  console.log(paperParams)
+export function setSecretListFirst(secretParams) {
+  console.log(secretParams)
   return request({
     url: '/api/wechatweb/v1/service/get_wp_se_detail',
     method: 'get',
-    params: paperParams,
+    params: secretParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
@@ -67,12 +67,12 @@ export function setPaperListFirst(paperParams) {
 }
 
 // 系列内图片新增
-export function addPaperListDetail(paperParams) {
-  console.log(paperParams)
+export function addSecretListDetail(secretParams) {
+  console.log(secretParams)
   return request({
     url: '/api/wechatweb/v1/service/get_wp_se_detail',
     method: 'get',
-    params: paperParams,
+    params: secretParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
@@ -80,12 +80,12 @@ export function addPaperListDetail(paperParams) {
 }
 
 // 系列内图片删除
-export function delPaperListDetail(paperParams) {
-  console.log(paperParams)
+export function delSecretListDetail(secretParams) {
+  console.log(secretParams)
   return request({
     url: '/api/wechatweb/v1/service/get_wp_se_detail',
     method: 'get',
-    params: paperParams,
+    params: secretParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
