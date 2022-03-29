@@ -8,19 +8,40 @@
         {{ appname }}
       </div>
       <div class="edit" v-show="appname !== '早安晚安'">
+        <!-- @input="searchEvent" -->
         <el-input
           placeholder="请输入关键词搜索"
           suffix-icon="el-icon-search"
           v-model="searchKey"
-          @input="searchEvent"
+          
         >
         </el-input>
         <i class="el-icon-sort"></i>
-        <i class="el-icon-plus" @click="adddetailimgset"></i>
-        <!-- <i class="el-icon-plus" @click="dialogVisible = true"></i> -->
+        <i class="el-icon-plus" @click="dialogVisible = true"></i>
 
         <!-- 编辑弹窗 -->
-        
+        <el-dialog title="新增系列" :visible.sync="dialogVisible">
+          <el-form :model="form">
+            <el-form-item label="系列名称：" :label-width="formLabelWidth">
+              <el-input
+                v-model="form.newSetName"
+                placeholder="请输入新系列名称（40字以内）"
+                autocomplete="off"
+              ></el-input>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible = false">取 消</el-button>
+            <el-button
+              type="primary"
+              @click="
+                dialogVisible = false;
+                adddetailimgset();
+              "
+              >确 定</el-button
+            >
+          </div>
+        </el-dialog>
       </div>
     </div>
 
@@ -28,7 +49,14 @@
     <div class="main-wrapper">
       <!-- :key="item.id" -->
       <div class="module-wrapper" v-for="item in modulesData" :key="item.id">
-        <img class="appimg" :src="(item.first)?('https://www.bizspace.cn'+item.first):(images.emptyimg)"/>
+        <img
+          class="appimg"
+          :src="
+            item.first
+              ? 'https://www.bizspace.cn' + item.first
+              : images.emptyimg
+          "
+        />
         <!-- <img class="appimg" :src="imgs.emptyimg"/> -->
         <div class="textversion">{{ item.se_name }}</div>
         <div class="texttime">张三 上传时间2022/xx/xx xx:xx</div>
@@ -42,6 +70,7 @@
             >查看</el-button
           >
           <el-button
+            :id="item.id"
             type="primary"
             class="deletebtn"
             @click="deletealert"
@@ -56,8 +85,8 @@
 </template>
 
 <script>
-import { fetchPaperList } from '@/api/wxwallpaper'
-import { getToken } from '@/utils/auth'
+import { fetchPaperList, addPaperList, delPaperList } from "@/api/wxwallpaper";
+import { getToken } from "@/utils/auth";
 
 export default {
   name: "WxDetail",
@@ -65,22 +94,40 @@ export default {
 
   data() {
     return {
-      images: {
-                emptyimg:require('@/assets/empty.jpg'),
-              },
+      images: { // 占位图
+        emptyimg: require("@/assets/empty.jpg"),
+      },
       searchKey: "", // 用户输入到搜索框中的关键字
       list: [], // 存放搜索前的所有数据
       newlist: [], // 存放搜索结果
+      // 后端传来的数据
+      modulesData: [],
       // 发送给后端的数据
-      paperParams:{
+      paperParamsFetch: {
         bizid: "uniwarm",
         token: getToken(),
       },
-      // 后端传来的数据
-      modulesData: [
-      ],
+      paperParamsAdd: {
+        bizid: "uniwarm",
+        token: getToken(),
+        se_name: "",
+      },
+      paperParamsDel: {
+        bizid: "uniwarm",
+        token: getToken(),
+        se_id: "",
+      },
+      
 
-      dialogVisible: false,  // 弹窗显隐
+      dialogVisible: false, // 弹窗显隐
+      form: {
+        newSetName: "",
+        // delivery: false,
+        // type: [],
+        // resource: "",
+        // desc: "",
+      },
+      formLabelWidth: "120px",
     };
   },
 
@@ -94,45 +141,82 @@ export default {
     },
   },
 
-  mounted(){
-    fetchPaperList(this.paperParams).then(response => {
-      console.log(response.data)
-      this.modulesData = response.data
-      }).catch(err => {
-        console.log(err)
+  mounted() {
+    fetchPaperList(this.paperParamsFetch)
+      .then((response) => {
+        console.log(response.data);
+        this.modulesData = response.data;
       })
-  
+      .catch((err) => {
+        console.log(err);
+      });
   },
 
   methods: {
+    // 返回上一级
     toback() {
       this.$router.go(-1);
     },
 
+    // 添加新系列
     adddetailimgset() {
-      this.$router.push({
-        name: "DetailAddImgOnly",
-      });
+      // this.$router.push({
+      //   name: "DetailAddImgOnly",
+      // });
+      this.paperParamsAdd.se_name = this.form.newSetName;
+      addPaperList(this.paperParamsAdd)
+        .then((response) => {
+          // console.log(response.data);
+          fetchPaperList(this.paperParamsFetch)
+                .then((response) => {
+                  this.modulesData = response.data;
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+        this.form.newSetName = ""
     },
 
-    // 搜索功能，绑定@input，数据变化就监测
-    searchEvent() {
-      this.clearTimer();
-      if (this.searchKey && this.searchKey.length > 0) {
-        // 输入到搜索框中的关键字不为空
-        //获取当前延时函数的ID，便于后面clearTimeout清除该ID对应的延迟函数
-        this.timer = setTimeout(() => {
-          this.$emit("searchHandler", this.searchKey);
-        }, 500);
-      } else {
-        // 输入到搜索框中的关键字为空
-        this.$emit("searchHandler", this.searchKey);
-      }
-    },
-    clearTimer() {
-      if (this.timer) {
-        clearTimeout(this.timer);
-      }
+    // 删除当前系列
+    deletealert(event) {
+      this.paperParamsDel.se_id = event.currentTarget.id;
+      this.$confirm("确定要删除该资源吗？", "提示", {
+        cancelButtonText: "取消",
+        confirmButtonText: "确定",
+        type: "warning",
+      })
+        .then(() => {
+          delPaperList(this.paperParamsDel)
+            .then((response) => {
+              console.log(response.data);
+              fetchPaperList(this.paperParamsFetch)
+                .then((response) => {
+                  this.modulesData = response.data;
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          this.$message({
+            type: "success",
+            message: "删除成功!",
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
+        });
+        // this.$router.go(0)
+
     },
 
     // 点击当前系列的查看按钮
@@ -150,27 +234,29 @@ export default {
       });
     },
 
-    // 点击当前系列的删除按钮
-    deletealert() {
-      this.$confirm("确定要删除该资源吗？", "提示", {
-        cancelButtonText: "取消",
-        confirmButtonText: "确定",
-        type: "warning",
-      })
-        .then(() => {
-          this.$message({
-            type: "success",
-            message: "删除成功!",
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除",
-          });
-        });
-    },
   },
+
+  // 搜索功能，绑定@input，数据变化就监测
+  searchEvent() {
+    this.clearTimer();
+    if (this.searchKey && this.searchKey.length > 0) {
+      // 输入到搜索框中的关键字不为空
+      //获取当前延时函数的ID，便于后面clearTimeout清除该ID对应的延迟函数
+      this.timer = setTimeout(() => {
+        this.$emit("searchHandler", this.searchKey);
+      }, 500);
+    } else {
+      // 输入到搜索框中的关键字为空
+      this.$emit("searchHandler", this.searchKey);
+    }
+  },
+  clearTimer() {
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
+  },
+
+  
 
   // 生命周期，先给搜索结果赋值为全部数据
   created() {
@@ -229,7 +315,9 @@ export default {
       color: #6e6e70;
       font-size: 20px;
     }
-
+    i:hover {
+      cursor: pointer;
+    }
     ::v-deep {
       // 搜索框
       .el-input {
@@ -245,6 +333,16 @@ export default {
         height: 3.5vh;
         line-height: 3.5vh;
       }
+    }
+  }
+
+  // 弹窗样式
+  ::v-deep .el-dialog {
+    top: 15%;
+    width: 45%;
+
+    .el-dialog__body {
+      padding-bottom: 0;
     }
   }
 }
@@ -277,13 +375,6 @@ export default {
       height: 85%;
     }
 
-    .textversion{
-
-    }
-
-    .texttime{
-
-    }
     // 当前系列的按钮
     ::v-deep .editbtn .el-button--medium {
       font-size: 12px;

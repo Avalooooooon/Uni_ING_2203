@@ -94,16 +94,16 @@ export const constantRoutes = [
     },
     children: [
       {
-        path: 'appcontent',
-        component: () => import('@/views/content/AppContent'),
-        name: 'AppContent',
-        meta: { title: 'APP内容管理', icon: 'dashboard', affix: true },
-      },
-      {
         path: 'wxcontent',
         component: () => import('@/views/content/WxContent'),
         name: 'WxContent',
         meta: { title: '小程序内容管理', icon: 'dashboard', affix: true },
+      },
+      {
+        path: 'appcontent',
+        component: () => import('@/views/content/AppContent'),
+        name: 'AppContent',
+        meta: { title: 'APP内容管理', icon: 'dashboard', affix: true },
       }
     ]
   },
@@ -141,7 +141,7 @@ export const constantRoutes = [
         path: 'wxdetail',
         component: () => import('@/views/content/components/WxDetail'),
         name: 'WxDetail',
-        meta: { title: '小程序详情', icon: 'dashboard', affix: true, activeMenu: '/content/wxcontent'},
+        meta: { title: '小程序详情(非表情包）', icon: 'dashboard', affix: true, activeMenu: '/content/wxcontent'},
 
         props(route){
           return{

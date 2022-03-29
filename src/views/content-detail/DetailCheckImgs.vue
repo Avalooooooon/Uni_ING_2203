@@ -81,7 +81,7 @@ export default {
         bizid: "uniwarm",
         token: getToken(),
         se_id: this.detailid,
-        page: 0,
+        page: 1,
       },
       // 后端传来的数据
       imgsData: [],
@@ -93,17 +93,8 @@ export default {
   },
 
 watch: {
-　　// 利用watch方法检测路由变化：
-　　'$route': function (to, from) {
-　　　　// 拿到目标参数 to.query.id 去再次请求数据接口
-　　　　this.paperParams
-　　}
+
 },
-
-
-
-  // 用于需要在同一路由地址，但携带参数不同的情况下跳转，如果不使用则页面不会进行刷新
-
 
   mounted(){
       console.log(this.paperParams)
