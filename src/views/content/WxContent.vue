@@ -1,20 +1,20 @@
 <template>
-<!-- “小程序内容管理”主界面,显示的是四个系列 -->
+  <!-- “小程序内容管理”主界面,显示的是四个系列 -->
   <div class="content-wrapper">
-    <div class="module-wrapper" @click="toMorningDetail" appid='1' appname='早安晚安'>
-      <img class="appimg" src='https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png'>
+    <div class="module-wrapper" appid="1" appname="早安晚安" @click="toMorningDetail">
+      <img class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png">
       早安晚安
     </div>
-    <div class="module-wrapper" @click="toWxDetail" appid='2' appname='壁纸'>
-      <img class="appimg" src='https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/wallpaper.png'>
+    <div class="module-wrapper" appid="2" appname="壁纸" @click="toWxDetail">
+      <img class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/wallpaper.png">
       壁纸
     </div>
-    <div class="module-wrapper" @click="toMemeDetail" appid='3' appname='表情包'>
-      <img class="appimg" src='https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/sticker.png'>
+    <div class="module-wrapper" appid="3" appname="表情包" @click="toMemeDetail">
+      <img class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/sticker.png">
       表情包
     </div>
-    <div class="module-wrapper" @click="toSecretDetail" appid='4' appname='爱的密语'>
-      <img class="appimg" src='https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/secret.png'>
+    <div class="module-wrapper" appid="4" appname="爱的密语" @click="toSecretDetail">
+      <img class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/secret.png">
       爱的密语
     </div>
   </div>
@@ -24,60 +24,60 @@
 export default {
   name: 'WxContent',
 
-  methods:{
+  methods: {
     // 进入早安晚安详情
-    toMorningDetail(event){
-      let appid = event.currentTarget.getAttribute("appid")
-      let appname = event.currentTarget.getAttribute("appname")
+    toMorningDetail(event) {
+      const appid = event.currentTarget.getAttribute('appid')
+      const appname = event.currentTarget.getAttribute('appname')
 
       this.$router.push({
-        name:'MorningDetail',
-        query:{
-          appid:appid,
-          appname:appname,
-          },
+        name: 'MorningDetail',
+        query: {
+          appid: appid,
+          appname: appname
+        }
       })
     },
 
     // 进入壁纸详情
-    toWxDetail(event){
-      let appid = event.currentTarget.getAttribute("appid")
-      let appname = event.currentTarget.getAttribute("appname")
+    toWxDetail(event) {
+      const appid = event.currentTarget.getAttribute('appid')
+      const appname = event.currentTarget.getAttribute('appname')
 
       this.$router.push({
-        name:'WxDetail',
-        query:{
-          appid:appid,
-          appname:appname,
-          },
+        name: 'WxDetail',
+        query: {
+          appid: appid,
+          appname: appname
+        }
       })
     },
 
     // 进入表情包详情
-    toMemeDetail(event){
-      let appid = event.currentTarget.getAttribute("appid")
-      let appname = event.currentTarget.getAttribute("appname")
+    toMemeDetail(event) {
+      const appid = event.currentTarget.getAttribute('appid')
+      const appname = event.currentTarget.getAttribute('appname')
 
       this.$router.push({
-        name:'MemeDetail',
-        query:{
-          appid:appid,
-          appname:appname,
-          },
+        name: 'MemeDetail',
+        query: {
+          appid: appid,
+          appname: appname
+        }
       })
     },
-    
+
     // 进入爱的密语详情
-    toSecretDetail(event){
-      let appid = event.currentTarget.getAttribute("appid")
-      let appname = event.currentTarget.getAttribute("appname")
+    toSecretDetail(event) {
+      const appid = event.currentTarget.getAttribute('appid')
+      const appname = event.currentTarget.getAttribute('appname')
 
       this.$router.push({
-        name:'SecretDetail',
-        query:{
-          appid:appid,
-          appname:appname,
-          },
+        name: 'SecretDetail',
+        query: {
+          appid: appid,
+          appname: appname
+        }
       })
     }
 
@@ -114,7 +114,6 @@ export default {
   text-align: center;
   font-size: 14px;
 
-
   img{
     width: 100%;
     height:100%;
@@ -124,7 +123,5 @@ export default {
     cursor: pointer;
   }
 }
-
-
 
 </style>
