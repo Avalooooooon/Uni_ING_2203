@@ -167,12 +167,8 @@ export default {
       addPaperList(this.paperParamsAdd)
         .then((response) => {
           // console.log(response.data);
-          // console.log(window.data.newSetName);
-          this.modulesData = response.data;
-
           fetchPaperList(this.paperParamsFetch)
                 .then((response) => {
-                  console.log(response.data);
                   this.modulesData = response.data;
                 })
                 .catch((err) => {
@@ -188,7 +184,6 @@ export default {
     // 删除当前系列
     deletealert(event) {
       this.paperParamsDel.se_id = event.currentTarget.id;
-      // console.log(event.currentTarget.id)
       this.$confirm("确定要删除该资源吗？", "提示", {
         cancelButtonText: "取消",
         confirmButtonText: "确定",
@@ -197,11 +192,9 @@ export default {
         .then(() => {
           delPaperList(this.paperParamsDel)
             .then((response) => {
-              // console.log(response.data);
-              // this.modulesData = response.data;
+              console.log(response.data);
               fetchPaperList(this.paperParamsFetch)
                 .then((response) => {
-                  console.log(response.data);
                   this.modulesData = response.data;
                 })
                 .catch((err) => {
@@ -382,11 +375,6 @@ export default {
       height: 85%;
     }
 
-    .textversion {
-    }
-
-    .texttime {
-    }
     // 当前系列的按钮
     ::v-deep .editbtn .el-button--medium {
       font-size: 12px;
