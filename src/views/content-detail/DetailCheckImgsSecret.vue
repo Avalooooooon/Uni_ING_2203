@@ -4,7 +4,7 @@
     <div class="topbar-wrapper">
       <div class="back" @click="toback">
         <i class="el-icon-arrow-left"></i>
-        爱的密语,具体名称: {{ detailname }}, 系列id: {{ detailid }}
+        {{ detailname }}
       </div>
       <div class="btns">
         <div class="btnsimg">
@@ -18,9 +18,9 @@
           <el-button
             type="primary"
             class="uploadsinglebtn"
-            @click="checkdetail"
             detailid="002"
             detailname="品牌灵魂v2"
+            @click="dialogVisible = true"
             >上传图片</el-button
           >
           <el-button type="primary" class="deletesinglebtn" @click="isdeleteimg"
@@ -31,7 +31,6 @@
           <el-button
             type="primary"
             class="editsetbtn"
-            @click="checkdetail"
             detailid="002"
             detailname="品牌灵魂v2"
             >编辑图集</el-button
@@ -43,28 +42,53 @@
       </div>
     </div>
 
+    <!--上传图片弹窗-->
+    <el-dialog
+      title="上传图片"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :before-close="handleClose"
+    >
+      <div style="width: 100%; text-align: center">
+        <el-upload
+          class="avatar-uploader"
+          action="/v3upload/admin_wx_wallpaper"
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload"
+          :http-request="uploadFile"
+        >
+          <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+          <i v-else class="el-icon-plus avatar-uploader-icon" />
+        </el-upload>
+      </div>
+    </el-dialog>
+
     <!-- 主要内容显示区域 -->
     <div class="images-wrapper">
       <div class="singleimage" v-for="item in imgsData" :key="item.id">
         <div class="block">
-          <img class="appimg" :src="'https://www.bizspace.cn'+item.image" />
-          <!-- <img class="appimg" src="@/assets/ht.jpg" /> -->
+          <img class="appimg" :src="'https://www.bizspace.cn' + item.image" />
           <div v-if="isDeleteing" ref="imgDelete" class="delete-img">
-            <i class="el-icon-delete" @click="deleteimg()"></i>
+            <i class="el-icon-delete" @click="deleteimg(item)"></i>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
-import { fetchSecretListDetail } from '@/api/wxsecret'
-import { getToken } from '@/utils/auth'
+import {
+  fetchSecretListDetail,
+  secretListUpload,
+  delSecretListDetail,
+} from "@/api/wxsecret";
+import { getToken } from "@/utils/auth";
+// import axios from 'axios'
 
 export default {
-  name: "DetailCheckImgs",
+  name: "DetailCheckImgsSecret",
   props: ["detailid", "detailname"],
 
   data() {
@@ -72,54 +96,118 @@ export default {
       isDeleteing: false, // 删除状态
 
       // 发送给后端的数据
-      secretParams:{
+      secretParams: {
         bizid: "uniwarm",
         token: getToken(),
         se_id: this.detailid,
         page: 0,
       },
+      secretParams1: {
+        bizid: "uniwarm",
+        token: getToken(),
+        s_id: this.detailid,
+      },
+      url: "https://www.bizspace.cn",
+      secretParams2: {
+        bizid: "uniwarm",
+        token: getToken(),
+        img_id: "",
+      },
+
       // 后端传来的数据
       imgsData: [],
 
-      trueimgsData: [
-        // 遍历 可以使用push和pop添加和删除
-      ],
+      dialogVisible: false, // 上传图片弹窗
+      imageUrl: "",
     };
   },
 
-watch: {
-
-},
-
-  mounted(){
-      console.log(this.secretParams)
-
-    fetchSecretListDetail(this.secretParams).then(response => {
-      console.log(response.data)
-      this.imgsData = response.data
-      }).catch(err => {
-        console.log(err)
-      })
-  
+  created() {
+    // console.log(this.paperParams)
+    this.getSecretList();
   },
+
+  // mounted() {
+  //   console.log(this.secretParams);
+
+  //   fetchSecretListDetail(this.secretParams)
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       this.imgsData = response.data;
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // },
 
   methods: {
     toback() {
       this.$router.go(-1);
     },
 
-    // 点击上传图片按键
-    checkdetail(event) {
-      let detailid = event.currentTarget.getAttribute("detailid");
-      let detailname = event.currentTarget.getAttribute("detailname");
+    getSecretList() {
+      fetchSecretListDetail(this.secretParams)
+        .then((response) => {
+          console.log(response.data);
+          this.imgsData = response.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
 
-      this.$router.push({
-        name: "DetailAddImgset",
-        query: {
-          detailid: detailid,
-          detailname: detailname,
-        },
+    // onChange(file) {
+    //   console.log(file)
+    //   this.headimg = file.file
+    // const fr = new FileReader()
+    // fr.readAsDataURL(file.raw)
+    // fr.onload = () => {
+    //   this.headimg = fr.result
+    //   console.log(this.headimg)
+    // }
+    // },
+
+    uploadFile(file) {
+      console.log(file);
+      var formData = new FormData();
+      formData.append("headimg", file.file);
+      secretListUpload(this.secretParams1, formData).then((res) => {
+        console.log(res);
+        this.imageUrl = this.url + res.image;
+        if (res.res === 0) {
+          this.$message({
+            type: "success",
+            message: "上传成功",
+          });
+          this.dialogVisible = false;
+          this.imageUrl = "";
+          this.getSecretList();
+        }
       });
+    },
+    handleAvatarSuccess(res, file) {
+      console.log(file);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg";
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error("上传头像图片只能是 JPG 格式!");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+      }
+      return isJPG && isLt2M;
+    },
+
+    // 关闭上传图片弹窗
+    handleClose(done) {
+      this.$confirm("确认关闭？")
+        .then((_) => {
+          done();
+        })
+        .catch((_) => {});
     },
 
     // 点击删除图片按键
@@ -149,27 +237,54 @@ watch: {
           });
         });
     },
+
     // 进入删除状态后删除单张图片
-    deleteimg() {
-      this.$confirm("是否删除该张图片?", "删除", {
+    deleteimg(item) {
+      // console.log(item)
+      this.secretParams2.img_id = item.id;
+      this.$confirm("是否删除该张图片？", "确认信息", {
+        distinguishCancelAndClose: true,
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "warning",
       })
         .then(() => {
-          this.$refs.img.src = this.uploadImage;
-          this.$refs.imgDelete.style.display = "none";
-          this.$message({
-            type: "success",
-            message: "删除成功!",
+          delSecretListDetail(this.secretParams2).then((res) => {
+            console.log(res);
+            if (res.res === 0) {
+              this.$message({
+                type: "success",
+                message: "删除成功",
+              });
+              this.dialogVisible = false;
+              this.getSecretList();
+            }
           });
         })
-        .catch(() => {
+        .catch((action) => {
           this.$message({
             type: "info",
             message: "已取消删除",
           });
         });
+      // this.$confirm('是否删除该张图片?', '删除', {
+      //   confirmButtonText: '确定',
+      //   cancelButtonText: '取消',
+      //   type: 'warning'
+      // })
+      //   .then(() => {
+      //     this.$refs.img.src = this.uploadImage
+      //     this.$refs.imgDelete.style.display = 'none'
+      //     this.$message({
+      //       type: 'success',
+      //       message: '删除成功!'
+      //     })
+      //   })
+      //   .catch(() => {
+      //     this.$message({
+      //       type: 'info',
+      //       message: '已取消删除'
+      //     })
+      //   })
     },
 
     // 保存当前状态

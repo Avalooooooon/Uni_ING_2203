@@ -66,11 +66,11 @@ export function setMorningListFirst(morningParams) {
   })
 }
 
-// 系列内图片新增
-export function addMorningListDetail(morningParams) {
+// 系列内图片删除
+export function delMorningListDetail(morningParams) {
   console.log(morningParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_wp_se_detail',
+    url: '/api/wechatweb/v1/service/delete_wp_img',
     method: 'get',
     params: morningParams,
     headers: {
@@ -79,15 +79,16 @@ export function addMorningListDetail(morningParams) {
   })
 }
 
-// 系列内图片删除
-export function delMorningListDetail(morningParams) {
-  console.log(morningParams)
+// 上传图片
+export function morningListUpload(morningParams1, headimg) {
+  console.log(morningParams1)
   return request({
-    url: '/api/wechatweb/v1/service/get_wp_se_detail',
-    method: 'get',
-    params: morningParams,
+    url: '/v3upload/admin_wx_wallpaper',
+    method: 'post',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'multipart/form-data'
     },
+    params: morningParams1,
+    data: headimg
   })
 }

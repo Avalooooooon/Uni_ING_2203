@@ -1,3 +1,4 @@
+// 小程序内容管理——壁纸相关接口
 import request from '@/utils/request'
 
 // 获取壁纸的系列

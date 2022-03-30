@@ -66,11 +66,11 @@ export function setMemeListFirst(memeParams) {
   })
 }
 
-// 系列内图片新增
-export function addMemeListDetail(memeParams) {
+// 系列内图片删除
+export function delMemeListDetail(memeParams) {
   console.log(memeParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_wp_se_detail',
+    url: '/api/wechatweb/v1/service/delete_wp_img',
     method: 'get',
     params: memeParams,
     headers: {
@@ -79,15 +79,16 @@ export function addMemeListDetail(memeParams) {
   })
 }
 
-// 系列内图片删除
-export function delMemeListDetail(memeParams) {
-  console.log(memeParams)
+// 上传图片
+export function memeListUpload(memeParams1, headimg) {
+  console.log(memeParams1)
   return request({
-    url: '/api/wechatweb/v1/service/get_wp_se_detail',
-    method: 'get',
-    params: memeParams,
+    url: '/v3upload/admin_wx_wallpaper',
+    method: 'post',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'multipart/form-data'
     },
+    params: memeParams1,
+    data: headimg
   })
 }

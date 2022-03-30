@@ -1,5 +1,5 @@
 <template>
-  <!-- 从”小程序内容管理“点击入口图进入的系列详情界面中点击查看，进入查看系列详情界面 -->
+  <!-- ”小程序内容管理“——壁纸——系列详情 -->
   <div class="content-wrapper">
     <div class="topbar-wrapper">
       <div class="back" @click="toback">
@@ -13,19 +13,19 @@
             type="primary"
             class="uploadsinglebtn"
             @click="savedetail"
-          >保存</el-button>
+            >保存</el-button
+          >
           <el-button
             type="primary"
             class="uploadsinglebtn"
             detailid="002"
             detailname="品牌灵魂v2"
             @click="dialogVisible = true"
-          >上传图片</el-button>
-          <el-button
-            type="primary"
-            class="deletesinglebtn"
-            @click="isdeleteimg"
-          >删除图片</el-button>
+            >上传图片</el-button
+          >
+          <el-button type="primary" class="deletesinglebtn" @click="isdeleteimg"
+            >删除图片</el-button
+          >
         </div>
         <div class="btnsset">
           <el-button
@@ -33,12 +33,11 @@
             class="editsetbtn"
             detailid="002"
             detailname="品牌灵魂v2"
-          >编辑图集</el-button>
-          <el-button
-            type="primary"
-            class="deletesetbtn"
-            @click="deleteset"
-          >删除图集</el-button>
+            >编辑图集</el-button
+          >
+          <el-button type="primary" class="deletesetbtn" @click="deleteset"
+            >删除图集</el-button
+          >
         </div>
       </div>
     </div>
@@ -50,7 +49,7 @@
       width="30%"
       :before-close="handleClose"
     >
-      <div style="width:100%; text-align: center;">
+      <div style="width: 100%; text-align: center">
         <el-upload
           class="avatar-uploader"
           action="/v3upload/admin_wx_wallpaper"
@@ -59,43 +58,38 @@
           :before-upload="beforeAvatarUpload"
           :http-request="uploadFile"
         >
-          <img v-if="imageUrl" :src="imageUrl" class="avatar">
+          <img v-if="imageUrl" :src="imageUrl" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon" />
         </el-upload>
-
       </div>
-
     </el-dialog>
 
     <!-- 主要内容显示区域 -->
     <div class="images-wrapper">
-      <div v-for="item in imgsData" :key="item.id" class="singleimage">
+      <div class="singleimage" v-for="item in imgsData" :key="item.id">
         <div class="block">
-          <img class="appimg" :src="'https://www.bizspace.cn'+item.image">
+          <img class="appimg" :src="'https://www.bizspace.cn' + item.image" />
           <div v-if="isDeleteing" ref="imgDelete" class="delete-img">
             <i class="el-icon-delete" @click="deleteimg(item)" />
           </div>
         </div>
       </div>
-
-      <!--
-              <div v-for="(item, index) in imgList" :key="index">
-                <img :src="require('../assets/images/'+ item.n +'.jpg')" alt="">
-                <span>{{item.n}}</span>
-              </div>
-      -->
     </div>
   </div>
 </template>
 
 <script>
-import { fetchPaperListDetail, paperListUpload, delPaperListDetail } from '@/api/wxwallpaper'
-import { getToken } from '@/utils/auth'
+import {
+  fetchPaperListDetail,
+  paperListUpload,
+  delPaperListDetail,
+} from "@/api/wxwallpaper";
+import { getToken } from "@/utils/auth";
 // import axios from 'axios'
 
 export default {
-  name: 'DetailCheckImgs',
-  props: ['detailid', 'detailname'],
+  name: "DetailCheckImgs",
+  props: ["detailid", "detailname"],
 
   data() {
     return {
@@ -103,68 +97,52 @@ export default {
 
       // 发送给后端的数据
       paperParams: {
-        bizid: 'uniwarm',
+        bizid: "uniwarm",
         token: getToken(),
         se_id: this.detailid,
-        page: 0
+        page: 0,
       },
       paperParams1: {
-        bizid: 'uniwarm',
+        bizid: "uniwarm",
         token: getToken(),
-        s_id: this.detailid
+        s_id: this.detailid,
       },
-      url: 'https://www.bizspace.cn',
+      url: "https://www.bizspace.cn",
       paperParams2: {
-        bizid: 'uniwarm',
+        bizid: "uniwarm",
         token: getToken(),
-        img_id: ''
+        img_id: "",
       },
 
       // 后端传来的数据
       imgsData: [],
 
-      trueimgsData: [
-        // 遍历 可以使用push和pop添加和删除
-      ],
       dialogVisible: false, // 上传图片弹窗
-      imageUrl: ''
-
-    }
+      imageUrl: "",
+    };
   },
-
-  watch: {
-    // 利用watch方法检测路由变化：
-    '$route': function(to, from) {
-      // 拿到目标参数 to.query.id 去再次请求数据接口
-      this.paperParams
-    }
-  },
-
-  // 用于需要在同一路由地址，但携带参数不同的情况下跳转，如果不使用则页面不会进行刷新
 
   created() {
     // console.log(this.paperParams)
-    this.getPaperList()
+    this.getPaperList();
   },
 
   methods: {
     toback() {
-      this.$router.go(-1)
-    },
-    getPaperList() {
-      fetchPaperListDetail(this.paperParams).then(response => {
-        console.log(response.data)
-        this.imgsData = response.data
-      }).catch(err => {
-        console.log(err)
-      })
+      this.$router.go(-1);
     },
 
-    // 点击上传图片按键
-    // checkdetail(event) {
-    //   const detailid = event.currentTarget.getAttribute('detailid')
-    //   const detailname = event.currentTarget.getAttribute('detailname')
-    // },
+    getPaperList() {
+      fetchPaperListDetail(this.paperParams)
+        .then((response) => {
+          console.log(response.data);
+          this.imgsData = response.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
     // onChange(file) {
     //   console.log(file)
     //   this.headimg = file.file
@@ -175,104 +153,106 @@ export default {
     //   console.log(this.headimg)
     // }
     // },
+
     uploadFile(file) {
-      console.log(file)
-      var formData = new FormData()
-      formData.append('headimg', file.file)
-      paperListUpload(this.paperParams1, formData).then(res => {
-        console.log(res)
-        this.imageUrl = this.url + res.image
+      console.log(file);
+      var formData = new FormData();
+      formData.append("headimg", file.file);
+      paperListUpload(this.paperParams1, formData).then((res) => {
+        console.log(res);
+        this.imageUrl = this.url + res.image;
         if (res.res === 0) {
           this.$message({
-            type: 'success',
-            message: '上传成功'
-          })
-          this.dialogVisible = false
-          this.imageUrl = ''
-          this.getPaperList()
+            type: "success",
+            message: "上传成功",
+          });
+          this.dialogVisible = false;
+          this.imageUrl = "";
+          this.getPaperList();
         }
-      })
+      });
     },
     handleAvatarSuccess(res, file) {
-      console.log(file)
+      console.log(file);
     },
     beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg'
-      const isLt2M = file.size / 1024 / 1024 < 2
+      const isJPG = file.type === "image/jpeg";
+      const isLt2M = file.size / 1024 / 1024 < 2;
 
       if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!')
+        this.$message.error("上传头像图片只能是 JPG 格式!");
       }
       if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!')
+        this.$message.error("上传头像图片大小不能超过 2MB!");
       }
-      return isJPG && isLt2M
+      return isJPG && isLt2M;
     },
 
     // 关闭上传图片弹窗
     handleClose(done) {
-      this.$confirm('确认关闭？')
-        .then(_ => {
-          done()
+      this.$confirm("确认关闭？")
+        .then((_) => {
+          done();
         })
-        .catch(_ => {})
+        .catch((_) => {});
     },
 
     // 点击删除图片按键
     isdeleteimg() {
-      this.isDeleteing = true
+      this.isDeleteing = true;
     },
 
     // 点击删除图集按键
     deleteset() {
-      this.$confirm('确定删除该图集？', '删除', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
+      this.$confirm("确定删除该图集？", "删除", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
         .then(() => {
-          this.$refs.img.src = this.uploadImage
-          this.$refs.imgDelete.style.display = 'none'
+          this.$refs.img.src = this.uploadImage;
+          this.$refs.imgDelete.style.display = "none";
           this.$message({
-            type: 'success',
-            message: '删除成功!'
-          })
+            type: "success",
+            message: "删除成功!",
+          });
         })
         .catch(() => {
           this.$message({
-            type: 'info',
-            message: '已取消删除'
-          })
-        })
+            type: "info",
+            message: "已取消删除",
+          });
+        });
     },
+    
     // 进入删除状态后删除单张图片
     deleteimg(item) {
       // console.log(item)
-      this.paperParams2.img_id = item.id
-      this.$confirm('是否删除该张图片？', '确认信息', {
+      this.paperParams2.img_id = item.id;
+      this.$confirm("是否删除该张图片？", "确认信息", {
         distinguishCancelAndClose: true,
-        confirmButtonText: '确定',
-        cancelButtonText: '取消'
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
       })
         .then(() => {
-          delPaperListDetail(this.paperParams2).then(res => {
-            console.log(res)
+          delPaperListDetail(this.paperParams2).then((res) => {
+            console.log(res);
             if (res.res === 0) {
               this.$message({
-                type: 'success',
-                message: '删除成功'
-              })
-              this.dialogVisible = false
-              this.getPaperList()
+                type: "success",
+                message: "删除成功",
+              });
+              this.dialogVisible = false;
+              this.getPaperList();
             }
-          })
+          });
         })
-        .catch(action => {
+        .catch((action) => {
           this.$message({
-            type: 'info',
-            message: '已取消删除'
-          })
-        })
+            type: "info",
+            message: "已取消删除",
+          });
+        });
       // this.$confirm('是否删除该张图片?', '删除', {
       //   confirmButtonText: '确定',
       //   cancelButtonText: '取消',
@@ -296,11 +276,11 @@ export default {
 
     // 保存当前状态
     savedetail() {
-      this.isDeleteing = false
-      this.fetchPaperListDetail()
-    }
-  }
-}
+      this.isDeleteing = false;
+      this.fetchPaperListDetail();
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -326,7 +306,7 @@ export default {
     height: 178px;
   }
   .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
+    border-color: #409eff;
   }
   .avatar-uploader-icon {
     font-size: 28px;
@@ -476,5 +456,4 @@ export default {
     }
   }
 }
-
 </style>
