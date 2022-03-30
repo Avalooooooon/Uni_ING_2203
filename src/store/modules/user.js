@@ -53,6 +53,7 @@ const actions = {
       user.login(payload).then(response => {
         commit('SET_TOKEN', response.token)
         setToken(response.token)
+        sessionStorage.setItem('headimg', response.headimg)
         resolve()
       }).catch(error => {
         reject(error)
