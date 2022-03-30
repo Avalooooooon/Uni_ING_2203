@@ -98,7 +98,19 @@ export const constantRoutes = [{
       title: '小程序内容管理',
       icon: 'wechat',
       affix: true
-    }
+    },
+//     children: [{
+//       path: 'morningdetail',
+//       hidden: true,
+//       // component: () => import('@/views/content/components/MorningDetail'),
+//       component: () => import('@/views/content/AppContent'),
+//       name: 'MorningDetail',
+//       meta: {
+//         title: '早安晚安',
+//         activeMenu: '/content/wxcontent'
+//       }
+//     }
+// ]
   },
   {
     path: '/content/wxcontent/morningdetail',

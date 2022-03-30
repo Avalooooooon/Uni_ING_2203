@@ -296,6 +296,7 @@ export default {
 
   width: 100%;
   height: calc(100vh - 50px);
+  overflow-y: scroll;
   //border: 1px solid black;
   margin: 0 1%;
   .avatar-uploader .el-upload {
