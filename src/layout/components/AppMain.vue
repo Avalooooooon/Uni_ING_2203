@@ -4,7 +4,8 @@
       <keep-alive :include="cachedViews">
         <!-- <router-view :key="key" /> -->
         <!-- 解决同一路由组件传参不同页面不刷新的问题 -->
-        <router-view :key="$route.fullPath" />
+        <!-- <router-view :key="$route.fullPath"/> -->
+        <router-view :key="new Date().getTime()"/>
       </keep-alive>
     </transition>
   </section>
