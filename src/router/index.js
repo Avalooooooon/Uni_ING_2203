@@ -70,20 +70,20 @@ export const constantRoutes = [
     component: () => import('@/views/error-page/401'),
     hidden: true
   },
-  // {
-  //   path: '/',
-  //   component: Layout,
-  //   redirect: '/dashboard',
-  //   hidden: true,
-  //   children: [
-  //     {
-  //       path: 'dashboard',
-  //       component: () => import('@/views/dashboard/index'),
-  //       name: 'Dashboard',
-  //       meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-  //     }
-  //   ]
-  // },
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/dashboard',
+    hidden: true,
+    children: [
+      {
+        path: 'dashboard',
+        component: () => import('@/views/dashboard/index'),
+        name: 'Dashboard',
+        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
   {
     path: '/content',
     component: Layout,
@@ -139,10 +139,33 @@ export const constantRoutes = [
     children: [
       {
         hidden: true,
+        path: 'morningdetail',
+        component: () => import('@/views/content/components/MorningDetail'),
+        name: 'MorningDetail',
+        meta: { title: '小程序详情(早安晚安）', icon: 'dashboard', affix: true, activeMenu: '/content/wxcontent' },
+
+        props(route) {
+          return {
+            appid: route.query.appid,
+            appname: route.query.appname
+          }
+        }
+
+      }
+    ]
+  },
+  {
+    path: '/content/wxcontent',
+    component: Layout,
+    hidden: true,
+    meta: { title: '内容管理/小程序内容管理' },
+    children: [
+      {
+        hidden: true,
         path: 'wxdetail',
         component: () => import('@/views/content/components/WxDetail'),
         name: 'WxDetail',
-        meta: { title: '小程序详情(非表情包）', icon: 'dashboard', affix: true, activeMenu: '/content/wxcontent' },
+        meta: { title: '小程序详情(壁纸）', icon: 'dashboard', affix: true, activeMenu: '/content/wxcontent' },
 
         props(route) {
           return {
@@ -165,7 +188,7 @@ export const constantRoutes = [
         path: 'memedetail',
         component: () => import('@/views/content/components/MemeDetail'),
         name: 'MemeDetail',
-        meta: { title: '小程序详情(表情包详情）', icon: 'dashboard', affix: true, activeMenu: '/content/wxcontent' },
+        meta: { title: '小程序详情(表情包）', icon: 'dashboard', affix: true, activeMenu: '/content/wxcontent' },
 
         props(route) {
           return {
@@ -177,7 +200,29 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/content/wxcontent',
+    component: Layout,
+    hidden: true,
+    meta: { title: '内容管理/小程序内容管理' },
+    children: [
+      {
+        hidden: true,
+        path: 'secretdetail',
+        component: () => import('@/views/content/components/SecretDetail'),
+        name: 'SecretDetail',
+        meta: { title: '小程序详情(爱的密语）', icon: 'dashboard', affix: true, activeMenu: '/content/wxcontent' },
 
+        props(route) {
+          return {
+            appid: route.query.appid,
+            appname: route.query.appname
+          }
+        }
+
+      }
+    ]
+  },
   {
     path: '/content/wxcontent',
     component: Layout,
@@ -210,10 +255,79 @@ export const constantRoutes = [
     children: [
       {
         hidden: true,
+        path: 'detailcheckimgsmorning',
+        component: () => import('@/views/content-detail/DetailCheckImgsMorning'),
+        name: 'DetailCheckImgsMorning',
+        meta: { title: '系列详情-早安晚安', icon: 'dashboard', activeMenu: '/content/wxcontent' },
+
+        props(route) {
+          return {
+            detailid: route.query.detailid,
+            detailname: route.query.detailname
+          }
+        }
+
+      }
+    ]
+  },
+  {
+    path: '/content/wxcontent',
+    component: Layout,
+    hidden: true,
+    meta: { title: '小程序内容管理' },
+    children: [
+      {
+        hidden: true,
         path: 'detailcheckimgs',
         component: () => import('@/views/content-detail/DetailCheckImgs'),
         name: 'DetailCheckImgs',
-        meta: { title: '详情-查看仅多张图片', icon: 'dashboard', activeMenu: '/content/wxcontent' },
+        meta: { title: '系列详情-壁纸', icon: 'dashboard', activeMenu: '/content/wxcontent' },
+
+        props(route) {
+          return {
+            detailid: route.query.detailid,
+            detailname: route.query.detailname
+          }
+        }
+
+      }
+    ]
+  },
+  {
+    path: '/content/wxcontent',
+    component: Layout,
+    hidden: true,
+    meta: { title: '小程序内容管理' },
+    children: [
+      {
+        hidden: true,
+        path: 'detailcheckimgsmeme',
+        component: () => import('@/views/content-detail/DetailCheckImgsMeme'),
+        name: 'DetailCheckImgsMeme',
+        meta: { title: '系列详情-表情包', icon: 'dashboard', activeMenu: '/content/wxcontent' },
+
+        props(route) {
+          return {
+            detailid: route.query.detailid,
+            detailname: route.query.detailname
+          }
+        }
+
+      }
+    ]
+  },
+  {
+    path: '/content/wxcontent',
+    component: Layout,
+    hidden: true,
+    meta: { title: '小程序内容管理' },
+    children: [
+      {
+        hidden: true,
+        path: 'detailcheckimgssecret',
+        component: () => import('@/views/content-detail/DetailCheckImgsSecret'),
+        name: 'DetailCheckImgsSecret',
+        meta: { title: '系列详情-爱的密语', icon: 'dashboard', activeMenu: '/content/wxcontent' },
 
         props(route) {
           return {
