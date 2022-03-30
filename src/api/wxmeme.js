@@ -5,7 +5,7 @@ import request from '@/utils/request'
 export function fetchMemeList(memeParams) {
   console.log(memeParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_wp_se',
+    url: '/api/wechatweb/v1/service/get_st_se',
     method: 'get',
     params: memeParams,
     headers: {
@@ -18,7 +18,7 @@ export function fetchMemeList(memeParams) {
 export function fetchMemeListDetail(memeParams) {
   console.log(memeParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_wp_se_detail',
+    url: '/api/wechatweb/v1/service/get_st_se_detail',
     method: 'get',
     params: memeParams,
     headers: {

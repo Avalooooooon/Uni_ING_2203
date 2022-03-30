@@ -56,11 +56,11 @@
         /> -->
         <img
           class="appimg"
-          src="@/assets/ht.jpg"
+          :src="url + item.first"
         >
         <!-- <img class="appimg" :src="imgs.emptyimg"/> -->
         <div class="textversion">{{ item.se_name }}</div>
-        <div class="texttime">张三 上传时间2022/xx/xx xx:xx</div>
+<!--        <div class="texttime">张三 上传时间2022/xx/xx xx:xx</div>-->
         <div class="editbtn">
           <el-button
             type="primary"
@@ -116,6 +116,7 @@ export default {
         token: getToken(),
         se_id: ''
       },
+      url: 'https://www.bizspace.cn',
 
       dialogVisible: false, // 弹窗显隐
       form: {

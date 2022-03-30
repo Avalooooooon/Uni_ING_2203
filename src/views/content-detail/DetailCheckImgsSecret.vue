@@ -4,7 +4,7 @@
     <div class="topbar-wrapper">
       <div class="back" @click="toback">
         <i class="el-icon-arrow-left" />
-        {{ detailname }}
+        爱的密语
       </div>
       <div class="btns">
         <div class="btnsimg">
@@ -101,7 +101,6 @@ export default {
       secretParams: {
         bizid: 'uniwarm',
         token: getToken(),
-        se_id: this.detailid,
         page: 0
       },
       secretParams1: {

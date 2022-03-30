@@ -12,24 +12,22 @@
     <!-- 显示模块 -->
     <div class="main-wrapper">
       <!-- :key="item.id" -->
-      <div v-for="item in modulesData" :key="item.id" class="module-wrapper">
+      <div v-for="item in morning" :key="item.id" class="module-wrapper">
         <img
           class="appimg"
           :src="
-            item.first
-              ? 'https://www.bizspace.cn' + item.first
-              : images.emptyimg
+            item.image
           "
         >
         <!-- <img class="appimg" :src="imgs.emptyimg"/> -->
         <div class="textversion">{{ item.se_name }}</div>
-        <div class="texttime">张三 上传时间2022/xx/xx xx:xx</div>
+<!--        <div class="texttime">张三 上传时间2022/xx/xx xx:xx</div>-->
         <div class="editbtn">
           <el-button
             type="primary"
             class="checkbtn"
             :detailid="item.id"
-            :detailname="item.se_name"
+            :detailname="item.name"
             @click="checkdetail"
           >查看</el-button>
           <el-button
@@ -72,7 +70,19 @@ export default {
         bizid: 'uniwarm',
         token: getToken(),
         se_id: ''
-      }
+      },
+      morning: [
+        {
+          id: '0',
+          name: '早安',
+          image: 'https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/hello/morning.png'
+        },
+        {
+          id: '1',
+          name: '晚安',
+          image: 'https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/hello/night.png'
+        }
+      ]
     }
   },
 
@@ -141,6 +151,8 @@ export default {
     checkdetail(event) {
       const detailid = event.currentTarget.getAttribute('detailid')
       const detailname = event.currentTarget.getAttribute('detailname')
+      console.log(detailid)
+      console.log(detailname)
 
       this.$router.push({
         // name:'DetailAddImgset',

@@ -10,20 +10,20 @@ export function fetchSecretList(secretParams) {
     params: secretParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }
   })
 }
 
-// 获取一个爱的密语系列内的图片
+// 获取爱的密语的图片
 export function fetchSecretListDetail(secretParams) {
   console.log(secretParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_wp_se_detail',
+    url: '/api/wechatweb/v1/service/get_secret_detail',
     method: 'get',
     params: secretParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }
   })
 }
 
@@ -36,7 +36,7 @@ export function addSecretList(secretParams) {
     params: secretParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }
   })
 }
 
@@ -49,7 +49,7 @@ export function delSecretList(secretParams) {
     params: secretParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }
   })
 }
 
@@ -62,7 +62,7 @@ export function setSecretListFirst(secretParams) {
     params: secretParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }
   })
 }
 
@@ -75,7 +75,7 @@ export function delSecretListDetail(secretParams) {
     params: secretParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }
   })
 }
 

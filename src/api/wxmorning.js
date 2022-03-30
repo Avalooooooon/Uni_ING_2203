@@ -10,7 +10,7 @@ export function fetchMorningList(morningParams) {
     params: morningParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }
   })
 }
 
@@ -18,12 +18,12 @@ export function fetchMorningList(morningParams) {
 export function fetchMorningListDetail(morningParams) {
   console.log(morningParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_wp_se_detail',
+    url: '/api/wechatweb/v1/service/get_hello_se_detail',
     method: 'get',
     params: morningParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }
   })
 }
 
@@ -36,7 +36,7 @@ export function addMorningList(morningParams) {
     params: morningParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }
   })
 }
 
@@ -49,7 +49,7 @@ export function delMorningList(morningParams) {
     params: morningParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }
   })
 }
 
@@ -62,7 +62,7 @@ export function setMorningListFirst(morningParams) {
     params: morningParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }
   })
 }
 
@@ -75,7 +75,7 @@ export function delMorningListDetail(morningParams) {
     params: morningParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }
   })
 }
 

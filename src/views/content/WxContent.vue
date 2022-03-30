@@ -73,7 +73,7 @@ export default {
       const appname = event.currentTarget.getAttribute('appname')
 
       this.$router.push({
-        name: 'SecretDetail',
+        name: 'DetailCheckImgsSecret',
         query: {
           appid: appid,
           appname: appname
