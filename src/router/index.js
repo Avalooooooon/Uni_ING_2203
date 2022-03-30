@@ -210,7 +210,8 @@ export const constantRoutes = [{
     component: () => import('@/views/content-detail/DetailAddImgset'),
     name: 'DetailAddImgset',
     meta: {
-      title: '详情-添加多张图片'
+      title: '详情-添加多张图片',
+      activeMenu: '/content/wxcontent'
     },
     props(route) {
       return {
@@ -225,7 +226,8 @@ export const constantRoutes = [{
     component: () => import('@/views/content-detail/DetailAddImgOnly'),
     name: 'DetailAddImgOnly',
     meta: {
-      title: '详情-添加单张图片'
+      title: '详情-添加单张图片',
+      activeMenu: '/content/wxcontent'
     },
     props(route) {
       return {
@@ -242,7 +244,8 @@ export const constantRoutes = [{
     meta: {
       title: 'APP内容管理',
       icon: 'international',
-      affix: true
+      affix: true,
+      activeMenu: '/content/appcontent'
     }
   },
   {
@@ -251,7 +254,8 @@ export const constantRoutes = [{
     component: () => import('@/views/content/components/AppDetail'),
     name: 'AppDetail',
     meta: {
-      title: 'App详情'
+      title: 'App详情',
+      activeMenu: '/content/appcontent'
     },
     props(route) {
       return {
@@ -266,7 +270,8 @@ export const constantRoutes = [{
     component: () => import('@/views/content-detail/DetailAdd'),
     name: 'DetailAdd',
     meta: {
-      title: '详情-添加富文本编辑器'
+      title: '详情-添加富文本编辑器',
+      activeMenu: '/content/appcontent'
     },
     props(route) {
       return {
@@ -281,7 +286,8 @@ export const constantRoutes = [{
     component: () => import('@/views/content-detail/DetailCheckVideo'),
     name: 'DetailCheckVideo',
     meta: {
-      title: '详情-查看视频'
+      title: '详情-查看视频',
+      activeMenu: '/content/appcontent'
     },
     props(route) {
       return {

@@ -168,7 +168,7 @@ export default {
 
   width: 100%;
   height: 100%;
-  margin: 0.7% 1%;
+  margin: 0 1%;
 }
 
 // 顶部区域
@@ -177,9 +177,10 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  //border: 1px solid black;
   width: 98%;
-  height: 7vh;
-  padding: 1.4% 0% 1% 0%;
+  height: 5vh;
+  padding: 1.4% 0 1% 0;
 
   // 返回上层
   .back {

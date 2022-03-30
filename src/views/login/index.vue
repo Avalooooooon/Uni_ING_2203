@@ -178,7 +178,8 @@ export default {
       handler: function(route) {
         const query = route.query
         if (query) {
-          this.redirect = query.redirect
+          // this.redirect = query.redirect
+          this.redirect = '/content/wxcontent'
           this.otherQuery = this.getOtherQuery(query)
         }
       },
