@@ -224,7 +224,7 @@ export default {
           });
         });
     },
-    
+
     // 进入删除状态后删除单张图片
     deleteimg(item) {
       // console.log(item)
@@ -429,7 +429,7 @@ export default {
       // 模块主图
       .appimg {
         width: 100%;
-        height: 95%;
+        height:95%;
       }
       // 删除状态下的删除栏
       .delete-img {

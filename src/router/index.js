@@ -39,259 +39,259 @@ import Layout from '@/layout'
  * all roles can be accessed
  */
 export const constantRoutes = [{
-    path: '/redirect',
-    component: Layout,
-    hidden: true,
-    children: [{
-      path: '/redirect/:path(.*)',
-      component: () => import('@/views/redirect/index')
-    }]
+  path: '/redirect',
+  component: Layout,
+  hidden: true,
+  children: [{
+    path: '/redirect/:path(.*)',
+    component: () => import('@/views/redirect/index')
+  }]
+},
+{
+  path: '/login',
+  component: () => import('@/views/login/index'),
+  hidden: true
+},
+{
+  path: '/auth-redirect',
+  component: () => import('@/views/login/auth-redirect'),
+  hidden: true
+},
+{
+  path: '/404',
+  component: () => import('@/views/error-page/404'),
+  hidden: true
+},
+{
+  path: '/401',
+  component: () => import('@/views/error-page/401'),
+  hidden: true
+},
+// {
+//   path: '/',
+//   component: Layout,
+//   redirect: '/dashboard',
+//   hidden: true,
+//   children: [
+//     {
+//       path: 'dashboard',
+//       component: () => import('@/views/dashboard/index'),
+//       name: 'Dashboard',
+//       meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+//     }
+//   ]
+// },
+{
+  path: '/content',
+  component: Layout,
+  redirect: '/content/wxcontent',
+  meta: {
+    title: '内容管理',
+    icon: 'form',
+    affix: true
   },
-  {
-    path: '/login',
-    component: () => import('@/views/login/index'),
-    hidden: true
-  },
-  {
-    path: '/auth-redirect',
-    component: () => import('@/views/login/auth-redirect'),
-    hidden: true
-  },
-  {
-    path: '/404',
-    component: () => import('@/views/error-page/404'),
-    hidden: true
-  },
-  {
-    path: '/401',
-    component: () => import('@/views/error-page/401'),
-    hidden: true
-  },
-  // {
-  //   path: '/',
-  //   component: Layout,
-  //   redirect: '/dashboard',
-  //   hidden: true,
-  //   children: [
-  //     {
-  //       path: 'dashboard',
-  //       component: () => import('@/views/dashboard/index'),
-  //       name: 'Dashboard',
-  //       meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-  //     }
-  //   ]
-  // },
-  {
-    path: '/content',
-    component: Layout,
-    redirect: '/content/wxcontent',
+  children: [{
+    path: 'wxcontent',
+    component: () => import('@/views/content/WxContent'),
+    name: 'WxContent',
     meta: {
-      title: '内容管理',
-      icon: 'form',
+      title: '小程序内容管理',
+      icon: 'wechat',
       affix: true
-    },
-    children: [{
-        path: 'wxcontent',
-        component: () => import('@/views/content/WxContent'),
-        name: 'WxContent',
-        meta: {
-          title: '小程序内容管理',
-          icon: 'wechat',
-          affix: true
-        }
-      },
-      {
-        path: '/content/wxcontent/morningdetail',
-        hidden: true,
-        component: () => import('@/views/content/components/MorningDetail'),
-        name: 'MorningDetail',
-        meta: {
-          title: '早安晚安',
-          activeMenu: '/content/wxcontent'
-        }
-      },
-      {
-        path: '/content/wxcontent/wxdetail',
-        hidden: true,
-        component: () => import('@/views/content/components/WxDetail'),
-        name: 'WxDetail',
-        meta: {
-          title: '壁纸',
-          activeMenu: '/content/wxcontent'
-        }
-      },
-      {
-        path: '/content/wxcontent/memedetail',
-        hidden: true,
-        component: () => import('@/views/content/components/MemeDetail'),
-        name: 'MemeDetail',
-        meta: {
-          title: '表情包',
-          activeMenu: '/content/wxcontent'
-        }
-      },
-      {
-        path: '/content/wxcontent/secretdetail',
-        hidden: true,
-        component: () => import('@/views/content/components/SecretDetail'),
-        name: 'SecretDetail',
-        meta: {
-          title: '爱的密语',
-          activeMenu: '/content/wxcontent'
-        }
-      },
-      {
-        path: '/content/wxcontent/detailcheckimgsmorning',
-        hidden: true,
-        component: () => import('@/views/content-detail/DetailCheckImgsMorning'),
-        name: 'DetailCheckImgsMorning',
-        meta: {
-          title: '早安晚安系列详情',
-          activeMenu: '/content/wxcontent'
-        },
-        props(route) {
-          return {
-            detailid: route.query.detailid,
-            detailname: route.query.detailname
-          }
-        }
-      },
-      {
-        path: '/content/wxcontent/detailcheckimgs',
-        hidden: true,
-        component: () => import('@/views/content-detail/DetailCheckImgs'),
-        name: 'DetailCheckImgs',
-        meta: {
-          title: '壁纸系列详情',
-          activeMenu: '/content/wxcontent'
-        },
-        props(route) {
-          return {
-            detailid: route.query.detailid,
-            detailname: route.query.detailname
-          }
-        }
-      },
-      {
-        path: '/content/wxcontent/detailcheckimgsmeme',
-        hidden: true,
-        component: () => import('@/views/content-detail/DetailCheckImgsMeme'),
-        name: 'DetailCheckImgsMeme',
-        meta: {
-          title: '表情包系列详情',
-          activeMenu: '/content/wxcontent'
-        },
-        props(route) {
-          return {
-            detailid: route.query.detailid,
-            detailname: route.query.detailname
-          }
-        }
-      },
-      {
-        path: '/content/wxcontent/detailcheckimgssecret',
-        hidden: true,
-        component: () => import('@/views/content-detail/DetailCheckImgsSecret'),
-        name: 'DetailCheckImgsSecret',
-        meta: {
-          title: '爱的密语系列详情',
-          activeMenu: '/content/wxcontent'
-        },
-        props(route) {
-          return {
-            detailid: route.query.detailid,
-            detailname: route.query.detailname
-          }
-        }
-      },
-      {
-        path: '/content/wxcontent/detailaddimgset',
-        hidden: true,
-        component: () => import('@/views/content-detail/DetailAddImgset'),
-        name: 'DetailAddImgset',
-        meta: {
-          title: '详情-添加多张图片'
-        },
-        props(route) {
-          return {
-            detailid: route.query.detailid,
-            detailname: route.query.detailname
-          }
-        }
-      },
-      {
-        path: '/content/wxcontent/detailaddimgonly',
-        hidden: true,
-        component: () => import('@/views/content-detail/DetailAddImgOnly'),
-        name: 'DetailAddImgOnly',
-        meta: {
-          title: '详情-添加单张图片'
-        },
-        props(route) {
-          return {
-            detailid: route.query.detailid,
-            detailname: route.query.detailname
-          }
-        }
-      },
-
-      {
-        path: 'appcontent',
-        component: () => import('@/views/content/AppContent'),
-        name: 'AppContent',
-        meta: {
-          title: 'APP内容管理',
-          icon: 'international',
-          affix: true
-        }
-      },
-      {
-        path: '/content/appcontent/appdetail',
-        hidden: true,
-        component: () => import('@/views/content/components/AppDetail'),
-        name: 'AppDetail',
-        meta: {
-          title: 'App详情'
-        },
-        props(route) {
-          return {
-            appid: route.query.appid,
-            appname: route.query.appname
-          }
-        }
-      },
-      {
-        path: '/content/appcontent/appdetail/detailadd',
-        hidden: true,
-        component: () => import('@/views/content-detail/DetailAdd'),
-        name: 'DetailAdd',
-        meta: {
-          title: '详情-添加富文本编辑器'
-        },
-        props(route) {
-          return {
-            detailid: route.query.detailid,
-            detailname: route.query.detailname
-          }
-        }
-      },
-      {
-        path: '/content/appcontent/appdetail/DetailCheckVideo',
-        hidden: true,
-        component: () => import('@/views/content-detail/DetailCheckVideo'),
-        name: 'DetailCheckVideo',
-        meta: {
-          title: '详情-查看视频'
-        },
-        props(route) {
-          return {
-            detailid: route.query.detailid,
-            detailname: route.query.detailname
-          }
-        }
-      }
-    ]
+    }
   },
+  {
+    path: '/content/wxcontent/morningdetail',
+    hidden: true,
+    component: () => import('@/views/content/components/MorningDetail'),
+    name: 'MorningDetail',
+    meta: {
+      title: '早安晚安',
+      activeMenu: '/content/wxcontent'
+    }
+  },
+  {
+    path: '/content/wxcontent/wxdetail',
+    hidden: true,
+    component: () => import('@/views/content/components/WxDetail'),
+    name: 'WxDetail',
+    meta: {
+      title: '壁纸',
+      activeMenu: '/content/wxcontent'
+    }
+  },
+  {
+    path: '/content/wxcontent/memedetail',
+    hidden: true,
+    component: () => import('@/views/content/components/MemeDetail'),
+    name: 'MemeDetail',
+    meta: {
+      title: '表情包',
+      activeMenu: '/content/wxcontent'
+    }
+  },
+  {
+    path: '/content/wxcontent/secretdetail',
+    hidden: true,
+    component: () => import('@/views/content/components/SecretDetail'),
+    name: 'SecretDetail',
+    meta: {
+      title: '爱的密语',
+      activeMenu: '/content/wxcontent'
+    }
+  },
+  {
+    path: '/content/wxcontent/detailcheckimgsmorning',
+    hidden: true,
+    component: () => import('@/views/content-detail/DetailCheckImgsMorning'),
+    name: 'DetailCheckImgsMorning',
+    meta: {
+      title: '早安晚安系列详情',
+      activeMenu: '/content/wxcontent'
+    },
+    props(route) {
+      return {
+        detailid: route.query.detailid,
+        detailname: route.query.detailname
+      }
+    }
+  },
+  {
+    path: '/content/wxcontent/detailcheckimgs',
+    hidden: true,
+    component: () => import('@/views/content-detail/DetailCheckImgs'),
+    name: 'DetailCheckImgs',
+    meta: {
+      title: '壁纸系列详情',
+      activeMenu: '/content/wxcontent'
+    },
+    props(route) {
+      return {
+        detailid: route.query.detailid,
+        detailname: route.query.detailname
+      }
+    }
+  },
+  {
+    path: '/content/wxcontent/detailcheckimgsmeme',
+    hidden: true,
+    component: () => import('@/views/content-detail/DetailCheckImgsMeme'),
+    name: 'DetailCheckImgsMeme',
+    meta: {
+      title: '表情包系列详情',
+      activeMenu: '/content/wxcontent'
+    },
+    props(route) {
+      return {
+        detailid: route.query.detailid,
+        detailname: route.query.detailname
+      }
+    }
+  },
+  {
+    path: '/content/wxcontent/detailcheckimgssecret',
+    hidden: true,
+    component: () => import('@/views/content-detail/DetailCheckImgsSecret'),
+    name: 'DetailCheckImgsSecret',
+    meta: {
+      title: '爱的密语系列详情',
+      activeMenu: '/content/wxcontent'
+    },
+    props(route) {
+      return {
+        detailid: route.query.detailid,
+        detailname: route.query.detailname
+      }
+    }
+  },
+  {
+    path: '/content/wxcontent/detailaddimgset',
+    hidden: true,
+    component: () => import('@/views/content-detail/DetailAddImgset'),
+    name: 'DetailAddImgset',
+    meta: {
+      title: '详情-添加多张图片'
+    },
+    props(route) {
+      return {
+        detailid: route.query.detailid,
+        detailname: route.query.detailname
+      }
+    }
+  },
+  {
+    path: '/content/wxcontent/detailaddimgonly',
+    hidden: true,
+    component: () => import('@/views/content-detail/DetailAddImgOnly'),
+    name: 'DetailAddImgOnly',
+    meta: {
+      title: '详情-添加单张图片'
+    },
+    props(route) {
+      return {
+        detailid: route.query.detailid,
+        detailname: route.query.detailname
+      }
+    }
+  },
+
+  {
+    path: 'appcontent',
+    component: () => import('@/views/content/AppContent'),
+    name: 'AppContent',
+    meta: {
+      title: 'APP内容管理',
+      icon: 'international',
+      affix: true
+    }
+  },
+  {
+    path: '/content/appcontent/appdetail',
+    hidden: true,
+    component: () => import('@/views/content/components/AppDetail'),
+    name: 'AppDetail',
+    meta: {
+      title: 'App详情'
+    },
+    props(route) {
+      return {
+        appid: route.query.appid,
+        appname: route.query.appname
+      }
+    }
+  },
+  {
+    path: '/content/appcontent/appdetail/detailadd',
+    hidden: true,
+    component: () => import('@/views/content-detail/DetailAdd'),
+    name: 'DetailAdd',
+    meta: {
+      title: '详情-添加富文本编辑器'
+    },
+    props(route) {
+      return {
+        detailid: route.query.detailid,
+        detailname: route.query.detailname
+      }
+    }
+  },
+  {
+    path: '/content/appcontent/appdetail/DetailCheckVideo',
+    hidden: true,
+    component: () => import('@/views/content-detail/DetailCheckVideo'),
+    name: 'DetailCheckVideo',
+    meta: {
+      title: '详情-查看视频'
+    },
+    props(route) {
+      return {
+        detailid: route.query.detailid,
+        detailname: route.query.detailname
+      }
+    }
+  }
+  ]
+}
   // {
   //   path: '/content/appcontent',
   //   component: Layout,

@@ -156,8 +156,8 @@ export default {
     }
     return {
       loginForm: {
-        username: 'wanglj',
-        password: 'visiontech305',
+        username: 'dong',
+        password: 'donglichao',
         bizid: 'uniwarm'
       },
       checked: true,
@@ -371,7 +371,7 @@ li {
 /*  font-size: 18px;*/
 /*}*/
 
-::v-deep .el-input__inner { 
+::v-deep .el-input__inner {
   height: 55px;
   width: 500px;
 }
