@@ -4,7 +4,7 @@
     <div class="topbar-wrapper">
       <div class="back" @click="toback">
         <!-- <span class="lt">&lt;&nbsp;</span>  -->
-        <i class="el-icon-arrow-left"></i>
+        <i class="el-icon-arrow-left" />
         早安晚安
       </div>
     </div>
@@ -12,7 +12,7 @@
     <!-- 显示模块 -->
     <div class="main-wrapper">
       <!-- :key="item.id" -->
-      <div class="module-wrapper" v-for="item in modulesData" :key="item.id">
+      <div v-for="item in modulesData" :key="item.id" class="module-wrapper">
         <img
           class="appimg"
           :src="
@@ -20,7 +20,7 @@
               ? 'https://www.bizspace.cn' + item.first
               : images.emptyimg
           "
-        />
+        >
         <!-- <img class="appimg" :src="imgs.emptyimg"/> -->
         <div class="textversion">{{ item.se_name }}</div>
         <div class="texttime">张三 上传时间2022/xx/xx xx:xx</div>
@@ -28,20 +28,18 @@
           <el-button
             type="primary"
             class="checkbtn"
-            @click="checkdetail"
             :detailid="item.id"
             :detailname="item.se_name"
-            >查看</el-button
-          >
+            @click="checkdetail"
+          >查看</el-button>
           <el-button
             :id="item.id"
             type="primary"
             class="deletebtn"
-            @click="deletealert"
             :detailid="item.id"
             :detailname="appname + item.name"
-            >删除</el-button
-          >
+            @click="deletealert"
+          >删除</el-button>
         </div>
       </div>
     </div>
@@ -49,33 +47,33 @@
 </template>
 
 <script>
-import { fetchMorningList, delMorningList } from "@/api/wxmorning";
-import { getToken } from "@/utils/auth";
+import { fetchMorningList, delMorningList } from '@/api/wxmorning'
+import { getToken } from '@/utils/auth'
 
 export default {
-  name: "MorningDetail",
-  props: ["appid", "appname"],
+  name: 'MorningDetail',
+  props: ['appid', 'appname'],
 
   data() {
     return {
       images: {
         // 占位图
-        emptyimg: require("@/assets/empty.jpg"),
+        emptyimg: require('@/assets/empty.jpg')
       },
 
       // 后端传来的数据
       modulesData: [],
       // 发送给后端的数据
       morningParamsFetch: {
-        bizid: "uniwarm",
-        token: getToken(),
+        bizid: 'uniwarm',
+        token: getToken()
       },
       morningParamsDel: {
-        bizid: "uniwarm",
+        bizid: 'uniwarm',
         token: getToken(),
-        se_id: "",
-      },
-    };
+        se_id: ''
+      }
+    }
   },
 
   watch: {},
@@ -83,78 +81,78 @@ export default {
   mounted() {
     fetchMorningList(this.morningParamsFetch)
       .then((response) => {
-        console.log(response.data);
-        this.modulesData = response.data;
+        console.log(response.data)
+        this.modulesData = response.data
       })
       .catch((err) => {
-        console.log(err);
-      });
+        console.log(err)
+      })
+  },
+
+  // 生命周期，先给搜索结果赋值为全部数据
+  created() {
+    this.newlist = this.list
   },
 
   methods: {
     // 返回上一级
     toback() {
-      this.$router.go(-1);
+      this.$router.go(-1)
     },
 
     // 删除当前系列
     deletealert(event) {
-      this.morningParamsDel.se_id = event.currentTarget.id;
-      this.$confirm("确定要删除该资源吗？", "提示", {
-        cancelButtonText: "取消",
-        confirmButtonText: "确定",
-        type: "warning",
+      this.morningParamsDel.se_id = event.currentTarget.id
+      this.$confirm('确定要删除该资源吗？', '提示', {
+        cancelButtonText: '取消',
+        confirmButtonText: '确定',
+        type: 'warning'
       })
         .then(() => {
           delMorningList(this.morningParamsDel)
             .then((response) => {
-              console.log(response.data);
+              console.log(response.data)
               fetchMorningList(this.morningParamsFetch)
                 .then((response) => {
-                  this.modulesData = response.data;
+                  this.modulesData = response.data
                 })
                 .catch((err) => {
-                  console.log(err);
-                });
+                  console.log(err)
+                })
             })
             .catch((err) => {
-              console.log(err);
-            });
+              console.log(err)
+            })
           this.$message({
-            type: "success",
-            message: "删除成功!",
-          });
+            type: 'success',
+            message: '删除成功!'
+          })
         })
         .catch(() => {
           this.$message({
-            type: "info",
-            message: "已取消删除",
-          });
-        });
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
       // this.$router.go(0)
     },
 
     // 点击当前系列的查看按钮
     checkdetail(event) {
-      let detailid = event.currentTarget.getAttribute("detailid");
-      let detailname = event.currentTarget.getAttribute("detailname");
+      const detailid = event.currentTarget.getAttribute('detailid')
+      const detailname = event.currentTarget.getAttribute('detailname')
 
       this.$router.push({
         // name:'DetailAddImgset',
-        name: "DetailCheckImgsMorning",
+        name: 'DetailCheckImgsMorning',
         query: {
           detailid: detailid,
-          detailname: detailname,
-        },
-      });
-    },
-  },
-
-  // 生命周期，先给搜索结果赋值为全部数据
-  created() {
-    this.newlist = this.list;
-  },
-};
+          detailname: detailname
+        }
+      })
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -167,7 +165,8 @@ export default {
   align-content: flex-start;
 
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 50px);
+  overflow-y: scroll;
   margin: 0 1%;
 }
 

@@ -267,7 +267,8 @@ export default {
   align-content: flex-start;
 
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 50px);
+  overflow-y: scroll;
   margin: 0 1%;
 }
 
