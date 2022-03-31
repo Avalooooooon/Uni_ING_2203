@@ -3,24 +3,24 @@
     <div class="topbar-wrapper">
       <div class="back" @click="toback">
         <!-- <span class="lt">&lt;&nbsp;</span>  -->
-        <i class="el-icon-arrow-left"></i>
-        {{appname}}
+        <i class="el-icon-arrow-left" />
+        {{ appname }}
       </div>
       <div class="edit">
         <el-input
+          v-model="searchkey"
           placeholder="请输入关键词搜索"
           suffix-icon="el-icon-search"
-          v-model="searchkey">
-        </el-input>
-        <i class="el-icon-sort"></i>
-        <i class="el-icon-plus" @click="adddetail"></i>
+        />
+        <i class="el-icon-sort" />
+        <i class="el-icon-plus" @click="adddetail" />
       </div>
     </div>
 
-    <div class="module-wrapper" detailid='1' detailname='品牌灵魂v1'>
-      <img class="appimg" src='@/assets/background.png'>
+    <div class="module-wrapper" detailid="1" detailname="品牌灵魂v1">
+      <img class="appimg" src="@/assets/background.png">
       <div class="textversion">
-        {{appname}}2022xxxx_v1
+        {{ appname }}2022xxxx_v1
       </div>
       <div class="texttime">
         张三 上传时间2022/xx/xx xx:xx
@@ -31,56 +31,56 @@
       </div>
     </div>
 
-    <div class="module-wrapper" detailid='002' detailname='品牌灵魂v2'>
-      <img class="appimg" src='@/assets/background.png'>
+    <div class="module-wrapper" detailid="002" detailname="品牌灵魂v2">
+      <img class="appimg" src="@/assets/background.png">
       <div class="textversion">
-        {{appname}}2022xxxx_v1
+        {{ appname }}2022xxxx_v1
       </div>
       <div class="texttime">
         张三 上传时间2022/xx/xx xx:xx
       </div>
       <div class="editbtn">
-        <el-button type="primary" class="checkbtn" >查看</el-button>
-        <el-button type="primary" class="deletebtn" >删除</el-button>
+        <el-button type="primary" class="checkbtn">查看</el-button>
+        <el-button type="primary" class="deletebtn">删除</el-button>
       </div>
     </div>
     <div class="module-wrapper">
-      <img class="appimg" src='@/assets/background.png'>
+      <img class="appimg" src="@/assets/background.png">
       <div class="textversion">
-        {{appname}}2022xxxx_v1
+        {{ appname }}2022xxxx_v1
       </div>
       <div class="texttime">
         张三 上传时间2022/xx/xx xx:xx
       </div>
       <div class="editbtn">
-        <el-button type="primary" class="checkbtn" >查看</el-button>
-        <el-button type="primary" class="deletebtn" >删除</el-button>
+        <el-button type="primary" class="checkbtn">查看</el-button>
+        <el-button type="primary" class="deletebtn">删除</el-button>
       </div>
     </div>
     <div class="module-wrapper">
-      <img class="appimg" src='@/assets/background.png'>
+      <img class="appimg" src="@/assets/background.png">
       <div class="textversion">
-        {{appname}}2022xxxx_v1
+        {{ appname }}2022xxxx_v1
       </div>
       <div class="texttime">
         张三 上传时间2022/xx/xx xx:xx
       </div>
       <div class="editbtn">
-        <el-button type="primary" class="checkbtn" >查看</el-button>
-        <el-button type="primary" class="deletebtn" >删除</el-button>
+        <el-button type="primary" class="checkbtn">查看</el-button>
+        <el-button type="primary" class="deletebtn">删除</el-button>
       </div>
     </div>
     <div class="module-wrapper">
-      <img class="appimg" src='@/assets/background.png'>
+      <img class="appimg" src="@/assets/background.png">
       <div class="textversion">
-        {{appname}}2022xxxx_v1
+        {{ appname }}2022xxxx_v1
       </div>
       <div class="texttime">
         张三 上传时间2022/xx/xx xx:xx
       </div>
       <div class="editbtn">
-        <el-button type="primary" class="checkbtn" >查看</el-button>
-        <el-button type="primary" class="deletebtn" >删除</el-button>
+        <el-button type="primary" class="checkbtn">查看</el-button>
+        <el-button type="primary" class="deletebtn">删除</el-button>
       </div>
     </div>
   </div>
@@ -89,47 +89,47 @@
 <script>
 export default {
   name: 'AppDetail',
-  props:['appid','appname'],
+  props: ['appid', 'appname'],
 
-  methods:{
-    toback(){
+  methods: {
+    toback() {
       this.$router.go(-1)
     },
 
-    adddetail(){
+    adddetail() {
       this.$router.push({
-        name:'DetailAdd',
+        name: 'DetailAdd'
       })
     },
 
-    deletealert(){
+    deletealert() {
       this.$confirm('确定要删除该资源吗？', '提示', {
-          cancelButtonText: '取消',
-          confirmButtonText: '确定',
-          type: 'warning'
-        }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除'
-          });          
-        });
+        cancelButtonText: '取消',
+        confirmButtonText: '确定',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     },
 
-    checkdetail(){
-      let detailid = event.currentTarget.getAttribute("detailid")
-      let detailname = event.currentTarget.getAttribute("detailname")
+    checkdetail() {
+      const detailid = event.currentTarget.getAttribute('detailid')
+      const detailname = event.currentTarget.getAttribute('detailname')
 
       this.$router.push({
-        name:'DetailCheck',
-        query:{
-          detailid:detailid,
-          detailname:detailname,
-          },
+        name: 'DetailCheck',
+        query: {
+          detailid: detailid,
+          detailname: detailname
+        }
       })
     }
   }
@@ -145,8 +145,9 @@ export default {
   align-content: flex-start;
 
   width: 100%;
-  height: 100%;
-  margin: 0.7% 1%;
+  height: calc(100vh - 50px);
+  overflow-y: scroll;
+  margin: 0 1%;
 }
 .topbar-wrapper{
   display: flex;
@@ -155,13 +156,14 @@ export default {
   align-items: center;
 
   width: 98%;
-  height: 7vh;
-  padding: 1.4% 0% 1% 1%;
+  height: 5vh;
+  padding: 1.4% 0 1% 1%;
 
 }
 .back{
   color:#D79432;
   font-size: 16px;
+  cursor: pointer;
 }
 .el-icon-arrow-left{
   font-weight:bolder;

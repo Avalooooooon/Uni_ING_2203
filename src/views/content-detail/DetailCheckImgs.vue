@@ -27,19 +27,19 @@
             @click="isdeleteimg"
           >删除图片</el-button>
         </div>
-        <div class="btnsset">
-          <el-button
-            type="primary"
-            class="editsetbtn"
-            detailid="002"
-            detailname="品牌灵魂v2"
-          >编辑图集</el-button>
-          <el-button
-            type="primary"
-            class="deletesetbtn"
-            @click="deleteset"
-          >删除图集</el-button>
-        </div>
+        <!--        <div class="btnsset">-->
+        <!--          <el-button-->
+        <!--            type="primary"-->
+        <!--            class="editsetbtn"-->
+        <!--            detailid="002"-->
+        <!--            detailname="品牌灵魂v2"-->
+        <!--          >编辑图集</el-button>-->
+        <!--          <el-button-->
+        <!--            type="primary"-->
+        <!--            class="deletesetbtn"-->
+        <!--            @click="deleteset"-->
+        <!--          >删除图集</el-button>-->
+        <!--        </div>-->
       </div>
     </div>
 
@@ -299,32 +299,32 @@ export default {
   overflow-y: scroll;
   //border: 1px solid black;
   margin: 0 1%;
-  .avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    width: 178px;
-    height: 178px;
-  }
-  .avatar-uploader .el-upload:hover {
-    border-color: #409eff;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    //line-height: 178px;
-    line-height: 178px;
-    text-align: center;
-  }
-  .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
-  }
+  //.avatar-uploader .el-upload {
+  //  border: 1px dashed #d9d9d9;
+  //  border-radius: 6px;
+  //  cursor: pointer;
+  //  position: relative;
+  //  overflow: hidden;
+  //  width: 178px;
+  //  height: 178px;
+  //}
+  //.avatar-uploader .el-upload:hover {
+  //  border-color: #409eff;
+  //}
+  //.avatar-uploader-icon {
+  //  font-size: 28px;
+  //  color: #8c939d;
+  //  width: 178px;
+  //  height: 178px;
+  //  //line-height: 178px;
+  //  line-height: 178px;
+  //  text-align: center;
+  //}
+  //.avatar {
+  //  width: 178px;
+  //  height: 178px;
+  //  display: block;
+  //}
 }
 
 // 顶部区域

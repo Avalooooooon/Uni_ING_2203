@@ -357,16 +357,18 @@ export default {
     justify-content: space-between;
     align-content: flex-start;
 
-    width: 19.6%; // (100-1*2)/5，根组件的左右margin为1%
+    width: 15%; // (100-1*2)/5，根组件的左右margin为1%
     padding: 1% 5px 0 5px;
     margin-bottom: 1vh;
     text-align: center;
     font-size: 14px;
+    //border: 1px solid red;
 
     // 模块主图
     .appimg {
       width: 100%;
-      height: 85%;
+      height: 80%;
+      //border: 1px solid black;
     }
 
     // 模块主图下的两行文字

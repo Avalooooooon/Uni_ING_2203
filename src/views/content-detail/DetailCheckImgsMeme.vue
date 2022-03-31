@@ -27,19 +27,19 @@
             @click="isdeleteimg"
           >删除图片</el-button>
         </div>
-        <div class="btnsset">
-          <el-button
-            type="primary"
-            class="editsetbtn"
-            detailid="002"
-            detailname="品牌灵魂v2"
-          >编辑图集</el-button>
-          <el-button
-            type="primary"
-            class="deletesetbtn"
-            @click="deleteset"
-          >删除图集</el-button>
-        </div>
+        <!--        <div class="btnsset">-->
+        <!--          <el-button-->
+        <!--            type="primary"-->
+        <!--            class="editsetbtn"-->
+        <!--            detailid="002"-->
+        <!--            detailname="品牌灵魂v2"-->
+        <!--          >编辑图集</el-button>-->
+        <!--          <el-button-->
+        <!--            type="primary"-->
+        <!--            class="deletesetbtn"-->
+        <!--            @click="deleteset"-->
+        <!--          >删除图集</el-button>-->
+        <!--        </div>-->
       </div>
     </div>
 
@@ -401,7 +401,7 @@ export default {
   // 单图模块
   .singleimage {
     position: relative;
-    width: 19.6%; // (100-1*2)/5，根组件的左右margin为1%
+    width: 15%; // (100-1*2)/5，根组件的左右margin为1%
     padding: 1% 5px 0 5px;
 
     .block {

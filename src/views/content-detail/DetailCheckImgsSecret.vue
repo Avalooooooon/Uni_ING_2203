@@ -27,19 +27,19 @@
             @click="isdeleteimg"
           >删除图片</el-button>
         </div>
-        <div class="btnsset">
-          <el-button
-            type="primary"
-            class="editsetbtn"
-            detailid="002"
-            detailname="品牌灵魂v2"
-          >编辑图集</el-button>
-          <el-button
-            type="primary"
-            class="deletesetbtn"
-            @click="deleteset"
-          >删除图集</el-button>
-        </div>
+        <!--        <div class="btnsset">-->
+        <!--          <el-button-->
+        <!--            type="primary"-->
+        <!--            class="editsetbtn"-->
+        <!--            detailid="002"-->
+        <!--            detailname="品牌灵魂v2"-->
+        <!--          >编辑图集</el-button>-->
+        <!--          <el-button-->
+        <!--            type="primary"-->
+        <!--            class="deletesetbtn"-->
+        <!--            @click="deleteset"-->
+        <!--          >删除图集</el-button>-->
+        <!--        </div>-->
       </div>
     </div>
 
