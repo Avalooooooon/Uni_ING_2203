@@ -393,6 +393,7 @@ export default {
 // 主要内容区域（多个）
 .images-wrapper {
   width: 100%;
+  height: 80%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -402,6 +403,7 @@ export default {
   .singleimage {
     position: relative;
     width: 19.6%; // (100-1*2)/5，根组件的左右margin为1%
+    height: 100%;
     padding: 1% 5px 0 5px;
 
     .block {

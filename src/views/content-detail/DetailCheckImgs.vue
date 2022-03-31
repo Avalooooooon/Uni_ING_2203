@@ -96,7 +96,6 @@ export default {
   data() {
     return {
       isDeleteing: false, // 删除状态
-
       // 发送给后端的数据
       paperParams: {
         bizid: 'uniwarm',
@@ -145,32 +144,33 @@ export default {
         })
     },
 
-    // onChange(file) {
-    //   console.log(file)
-    //   this.headimg = file.file
-    // const fr = new FileReader()
-    // fr.readAsDataURL(file.raw)
-    // fr.onload = () => {
-    //   this.headimg = fr.result
-    //   console.log(this.headimg)
-    // }
+    // openFullScreen2() {
+    //   const loading = this.$loading({
+    //     lock: true,
+    //     text: 'Loading',
+    //     spinner: 'el-icon-loading',
+    //     background: 'rgba(0, 0, 0, 0.7)'
+    //   })
+    //   setTimeout(() => {
+    //     loading.close()
+    //   }, 2000)
     // },
-
     uploadFile(file) {
       console.log(file)
+      // this.openFullScreen2()
       var formData = new FormData()
       formData.append('headimg', file.file)
       paperListUpload(this.paperParams1, formData).then((res) => {
         console.log(res)
         this.imageUrl = this.url + res.image
         if (res.res === 0) {
+          this.dialogVisible = false
+          this.imageUrl = ''
+          this.getPaperList()
           this.$message({
             type: 'success',
             message: '上传成功'
           })
-          this.dialogVisible = false
-          this.imageUrl = ''
-          this.getPaperList()
         }
       })
     },
@@ -299,6 +299,7 @@ export default {
   overflow-y: scroll;
   //border: 1px solid black;
   margin: 0 1%;
+  //border: 1px solid red;
   //.avatar-uploader .el-upload {
   //  border: 1px dashed #d9d9d9;
   //  border-radius: 6px;
@@ -408,7 +409,8 @@ export default {
 // 主要内容区域（多个）
 .images-wrapper {
   width: 100%;
-  height: 100%;
+  height: 80%;
+  //border: 1px solid black;
   //border: 1px solid black;
   display: flex;
   flex-direction: row;
@@ -419,8 +421,9 @@ export default {
   .singleimage {
     position: relative;
     width: 19.6%; // (100-1*2)/5，根组件的左右margin为1%
+    height: 100%;
     padding: 1% 5px 0 5px;
-
+    //border: 1px solid blue;
     .block {
       position: relative;
       display: flex;
@@ -442,7 +445,7 @@ export default {
 
         width: 100%;
         position: absolute;
-        bottom: 0px;
+        bottom: 0;
         height: 30px;
         line-height: 30px;
         margin: 0;
