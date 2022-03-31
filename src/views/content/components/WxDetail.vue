@@ -56,7 +56,7 @@
         >
         <!-- <img class="appimg" :src="imgs.emptyimg"/> -->
         <div class="textversion">{{ item.se_name }}</div>
-        <div class="texttime">张三 上传时间2022/xx/xx xx:xx</div>
+<!--        <div class="texttime">张三 上传时间2022/xx/xx xx:xx</div>-->
         <div class="editbtn">
           <el-button
             type="primary"
@@ -129,7 +129,7 @@ export default {
     // 如果搜索框中的内容为空，显示全部内容
     searchKey(curr, old) {
       // 参数分别为新值和旧值
-      if (curr == '') {
+      if (curr === '') {
         this.newlist = this.list
       }
     }

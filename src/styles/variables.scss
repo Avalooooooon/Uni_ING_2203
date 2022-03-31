@@ -13,11 +13,13 @@ $menuText:#bfcbd9;
 $menuActiveText:#409EFF;
 $subMenuActiveText:#f4f4f5; // https://github.com/ElemeFE/element/issues/12951
 
-$menuBg:#304156;
-$menuHover:#263445;
+$menuBg:#304156;     // 菜单背景
+$menuHover:#263445;  // 菜单悬浮变色
 
-$subMenuBg:#1f2d3d;
-$subMenuHover:#001528;
+$subMenuBg:#1f2d3d;  // 子菜单背景
+//$subMenuBg:#304156;
+$subMenuHover:#001528; // 子菜单悬浮背景
+//$subMenuActiveBg: #fff;
 
 $sideBarWidth: 210px;
 
@@ -31,5 +33,6 @@ $sideBarWidth: 210px;
   menuHover: $menuHover;
   subMenuBg: $subMenuBg;
   subMenuHover: $subMenuHover;
+  //subMenuActiveBg: $subMenuActiveBg;
   sideBarWidth: $sideBarWidth;
 }

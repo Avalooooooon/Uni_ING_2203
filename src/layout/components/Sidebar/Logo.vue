@@ -1,14 +1,14 @@
 <template>
   <div class="sidebar-logo-container" :class="{'collapse':collapse}">
     <transition name="sidebarLogoFade">
-      <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo">
-        <h1 v-else class="sidebar-title">{{ title }} </h1>
-      </router-link>
-      <router-link v-else key="expand" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo">
-        <h1 class="sidebar-title">{{ title }} </h1>
-      </router-link>
+      <div class="sidebar-logo-link">
+        <img src="../../../assets/logo.jpg" style="width: 100%">
+      <!--        <h1 v-else class="sidebar-title">{{ title }} </h1>-->
+      </div>
+      <!--      <router-link v-else key="expand" class="sidebar-logo-link" to="/">-->
+      <!--      <img v-if="logo" src="logo" class="sidebar-logo">-->
+      <!--        <h1 class="sidebar-title">{{ title }} </h1>-->
+      <!--      </router-link>-->
     </transition>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       title: 'Vue Element Admin',
-      logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+      // logo: '../assets/logo.jpg'
     }
   }
 }
@@ -46,17 +46,19 @@ export default {
   width: 100%;
   height: 50px;
   line-height: 50px;
-  background: #2b2f3a;
+  background: #ffffff;
   text-align: center;
   overflow: hidden;
 
   & .sidebar-logo-link {
     height: 100%;
     width: 100%;
+    display: flex;
+    align-items: center;
 
     & .sidebar-logo {
-      width: 32px;
-      height: 32px;
+      width: 100%;
+      height: 100%;
       vertical-align: middle;
       margin-right: 12px;
     }

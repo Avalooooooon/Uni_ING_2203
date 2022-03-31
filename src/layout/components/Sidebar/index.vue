@@ -10,6 +10,7 @@
         :unique-opened="false"
         :active-text-color="variables.menuActiveText"
         :collapse-transition="false"
+        class="Menu"
         mode="vertical"
       >
         <sidebar-item v-for="route in permission_routes" :key="route.path" :item="route" :base-path="route.path" />
@@ -52,3 +53,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.Menu:active{
+  background-color: red;
+}
+</style>

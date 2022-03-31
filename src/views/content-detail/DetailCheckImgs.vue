@@ -171,6 +171,11 @@ export default {
             type: 'success',
             message: '上传成功'
           })
+        } else {
+          this.$message({
+            type: 'error',
+            message: '上传失败'
+          })
         }
       })
     },

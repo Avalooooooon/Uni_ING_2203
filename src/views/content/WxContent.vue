@@ -1,21 +1,21 @@
 <template>
   <!-- “小程序内容管理”主界面,显示的是四个系列 -->
   <div class="content-wrapper">
-    <div class="module-wrapper" appid="1" appname="早安晚安" @click="toMorningDetail">
-      <img class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png">
-      <div class="contentName">早安晚安</div>
+    <div class="module-wrapper" appid="1" appname="早安晚安">
+      <img @click="toMorningDetail" class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png">
+      <div @click="toMorningDetail" class="contentName">早安晚安</div>
     </div>
-    <div class="module-wrapper" appid="2" appname="壁纸" @click="toWxDetail">
-      <img class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/wallpaper.png">
-      <div class="contentName">壁纸</div>
+    <div class="module-wrapper" appid="2" appname="壁纸">
+      <img @click="toWxDetail" class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/wallpaper.png">
+      <div @click="toWxDetail" class="contentName">壁纸</div>
     </div>
-    <div class="module-wrapper" appid="3" appname="表情包" @click="toMemeDetail">
-      <img class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/sticker.png">
-      <div class="contentName">表情包</div>
+    <div class="module-wrapper" appid="3" appname="表情包">
+      <img @click="toMemeDetail" class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/sticker.png">
+      <div @click="toMemeDetail" class="contentName">表情包</div>
     </div>
-    <div class="module-wrapper" appid="4" appname="爱的密语" @click="toSecretDetail">
-      <img class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/secret.png">
-      <div class="contentName">爱的密语</div>
+    <div class="module-wrapper" appid="4" appname="爱的密语">
+      <img @click="toSecretDetail" class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/secret.png">
+      <div @click="toSecretDetail" class="contentName">爱的密语</div>
     </div>
 
   </div>
