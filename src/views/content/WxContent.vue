@@ -123,16 +123,17 @@ export default {
   //border: 1px solid red;
   // width: 19.6%;  // (100-1*2)/5，根组件的左右margin为1%
   width: 50%;
-  height: 50%;
+  height: calc((100vh - 50px)/2);
   //padding: 0 25px 5px 25px;
-  padding: 5px 50px 0 50px;
+  padding: 0 50px 0 50px;
 
   text-align: center;
   font-size: 14px;
 
   img{
     width: 100%;
-    height: calc(100% - 50px);
+    //height: calc(100% - 50px);
+    height: 50vw;
     //margin-bottom: 10px;
   }
   .contentName{
