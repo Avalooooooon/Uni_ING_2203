@@ -205,7 +205,11 @@ export default {
 
     // 关闭上传图片弹窗
     handleClose(done) {
-      this.$confirm('确认关闭？')
+      this.$confirm('确认关闭？', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
         .then((_) => {
           done()
         })

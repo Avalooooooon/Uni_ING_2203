@@ -11,7 +11,7 @@
                 src="../../assets/topbar.png"
                 alt="欢迎登录"
               ><br>
-              <div class="text">uniwarm服务管理平台</div>
+              <div class="text">uniwarm运维管理平台</div>
             </div>
             <el-form
               ref="loginForm"

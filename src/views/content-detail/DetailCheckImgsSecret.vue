@@ -106,7 +106,7 @@ export default {
       secretParams1: {
         bizid: 'uniwarm',
         token: getToken(),
-        s_id: this.detailid
+        locked: 'no'
       },
       url: 'https://www.bizspace.cn',
       secretParams2: {
@@ -204,7 +204,11 @@ export default {
 
     // 关闭上传图片弹窗
     handleClose(done) {
-      this.$confirm('确认关闭？')
+      this.$confirm('确认关闭？', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
         .then((_) => {
           done()
         })

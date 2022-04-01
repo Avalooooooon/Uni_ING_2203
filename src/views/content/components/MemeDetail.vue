@@ -134,7 +134,7 @@ export default {
     // 如果搜索框中的内容为空，显示全部内容
     searchKey(curr, old) {
       // 参数分别为新值和旧值
-      if (curr == '') {
+      if (curr === '') {
         this.newlist = this.list
       }
     }

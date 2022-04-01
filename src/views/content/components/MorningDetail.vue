@@ -21,7 +21,7 @@
         >
         <!-- <img class="appimg" :src="imgs.emptyimg"/> -->
         <div class="textversion">{{ item.se_name }}</div>
-<!--        <div class="texttime">张三 上传时间2022/xx/xx xx:xx</div>-->
+        <!--        <div class="texttime">张三 上传时间2022/xx/xx xx:xx</div>-->
         <div class="editbtn">
           <el-button
             type="primary"
@@ -222,6 +222,7 @@ export default {
     flex-wrap: nowrap;
     justify-content: space-between;
     align-content: flex-start;
+    //border:1px solid black;
 
     width: 19.6%; // (100-1*2)/5，根组件的左右margin为1%
     padding: 1% 5px 0 5px;
@@ -232,7 +233,7 @@ export default {
     // 模块主图
     .appimg {
       width: 100%;
-      height: 85%;
+      //height: 85%;
     }
 
     // 模块主图下的两行文字

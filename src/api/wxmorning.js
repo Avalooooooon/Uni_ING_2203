@@ -70,7 +70,7 @@ export function setMorningListFirst(morningParams) {
 export function delMorningListDetail(morningParams) {
   console.log(morningParams)
   return request({
-    url: '/api/wechatweb/v1/service/delete_wp_img',
+    url: '/api/wechatweb/v1/service/delete_hello_img',
     method: 'get',
     params: morningParams,
     headers: {
@@ -83,7 +83,7 @@ export function delMorningListDetail(morningParams) {
 export function morningListUpload(morningParams1, headimg) {
   console.log(morningParams1)
   return request({
-    url: '/v3upload/admin_wx_wallpaper',
+    url: '/v3upload/admin_wx_hello',
     method: 'post',
     headers: {
       'Content-Type': 'multipart/form-data'

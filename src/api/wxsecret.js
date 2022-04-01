@@ -27,32 +27,6 @@ export function fetchSecretListDetail(secretParams) {
   })
 }
 
-// 系列新增
-export function addSecretList(secretParams) {
-  console.log(secretParams)
-  return request({
-    url: '/api/wechatweb/v1/service/add_wp_se',
-    method: 'get',
-    params: secretParams,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  })
-}
-
-// 系列删除
-export function delSecretList(secretParams) {
-  console.log(secretParams)
-  return request({
-    url: '/api/wechatweb/v1/service/delete_wp_se',
-    method: 'get',
-    params: secretParams,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  })
-}
-
 // 系列设置封面
 export function setSecretListFirst(secretParams) {
   console.log(secretParams)
@@ -67,12 +41,12 @@ export function setSecretListFirst(secretParams) {
 }
 
 // 系列内图片删除
-export function delSecretListDetail(secretParams) {
-  console.log(secretParams)
+export function delSecretListDetail(secretParams2) {
+  console.log(secretParams2)
   return request({
-    url: '/api/wechatweb/v1/service/delete_wp_img',
+    url: '/api/wechatweb/v1/service/delete_secret_img',
     method: 'get',
-    params: secretParams,
+    params: secretParams2,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
@@ -83,7 +57,7 @@ export function delSecretListDetail(secretParams) {
 export function secretListUpload(secretParams1, headimg) {
   console.log(secretParams1)
   return request({
-    url: '/v3upload/admin_wx_wallpaper',
+    url: '/v3upload/admin_wx_secret',
     method: 'post',
     headers: {
       'Content-Type': 'multipart/form-data'

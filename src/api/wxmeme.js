@@ -10,7 +10,7 @@ export function fetchMemeList(memeParams) {
     params: memeParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }
   })
 }
 
@@ -23,20 +23,20 @@ export function fetchMemeListDetail(memeParams) {
     params: memeParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }
   })
 }
 
 // 系列新增
-export function addMemeList(memeParams) {
-  console.log(memeParams)
+export function addMemeList(memeParamsAdd) {
+  console.log(memeParamsAdd)
   return request({
-    url: '/api/wechatweb/v1/service/add_wp_se',
+    url: '/api/wechatweb/v1/service/add_st_se',
     method: 'get',
-    params: memeParams,
+    params: memeParamsAdd,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }
   })
 }
 
@@ -44,12 +44,12 @@ export function addMemeList(memeParams) {
 export function delMemeList(memeParams) {
   console.log(memeParams)
   return request({
-    url: '/api/wechatweb/v1/service/delete_wp_se',
+    url: '/api/wechatweb/v1/service/delete_st_se',
     method: 'get',
     params: memeParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }
   })
 }
 
@@ -62,7 +62,7 @@ export function setMemeListFirst(memeParams) {
     params: memeParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }
   })
 }
 
@@ -70,12 +70,12 @@ export function setMemeListFirst(memeParams) {
 export function delMemeListDetail(memeParams) {
   console.log(memeParams)
   return request({
-    url: '/api/wechatweb/v1/service/delete_wp_img',
+    url: '/api/wechatweb/v1/service/delete_st_img',
     method: 'get',
     params: memeParams,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }
   })
 }
 
@@ -83,7 +83,7 @@ export function delMemeListDetail(memeParams) {
 export function memeListUpload(memeParams1, headimg) {
   console.log(memeParams1)
   return request({
-    url: '/v3upload/admin_wx_wallpaper',
+    url: '/v3upload/admin_wx_sticker',
     method: 'post',
     headers: {
       'Content-Type': 'multipart/form-data'
