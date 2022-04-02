@@ -76,6 +76,16 @@
           </div>
         </div>
       </div>
+      <div class="footer">
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :current-page="paperParams.page"
+          :page-size="pagerow"
+          :total="total"
+          @current-change="handleCurrentChange"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -101,7 +111,7 @@ export default {
         bizid: 'uniwarm',
         token: getToken(),
         se_id: this.detailid,
-        page: 0
+        page: 1
       },
       paperParams1: {
         bizid: 'uniwarm',
@@ -117,6 +127,8 @@ export default {
 
       // 后端传来的数据
       imgsData: [],
+      total: 0,
+      pagerow: 20,
 
       dialogVisible: false, // 上传图片弹窗
       imageUrl: ''
@@ -134,14 +146,24 @@ export default {
     },
 
     getPaperList() {
+      this.paperParams.page = this.paperParams.page - 1
       fetchPaperListDetail(this.paperParams)
         .then((response) => {
           console.log(response.data)
+          this.total = response.total
           this.imgsData = response.data
+          this.paperParams.page = this.paperParams.page + 1
         })
         .catch((err) => {
           console.log(err)
         })
+    },
+    // 分页器
+    handleCurrentChange(currentPage) {
+      console.log(currentPage)
+      this.paperParams.page = currentPage
+      console.log(this.paperParams.page)
+      this.getPaperList()
     },
 
     // openFullScreen2() {
@@ -469,6 +491,14 @@ export default {
         }
       }
     }
+  }
+}
+.footer{
+  width: 100%;
+  //border: 1px solid black;
+  text-align: center;
+  .el-pagination{
+    margin-bottom: 40px;
   }
 }
 </style>

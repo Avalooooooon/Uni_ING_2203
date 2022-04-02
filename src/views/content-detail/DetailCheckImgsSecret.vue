@@ -76,6 +76,16 @@
           </div>
         </div>
       </div>
+      <div class="footer">
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :current-page="secretParams.page"
+          :page-size="pagerow"
+          :total="total"
+          @current-change="handleCurrentChange"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -101,7 +111,7 @@ export default {
       secretParams: {
         bizid: 'uniwarm',
         token: getToken(),
-        page: 0
+        page: 1
       },
       secretParams1: {
         bizid: 'uniwarm',
@@ -117,6 +127,8 @@ export default {
 
       // 后端传来的数据
       imgsData: [],
+      total: 0,
+      pagerow: 20,
 
       dialogVisible: false, // 上传图片弹窗
       imageUrl: ''
@@ -147,14 +159,25 @@ export default {
     },
 
     getSecretList() {
+      this.secretParams.page = this.secretParams.page - 1
       fetchSecretListDetail(this.secretParams)
         .then((response) => {
           console.log(response.data)
+          console.log(response.total)
+          this.total = response.total
           this.imgsData = response.data
+          this.secretParams.page = this.secretParams.page + 1
         })
         .catch((err) => {
           console.log(err)
         })
+    },
+    // 分页器
+    handleCurrentChange(currentPage) {
+      console.log(currentPage)
+      this.secretParams.page = currentPage
+      console.log(this.secretParams.page)
+      this.getSecretList()
     },
 
     // onChange(file) {
@@ -250,7 +273,8 @@ export default {
       this.$confirm('是否删除该张图片？', '确认信息', {
         distinguishCancelAndClose: true,
         confirmButtonText: '确定',
-        cancelButtonText: '取消'
+        cancelButtonText: '取消',
+        type: 'warning'
       })
         .then(() => {
           delSecretListDetail(this.secretParams2).then((res) => {
@@ -443,6 +467,14 @@ export default {
         }
       }
     }
+  }
+}
+.footer{
+  width: 100%;
+  //border: 1px solid black;
+  text-align: center;
+  .el-pagination{
+    margin-bottom: 40px;
   }
 }
 </style>
