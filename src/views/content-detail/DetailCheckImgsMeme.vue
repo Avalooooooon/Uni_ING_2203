@@ -63,6 +63,7 @@
           <img v-if="imageUrl" :src="imageUrl" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon" />
         </el-upload>
+        <div style="width: 100%;margin-top: 30px">格式额外增加gif，分辨率推荐为：240 x 240 像素 </div>
       </div>
     </el-dialog>
 

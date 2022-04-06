@@ -63,6 +63,7 @@
           <img v-if="imageUrl" :src="imageUrl" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon" />
         </el-upload>
+        <div style="width: 100%;margin-top: 30px">分辨率推荐1125 x 2436像素（竖屏），大小不超过 2MB</div>
       </div>
     </el-dialog>
 
