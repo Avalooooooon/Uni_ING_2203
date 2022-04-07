@@ -98,19 +98,19 @@ export const constantRoutes = [{
       title: '小程序内容管理',
       icon: 'wechat',
       affix: true
-    },
-//     children: [{
-//       path: 'morningdetail',
-//       hidden: true,
-//       // component: () => import('@/views/content/components/MorningDetail'),
-//       component: () => import('@/views/content/AppContent'),
-//       name: 'MorningDetail',
-//       meta: {
-//         title: '早安晚安',
-//         activeMenu: '/content/wxcontent'
-//       }
-//     }
-// ]
+    }
+    //     children: [{
+    //       path: 'morningdetail',
+    //       hidden: true,
+    //       // component: () => import('@/views/content/components/MorningDetail'),
+    //       component: () => import('@/views/content/AppContent'),
+    //       name: 'MorningDetail',
+    //       meta: {
+    //         title: '早安晚安',
+    //         activeMenu: '/content/wxcontent'
+    //       }
+    //     }
+    // ]
   },
   {
     path: '/content/wxcontent/morningdetail',
@@ -273,6 +273,102 @@ export const constantRoutes = [{
       return {
         appid: route.query.appid,
         appname: route.query.appname
+      }
+    }
+  },
+  {
+    path: '/content/appcontent/designerdetail',
+    hidden: true,
+    component: () => import('@/views/content/components/DesignerDetail'),
+    name: 'DesignerDetail',
+    meta: {
+      title: '设计师',
+      activeMenu: '/content/appcontent'
+    },
+    props(route) {
+      return {
+        appid: route.query.appid,
+        appname: route.query.appname
+      }
+    }
+  },
+  {
+    path: '/content/appcontent/designerdetail/detailcheckimgsdesigner',
+    hidden: true,
+    component: () => import('@/views/content-detail/DetailCheckImgsDesigner'),
+    name: 'DetailCheckImgsDesigner',
+    meta: {
+      title: '设计师详情',
+      activeMenu: '/content/appcontent'
+    },
+    props(route) {
+      return {
+        appid: route.query.detailid,
+        appname: route.query.detailname
+      }
+    }
+  },
+  {
+    path: '/content/appcontent/newsdetail',
+    hidden: true,
+    component: () => import('@/views/content/components/NewsDetail'),
+    name: 'NewsDetail',
+    meta: {
+      title: '资讯',
+      activeMenu: '/content/appcontent'
+    },
+    props(route) {
+      return {
+        appid: route.query.appid,
+        appname: route.query.appname
+      }
+    }
+  },
+  {
+    path: '/content/appcontent/designerdetail/detailcheckimgsnews',
+    hidden: true,
+    component: () => import('@/views/content-detail/DetailCheckImgsNews'),
+    name: 'DetailCheckImgsNews',
+    meta: {
+      title: '资讯详情',
+      activeMenu: '/content/appcontent'
+    },
+    props(route) {
+      return {
+        appid: route.query.detailid,
+        appname: route.query.detailname
+      }
+    }
+  },
+  {
+    path: '/content/appcontent/knowledgedetail',
+    hidden: true,
+    component: () => import('@/views/content/components/KnowledgeDetail'),
+    name: 'KnowledgeDetail',
+    meta: {
+      title: '保养小知识',
+      activeMenu: '/content/appcontent'
+    },
+    props(route) {
+      return {
+        appid: route.query.appid,
+        appname: route.query.appname
+      }
+    }
+  },
+  {
+    path: '/content/appcontent/designerdetail/detailcheckimgsknowledge',
+    hidden: true,
+    component: () => import('@/views/content-detail/DetailCheckImgsKnowledge'),
+    name: 'DetailCheckImgsKnowledge',
+    meta: {
+      title: '保养小知识详情',
+      activeMenu: '/content/appcontent'
+    },
+    props(route) {
+      return {
+        appid: route.query.detailid,
+        appname: route.query.detailname
       }
     }
   },

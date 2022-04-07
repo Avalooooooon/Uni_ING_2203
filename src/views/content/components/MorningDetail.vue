@@ -151,8 +151,8 @@ export default {
     checkdetail(event) {
       const detailid = event.currentTarget.getAttribute('detailid')
       const detailname = event.currentTarget.getAttribute('detailname')
-      console.log(detailid)
-      console.log(detailname)
+      // console.log(detailid)
+      // console.log(detailname)
 
       this.$router.push({
         // name:'DetailAddImgset',

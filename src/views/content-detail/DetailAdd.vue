@@ -5,8 +5,8 @@
 <script>
 import ArticleDetail from './components/ArticleDetail'
 export default {
-    name:'DetailAdd',
-    components: { ArticleDetail }
+  name: 'DetailAdd',
+  components: { ArticleDetail }
 }
 </script>
 

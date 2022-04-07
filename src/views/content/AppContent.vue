@@ -13,11 +13,11 @@
       <img class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/erp/ops/static/design.png">
       <div class="contentName">设计师</div>
     </div>
-    <div class="module-wrapper" appid="004" appname="资讯" @click="toAppDetail">
+    <div class="module-wrapper" appid="004" appname="资讯" @click="toNewsDetail">
       <img class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/erp/ops/static/news.png">
       <div class="contentName">资讯</div>
     </div>
-    <div class="module-wrapper" appid="005" appname="保养小知识" @click="toAppDetail">
+    <div class="module-wrapper" appid="005" appname="保养小知识" @click="toKnowledgeDetail">
       <img class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/erp/ops/static/maintain.png">
       <div class="contentName">保养小知识</div>
     </div>
@@ -34,7 +34,31 @@ export default {
       const appname = event.currentTarget.getAttribute('appname')
 
       this.$router.push({
-        name: 'AppDetail',
+        name: 'DesignerDetail',
+        query: {
+          appid: appid,
+          appname: appname
+        }
+      })
+    },
+    toNewsDetail(e) {
+      const appid = event.currentTarget.getAttribute('appid')
+      const appname = event.currentTarget.getAttribute('appname')
+
+      this.$router.push({
+        name: 'NewsDetail',
+        query: {
+          appid: appid,
+          appname: appname
+        }
+      })
+    },
+    toKnowledgeDetail(e) {
+      const appid = event.currentTarget.getAttribute('appid')
+      const appname = event.currentTarget.getAttribute('appname')
+
+      this.$router.push({
+        name: 'KnowledgeDetail',
         query: {
           appid: appid,
           appname: appname
