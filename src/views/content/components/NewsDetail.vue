@@ -1,4 +1,5 @@
 <template>
+  <!-- ”app内容管理“——资讯 -->
   <div class="content-wrapper">
     <div class="topbar-wrapper">
       <div class="back" @click="toback">
@@ -13,107 +14,202 @@
           suffix-icon="el-icon-search"
         />
         <i class="el-icon-sort" />
-        <i class="el-icon-plus" @click="adddetail" />
+        <i class="el-icon-plus" @click="dialogVisible = true" />
+
+        <!-- 编辑弹窗 -->
+        <el-dialog title="新增系列" :visible.sync="dialogVisible">
+          <el-form :model="form">
+            <el-form-item label="系列名称：" :label-width="formLabelWidth">
+              <el-input
+                v-model="form.newSetName"
+                placeholder="请输入新系列名称（40字以内）"
+                autocomplete="off"
+              />
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible = false">取 消</el-button>
+            <el-button
+              type="primary"
+              @click="
+                dialogVisible = false;
+                adddetailimgset();
+              "
+            >确 定</el-button>
+          </div>
+        </el-dialog>
       </div>
     </div>
 
-    <div v-for="item in datalist" :key="item.id" class="module-wrapper">
-      <img class="appimg" src="@/assets/background.png">
-      <div class="textversion">
-        {{ item.name }} 2022xxxx_v1
-      </div>
-      <!--      <div class="texttime">-->
-      <!--        张三 上传时间2022/xx/xx xx:xx-->
-      <!--      </div>-->
+    <div v-for="item in modulesData" :key="item.id" class="module-wrapper">
+      <!-- <img class="appimg" src="@/assets/logo.jpg"> -->
+      <img
+        class="appimg"
+        :src="
+          item.image ? 'https://www.bizspace.cn' + item.image : images.emptyimg
+        "
+      />
+      <div class="textversion">{{ item.name }}</div>
       <div class="editbtn">
-        <el-button type="primary" class="checkbtn" :detailid="item.id" :detailname="item.name" @click="checkdetail">查看</el-button>
-        <el-button type="primary" class="deletebtn" @click="deletealert">删除</el-button>
+        <el-button
+          type="primary"
+          class="checkbtn"
+          :detailid="item.id"
+          :detailname="item.name"
+          @click="checkdetail"
+          >查看</el-button
+        >
+        <el-button
+            :id="item.id"
+            type="primary"
+            class="deletebtn"
+            :detailid="item.id"
+            :detailname="item.name"
+            @click="deletealert"
+          >删除</el-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { fetchNewsList, addNewsList, delNewsList } from '@/api/appnews'
+import { getToken } from '@/utils/auth'
+
 export default {
-  name: 'NewsDetail',
-  props: ['appid', 'appname'],
+  name: "NewsDetail",
+  props: ["appid", "appname"],
   data() {
     return {
-      searchkey: '',
-      datalist: [
-        {
-          id: '0001',
-          image: '../../assets/logo.jpg',
-          name: '资讯1'
-        },
-        {
-          id: '0002',
-          image: '../../assets/logo.jpg',
-          name: '资讯2'
-        },
-        {
-          id: '0003',
-          image: '../../assets/logo.jpg',
-          name: '资讯3'
-        },
-        {
-          id: '0004',
-          image: '../../assets/logo.jpg',
-          name: '资讯4'
-        }
-      ]
-    }
+      images: { // 占位图
+        emptyimg: require('@/assets/empty.jpg')
+      },
+      searchKey: '', // 用户输入到搜索框中的关键字
+      list: [], // 存放搜索前的所有数据
+      newlist: [], // 存放搜索结果
+      
+      // 后端传来的数据
+      modulesData: [],
+      // 发送给后端的数据
+      newsParamsFetch: {
+        bizid: 'uniwarm',
+        token: getToken(),
+        listid:8,
+        page:0
+      },
+      newsParamsAdd: {
+        bizid: 'uniwarm',
+        token: getToken(),
+        se_name: ''
+      },
+      newsParamsDel: {
+        bizid: 'uniwarm',
+        token: getToken(),
+        se_id: ''
+      },
+
+      dialogVisible: false, // 弹窗显隐
+      form: {
+        newSetName: ''
+      },
+      formLabelWidth: '120px'
+    };
+  },
+
+  mounted() {
+    fetchNewsList(this.newsParamsFetch)
+      .then((response) => {
+        console.log(response.data)
+        this.modulesData = response.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   },
 
   methods: {
+    // 返回上一级
     toback() {
-      this.$router.go(-1)
+      this.$router.go(-1);
     },
 
-    adddetail() {
-      this.$router.push({
-        name: 'DetailAdd'
-      })
+    // 添加新系列
+    adddetailimgset() {
+      this.newsParamsAdd.se_name = this.form.newSetName
+      addNewsList(this.newsParamsAdd)
+        .then((response) => {
+          // console.log(response.data);
+          fetchNewsList(this.newsParamsFetch)
+            .then((response) => {
+              this.modulesData = response.data
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      this.form.newSetName = ''
     },
 
-    deletealert() {
+    // 删除当前系列
+    deletealert(event) {
+      this.newsParamsDel.se_id = event.currentTarget.id
       this.$confirm('确定要删除该资源吗？', '提示', {
         cancelButtonText: '取消',
         confirmButtonText: '确定',
         type: 'warning'
-      }).then(() => {
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
-        })
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消删除'
-        })
       })
+        .then(() => {
+          delNewsList(this.newsParamsDel)
+            .then((response) => {
+              console.log(response.data)
+              fetchNewsList(this.newsParamsFetch)
+                .then((response) => {
+                  this.modulesData = response.data
+                })
+                .catch((err) => {
+                  console.log(err)
+                })
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
+      // this.$router.go(0)
     },
 
-    checkdetail(e) {
-      const detailid = event.currentTarget.getAttribute('detailid')
-      const detailname = event.currentTarget.getAttribute('detailname')
-      console.log(detailid)
-      console.log(detailname)
+    
+    // 点击当前系列的查看按钮
+    checkdetail(event) {
+      const detailid = event.currentTarget.getAttribute("detailid");
+      const detailname = event.currentTarget.getAttribute("detailname");
 
       this.$router.push({
-        name: 'DetailCheckImgsNews',
+        name: "DetailCheckImgsNews",
         query: {
           detailid: detailid,
-          detailname: detailname
-        }
-      })
-    }
-  }
-}
+          detailname: detailname,
+        },
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-.content-wrapper{
+.content-wrapper {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -125,7 +221,7 @@ export default {
   overflow-y: scroll;
   margin: 0 1%;
 }
-.topbar-wrapper{
+.topbar-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -134,17 +230,16 @@ export default {
   width: 98%;
   height: 5vh;
   padding: 1.4% 0 1% 1%;
-
 }
-.back{
-  color:#D79432;
+.back {
+  color: #d79432;
   font-size: 16px;
   cursor: pointer;
 }
-.el-icon-arrow-left{
-  font-weight:bolder;
+.el-icon-arrow-left {
+  font-weight: bolder;
 }
-.edit{
+.edit {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -153,27 +248,27 @@ export default {
   width: 32%;
   height: 7vh;
 
-  color: #989A9E;
+  color: #989a9e;
 }
-.edit i{
-  color:#6e6e70;
-  font-size:20px;
+.edit i {
+  color: #6e6e70;
+  font-size: 20px;
 }
-::v-deep .edit .el-input{
+::v-deep .edit .el-input {
   width: 21vw;
 }
-::v-deep .edit .el-input__inner{
+::v-deep .edit .el-input__inner {
   font-size: 10px;
   height: 3.5vh;
   background-color: transparent;
 }
-::v-deep .edit .el-input__icon{
+::v-deep .edit .el-input__icon {
   font-size: 14px;
-  height:3.5vh;
-  line-height:3.5vh;
+  height: 3.5vh;
+  line-height: 3.5vh;
 }
 
-.module-wrapper{
+.module-wrapper {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -188,38 +283,33 @@ export default {
 
   // background-color: antiquewhite;
 }
-.appimg{
+.appimg {
   width: 100%;
-  height: 16vh;
+  // height: 16vh;
 }
-.textversion{
+.textversion {
   font-size: 14px;
   font-weight: bold;
-  margin:1.5vh 0 1vh 0;
-}
-.texttime{
-  font-size: 10px;
-  color:#777777;
-  margin:0 0 1.5vh 0;
+  margin: 1.5vh 0 1vh 0;
 }
 
-::v-deep .editbtn .el-button--medium{
+::v-deep .editbtn .el-button--medium {
   font-size: 12px;
 }
-.checkbtn{
-  height:3vh;
-  width:37%;
+.checkbtn {
+  height: 3vh;
+  width: 37%;
   padding: 0;
   background-color: #253647;
-  color:white;
-  border:none;
+  color: white;
+  border: none;
 }
-.deletebtn{
-  height:3vh;
-  width:40%;
+.deletebtn {
+  height: 3vh;
+  width: 40%;
   padding: 0;
   background-color: transparent;
-  color:#F56C6C;
-  border:1px solid #F56C6C;
+  color: #f56c6c;
+  border: 1px solid #f56c6c;
 }
 </style>

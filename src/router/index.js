@@ -261,22 +261,6 @@ export const constantRoutes = [{
     }
   },
   {
-    path: '/content/appcontent/appdetail',
-    hidden: true,
-    component: () => import('@/views/content/components/AppDetail'),
-    name: 'AppDetail',
-    meta: {
-      title: 'App详情',
-      activeMenu: '/content/appcontent'
-    },
-    props(route) {
-      return {
-        appid: route.query.appid,
-        appname: route.query.appname
-      }
-    }
-  },
-  {
     path: '/content/appcontent/designerdetail',
     hidden: true,
     component: () => import('@/views/content/components/DesignerDetail'),
@@ -303,8 +287,8 @@ export const constantRoutes = [{
     },
     props(route) {
       return {
-        appid: route.query.detailid,
-        appname: route.query.detailname
+        detailid: route.query.detailid,
+        detailname: route.query.detailname
       }
     }
   },
@@ -335,8 +319,8 @@ export const constantRoutes = [{
     },
     props(route) {
       return {
-        appid: route.query.detailid,
-        appname: route.query.detailname
+        detailid: route.query.detailid,
+        detailname: route.query.detailname
       }
     }
   },
@@ -367,8 +351,8 @@ export const constantRoutes = [{
     },
     props(route) {
       return {
-        appid: route.query.detailid,
-        appname: route.query.detailname
+        detailid: route.query.detailid,
+        detailname: route.query.detailname
       }
     }
   },

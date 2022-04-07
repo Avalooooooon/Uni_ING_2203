@@ -1,15 +1,7 @@
 <template>
-  <!-- “APP内容管理”主界面，显示的是五个系列 -->
+  <!-- “APP内容管理”主界面，显示的是三个系列 -->
   <div class="content-wrapper">
-    <!--    <div class="module-wrapper" appid="001" appname="品牌故事" @click="toAppDetail">-->
-    <!--      <img class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png">-->
-    <!--      <div class="contentName">品牌故事</div>-->
-    <!--    </div>-->
-    <!--    <div class="module-wrapper" appid="002" appname="品牌灵魂" @click="toAppDetail">-->
-    <!--      <img class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png">-->
-    <!--      <div class="contentName">品牌灵魂</div>-->
-    <!--    </div>-->
-    <div class="module-wrapper" appid="003" appname="设计师" @click="toAppDetail">
+    <div class="module-wrapper" appid="003" appname="设计师" @click="toDesignerDetail">
       <img class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/erp/ops/static/design.png">
       <div class="contentName">设计师</div>
     </div>
@@ -29,7 +21,7 @@ export default {
   name: 'AppContent',
 
   methods: {
-    toAppDetail(e) {
+    toDesignerDetail(event) {
       const appid = event.currentTarget.getAttribute('appid')
       const appname = event.currentTarget.getAttribute('appname')
 
@@ -41,7 +33,7 @@ export default {
         }
       })
     },
-    toNewsDetail(e) {
+    toNewsDetail(event) {
       const appid = event.currentTarget.getAttribute('appid')
       const appname = event.currentTarget.getAttribute('appname')
 
@@ -53,7 +45,7 @@ export default {
         }
       })
     },
-    toKnowledgeDetail(e) {
+    toKnowledgeDetail(event) {
       const appid = event.currentTarget.getAttribute('appid')
       const appname = event.currentTarget.getAttribute('appname')
 
