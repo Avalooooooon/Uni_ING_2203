@@ -7,6 +7,7 @@
         {{ detailname }}
       </div>
     </div>
+
     <div class="content">
       <div class="content-left">
         <el-form
@@ -31,21 +32,17 @@
           </el-form-item>
 
           <el-form-item label="照片" prop="image" required>
-            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <!-- :http-request="uploadFile" -->
             <el-upload
-              v-else
               class="avatar-uploader"
-              list-type="picture-card"
               action="/v3upload/admin_wx_xxx"
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
               :before-upload="beforeAvatarUpload"
-              :http-request="uploadFile"
             >
-              <i class="el-icon-plus avatar-uploader-icon" />
+              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+              <i v-else class="el-icon-plus avatar-uploader-icon" />
             </el-upload>
-
-
           </el-form-item>
 
           <el-form-item label="专业" prop="major">
@@ -56,7 +53,7 @@
               ocomplete="off"
             />
           </el-form-item>
-          
+
           <el-form-item label="任职" prop="position">
             <el-input
               v-model.number="numberValidateForm.position"
@@ -154,7 +151,7 @@ export default {
           console.log(response.detail);
           this.designerData = response.detail;
           this.numberValidateForm.name = this.designerData.name;
-          this.imageUrl = this.url + this.designerData.image;
+          // this.imageUrl = this.url + this.designerData.image;
           this.numberValidateForm.major = this.designerData.major;
           this.numberValidateForm.position = this.designerData.position;
           this.numberValidateForm.country = this.designerData.country;
@@ -177,15 +174,16 @@ export default {
       //       type: 'success',
       //       message: '上传成功'
       //     })
-      //     this.dialogVisible = false
       //     this.imageUrl = ''
       //     this.getMorningList()
       //   }
       // })
     },
     handleAvatarSuccess(res, file) {
-      console.log(file);
+      this.imageUrl = URL.createObjectURL(file.raw);
     },
+
+    // 上传开始前判断待上传图片是否符合格式要求
     beforeAvatarUpload(file) {
       const isJPG = file.type === "image/jpeg";
       const isLt2M = file.size / 1024 / 1024 < 2;
@@ -198,6 +196,7 @@ export default {
       }
       return isJPG && isLt2M;
     },
+    
   },
 };
 </script>
@@ -298,7 +297,7 @@ export default {
   width: 100%;
   height: calc(100vh - 100px);
   display: flex;
-  
+
   // 左侧列表
   .content-left {
     width: 40%;
@@ -311,11 +310,34 @@ export default {
         .el-input {
           width: 250px;
         }
+
+        // 照片上传组件
+        .avatar-uploader .el-upload {
+          border: 1px dashed #d9d9d9;
+          border-radius: 6px;
+          cursor: pointer;
+          position: relative;
+          overflow: hidden;
+        }
+        .avatar-uploader .el-upload:hover {
+          border-color: #409eff;
+        }
+        .avatar-uploader-icon {
+          font-size: 28px;
+          color: #8c939d;
+          width: 200px;
+          height: 278px;
+          line-height: 278px;
+          text-align: center;
+        }
+        // 主图
+        .avatar {
+          width: 200px;
+          height: 278px;
+          display: block;
+        }
+
       }
-    }
-    // 后台拿到的/待上传主图
-    .avatar{
-      width:250px;
     }
   }
 
@@ -326,18 +348,17 @@ export default {
     // 需要隐藏的部分
     ::v-deep {
       // 顶部栏除了upload按钮的其他按钮
-      .mce-container-body.mce-flow-layout{
+      .mce-container-body.mce-flow-layout {
         // visibility:hidden;
-        width:100%;
+        width: 100%;
       }
       // 顶部栏下面的工具栏
       .mce-toolbar-grp.mce-container.mce-panel.mce-last {
         // display: none;
-        width:100%;
+        width: 100%;
       }
-      .mce-container.mce-flow-layout-item.mce-first.mce-last.mce-btn-group{
-        width:100%;
-
+      .mce-container.mce-flow-layout-item.mce-first.mce-last.mce-btn-group {
+        width: 100%;
       }
     }
   }

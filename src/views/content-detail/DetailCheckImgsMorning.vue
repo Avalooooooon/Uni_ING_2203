@@ -27,19 +27,6 @@
             @click="isdeleteimg"
           >删除图片</el-button>
         </div>
-        <!--        <div class="btnsset">-->
-        <!--          <el-button-->
-        <!--            type="primary"-->
-        <!--            class="editsetbtn"-->
-        <!--            detailid="002"-->
-        <!--            detailname="品牌灵魂v2"-->
-        <!--          >编辑图集</el-button>-->
-        <!--          <el-button-->
-        <!--            type="primary"-->
-        <!--            class="deletesetbtn"-->
-        <!--            @click="deleteset"-->
-        <!--          >删除图集</el-button>-->
-        <!--        </div>-->
       </div>
     </div>
 
@@ -138,22 +125,8 @@ export default {
   },
 
   created() {
-    // console.log(this.paperParams)
     this.getMorningList()
   },
-
-  // mounted() {
-  //   console.log(this.morningParams);
-
-  //   fetchMorningListDetail(this.morningParams)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       this.imgsData = response.data;
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // },
 
   methods: {
     toback() {
@@ -471,6 +444,8 @@ export default {
     }
   }
 }
+
+// 分页器
 .footer{
   width: 100%;
   //border: 1px solid black;
