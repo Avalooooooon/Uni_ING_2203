@@ -493,13 +493,15 @@ export default {
       }
     }
   }
-}
-.footer{
-  width: 100%;
-  //border: 1px solid black;
-  text-align: center;
-  .el-pagination{
-    margin-bottom: 40px;
+
+  .footer{
+    width: 100%;
+    //border: 1px solid black;
+    text-align: center;
+    .el-pagination{
+      margin-bottom: 40px;
+    }
   }
 }
+
 </style>
