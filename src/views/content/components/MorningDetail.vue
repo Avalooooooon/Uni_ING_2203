@@ -155,7 +155,6 @@ export default {
       // console.log(detailname)
 
       this.$router.push({
-        // name:'DetailAddImgset',
         name: 'DetailCheckImgsMorning',
         query: {
           detailid: detailid,

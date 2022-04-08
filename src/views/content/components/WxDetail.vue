@@ -220,7 +220,6 @@ export default {
       const detailname = event.currentTarget.getAttribute('detailname')
 
       this.$router.push({
-        // name:'DetailAddImgset',
         name: 'DetailCheckImgs',
         query: {
           detailid: detailid,

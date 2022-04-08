@@ -14,31 +14,8 @@
           suffix-icon="el-icon-search"
         />
         <i class="el-icon-sort" />
-        <i class="el-icon-plus" @click="dialogVisible = true" />
+        <i class="el-icon-plus" listid = "8" @click="toAddDesigner" />
 
-        <!-- 编辑弹窗 -->
-        <el-dialog title="新增系列" :visible.sync="dialogVisible">
-          <el-form :model="form">
-            <el-form-item label="系列名称：" :label-width="formLabelWidth">
-              <el-input
-                v-model="form.newSetName"
-                placeholder="请输入新系列名称（40字以内）"
-                autocomplete="off"
-              />
-            </el-form-item>
-          </el-form>
-          <div slot="footer" class="dialog-footer">
-            <el-button @click="dialogVisible = false">取 消</el-button>
-            <el-button
-              type="primary"
-              @click="
-                dialogVisible = false;
-                adddetailimgset();
-              "
-              >确 定</el-button
-            >
-          </div>
-        </el-dialog>
       </div>
     </div>
     <div class="moudle-wrapper">
@@ -131,29 +108,13 @@ export default {
         token: getToken(),
         se_id: "",
       },
-
-      dialogVisible: false, // 弹窗显隐
-      form: {
-        newSetName: "",
-      },
-      formLabelWidth: "120px",
+      
     };
   },
 
   created() {
     this.getDesignerList();
   },
-
-  // mounted() {
-  //   fetchDesignerList(this.designerParamsFetch)
-  //     .then((response) => {
-  //       console.log(response.data)
-  //       this.modulesData = response.data
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  // },
 
   methods: {
     // 返回上一级
@@ -175,6 +136,19 @@ export default {
           console.log(err);
         });
     },
+
+    // 点击顶部加号添加新系列
+    toAddDesigner(event){
+      const listid = event.currentTarget.getAttribute('listid')
+
+      this.$router.push({
+        name: 'AddDesigner',
+        query: {
+          listid: listid,
+        }
+      })
+    },
+
     // 分页器
     handleCurrentChange(currentPage) {
       console.log(currentPage);
@@ -184,7 +158,7 @@ export default {
     },
     // 添加新系列
     adddetailimgset() {
-      this.designerParamsAdd.se_name = this.form.newSetName;
+
       addDesignerList(this.designerParamsAdd)
         .then((response) => {
           // console.log(response.data);
@@ -199,7 +173,7 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-      this.form.newSetName = "";
+
     },
 
     // 删除当前系列
@@ -304,13 +278,19 @@ export default {
       font-size: 20px;
     }
     ::v-deep {
+      // 搜索框
       .el-input {
-        width: 21vw;
+        width: 17vw;
       }
       .el-input__inner {
         font-size: 10px;
         height: 3.5vh;
         background-color: transparent;
+      }
+      .el-input__icon {
+        font-size: 14px;
+        height: 3.5vh;
+        line-height: 3.5vh;
       }
     }
   }

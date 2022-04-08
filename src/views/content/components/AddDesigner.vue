@@ -1,10 +1,10 @@
 <template>
-  <!-- ”app内容管理“——设计师——设计师详情-->
+  <!-- ”app内容管理“——设计师——新增设计师-->
   <div class="content-wrapper">
     <div class="topbar-wrapper">
       <div class="back" @click="toback">
         <i class="el-icon-arrow-left" />
-        {{ detailname }}
+        {{ listid }}：新增设计师
       </div>
       <div class="btns">
         <div class="btnsimg">
@@ -13,7 +13,7 @@
             class="uploadsinglebtn"
             listid="8"
             @click="saveAppDetail"
-          >保存</el-button>
+          >提交</el-button>
         </div>
       </div>
     </div>
@@ -107,9 +107,9 @@ import Tinymce from "@/components/Tinymce";
 // import axios from 'axios'
 
 export default {
-  name: "DetailCheckImgsDesigner",
+  name: "AddDesigner",
   components: { Tinymce },
-  props: ["detailid", "detailname"],
+  props: ["listid"],
   data() {
     return {
       url: "https://www.bizspace.cn",
@@ -147,7 +147,7 @@ export default {
   },
 
   created() {
-    this.getDesignerList();
+    // this.getDesignerList();
   },
 
   methods: {
@@ -155,7 +155,6 @@ export default {
       this.$router.go(-1);
     },
 
-    // 重新请求数据并刷新
     getDesignerList() {
       fetchDesignerListDetail(this.designerParams)
         .then((response) => {
@@ -175,7 +174,7 @@ export default {
 
     // 点击保存按钮
     saveAppDetail() {
-      this.$confirm('确定保存本次编辑？','提示', {
+      this.$confirm('确定提交本次新增？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -185,18 +184,17 @@ export default {
           // this.$refs.imgDelete.style.display = 'none'
           this.$message({
             type: 'success',
-            message: '保存成功!'
+            message: '提交成功!'
           })
         })
         .catch(() => {
           this.$message({
             type: 'info',
-            message: '取消保存'
+            message: '取消提交'
           })
         })
     },
 
-    // 上传照片
     uploadFile(file) {
       console.log(file);
       var formData = new FormData();
@@ -293,6 +291,7 @@ export default {
         margin-right: 0.5vw;
       }
     }
+
   }
 }
 // 主要内容显示区域

@@ -90,6 +90,8 @@ export const constantRoutes = [{
     icon: 'form',
     affix: true
   },
+  
+  // 小程序内容管理部分路由
   children: [{
     path: 'wxcontent',
     component: () => import('@/views/content/WxContent'),
@@ -99,18 +101,6 @@ export const constantRoutes = [{
       icon: 'wechat',
       affix: true
     }
-    //     children: [{
-    //       path: 'morningdetail',
-    //       hidden: true,
-    //       // component: () => import('@/views/content/components/MorningDetail'),
-    //       component: () => import('@/views/content/AppContent'),
-    //       name: 'MorningDetail',
-    //       meta: {
-    //         title: '早安晚安',
-    //         activeMenu: '/content/wxcontent'
-    //       }
-    //     }
-    // ]
   },
   {
     path: '/content/wxcontent/morningdetail',
@@ -216,39 +206,8 @@ export const constantRoutes = [{
       }
     }
   },
-  {
-    path: '/content/wxcontent/detailaddimgset',
-    hidden: true,
-    component: () => import('@/views/content-detail/DetailAddImgset'),
-    name: 'DetailAddImgset',
-    meta: {
-      title: '详情-添加多张图片',
-      activeMenu: '/content/wxcontent'
-    },
-    props(route) {
-      return {
-        detailid: route.query.detailid,
-        detailname: route.query.detailname
-      }
-    }
-  },
-  {
-    path: '/content/wxcontent/detailaddimgonly',
-    hidden: true,
-    component: () => import('@/views/content-detail/DetailAddImgOnly'),
-    name: 'DetailAddImgOnly',
-    meta: {
-      title: '详情-添加单张图片',
-      activeMenu: '/content/wxcontent'
-    },
-    props(route) {
-      return {
-        detailid: route.query.detailid,
-        detailname: route.query.detailname
-      }
-    }
-  },
 
+  // App内容管理部分路由
   {
     path: 'appcontent',
     component: () => import('@/views/content/AppContent'),
@@ -293,6 +252,21 @@ export const constantRoutes = [{
     }
   },
   {
+    path: '/content/appcontent/designerdetail/adddesigner',
+    hidden: true,
+    component: () => import('@/views/content/components/AddDesigner'),
+    name: 'AddDesigner',
+    meta: {
+      title: '新增设计师',
+      activeMenu: '/content/appcontent'
+    },
+    props(route) {
+      return {
+        listid: route.query.listid,
+      }
+    }
+  },
+  {
     path: '/content/appcontent/newsdetail',
     hidden: true,
     component: () => import('@/views/content/components/NewsDetail'),
@@ -309,7 +283,7 @@ export const constantRoutes = [{
     }
   },
   {
-    path: '/content/appcontent/designerdetail/detailcheckimgsnews',
+    path: '/content/appcontent/newsdetail/detailcheckimgsnews',
     hidden: true,
     component: () => import('@/views/content-detail/DetailCheckImgsNews'),
     name: 'DetailCheckImgsNews',
@@ -321,6 +295,21 @@ export const constantRoutes = [{
       return {
         detailid: route.query.detailid,
         detailname: route.query.detailname
+      }
+    }
+  },
+  {
+    path: '/content/appcontent/newsdetail/addnews',
+    hidden: true,
+    component: () => import('@/views/content/components/AddNews'),
+    name: 'AddNews',
+    meta: {
+      title: '新增资讯',
+      activeMenu: '/content/appcontent'
+    },
+    props(route) {
+      return {
+        listid: route.query.listid,
       }
     }
   },
@@ -357,21 +346,21 @@ export const constantRoutes = [{
     }
   },
   {
-    path: '/content/appcontent/appdetail/detailadd',
+    path: '/content/appcontent/newsdetail/addknowledge',
     hidden: true,
-    component: () => import('@/views/content-detail/DetailAdd'),
-    name: 'DetailAdd',
+    component: () => import('@/views/content/components/AddKnowledge'),
+    name: 'AddKnowledge',
     meta: {
-      title: '详情-添加富文本编辑器',
+      title: '新增保养小知识',
       activeMenu: '/content/appcontent'
     },
     props(route) {
       return {
-        detailid: route.query.detailid,
-        detailname: route.query.detailname
+        listid: route.query.listid,
       }
     }
   },
+  
   {
     path: '/content/appcontent/appdetail/DetailCheckVideo',
     hidden: true,
@@ -505,29 +494,6 @@ export const constantRoutes = [{
   //     }
   //   ]
   // },
-  // {
-  //   path: '/content/wxcontent',
-  //   component: Layout,
-  //   hidden: true,
-  //   meta: { title: '小程序内容管理' },
-  //   children: [
-  //     {
-  //       hidden: true,
-  //       path: 'detailaddimgonly',
-  //       component: () => import('@/views/content-detail/DetailAddImgOnly'),
-  //       name: 'DetailAddImgOnly',
-  //       meta: { title: '详情-添加单张图片', icon: 'dashboard', activeMenu: '/content/wxcontent' },
-  //
-  //       props(route) {
-  //         return {
-  //           detailid: route.query.detailid,
-  //           detailname: route.query.detailname
-  //         }
-  //       }
-  //
-  //     }
-  //   ]
-  // },
 
   // {
   //   path: '/content/wxcontent',
@@ -622,50 +588,7 @@ export const constantRoutes = [{
   //   ]
   // },
 
-  // {
-  //   path: '/content/wxcontent',
-  //   component: Layout,
-  //   hidden: true,
-  //   meta: { title: '小程序内容管理' },
-  //   children: [
-  //     {
-  //       hidden: true,
-  //       path: 'detailaddimgset',
-  //       component: () => import('@/views/content-detail/DetailAddImgset'),
-  //       name: 'DetailAddImgset',
-  //       meta: { title: '详情-添加多张图片', icon: 'dashboard', activeMenu: '/content/wxcontent' },
-  //
-  //       props(route) {
-  //         return {
-  //           detailid: route.query.detailid,
-  //           detailname: route.query.detailname
-  //         }
-  //       }
-  //     }
-  //   ]
-  // },
 
-  // {
-  //   path: '/content/appcontent/appdetail',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       hidden: true,
-  //       path: 'detailadd',
-  //       component: () => import('@/views/content-detail/DetailAdd'),
-  //       name: 'DetailAdd',
-  //       meta: { title: '详情-添加富文本编辑器', icon: 'dashboard', activeMenu: '/content/appcontent' },
-  //
-  //       props(route) {
-  //         return {
-  //           detailid: route.query.detailid,
-  //           detailname: route.query.detailname
-  //         }
-  //       }
-  //
-  //     }
-  //   ]
-  // },
 
   // {
   //   path: '/content/appcontent/appdetail/DetailCheckVideo',
