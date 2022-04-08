@@ -14,14 +14,14 @@
           suffix-icon="el-icon-search"
         />
         <i class="el-icon-sort" />
-        <i class="el-icon-plus" listid = "8" @click="toAddDesigner" />
+        <i class="el-icon-plus" listid="8" @click="toAddDesigner" />
 
       </div>
     </div>
     <div class="moudle-wrapper">
       <!-- <div v-for="item in modulesData" :key="item.id" class="module-wrapper"> -->
       <div v-for="item in modulesData" :key="item.id" class="singlemoudle">
-        <!-- <img class="appimg" src="@/assets/logo.jpg"> -->
+<!--         <img class="appimg" src="@/assets/logo.jpg"> -->
         <img
           class="appimg"
           :src="
@@ -29,7 +29,7 @@
               ? 'https://www.bizspace.cn' + item.image
               : images.emptyimg
           "
-        />
+        >
         <div class="textversion">{{ item.name }}</div>
         <div class="editbtn">
           <el-button
@@ -38,16 +38,14 @@
             :detailid="item.id"
             :detailname="item.name"
             @click="checkdetail"
-            >查看</el-button
-          >
+          >查看</el-button>
           <el-button
             :id="item.id"
             type="primary"
             class="deletebtn"
             :detailid="item.id"
             @click="deletealert"
-            >删除</el-button
-          >
+          >删除</el-button>
         </div>
       </div>
       <div class="footer">
@@ -68,20 +66,20 @@
 import {
   fetchDesignerList,
   addDesignerList,
-  delDesignerList,
-} from "@/api/appdesigner";
-import { getToken } from "@/utils/auth";
+  delDesignerList
+} from '@/api/appdesigner'
+import { getToken } from '@/utils/auth'
 
 export default {
-  name: "AppDetail",
-  props: ["appid", "appname"],
+  name: 'AppDetail',
+  props: ['appid', 'appname'],
   data() {
     return {
       images: {
         // 占位图
-        emptyimg: require("@/assets/empty.jpg"),
+        emptyimg: require('@/assets/empty.jpg')
       },
-      searchKey: "", // 用户输入到搜索框中的关键字
+      searchkey: '', // 用户输入到搜索框中的关键字
       list: [], // 存放搜索前的所有数据
       newlist: [], // 存放搜索结果
 
@@ -92,112 +90,112 @@ export default {
 
       // 发送给后端的数据
       designerParamsFetch: {
-        bizid: "uniwarm",
+        bizid: 'uniwarm',
         token: getToken(),
         listid: 8,
-        page: 1,
+        page: 1
       },
       designerParamsDel: {
-        bizid: "uniwarm",
+        bizid: 'uniwarm',
         token: getToken(),
         listid: 8,
-        itemid: "",
-      },
-      
-    };
+        itemid: ''
+      }
+
+    }
   },
 
   created() {
-    this.getDesignerList();
+    this.getDesignerList()
   },
 
   methods: {
     // 返回上一级
     toback() {
-      this.$router.go(-1);
+      this.$router.go(-1)
     },
 
     // 钩子函数：从后台拿数据
     getDesignerList() {
-      this.designerParamsFetch.page = this.designerParamsFetch.page - 1;
+      this.designerParamsFetch.page = this.designerParamsFetch.page - 1
       fetchDesignerList(this.designerParamsFetch)
         .then((response) => {
-          console.log(response.data);
-          this.total = response.total;
-          this.modulesData = response.data;
-          this.designerParamsFetch.page = this.designerParamsFetch.page + 1;
+          console.log(response.data)
+          this.total = response.total
+          this.modulesData = response.data
+          this.designerParamsFetch.page = this.designerParamsFetch.page + 1
         })
         .catch((err) => {
-          console.log(err);
-        });
+          console.log(err)
+        })
     },
 
     // 点击顶部加号添加新系列
-    toAddDesigner(event){
+    toAddDesigner(event) {
       const listid = event.currentTarget.getAttribute('listid')
 
       this.$router.push({
         name: 'AddDesigner',
         query: {
-          listid: listid,
+          listid: listid
         }
       })
     },
 
     // 分页器
     handleCurrentChange(currentPage) {
-      console.log(currentPage);
-      this.designerParams.page = currentPage;
-      console.log(this.designerParams.page);
-      this.getDesignerList();
+      console.log(currentPage)
+      this.designerParams.page = currentPage
+      console.log(this.designerParams.page)
+      this.getDesignerList()
     },
 
     // 删除当前系列
     deletealert(event) {
-      this.designerParamsDel.itemid = event.currentTarget.id;
-      this.$confirm("确定要删除该资源吗？", "提示", {
-        cancelButtonText: "取消",
-        confirmButtonText: "确定",
-        type: "warning",
+      this.designerParamsDel.itemid = event.currentTarget.id
+      this.$confirm('确定要删除该资源吗？', '提示', {
+        cancelButtonText: '取消',
+        confirmButtonText: '确定',
+        type: 'warning'
       })
         .then(() => {
           delDesignerList(this.designerParamsDel)
             .then((response) => {
-              console.log(response.data);
-              this.getDesignerList();
+              console.log(response.data)
+              this.getDesignerList()
             })
             .catch((err) => {
-              console.log(err);
-            });
+              console.log(err)
+            })
           this.$message({
-            type: "success",
-            message: "删除成功!",
-          });
+            type: 'success',
+            message: '删除成功!'
+          })
         })
         .catch(() => {
           this.$message({
-            type: "info",
-            message: "已取消删除",
-          });
-        });
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
       // this.$router.go(0)
     },
 
     // 点击当前系列的查看按钮
     checkdetail(event) {
-      const detailid = event.currentTarget.getAttribute("detailid");
-      const detailname = event.currentTarget.getAttribute("detailname");
+      const detailid = event.currentTarget.getAttribute('detailid')
+      const detailname = event.currentTarget.getAttribute('detailname')
 
       this.$router.push({
-        name: "DetailCheckImgsDesigner",
+        name: 'DetailCheckImgsDesigner',
         query: {
           detailid: detailid,
-          detailname: detailname,
-        },
-      });
-    },
-  },
-};
+          detailname: detailname
+        }
+      })
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -224,7 +222,7 @@ export default {
 
   width: 98%;
   height: 5vh;
-  padding: 1.4% 0 1% 1%;
+  padding: 1.4% 0 1% 0;
   // 返回上一页
   .back {
     color: #d79432;
@@ -268,12 +266,13 @@ export default {
 
 .moudle-wrapper {
   width: 100%;
-  height: 80%;
+  height: 45%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-content: flex-start;
+  //border: 1px solid black;
 
   // 主要内容显示区域（单个）
   .singlemoudle {
@@ -282,9 +281,10 @@ export default {
     flex-wrap: nowrap;
     justify-content: space-between;
     align-content: flex-start;
+    //border: 1px solid blue;
 
-    width: 19.6%;
-    // height: 27vh;
+    width: 14%;
+     height: 100%;
     padding: 1% 5px 0 5px;
     text-align: center;
     font-size: 14px;
@@ -292,12 +292,15 @@ export default {
     // background-color: antiquewhite;
     .appimg {
       width: 100%;
-      height: 99%;
+      height: 80%;
+      //border: 1px solid red;
     }
     .textversion {
       font-size: 14px;
+      //border: 1px solid red;
       font-weight: bold;
-      margin: 1.5vh 0 1vh 0;
+      margin: 0;
+      //margin: 1.5vh 0 1vh 0;
     }
     ::v-deep .editbtn .el-button--medium {
       font-size: 12px;

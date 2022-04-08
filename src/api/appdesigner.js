@@ -88,7 +88,7 @@ export function delDesignerListDetail(designerParams) {
 export function designerListUpload(designerParams1, headimg) {
   console.log(designerParams1)
   return request({
-    url: '/v3upload/admin_wx_xxx',
+    url: '/v3upload/admin_person2',
     method: 'post',
     headers: {
       'Content-Type': 'multipart/form-data'
