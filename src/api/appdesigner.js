@@ -1,5 +1,6 @@
 // app内容管理——设计师相关接口
 import request from '@/utils/request'
+import qs from 'qs'
 
 // 获取设计师的系列
 export function fetchDesignerList(designerParams) {
@@ -27,24 +28,28 @@ export function fetchDesignerListDetail(designerParams) {
   })
 }
 
-// 系列新增
-export function addDesignerList(designerParams) {
-  console.log(designerParams)
-  return request({
-    url: '/api/wechatweb/v1/service/add_wp_se',
-    method: 'get',
-    params: designerParams,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  })
-}
+// 系列新增（无效）
+// export function addDesignerList(designerParams,jsondata) {
+//   // contentType:"application/json"表示发送给服务端的消息主体是序列化的JSON的字符串。所以传输的data必须是序列化的JSON字符串:JSON.stringify()
+//   // jsondata = qs.stringify(jsondata)
+//   console.log(jsondata)
+//   console.log(designerParams)
+//   return request({
+//     url: '/api/v3/person2/erp_add',
+//     method: 'post',
+//     params: designerParams,
+//     jsondata,
+//     headers: {
+//       'Content-Type': 'application/json'
+//     }
+//   })
+// }
 
 // 系列删除
 export function delDesignerList(designerParams) {
   console.log(designerParams)
   return request({
-    url: '/api/wechatweb/v1/service/delete_wp_se',
+    url: '/api/v3/person2/erp_delete',
     method: 'get',
     params: designerParams,
     headers: {
@@ -54,7 +59,7 @@ export function delDesignerList(designerParams) {
 }
 
 // 系列设置封面
-export function setDesignerListFirst(designerParams) {
+export function setDesignerImage(designerParams) {
   console.log(designerParams)
   return request({
     url: '/api/wechatweb/v1/service/get_wp_se_detail',

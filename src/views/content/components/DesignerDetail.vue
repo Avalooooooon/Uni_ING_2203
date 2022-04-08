@@ -45,7 +45,6 @@
             type="primary"
             class="deletebtn"
             :detailid="item.id"
-            :detailname="item.name"
             @click="deletealert"
             >删除</el-button
           >
@@ -98,15 +97,11 @@ export default {
         listid: 8,
         page: 1,
       },
-      designerParamsAdd: {
-        bizid: "uniwarm",
-        token: getToken(),
-        se_name: "",
-      },
       designerParamsDel: {
         bizid: "uniwarm",
         token: getToken(),
-        se_id: "",
+        listid: 8,
+        itemid: "",
       },
       
     };
@@ -156,29 +151,10 @@ export default {
       console.log(this.designerParams.page);
       this.getDesignerList();
     },
-    // 添加新系列
-    adddetailimgset() {
-
-      addDesignerList(this.designerParamsAdd)
-        .then((response) => {
-          // console.log(response.data);
-          fetchDesignerList(this.designerParamsFetch)
-            .then((response) => {
-              this.modulesData = response.data;
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
-    },
 
     // 删除当前系列
     deletealert(event) {
-      this.designerParamsDel.se_id = event.currentTarget.id;
+      this.designerParamsDel.itemid = event.currentTarget.id;
       this.$confirm("确定要删除该资源吗？", "提示", {
         cancelButtonText: "取消",
         confirmButtonText: "确定",
@@ -188,13 +164,7 @@ export default {
           delDesignerList(this.designerParamsDel)
             .then((response) => {
               console.log(response.data);
-              fetchDesignerList(this.designerParamsFetch)
-                .then((response) => {
-                  this.modulesData = response.data;
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
+              this.getDesignerList();
             })
             .catch((err) => {
               console.log(err);
@@ -264,7 +234,7 @@ export default {
       font-weight: bolder;
     }
   }
-  // 右侧功能区
+  // 头部右侧功能区
   .edit {
     display: flex;
     flex-direction: row;
@@ -322,7 +292,7 @@ export default {
     // background-color: antiquewhite;
     .appimg {
       width: 100%;
-      // height: 100%;
+      height: 99%;
     }
     .textversion {
       font-size: 14px;
@@ -355,6 +325,7 @@ export default {
     //border: 1px solid black;
     text-align: center;
     .el-pagination {
+      margin-top: 40px;
       margin-bottom: 40px;
     }
   }

@@ -13,7 +13,8 @@
             class="uploadsinglebtn"
             listid="8"
             @click="saveAppDetail"
-          >提交</el-button>
+            >提交</el-button
+          >
         </div>
       </div>
     </div>
@@ -97,13 +98,12 @@
 </template>
 
 <script>
-import {
-  fetchDesignerListDetail,
-  designerListUpload,
-  delDesignerListDetail,
-} from "@/api/appdesigner";
+import { addDesignerList, setDesignerImage } from "@/api/appdesigner";
 import { getToken } from "@/utils/auth";
 import Tinymce from "@/components/Tinymce";
+import qs from "qs";
+import axios from "axios";
+
 // import axios from 'axios'
 
 export default {
@@ -115,20 +115,19 @@ export default {
       url: "https://www.bizspace.cn",
       imageUrl: "",
       numberValidateForm: {
-        name: "",
-        content: "",
+        name: "111",
+        content: "22",
         image: "",
-        major: "",
-        position: "",
-        country: "",
+        major: "33",
+        position: "33",
+        country: "33",
       },
 
       // 发送给后端的数据
       designerParams: {
         bizid: "uniwarm",
         token: getToken(),
-        listid: 8,
-        itemid: this.detailid,
+        listid: this.listid,
       },
       designerParams1: {
         bizid: "uniwarm",
@@ -174,25 +173,49 @@ export default {
 
     // 点击保存按钮
     saveAppDetail() {
-      this.$confirm('确定提交本次新增？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
+      // this.numberValidateForm = qs.stringify(this.numberValidateForm)
+      this.$confirm("确定提交本次新增？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
-        .then(() => {
-          // this.$refs.img.src = this.uploadImage
-          // this.$refs.imgDelete.style.display = 'none'
-          this.$message({
-            type: 'success',
-            message: '提交成功!'
+        .then(() =>
+          axios({
+            url: "/api/v3/person2/erp_add",
+            method: "post",
+            params: {
+              bizid: "uniwarm",
+              token: getToken(),
+              listid: this.listid,
+            },
+            data: this.numberValidateForm,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }).then((res) => {
+            console.log(this.designerParams);
+            console.log(this.numberValidateForm);
+            console.log(res);
+            if (res.data.res === 0) {
+              this.$router.go(-1);
+              this.$message({
+                type: "success",
+                message: "上传成功",
+              });
+            } else {
+              this.$message({
+                type: "error",
+                message: "上传失败",
+              });
+            }
           })
-        })
+        )
         .catch(() => {
           this.$message({
-            type: 'info',
-            message: '取消提交'
-          })
-        })
+            type: "info",
+            message: "已取消上传",
+          });
+        });
     },
 
     uploadFile(file) {
@@ -229,7 +252,6 @@ export default {
       }
       return isJPG && isLt2M;
     },
-    
   },
 };
 </script>
@@ -291,7 +313,6 @@ export default {
         margin-right: 0.5vw;
       }
     }
-
   }
 }
 // 主要内容显示区域
@@ -338,7 +359,6 @@ export default {
           height: 278px;
           display: block;
         }
-
       }
     }
   }
