@@ -39,14 +39,17 @@
             />
           </el-form-item>
 
+          <!-- :on-change="handlePictureCardPreview" -->
           <el-form-item label="照片" prop="image">
             <el-upload
               class="avatar-uploader"
               action="/v3upload/admin_person2"
+              :auto-upload="false"
+              :file-list="filelist"
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
-              :before-upload="beforeAvatarUpload"
               :http-request="uploadFile"
+              :on-change="handlePictureCardPreview"
             >
               <img v-if="imageUrl" :src="imageUrl" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon" />
@@ -102,7 +105,6 @@ import {
 } from "@/api/appdesigner";
 import { getToken } from "@/utils/auth";
 import Tinymce from "@/components/Tinymce";
-import qs from "qs";
 import axios from "axios";
 
 // import axios from 'axios'
@@ -123,6 +125,8 @@ export default {
         position: "",
         country: "",
       },
+      // 上传列表
+      filelist: [],
       rules: {
         name: [{ required: true, message: "名称不能为空", trigger: "blur" }],
         image: [{ required: true, message: " ", trigger: "blur" }],
@@ -138,11 +142,6 @@ export default {
         bizid: "uniwarm",
         token: getToken(),
         listid: 8,
-      },
-      designerParams2: {
-        bizid: "uniwarm",
-        token: getToken(),
-        img_id: "",
       },
 
       // 后端传来的数据
@@ -204,9 +203,8 @@ export default {
                 });
               });
           } else {
-            this.$alert('请上传设计师照片')
+            this.$alert("请上传设计师照片");
             return false;
-      
           }
         } else {
           console.log("error submit!!");
@@ -218,7 +216,8 @@ export default {
     uploadFile(file) {
       console.log(file);
       var formData = new FormData();
-      formData.append("headimg", file.file);
+      // formData.append("headimg", file.file);
+      formData.append("headimg", this.filelist[0].raw);
       designerListUpload(this.designerParams1, formData).then((res) => {
         console.log(res);
         this.numberValidateForm.image = res.image;
@@ -232,24 +231,52 @@ export default {
         }
       });
     },
-    
+
     handleAvatarSuccess() {
       this.numberValidateForm.image = this.url + res.image;
       // this.$refs.numberValidateForm.resetFields(); //清除图片校验文字
     },
 
-    // 上传开始前判断待上传图片是否符合格式要求
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 5;
+    // on-change事件，判断图片类型、大小、尺寸是否符合要求
+    handlePictureCardPreview(file) {
+      const isJPG = file.raw.type === "image/jpeg" || 'image/png';
+      const isLt5M = file.raw.size / 1024 / 1024 < 5;
 
       if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
+        this.$message.error("上传的照片只能是 JPG 格式!");
+        this.filelist.pop();
+        return false;
       }
-      if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 5MB!");
+      if (!isLt5M) {
+        this.$message.error("上传的照片大小不能超过 5MB!");
+        this.filelist.pop();
+        return false;
       }
-      return isJPG && isLt2M;
+
+      let url = URL.createObjectURL(file.raw);
+      new Promise(function (resolve, reject) {
+        let width = 300;
+        let height = 400;
+        let img = new Image();
+        img.onload = function () {
+          let valid = img.width === width && img.height === height;
+          valid ? resolve() : reject();
+        };
+        img.src = url;
+      }).then(
+        () => {
+          this.filelist.push(file);
+          let truefile = this.filelist[0];
+          console.log(truefile);
+          this.uploadFile(truefile);
+          return file;
+        },
+        () => {
+          this.$message.error("上传图片尺寸只能是 750*1000px !");
+          this.filelist.pop();
+          return Promise.reject();
+        }
+      );
     },
   },
 };
