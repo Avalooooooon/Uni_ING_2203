@@ -12,8 +12,9 @@
             type="primary"
             class="uploadsinglebtn"
             listid="8"
-            @click="saveAppDetail"
-          >提交</el-button>
+            @click="saveAppDetail('numberValidateForm')"
+            >提交</el-button
+          >
         </div>
       </div>
     </div>
@@ -23,17 +24,14 @@
         <el-form
           ref="numberValidateForm"
           :model="numberValidateForm"
+          :rules="rules"
           label-width="100px"
           style="margin-top: 30px"
           class="demo-dynamic"
         >
-          <el-form-item
-            label="姓名"
-            prop="name"
-            :rules="[{ required: true, message: '名称不能为空' }]"
-          >
+          <el-form-item label="姓名" prop="name">
             <el-input
-              v-model.number="numberValidateForm.name"
+              v-model="numberValidateForm.name"
               placeholder="请输入名称"
               type="age"
               style="width: 250px"
@@ -41,8 +39,7 @@
             />
           </el-form-item>
 
-          <el-form-item label="照片" prop="image" required>
-            <!-- :http-request="uploadFile" -->
+          <el-form-item label="照片" prop="image">
             <el-upload
               class="avatar-uploader"
               action="/v3upload/admin_person2"
@@ -51,7 +48,7 @@
               :before-upload="beforeAvatarUpload"
               :http-request="uploadFile"
             >
-              <img v-if="imageUrl" :src="imageUrl" class="avatar">
+              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon" />
             </el-upload>
           </el-form-item>
@@ -98,162 +95,164 @@
 </template>
 
 <script>
-import {addDesignerList, designerListUpload, setDesignerImage} from '@/api/appdesigner'
-import { getToken } from '@/utils/auth'
-import Tinymce from '@/components/Tinymce'
-import qs from 'qs'
-import axios from 'axios'
+import {
+  addDesignerList,
+  designerListUpload,
+  setDesignerImage,
+} from "@/api/appdesigner";
+import { getToken } from "@/utils/auth";
+import Tinymce from "@/components/Tinymce";
+import qs from "qs";
+import axios from "axios";
 
 // import axios from 'axios'
 
 export default {
-  name: 'AddDesigner',
+  name: "AddDesigner",
   components: { Tinymce },
-  props: ['listid'],
+  props: ["listid"],
   data() {
     return {
-      url: 'https://www.bizspace.cn',
-      imageUrl: '',
+      url: "https://www.bizspace.cn",
+      imageUrl: "",
       numberValidateForm: {
-        name: '',
-        content: '',
-        image: '',
-        major: '',
-        position: '',
-        country: ''
+        name: "",
+        content: "",
+        image: "",
+        major: "",
+        position: "",
+        country: "",
+      },
+      rules: {
+        name: [{ required: true, message: "名称不能为空", trigger: "blur" }],
+        image: [{ required: true, message: " ", trigger: "blur" }],
       },
 
       // 发送给后端的数据
       designerParams: {
-        bizid: 'uniwarm',
+        bizid: "uniwarm",
         token: getToken(),
-        listid: this.listid
+        listid: this.listid,
       },
       designerParams1: {
-        bizid: 'uniwarm',
+        bizid: "uniwarm",
         token: getToken(),
-        listid: 8
+        listid: 8,
       },
       designerParams2: {
-        bizid: 'uniwarm',
+        bizid: "uniwarm",
         token: getToken(),
-        img_id: ''
+        img_id: "",
       },
 
       // 后端传来的数据
-      designerData: []
-    }
-  },
-
-  created() {
-    // this.getDesignerList();
+      designerData: [],
+    };
   },
 
   methods: {
     toback() {
-      this.$router.go(-1)
+      this.$router.go(-1);
     },
 
-    // getDesignerList() {
-    //   fetchDesignerListDetail(this.designerParams)
-    //     .then((response) => {
-    //       console.log(response.detail)
-    //       this.designerData = response.detail
-    //       this.numberValidateForm.name = this.designerData.name
-    //       // this.imageUrl = this.url + this.designerData.image;
-    //       this.numberValidateForm.major = this.designerData.major
-    //       this.numberValidateForm.position = this.designerData.position
-    //       this.numberValidateForm.country = this.designerData.country
-    //       this.numberValidateForm.content = this.designerData.content
-    //     })
-    //     .catch((err) => {
-    //       console.log(err)
-    //     })
-    // },
-
     // 点击保存按钮
-    saveAppDetail() {
-      // this.numberValidateForm = qs.stringify(this.numberValidateForm)
-      this.$confirm('确定提交本次新增？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then(() =>
-          axios({
-            url: '/api/v3/person2/erp_add',
-            method: 'post',
-            params: {
-              bizid: 'uniwarm',
-              token: getToken(),
-              listid: this.listid
-            },
-            data: this.numberValidateForm,
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          }).then((res) => {
-            console.log(this.designerParams)
-            console.log(this.numberValidateForm)
-            console.log(res)
-            if (res.data.res === 0) {
-              this.$router.go(-1)
-              this.$message({
-                type: 'success',
-                message: '上传成功'
-              })
-            } else {
-              this.$message({
-                type: 'error',
-                message: '上传失败'
-              })
-            }
-          })
-        )
-        .catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消上传'
-          })
-        })
+    saveAppDetail(formName) {
+      this.$refs[formName].validate((valid) => {
+        // if (valid) {
+        if (this.numberValidateForm.name) {
+          if (this.numberValidateForm.image) {
+            this.$confirm("确定提交本次新增？", "提示", {
+              confirmButtonText: "确定",
+              cancelButtonText: "取消",
+              type: "warning",
+            })
+              .then(() =>
+                axios({
+                  url: "/api/v3/person2/erp_add",
+                  method: "post",
+                  params: {
+                    bizid: "uniwarm",
+                    token: getToken(),
+                    listid: this.listid,
+                  },
+                  data: this.numberValidateForm,
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                }).then((res) => {
+                  console.log(this.designerParams);
+                  console.log(this.numberValidateForm);
+                  console.log(res);
+                  if (res.data.res === 0) {
+                    this.$router.go(-1);
+                    this.$message({
+                      type: "success",
+                      message: "上传成功",
+                    });
+                  } else {
+                    this.$message({
+                      type: "error",
+                      message: "上传失败",
+                    });
+                  }
+                })
+              )
+              .catch(() => {
+                this.$message({
+                  type: "info",
+                  message: "已取消上传",
+                });
+              });
+          } else {
+            this.$alert('请上传设计师照片')
+            return false;
+      
+          }
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
     },
 
     uploadFile(file) {
-      console.log(file)
-      var formData = new FormData()
-      formData.append('headimg', file.file)
+      console.log(file);
+      var formData = new FormData();
+      formData.append("headimg", file.file);
       designerListUpload(this.designerParams1, formData).then((res) => {
-        console.log(res)
-        this.numberValidateForm.image = res.image
-        this.imageUrl = this.url + res.image
-        console.log(this.imageUrl)
+        console.log(res);
+        this.numberValidateForm.image = res.image;
+        this.imageUrl = this.url + res.image;
+        console.log(this.imageUrl);
         if (res.res === 0) {
           this.$message({
-            type: 'success',
-            message: '上传成功'
-          })
+            type: "success",
+            message: "上传成功",
+          });
         }
-      })
+      });
     },
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw)
+    
+    handleAvatarSuccess() {
+      this.numberValidateForm.image = this.url + res.image;
+      // this.$refs.numberValidateForm.resetFields(); //清除图片校验文字
     },
 
     // 上传开始前判断待上传图片是否符合格式要求
     beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg'
-      const isLt2M = file.size / 1024 / 1024 < 2
+      const isJPG = file.type === "image/jpeg";
+      const isLt2M = file.size / 1024 / 1024 < 5;
 
       if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!')
+        this.$message.error("上传头像图片只能是 JPG 格式!");
       }
       if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!')
+        this.$message.error("上传头像图片大小不能超过 5MB!");
       }
-      return isJPG && isLt2M
-    }
-  }
-}
+      return isJPG && isLt2M;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
