@@ -1,6 +1,5 @@
 // app内容管理——设计师相关接口
 import request from '@/utils/request'
-import qs from 'qs'
 
 // 获取设计师的系列
 export function fetchDesignerList(designerParams) {
@@ -58,31 +57,7 @@ export function delDesignerList(designerParams) {
   })
 }
 
-// 系列设置封面
-export function setDesignerImage(designerParams) {
-  console.log(designerParams)
-  return request({
-    url: '/api/wechatweb/v1/service/get_wp_se_detail',
-    method: 'get',
-    params: designerParams,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  })
-}
 
-// 系列内图片删除
-export function delDesignerListDetail(designerParams) {
-  console.log(designerParams)
-  return request({
-    url: '/api/wechatweb/v1/service/delete_wp_img',
-    method: 'get',
-    params: designerParams,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  })
-}
 
 // 上传图片
 export function designerListUpload(designerParams1, headimg) {
