@@ -31,6 +31,7 @@
           "
         >
         <div class="textversion">{{ item.name }}</div>
+
         <div class="editbtn">
           <el-button
             type="primary"
@@ -302,6 +303,7 @@ export default {
       margin: 0;
       //margin: 1.5vh 0 1vh 0;
     }
+
     ::v-deep .editbtn .el-button--medium {
       font-size: 12px;
     }

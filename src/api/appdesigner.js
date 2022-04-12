@@ -3,7 +3,7 @@ import request from '@/utils/request'
 
 // 获取设计师的系列
 export function fetchDesignerList(designerParams) {
-  console.log(designerParams)
+  // console.log(designerParams)
   return request({
     url: '/api/v3/person2/erp_listall',
     method: 'get',
@@ -16,7 +16,7 @@ export function fetchDesignerList(designerParams) {
 
 // 获取一个设计师的详情
 export function fetchDesignerListDetail(designerParams) {
-  console.log(designerParams)
+  // console.log(designerParams)
   return request({
     url: '/api/v3/person2/erp_detail',
     method: 'get',
@@ -46,7 +46,7 @@ export function fetchDesignerListDetail(designerParams) {
 
 // 系列删除
 export function delDesignerList(designerParams) {
-  console.log(designerParams)
+  // console.log(designerParams)
   return request({
     url: '/api/v3/person2/erp_delete',
     method: 'get',
@@ -61,7 +61,7 @@ export function delDesignerList(designerParams) {
 
 // 上传图片
 export function designerListUpload(designerParams1, headimg) {
-  console.log(designerParams1)
+  // console.log(designerParams1)
   return request({
     url: '/v3upload/admin_person2',
     method: 'post',

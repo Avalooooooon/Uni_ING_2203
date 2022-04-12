@@ -4,7 +4,7 @@
     <div class="topbar-wrapper">
       <div class="back" @click="toback">
         <i class="el-icon-arrow-left" />
-        {{ listid }}：新增保养小知识
+        新增：保养小知识
       </div>
       <div class="btns">
         <div class="btnsimg">
@@ -29,7 +29,7 @@
           style="margin-top: 30px"
           class="demo-dynamic"
         >
-          <el-form-item label="姓名" prop="name">
+          <el-form-item label="标题" prop="name">
             <el-input
               v-model="numberValidateForm.name"
               placeholder="请输入名称"
@@ -40,7 +40,7 @@
           </el-form-item>
 
           <!-- :on-change="handlePictureCardPreview" -->
-          <el-form-item label="照片" prop="image">
+          <el-form-item label="图片" prop="image">
             <el-upload
               class="avatar-uploader"
               action="/v3upload/admin_person2"
@@ -56,7 +56,7 @@
             </el-upload>
           </el-form-item>
 
-          <el-form-item label="专业" prop="major">
+          <!-- <el-form-item label="专业" prop="major">
             <el-input
               v-model.number="numberValidateForm.major"
               placeholder="请输入专业名称"
@@ -81,7 +81,9 @@
               type="age"
               ocomplete="off"
             />
-          </el-form-item>
+          </el-form-item> -->
+
+
         </el-form>
       </div>
       <div class="content-right">
@@ -121,9 +123,9 @@ export default {
         name: "",
         content: "",
         image: "",
-        major: "",
-        position: "",
-        country: "",
+        // major: "",
+        // position: "",
+        // country: "",
       },
       // 上传列表
       filelist: [],

@@ -28,7 +28,7 @@
           class="demo-dynamic"
         >
           <el-form-item
-            label="姓名"
+            label="标题"
             prop="name"
             :rules="[{ required: true, message: '名称不能为空' }]"
           >
@@ -36,12 +36,11 @@
               v-model.number="numberValidateForm.name"
               placeholder="请输入名称"
               type="name"
-              style="width: 250px"
               ocomplete="off"
             />
           </el-form-item>
 
-          <el-form-item label="照片" prop="image" required>
+          <el-form-item label="图片" prop="image" required>
             <!-- :http-request="uploadFile" -->
             <el-upload
               class="avatar-uploader"
@@ -56,7 +55,7 @@
             </el-upload>
           </el-form-item>
 
-          <el-form-item label="专业" prop="major">
+          <!-- <el-form-item label="专业" prop="major">
             <el-input
               v-model.number="numberValidateForm.major"
               placeholder="请输入专业名称"
@@ -81,7 +80,9 @@
               type="age"
               ocomplete="off"
             />
-          </el-form-item>
+          </el-form-item> -->
+
+
         </el-form>
       </div>
       <div class="content-right">
@@ -120,9 +121,9 @@ export default {
         name: '',
         content: '',
         image: '',
-        major: '',
-        position: '',
-        country: ''
+        // major: '',
+        // position: '',
+        // country: ''
       },
       listid: 13,
 
@@ -137,11 +138,6 @@ export default {
         bizid: 'uniwarm',
         token: getToken(),
         listid: 13
-      },
-      knowledgeParams2: {
-        bizid: 'uniwarm',
-        token: getToken(),
-        img_id: ''
       },
 
       // 后端传来的数据

@@ -3,7 +3,7 @@ import request from '@/utils/request'
 
 // 获取保养小知识的系列
 export function fetchKnowledgeList(knowledgeParams) {
-  console.log(knowledgeParams)
+  // console.log(knowledgeParams)
   return request({
     url: '/api/v3/news/erp_listall',
     method: 'get',
@@ -16,7 +16,7 @@ export function fetchKnowledgeList(knowledgeParams) {
 
 // 获取一个保养小知识的详情
 export function fetchKnowledgeListDetail(knowledgeParams) {
-  console.log(knowledgeParams)
+  // console.log(knowledgeParams)
   return request({
     url: '/api/v3/news/erp_detail',
     method: 'get',
@@ -46,7 +46,7 @@ export function fetchKnowledgeListDetail(knowledgeParams) {
 
 // 系列删除
 export function delKnowledgeList(knowledgeParams) {
-  console.log(knowledgeParams)
+  // console.log(knowledgeParams)
   return request({
     url: '/api/v3/news/erp_delete',
     method: 'get',
@@ -61,7 +61,7 @@ export function delKnowledgeList(knowledgeParams) {
 
 // 上传图片
 export function knowledgeListUpload(knowledgeParams1, headimg) {
-  console.log(knowledgeParams1)
+  // console.log(knowledgeParams1)
   return request({
     url: '/v3upload/admin_news',
     method: 'post',

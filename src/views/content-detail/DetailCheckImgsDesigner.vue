@@ -36,7 +36,6 @@
               v-model.number="numberValidateForm.name"
               placeholder="请输入名称"
               type="name"
-              style="width: 250px"
               ocomplete="off"
             />
           </el-form-item>
@@ -137,11 +136,6 @@ export default {
         bizid: 'uniwarm',
         token: getToken(),
         listid: 8
-      },
-      designerParams2: {
-        bizid: 'uniwarm',
-        token: getToken(),
-        img_id: ''
       },
 
       // 后端传来的数据
