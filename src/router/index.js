@@ -39,578 +39,562 @@ import Layout from '@/layout'
  * all roles can be accessed
  */
 export const constantRoutes = [{
-  path: '/redirect',
-  component: Layout,
-  hidden: true,
-  children: [{
-    path: '/redirect/:path(.*)',
-    component: () => import('@/views/redirect/index')
-  }]
-},
-{
-  path: '/login',
-  component: () => import('@/views/login/index'),
-  hidden: true
-},
-{
-  path: '/auth-redirect',
-  component: () => import('@/views/login/auth-redirect'),
-  hidden: true
-},
-{
-  path: '/404',
-  component: () => import('@/views/error-page/404'),
-  hidden: true
-},
-{
-  path: '/401',
-  component: () => import('@/views/error-page/401'),
-  hidden: true
-},
-// {
-//   path: '/',
-//   component: Layout,
-//   redirect: '/dashboard',
-//   hidden: true,
-//   children: [
-//     {
-//       path: 'dashboard',
-//       component: () => import('@/views/dashboard/index'),
-//       name: 'Dashboard',
-//       meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-//     }
-//   ]
-// },
-{
-  path: '/content',
-  component: Layout,
-  redirect: '/content/wxcontent',
-  meta: {
-    title: '内容管理',
-    icon: 'form',
-    affix: true
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [{
+      path: '/redirect/:path(.*)',
+      component: () => import('@/views/redirect/index')
+    }]
   },
-  
-  // 小程序内容管理部分路由
-  children: [{
-    path: 'wxcontent',
-    component: () => import('@/views/content/WxContent'),
-    name: 'WxContent',
+  {
+    path: '/login',
+    component: () => import('@/views/login/index'),
+    hidden: true
+  },
+  {
+    path: '/auth-redirect',
+    component: () => import('@/views/login/auth-redirect'),
+    hidden: true
+  },
+  {
+    path: '/404',
+    component: () => import('@/views/error-page/404'),
+    hidden: true
+  },
+  {
+    path: '/401',
+    component: () => import('@/views/error-page/401'),
+    hidden: true
+  },
+  // {
+  //   path: '/',
+  //   component: Layout,
+  //   redirect: '/dashboard',
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: 'dashboard',
+  //       component: () => import('@/views/dashboard/index'),
+  //       name: 'Dashboard',
+  //       meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+  //     }
+  //   ]
+  // },
+
+  ////////////////////内容管理start
+  {
+    path: '/content',
+    component: Layout,
+    redirect: '/content/wxcontent',
     meta: {
-      title: '小程序内容管理',
-      icon: 'wechat',
+      title: '内容管理',
+      icon: 'form',
       affix: true
-    }
-  },
-  {
-    path: '/content/wxcontent/morningdetail',
-    hidden: true,
-    component: () => import('@/views/content/components/MorningDetail'),
-    name: 'MorningDetail',
-    meta: {
-      title: '早安晚安',
-      activeMenu: '/content/wxcontent'
-    }
-  },
-  {
-    path: '/content/wxcontent/wxdetail',
-    hidden: true,
-    component: () => import('@/views/content/components/WxDetail'),
-    name: 'WxDetail',
-    meta: {
-      title: '壁纸',
-      activeMenu: '/content/wxcontent'
-    }
-  },
-  {
-    path: '/content/wxcontent/memedetail',
-    hidden: true,
-    component: () => import('@/views/content/components/MemeDetail'),
-    name: 'MemeDetail',
-    meta: {
-      title: '表情包',
-      activeMenu: '/content/wxcontent'
-    }
-  },
-  {
-    path: '/content/wxcontent/secretdetail',
-    hidden: true,
-    component: () => import('@/views/content/components/SecretDetail'),
-    name: 'SecretDetail',
-    meta: {
-      title: '爱的密语',
-      activeMenu: '/content/wxcontent'
-    }
-  },
-  {
-    path: '/content/wxcontent/detailcheckimgsmorning',
-    hidden: true,
-    component: () => import('@/views/content-detail/DetailCheckImgsMorning'),
-    name: 'DetailCheckImgsMorning',
-    meta: {
-      title: '早安晚安系列详情',
-      activeMenu: '/content/wxcontent'
     },
-    props(route) {
-      return {
-        detailid: route.query.detailid,
-        detailname: route.query.detailname
-      }
-    }
-  },
-  {
-    path: '/content/wxcontent/detailcheckimgs',
-    hidden: true,
-    component: () => import('@/views/content-detail/DetailCheckImgs'),
-    name: 'DetailCheckImgs',
-    meta: {
-      title: '壁纸系列详情',
-      activeMenu: '/content/wxcontent'
-    },
-    props(route) {
-      return {
-        detailid: route.query.detailid,
-        detailname: route.query.detailname
-      }
-    }
-  },
-  {
-    path: '/content/wxcontent/detailcheckimgsmeme',
-    hidden: true,
-    component: () => import('@/views/content-detail/DetailCheckImgsMeme'),
-    name: 'DetailCheckImgsMeme',
-    meta: {
-      title: '表情包系列详情',
-      activeMenu: '/content/wxcontent'
-    },
-    props(route) {
-      return {
-        detailid: route.query.detailid,
-        detailname: route.query.detailname
-      }
-    }
-  },
-  {
-    path: '/content/wxcontent/detailcheckimgssecret',
-    hidden: true,
-    component: () => import('@/views/content-detail/DetailCheckImgsSecret'),
-    name: 'DetailCheckImgsSecret',
-    meta: {
-      title: '爱的密语系列详情',
-      activeMenu: '/content/wxcontent'
-    },
-    props(route) {
-      return {
-        detailid: route.query.detailid,
-        detailname: route.query.detailname
-      }
-    }
-  },
 
-  // App内容管理部分路由
-  {
-    path: 'appcontent',
-    component: () => import('@/views/content/AppContent'),
-    name: 'AppContent',
-    meta: {
-      title: 'APP内容管理',
-      icon: 'international',
-      affix: true,
-      activeMenu: '/content/appcontent'
-    }
+    // 小程序内容管理部分路由
+    children: [{
+        path: 'wxcontent',
+        component: () => import('@/views/content/WxContent'),
+        name: 'WxContent',
+        meta: {
+          title: '小程序内容管理',
+          icon: 'wechat',
+          affix: true
+        }
+      },
+      {
+        path: '/content/wxcontent/morningdetail',
+        hidden: true,
+        component: () => import('@/views/content/components/MorningDetail'),
+        name: 'MorningDetail',
+        meta: {
+          title: '早安晚安',
+          activeMenu: '/content/wxcontent'
+        }
+      },
+      {
+        path: '/content/wxcontent/wxdetail',
+        hidden: true,
+        component: () => import('@/views/content/components/WxDetail'),
+        name: 'WxDetail',
+        meta: {
+          title: '壁纸',
+          activeMenu: '/content/wxcontent'
+        }
+      },
+      {
+        path: '/content/wxcontent/memedetail',
+        hidden: true,
+        component: () => import('@/views/content/components/MemeDetail'),
+        name: 'MemeDetail',
+        meta: {
+          title: '表情包',
+          activeMenu: '/content/wxcontent'
+        }
+      },
+      {
+        path: '/content/wxcontent/secretdetail',
+        hidden: true,
+        component: () => import('@/views/content/components/SecretDetail'),
+        name: 'SecretDetail',
+        meta: {
+          title: '爱的密语',
+          activeMenu: '/content/wxcontent'
+        }
+      },
+      {
+        path: '/content/wxcontent/detailcheckimgsmorning',
+        hidden: true,
+        component: () => import('@/views/content-detail/DetailCheckImgsMorning'),
+        name: 'DetailCheckImgsMorning',
+        meta: {
+          title: '早安晚安系列详情',
+          activeMenu: '/content/wxcontent'
+        },
+        props(route) {
+          return {
+            detailid: route.query.detailid,
+            detailname: route.query.detailname
+          }
+        }
+      },
+      {
+        path: '/content/wxcontent/detailcheckimgs',
+        hidden: true,
+        component: () => import('@/views/content-detail/DetailCheckImgs'),
+        name: 'DetailCheckImgs',
+        meta: {
+          title: '壁纸系列详情',
+          activeMenu: '/content/wxcontent'
+        },
+        props(route) {
+          return {
+            detailid: route.query.detailid,
+            detailname: route.query.detailname
+          }
+        }
+      },
+      {
+        path: '/content/wxcontent/detailcheckimgsmeme',
+        hidden: true,
+        component: () => import('@/views/content-detail/DetailCheckImgsMeme'),
+        name: 'DetailCheckImgsMeme',
+        meta: {
+          title: '表情包系列详情',
+          activeMenu: '/content/wxcontent'
+        },
+        props(route) {
+          return {
+            detailid: route.query.detailid,
+            detailname: route.query.detailname
+          }
+        }
+      },
+      {
+        path: '/content/wxcontent/detailcheckimgssecret',
+        hidden: true,
+        component: () => import('@/views/content-detail/DetailCheckImgsSecret'),
+        name: 'DetailCheckImgsSecret',
+        meta: {
+          title: '爱的密语系列详情',
+          activeMenu: '/content/wxcontent'
+        },
+        props(route) {
+          return {
+            detailid: route.query.detailid,
+            detailname: route.query.detailname
+          }
+        }
+      },
+
+      // App内容管理部分路由
+      {
+        path: 'appcontent',
+        component: () => import('@/views/content/AppContent'),
+        name: 'AppContent',
+        meta: {
+          title: 'APP内容管理',
+          icon: 'international',
+          affix: true,
+          activeMenu: '/content/appcontent'
+        }
+      },
+      {
+        path: '/content/appcontent/designerdetail',
+        hidden: true,
+        component: () => import('@/views/content/components/DesignerDetail'),
+        name: 'DesignerDetail',
+        meta: {
+          title: '设计师',
+          activeMenu: '/content/appcontent'
+        },
+        props(route) {
+          return {
+            appid: route.query.appid,
+            appname: route.query.appname
+          }
+        }
+      },
+      {
+        path: '/content/appcontent/designerdetail/detailcheckimgsdesigner',
+        hidden: true,
+        component: () => import('@/views/content-detail/DetailCheckImgsDesigner'),
+        name: 'DetailCheckImgsDesigner',
+        meta: {
+          title: '设计师详情',
+          activeMenu: '/content/appcontent'
+        },
+        props(route) {
+          return {
+            detailid: route.query.detailid,
+            detailname: route.query.detailname
+          }
+        }
+      },
+      {
+        path: '/content/appcontent/designerdetail/adddesigner',
+        hidden: true,
+        component: () => import('@/views/content/components/AddDesigner'),
+        name: 'AddDesigner',
+        meta: {
+          title: '新增设计师',
+          activeMenu: '/content/appcontent'
+        },
+        props(route) {
+          return {
+            listid: route.query.listid,
+          }
+        }
+      },
+      {
+        path: '/content/appcontent/newsdetail',
+        hidden: true,
+        component: () => import('@/views/content/components/NewsDetail'),
+        name: 'NewsDetail',
+        meta: {
+          title: '资讯',
+          activeMenu: '/content/appcontent'
+        },
+        props(route) {
+          return {
+            appid: route.query.appid,
+            appname: route.query.appname
+          }
+        }
+      },
+      {
+        path: '/content/appcontent/newsdetail/detailcheckimgsnews',
+        hidden: true,
+        component: () => import('@/views/content-detail/DetailCheckImgsNews'),
+        name: 'DetailCheckImgsNews',
+        meta: {
+          title: '资讯详情',
+          activeMenu: '/content/appcontent'
+        },
+        props(route) {
+          return {
+            detailid: route.query.detailid,
+            detailname: route.query.detailname
+          }
+        }
+      },
+      {
+        path: '/content/appcontent/newsdetail/addnews',
+        hidden: true,
+        component: () => import('@/views/content/components/AddNews'),
+        name: 'AddNews',
+        meta: {
+          title: '新增资讯',
+          activeMenu: '/content/appcontent'
+        },
+        props(route) {
+          return {
+            listid: route.query.listid,
+          }
+        }
+      },
+      {
+        path: '/content/appcontent/knowledgedetail',
+        hidden: true,
+        component: () => import('@/views/content/components/KnowledgeDetail'),
+        name: 'KnowledgeDetail',
+        meta: {
+          title: '保养小知识',
+          activeMenu: '/content/appcontent'
+        },
+        props(route) {
+          return {
+            appid: route.query.appid,
+            appname: route.query.appname
+          }
+        }
+      },
+      {
+        path: '/content/appcontent/designerdetail/detailcheckimgsknowledge',
+        hidden: true,
+        component: () => import('@/views/content-detail/DetailCheckImgsKnowledge'),
+        name: 'DetailCheckImgsKnowledge',
+        meta: {
+          title: '保养小知识详情',
+          activeMenu: '/content/appcontent'
+        },
+        props(route) {
+          return {
+            detailid: route.query.detailid,
+            detailname: route.query.detailname
+          }
+        }
+      },
+      {
+        path: '/content/appcontent/newsdetail/addknowledge',
+        hidden: true,
+        component: () => import('@/views/content/components/AddKnowledge'),
+        name: 'AddKnowledge',
+        meta: {
+          title: '新增保养小知识',
+          activeMenu: '/content/appcontent'
+        },
+        props(route) {
+          return {
+            listid: route.query.listid,
+          }
+        }
+      },
+    ]
   },
+  ////////////////////内容管理end
+
+
+
+  ////////////////////素材投放start
   {
-    path: '/content/appcontent/designerdetail',
-    hidden: true,
-    component: () => import('@/views/content/components/DesignerDetail'),
-    name: 'DesignerDetail',
+    path: '/material',
+    component: Layout,
+    redirect: '/material/matlib',
     meta: {
-      title: '设计师',
-      activeMenu: '/content/appcontent'
+      title: '素材投放',
+      icon: 'form',
+      affix: true
     },
-    props(route) {
-      return {
-        appid: route.query.appid,
-        appname: route.query.appname
-      }
-    }
-  },
-  {
-    path: '/content/appcontent/designerdetail/detailcheckimgsdesigner',
-    hidden: true,
-    component: () => import('@/views/content-detail/DetailCheckImgsDesigner'),
-    name: 'DetailCheckImgsDesigner',
-    meta: {
-      title: '设计师详情',
-      activeMenu: '/content/appcontent'
-    },
-    props(route) {
-      return {
-        detailid: route.query.detailid,
-        detailname: route.query.detailname
-      }
-    }
-  },
-  {
-    path: '/content/appcontent/designerdetail/adddesigner',
-    hidden: true,
-    component: () => import('@/views/content/components/AddDesigner'),
-    name: 'AddDesigner',
-    meta: {
-      title: '新增设计师',
-      activeMenu: '/content/appcontent'
-    },
-    props(route) {
-      return {
-        listid: route.query.listid,
-      }
-    }
-  },
-  {
-    path: '/content/appcontent/newsdetail',
-    hidden: true,
-    component: () => import('@/views/content/components/NewsDetail'),
-    name: 'NewsDetail',
-    meta: {
-      title: '资讯',
-      activeMenu: '/content/appcontent'
-    },
-    props(route) {
-      return {
-        appid: route.query.appid,
-        appname: route.query.appname
-      }
-    }
-  },
-  {
-    path: '/content/appcontent/newsdetail/detailcheckimgsnews',
-    hidden: true,
-    component: () => import('@/views/content-detail/DetailCheckImgsNews'),
-    name: 'DetailCheckImgsNews',
-    meta: {
-      title: '资讯详情',
-      activeMenu: '/content/appcontent'
-    },
-    props(route) {
-      return {
-        detailid: route.query.detailid,
-        detailname: route.query.detailname
-      }
-    }
-  },
-  {
-    path: '/content/appcontent/newsdetail/addnews',
-    hidden: true,
-    component: () => import('@/views/content/components/AddNews'),
-    name: 'AddNews',
-    meta: {
-      title: '新增资讯',
-      activeMenu: '/content/appcontent'
-    },
-    props(route) {
-      return {
-        listid: route.query.listid,
-      }
-    }
-  },
-  {
-    path: '/content/appcontent/knowledgedetail',
-    hidden: true,
-    component: () => import('@/views/content/components/KnowledgeDetail'),
-    name: 'KnowledgeDetail',
-    meta: {
-      title: '保养小知识',
-      activeMenu: '/content/appcontent'
-    },
-    props(route) {
-      return {
-        appid: route.query.appid,
-        appname: route.query.appname
-      }
-    }
-  },
-  {
-    path: '/content/appcontent/designerdetail/detailcheckimgsknowledge',
-    hidden: true,
-    component: () => import('@/views/content-detail/DetailCheckImgsKnowledge'),
-    name: 'DetailCheckImgsKnowledge',
-    meta: {
-      title: '保养小知识详情',
-      activeMenu: '/content/appcontent'
-    },
-    props(route) {
-      return {
-        detailid: route.query.detailid,
-        detailname: route.query.detailname
-      }
-    }
-  },
-  {
-    path: '/content/appcontent/newsdetail/addknowledge',
-    hidden: true,
-    component: () => import('@/views/content/components/AddKnowledge'),
-    name: 'AddKnowledge',
-    meta: {
-      title: '新增保养小知识',
-      activeMenu: '/content/appcontent'
-    },
-    props(route) {
-      return {
-        listid: route.query.listid,
-      }
-    }
-  },
-  
-  {
-    path: '/content/appcontent/appdetail/DetailCheckVideo',
-    hidden: true,
-    component: () => import('@/views/content-detail/DetailCheckVideo'),
-    name: 'DetailCheckVideo',
-    meta: {
-      title: '详情-查看视频',
-      activeMenu: '/content/appcontent'
-    },
-    props(route) {
-      return {
-        detailid: route.query.detailid,
-        detailname: route.query.detailname
-      }
-    }
+    children: [
+      // 素材库部分路由
+      {
+        path: 'matlib',
+        component: () => import('@/views/material-lib/MatLib'),
+        name: 'MatLib',
+        meta: {
+          title: '素材库',
+          icon: 'wechat',
+          affix: true
+        }
+      },
+      {
+        path: '/material/matlib/libcheckdetail',
+        hidden: true,
+        component: () => import('@/views/material-lib/LibCheckDetail'),
+        name: 'LibCheckDetail',
+        meta: {
+          title: '查看视频',
+          activeMenu: '/material/matlib'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+      {
+        path: '/material/matlib/libcheckdetail',
+        hidden: true,
+        component: () => import('@/views/material-lib/LibCheckDetail'),
+        name: 'LibCheckDetail',
+        meta: {
+          title: '查看详情',
+          activeMenu: '/material/matlib'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+      {
+        path: '/material/matlib/libedit',
+        hidden: true,
+        component: () => import('@/views/material-lib/LibEdit'),
+        name: 'LibEdit',
+        meta: {
+          title: '编辑素材',
+          activeMenu: '/material/matlib'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+      {
+        path: '/material/matlib/libeditvideo',
+        hidden: true,
+        component: () => import('@/views/material-lib/LibEditVideo'),
+        name: 'LibEditVideo',
+        meta: {
+          title: '编辑视频',
+          activeMenu: '/material/matlib'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+      {
+        path: '/material/matlib/libimageset',
+        hidden: true,
+        component: () => import('@/views/material-lib/LibImageset'),
+        name: 'LibImageset',
+        meta: {
+          title: '查看图集',
+          activeMenu: '/material/matlib'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+      {
+        path: '/material/matlib/libimagesetadd',
+        hidden: true,
+        component: () => import('@/views/material-lib/LibImagesetAdd'),
+        name: 'LibImagesetAdd',
+        meta: {
+          title: '编辑新图集（上传图集）',
+          activeMenu: '/material/matlib'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+      {
+        path: '/material/matlib/libimagesetedit',
+        hidden: true,
+        component: () => import('@/views/material-lib/LibImagesetEdit'),
+        name: 'LibImagesetEdit',
+        meta: {
+          title: '编辑已上传图集',
+          activeMenu: '/material/matlib'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+      {
+        path: '/material/matlib/libimagesetdel',
+        hidden: true,
+        component: () => import('@/views/material-lib/LibImagesetDel'),
+        name: 'LibImagesetDel',
+        meta: {
+          title: '删除图集',
+          activeMenu: '/material/matlib'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+
+      // 投放申请部分路由
+      {
+        path: 'matapply',
+        component: () => import('@/views/material-apply/MatApply'),
+        name: 'MatApply',
+        meta: {
+          title: '投放申请',
+          icon: 'wechat',
+          affix: true
+        }
+      },
+      {
+        path: '/material/matapply/applychoosemat',
+        hidden: true,
+        component: () => import('@/views/material-apply/ApplyChooseMat'),
+        name: 'ApplyChooseMat',
+        meta: {
+          title: '投放申请-选择素材',
+          activeMenu: '/material/matapply'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+
+      // 投放记录部分路由
+      {
+        path: 'matrecord',
+        component: () => import('@/views/material-record/MatRecord'),
+        name: 'MatRecord',
+        meta: {
+          title: '投放记录',
+          icon: 'wechat',
+          affix: true
+        }
+      },
+      {
+        path: '/material/matlib/recorddetail',
+        hidden: true,
+        component: () => import('@/views/material-record/RecordDetail'),
+        name: 'RecordDetail',
+        meta: {
+          title: '投放记录-详情',
+          activeMenu: '/material/matrecord'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+      {
+        path: '/material/matlib/recordwithdraw',
+        hidden: true,
+        component: () => import('@/views/material-record/RecordWithdraw'),
+        name: 'RecordWithdraw',
+        meta: {
+          title: '投放记录-撤回',
+          activeMenu: '/material/matrecord'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+
+    ]
   }
-  ]
-}
-  // {
-  //   path: '/content/appcontent',
-  //   component: Layout,
-  //   hidden: true,
-  //   meta: { title: '内容管理/App内容管理' },
-  //   children: [
-  //     {
-  //       hidden: true,
-  //       path: 'appdetail',
-  //       component: () => import('@/views/content/components/AppDetail'),
-  //       name: 'AppDetail',
-  //       meta: { title: 'App详情', icon: 'dashboard', affix: true, activeMenu: '/content/appcontent' },
-  //
-  //       props(route) {
-  //         return {
-  //           appid: route.query.appid,
-  //           appname: route.query.appname
-  //         }
-  //       }
-  //
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '',
-  //   component: Layout,
-  //   hidden: true,
-  //   meta: { title: '内容管理' },
-  //   children: [
-  //     {
-  //       // hidden: true,
-  //       path: '/content/wxcontent/morningdetail',
-  //       component: () => import('@/views/content/components/MorningDetail'),
-  //       name: 'MorningDetail',
-  //       meta: { title: '早安晚安', icon: 'dashboard', affix: true },
-  //
-  //       props(route) {
-  //         return {
-  //           appid: route.query.appid,
-  //           appname: route.query.appname
-  //         }
-  //       }
-  //
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/content/wxcontent',
-  //   component: Layout,
-  //   hidden: true,
-  //   meta: { title: '内容管理' },
-  //   children: [
-  //     {
-  //       hidden: true,
-  //       path: 'wxdetail',
-  //       component: () => import('@/views/content/components/WxDetail'),
-  //       name: 'WxDetail',
-  //       meta: { title: '小程序详情(壁纸）', icon: 'dashboard', affix: true, activeMenu: '/content/wxcontent' },
-  //
-  //       props(route) {
-  //         return {
-  //           appid: route.query.appid,
-  //           appname: route.query.appname
-  //         }
-  //       }
-  //
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/content/wxcontent',
-  //   component: Layout,
-  //   hidden: true,
-  //   meta: { title: '内容管理/小程序内容管理' },
-  //   children: [
-  //     {
-  //       hidden: true,
-  //       path: 'memedetail',
-  //       component: () => import('@/views/content/components/MemeDetail'),
-  //       name: 'MemeDetail',
-  //       meta: { title: '小程序详情(表情包）', icon: 'dashboard', affix: true, activeMenu: '/content/wxcontent' },
-  //
-  //       props(route) {
-  //         return {
-  //           appid: route.query.appid,
-  //           appname: route.query.appname
-  //         }
-  //       }
-  //
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/content/wxcontent',
-  //   component: Layout,
-  //   hidden: true,
-  //   meta: { title: '内容管理/小程序内容管理' },
-  //   children: [
-  //     {
-  //       hidden: true,
-  //       path: 'secretdetail',
-  //       component: () => import('@/views/content/components/SecretDetail'),
-  //       name: 'SecretDetail',
-  //       meta: { title: '小程序详情(爱的密语）', icon: 'dashboard', affix: true, activeMenu: '/content/wxcontent' },
-  //
-  //       props(route) {
-  //         return {
-  //           appid: route.query.appid,
-  //           appname: route.query.appname
-  //         }
-  //       }
-  //
-  //     }
-  //   ]
-  // },
+  ////////////////////素材投放end
 
-  // {
-  //   path: '/content/wxcontent',
-  //   component: Layout,
-  //   hidden: true,
-  //   meta: { title: '小程序内容管理' },
-  //   children: [
-  //     {
-  //       hidden: true,
-  //       path: 'detailcheckimgsmorning',
-  //       component: () => import('@/views/content-detail/DetailCheckImgsMorning'),
-  //       name: 'DetailCheckImgsMorning',
-  //       meta: { title: '系列详情-早安晚安', icon: 'dashboard', activeMenu: '/content/wxcontent' },
-  //
-  //       props(route) {
-  //         return {
-  //           detailid: route.query.detailid,
-  //           detailname: route.query.detailname
-  //         }
-  //       }
-  //
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/content/wxcontent',
-  //   component: Layout,
-  //   hidden: true,
-  //   meta: { title: '小程序内容管理' },
-  //   children: [
-  //     {
-  //       hidden: true,
-  //       path: 'detailcheckimgs',
-  //       component: () => import('@/views/content-detail/DetailCheckImgs'),
-  //       name: 'DetailCheckImgs',
-  //       meta: { title: '系列详情-壁纸', icon: 'dashboard', activeMenu: '/content/wxcontent' },
-  //
-  //       props(route) {
-  //         return {
-  //           detailid: route.query.detailid,
-  //           detailname: route.query.detailname
-  //         }
-  //       }
-  //
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/content/wxcontent',
-  //   component: Layout,
-  //   hidden: true,
-  //   meta: { title: '小程序内容管理' },
-  //   children: [
-  //     {
-  //       hidden: true,
-  //       path: 'detailcheckimgsmeme',
-  //       component: () => import('@/views/content-detail/DetailCheckImgsMeme'),
-  //       name: 'DetailCheckImgsMeme',
-  //       meta: { title: '系列详情-表情包', icon: 'dashboard', activeMenu: '/content/wxcontent' },
-  //
-  //       props(route) {
-  //         return {
-  //           detailid: route.query.detailid,
-  //           detailname: route.query.detailname
-  //         }
-  //       }
-  //
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/content/wxcontent',
-  //   component: Layout,
-  //   hidden: true,
-  //   meta: { title: '小程序内容管理' },
-  //   children: [
-  //     {
-  //       hidden: true,
-  //       path: 'detailcheckimgssecret',
-  //       component: () => import('@/views/content-detail/DetailCheckImgsSecret'),
-  //       name: 'DetailCheckImgsSecret',
-  //       meta: { title: '系列详情-爱的密语', icon: 'dashboard', activeMenu: '/content/wxcontent' },
-  //
-  //       props(route) {
-  //         return {
-  //           detailid: route.query.detailid,
-  //           detailname: route.query.detailname
-  //         }
-  //       }
-  //
-  //     }
-  //   ]
-  // },
-
-
-
-  // {
-  //   path: '/content/appcontent/appdetail/DetailCheckVideo',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       hidden: true,
-  //       path: '',
-  //       component: () => import('@/views/content-detail/DetailCheckVideo'),
-  //       name: 'DetailCheckVideo',
-  //       meta: { title: '详情-查看视频', icon: 'dashboard' },
-  //
-  //       props(route) {
-  //         return {
-  //           detailid: route.query.detailid,
-  //           detailname: route.query.detailname
-  //         }
-  //       }
-  //
-  //     }
-  //   ]
-  // }
   // {
   //   path: '/new',
   //   component: Layout,
