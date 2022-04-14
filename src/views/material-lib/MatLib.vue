@@ -2,7 +2,7 @@
   <!--  素材库-->
   <div class="content-wrapper">
     <div class="topbar-wrapper">
-      <div class="back">
+      <div class="back" style="font-size: 13px">
         <div>
           素材名称 :
           <el-input v-model="form.title" size="mini" class="filterBox" placeholder="请输入" />
@@ -83,8 +83,8 @@
           </div>
         </div>
         <span slot="footer" class="dialog-footer">
-          <el-button @click="centerDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
+          <el-button class="resetlebtn" @click="centerDialogVisible = false">取 消</el-button>
+          <el-button class="filterlebtn" type="primary" @click="centerDialogVisible = false">确 定</el-button>
         </span>
       </el-dialog>
     </div>
@@ -92,18 +92,22 @@
     <!-- 主要内容显示区域 -->
     <div class="images-wrapper">
       <el-table
+        class="customer-table"
         :data="tableData"
         :show-header="false"
-        border
+        :border="true"
         style="width: 100%"
       >
         <el-table-column
           label="图片"
           align="center"
           width="220"
+          style="background-color: red"
         >
           <template slot-scope="scope">
-            <img class="tableImg" :src="scope.row.image" alt="">
+            <div style="width: 100%; height: 120px;">
+              <img class="tableImg" :src="scope.row.image" alt="">
+            </div>
           </template>
         </el-table-column>
         <el-table-column
@@ -136,9 +140,12 @@
           label="操作"
         >
           <template slot-scope="scope">
-            <el-button style="color: #d79432;margin-right: 30px" type="text" @click="checkDetail(scope.row)">查看</el-button>
-            <el-button style="color: #d79432;margin-right: 30px" type="text" @click="handleEdit(scope.row)">编辑</el-button>
-            <el-button style="color: #f56c6c" type="text">删除</el-button>
+<!--            <el-button style="color: #d79432;margin-right: 30px" type="text" @click="checkDetail(scope.row)">查看</el-button>-->
+            <el-link :underline="false" style="color: #d79432;margin-right: 30px" @click="checkDetail(scope.row)"><i class="el-icon-view el-icon--right"></i> 查看</el-link>
+<!--            <el-button style="color: #d79432;margin-right: 30px" type="text" @click="handleEdit(scope.row)">编辑</el-button>-->
+            <el-link :underline="false" style="color: #d79432;margin-right: 30px" @click="handleEdit(scope.row)" icon="el-icon-edit">编辑</el-link>
+            <el-link style="color: #f56c6c" icon="el-icon-delete">删除</el-link>
+<!--            <el-button style="color: #f56c6c" type="text">删除</el-button>-->
           </template>
         </el-table-column>
       </el-table>
@@ -513,6 +520,24 @@ export default {
   //border: 1px solid black;
   height: 5vh;
   margin: 30px 2%;
+  .filterlebtn{
+    height: 3vh;
+    width: 5vw;
+    padding: 0;
+    background-color: #253647;
+    color: white;
+    border: none;
+    margin-right: 0.5vw;
+  }
+  .resetlebtn{
+    height: 3vh;
+    width: 5vw;
+    padding: 0;
+    background-color: transparent;
+    color: #253647;
+    border: 1px solid #253647;
+    margin-right: 0.5vw;
+  }
 
   .back {
     font-size: 14px;
@@ -612,27 +637,18 @@ export default {
   align-content: flex-start;
   margin-left: 2%;
   .tableImg{
-    //width: 200px;
-    //height: 150px;
     width: 100%;
     height: 100%;
-    //border: 1px solid black;
   }
 
   .footer{
     width: 100%;
     //border: 1px solid black;
-    //text-align: center;
-    //margin-bottom: 30px;
-    position: relative;
-    //display: inline-block;
-    //display: flex;
+    float: right;
     .el-pagination{
-      position: absolute;
+      float: right;
       margin-top: 30px;
-      //float: right;
       margin-bottom: 30px;
-      right: 0;
     }
   }
 }

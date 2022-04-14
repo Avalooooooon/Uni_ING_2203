@@ -3,7 +3,7 @@
   <div class="content-wrapper">
     <div class="topbar-wrapper">
       <div class="back">
-        <span style="width: 150px">请输入标题 : </span>
+        <span style="width: 130px;font-size: 13px">请输入标题 : </span>
         <el-input v-model="input" placeholder="请输入封面标题"></el-input>
       </div>
       <div class="btns">
