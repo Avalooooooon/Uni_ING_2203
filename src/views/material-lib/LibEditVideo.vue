@@ -3,10 +3,11 @@
   <div class="content-wrapper">
     <div class="topbar-wrapper">
       <div class="back">
-        <span style="width: 150px">请输入标题 : </span>
-        <el-input style="width: 300px" v-model="input" placeholder="请输入封面标题"></el-input>
+        <span style="width: 170px">请输入标题 : </span>
+        <el-input v-model="input" placeholder="请输入封面标题"></el-input>
         <el-button
           type="primary"
+          style="font-size: 12px;width: 150px"
           class="filterlebtn"
         >更换视频</el-button>
       </div>
@@ -55,6 +56,7 @@ export default {
   },
 
   created() {
+
   },
 
   methods: {

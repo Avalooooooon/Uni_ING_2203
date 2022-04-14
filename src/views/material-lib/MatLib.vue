@@ -3,62 +3,41 @@
   <div class="content-wrapper">
     <div class="topbar-wrapper">
       <div class="back">
-        <span class="selecters">素材名称 : </span>
-        <el-select
-          v-model="form.title"
-          size="mini"
-          style="width: 150px;min-width: 50px;margin-right: 40px"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
+        <div>
+          素材名称 :
+          <el-input v-model="form.title" size="mini" class="filterBox" placeholder="请输入" />
+        </div>
+        <div style="margin-left: 30px">
+          素材类型 :
+          <el-select
+            v-model="form.type"
+            class="filterBox"
+            size="mini"
+            style="width: 150px;min-width: 50px;margin-right: 40px"
+            placeholder="请选择"
+          >
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </div>
+        <div style="margin-left: -10px">
+          上传人 :
+          <el-input v-model="form.name" size="mini" class="filterBox" placeholder="请输入" />
+        </div>
+        <div style="margin-left: 30px">
+          上传时间 :
+          <el-date-picker
+            v-model="form.date"
+            size="mini"
+            class="filterBox"
+            type="date"
+            placeholder="选择日期"
           />
-        </el-select>
-        <span class="selecters">素材类型 : </span>
-        <el-select
-          v-model="form.type"
-          size="mini"
-          style="width: 150px;min-width: 50px;margin-right: 40px"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
-        <span class="selecters">上传人 : </span>
-        <el-select
-          v-model="form.name"
-          size="mini"
-          style="width: 150px;min-width: 50px;margin-right: 40px"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
-        <span class="selecters">上传时间 : </span>
-        <el-select
-          v-model="form.date"
-          size="mini"
-          style="width: 150px;min-width: 50px;margin-right: 40px"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
+        </div>
       </div>
       <div class="btns">
         <div class="btnsimg">
@@ -84,17 +63,17 @@
         center
       >
         <div class="dialogContent">
-          <div class="uploadType" @click="handleClickMat">
+          <div class="uploadType" @click="uploadPictureMat">
             <div class="typeImg"></div>
             <div class="typeTitle">图文素材</div>
           </div>
-          <div class="uploadType">
+          <div class="uploadType" @click="uploadVideoMat">
             <div class="typeImg"></div>
             <div class="typeTitle">视频素材</div>
           </div>
         </div>
         <div class="dialogContent">
-          <div class="uploadType">
+          <div class="uploadType" @click="uploadImagesMat">
             <div class="typeImg"></div>
             <div class="typeTitle">图集素材</div>
           </div>
@@ -166,6 +145,7 @@
       <div class="footer">
         <el-pagination
           class="el-pagination"
+          background
           :current-page="currentPage4"
           :page-sizes="[100, 200, 300, 400]"
           :page-size="100"
@@ -226,6 +206,18 @@ export default {
         image: 'https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
         title: '品牌灵魂xxxxxxx',
         type: '图集',
+        uploadName: 'xxx',
+        date: '2016-05-02'
+      }, {
+        image: 'https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
+        title: '品牌灵魂xxxxxxx',
+        type: '视频',
+        uploadName: 'xxx',
+        date: '2016-05-02'
+      }, {
+        image: 'https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
+        title: '品牌灵魂xxxxxxx',
+        type: '视频',
         uploadName: 'xxx',
         date: '2016-05-02'
       }, {
@@ -332,9 +324,17 @@ export default {
       this.centerDialogVisible = true
     },
 
-    // 编辑新图集
-    handleClickMat() {
+    // 编辑新图集/上传新图集素材
+    uploadImagesMat() {
       this.$router.push({ path: '/material/matlib/libimagesetadd', query: { id: this.matId }})
+    },
+    // 编辑新图集/上传图文素材
+    uploadPictureMat() {
+      this.$router.push({ path: '/material/matlib/libedit', query: { id: this.matId }})
+    },
+    // 编辑新图集/上传视频素材
+    uploadVideoMat() {
+      this.$router.push({ path: '/material/matlib/libeditvideo', query: { id: this.matId, status: 'false' }})
     },
 
     // openFullScreen2() {
@@ -517,7 +517,12 @@ export default {
   .back {
     font-size: 14px;
     padding: 0;
+    display: flex;
     //border: 1px solid black;
+    .filterBox{
+      width: 150px;
+      min-width: 150px;
+    }
   }
   .back:hover {
     cursor: pointer;
@@ -617,15 +622,17 @@ export default {
   .footer{
     width: 100%;
     //border: 1px solid black;
-    text-align: center;
+    //text-align: center;
     //margin-bottom: 30px;
-    //position: relative;
+    position: relative;
+    //display: inline-block;
     //display: flex;
     .el-pagination{
-      //position: absolute;
+      position: absolute;
       margin-top: 30px;
+      //float: right;
       margin-bottom: 30px;
-      //right: 0;
+      right: 0;
     }
   }
 }

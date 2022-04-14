@@ -26,7 +26,7 @@
     <div class="images-wrapper">
       <div class="content">
         <div class="content-left">
-          <div style="font-size: 16px;font-weight: bold;margin-top: 30px">素材名称</div><br>
+          <div style="font-size: 16px;font-weight: bold;">素材名称</div><br>
           <div style="font-size: 13px;color: gray">上传人 20220413xxxxxxxxxxxx</div>
         </div>
         <div class="content-right">
@@ -172,7 +172,8 @@ export default {
 
     // 左侧列表
     .content-left {
-      width: 40%;
+      width: 35%;
+      margin-left: 1.5%;
       height: 100%;
       //border: 1px solid black;
       // 列表输入框

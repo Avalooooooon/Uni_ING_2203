@@ -171,7 +171,8 @@ export default {
 
     // 左侧列表
     .content-top {
-      width: 100%;
+      width: 98%;
+      margin-left: 1%;
       //border: 1px solid black;
       // 列表输入框
       ::v-deep {
@@ -214,6 +215,7 @@ export default {
 
     // 右侧编辑器
     .content-bottom {
+      margin-left: 1%;
       width: 900px;
       height: 600px;
       margin-top: 30px;

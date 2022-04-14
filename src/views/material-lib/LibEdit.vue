@@ -4,7 +4,7 @@
     <div class="topbar-wrapper">
       <div class="back">
         <span style="width: 150px">请输入标题 : </span>
-        <el-input style="width: 300px" v-model="input" placeholder="请输入封面标题"></el-input>
+        <el-input v-model="input" placeholder="请输入封面标题"></el-input>
       </div>
       <div class="btns">
         <div class="btnsimg">
