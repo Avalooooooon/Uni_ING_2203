@@ -173,11 +173,11 @@
 </template>
 
 <script>
-import {
-  fetchDesignerListDetail,
-  designerListUpload,
-  delDesignerListDetail,
-} from "@/api/appdesigner";
+// import {
+//   fetchDesignerListDetail,
+//   materialListUpload,
+//   delDesignerListDetail,
+// } from "@/api/material";
 import { getToken } from "@/utils/auth";
 import axios from "axios";
 
@@ -221,20 +221,20 @@ export default {
       ],
 
       // 发送给后端的数据
-      designerParams: {
+      materialParams: {
         bizid: "uniwarm",
         token: getToken(),
         listid: 8,
         itemid: this.detailid,
       },
-      designerParams1: {
+      materialParams1: {
         bizid: "uniwarm",
         token: getToken(),
         listid: 8,
       },
 
       // 后端传来的数据
-      designerData: [],
+      materialData: [],
     };
   },
 
@@ -267,7 +267,7 @@ export default {
               "Content-Type": "application/json",
             },
           }).then((res) => {
-            console.log(this.designerParams);
+            console.log(this.materialParams);
             console.log(this.numberValidateForm);
             console.log(res);
             if (res.data.res === 0) {
