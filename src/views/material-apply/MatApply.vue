@@ -7,15 +7,13 @@
           <el-button
             type="primary"
             class="cancelbtn"
-            listid="8"
-            @click="saveAppDetail"
+            @click="toMaterialLib"
             >取消</el-button
           >
           <el-button
             type="primary"
             class="submitbtn"
-            listid="8"
-            @click="saveAppDetail"
+            @click="submitMatApply"
             >提交</el-button
           >
         </div>
@@ -84,9 +82,10 @@
           >
             <div class="edit">
               <div class="buttons">
-                <el-button slot="trigger" type="primary" class="addbtn"
-                  >添加素材</el-button
-                >
+                <!-- <el-button slot="trigger" type="primary" class="addbtn"
+                  >添加素材</el-button> -->
+                  <el-button class="addbtn" @click="toApplyChooseMat"
+                  >添加素材</el-button>
                 <!-- <el-button
                 style="margin-left: 10px"
                 size="small"
@@ -116,19 +115,24 @@
         label-width="100px"
         class="demo-dynamic"
       >
-        <!--省略,其他表单项-->
-        <div class="row" v-for="(item, index) in form.channels" :key="index">
+        <div v-for="(item, index) in channelForm.channels" :key="index">
           <el-form-item
             :label="'渠道' + (index + 1)"
             :prop="'channels.' + index + '.channel'"
-            required
+            :rules="[
+              { required: true, message: '请选择渠道', trigger: 'change' },
+            ]"
           >
-            <el-select class="input" v-model="item.channel">
+            <el-select
+              class="input"
+              v-model="item.channel"
+              placeholder="请选择渠道"
+            >
               <el-option
-                v-for="item in deptList"
-                :key="item.name"
-                :label="item.name"
-                :value="item.name"
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
               ></el-option>
             </el-select>
           </el-form-item>
@@ -136,7 +140,9 @@
           <el-form-item
             :label="'链接' + (index + 1)"
             :prop="'channels.' + index + '.link'"
-            required
+            :rules="[
+              { required: true, message: '链接不能为空', trigger: 'blur' },
+            ]"
           >
             <el-input v-model="channelForm.link"></el-input>
           </el-form-item>
@@ -144,21 +150,24 @@
           <el-form-item
             :label="'运营号' + (index + 1)"
             :prop="'channels.' + index + '.name'"
-            required
+            :rules="[
+              { required: true, message: '运营号不能为空', trigger: 'blur' },
+            ]"
           >
             <el-input v-model="channelForm.name"></el-input>
           </el-form-item>
 
-          <i class="el-icon-circle-plus" @click="addDept"></i>
           <i
-            v-if="form.channels.length > 1"
+            v-if="channelForm.channels.length > 1"
             class="el-icon-remove-outline"
-            @click="delDept(index)"
+            @click="delChannel(index)"
           ></i>
         </div>
-
-        <!--省略,其他表单项-->
       </el-form>
+      <!-- <i class="el-icon-circle-plus" @click="addChannel"></i> -->
+      <div class="buttons">
+        <el-button class="addbtn" @click="addChannel">添加渠道</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -176,15 +185,6 @@ export default {
   name: "MatApply",
   data() {
     return {
-      form: {
-        td: "",
-        channels: [
-          { channel: "", link: "", name: "" },
-          { channel: "", link: "", name: "" },
-        ], //默认展示一行部门数据
-        rs: "",
-      },
-
       url: "https://www.bizspace.cn",
       imageUrl: "",
       // 素材的投放名称、使用说明、使用时间
@@ -207,9 +207,10 @@ export default {
 
       // 渠道的名字、链接、运营号
       channelForm: {
-        channel: "",
-        link: "",
-        person: "",
+        channels: [
+          { channel: "", link: "", name: "" },
+          { channel: "", link: "", name: "" },
+        ], //默认展示一行部门数据
       },
       // 渠道的可选值
       options: [
@@ -238,6 +239,72 @@ export default {
   },
 
   methods: {
+    // 点击右上取消按钮，返回素材库页面
+    toMaterialLib(event) {
+      this.$router.push({
+        name: "MatLib",
+      });
+    },
+
+    // 点击右上提交按钮
+    submitMatApply(event) {
+      this.$confirm("确定提交本次申请？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() =>
+          axios({
+            url: "/api/v3/person2/xxx",
+            method: "post",
+            params: {
+              bizid: "uniwarm",
+              token: getToken(),
+              listid: this.listid,
+            },
+            data: this.numberValidateForm,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }).then((res) => {
+            console.log(this.designerParams);
+            console.log(this.numberValidateForm);
+            console.log(res);
+            if (res.data.res === 0) {
+              this.$router.go(-1);
+              this.$message({
+                type: "success",
+                message: "上传成功",
+              });
+              setTimeout(() => {
+                this.$router.push({
+                  name: "MatRecord",
+                });
+              }, "500");
+            } else {
+              this.$message({
+                type: "error",
+                message: "上传失败",
+              });
+            }
+          })
+        )
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消上传",
+          });
+        });
+
+    },
+
+    // 点击添加素材按钮
+    toApplyChooseMat(event) {
+      this.$router.push({
+        name: "ApplyChooseMat",
+      });
+    },
+
     submitUpload() {
       this.$refs.upload.submit();
     },
@@ -248,41 +315,13 @@ export default {
       console.log(file);
     },
 
-    // 提交渠道表单
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          alert("submit!");
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
+    // 增加渠道条目
+    addChannel() {
+      this.channelForm.channels.push({ channel: "", link: "", name: "" });
     },
-    // 重置渠道表单
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
-    },
-    // 删除渠道表单项
-    removeDomain(item) {
-      var index = this.channelForm.domains.indexOf(item);
-      if (index !== -1) {
-        this.channelForm.domains.splice(index, 1);
-      }
-    },
-    // 新增渠道表单项
-    addDomain() {
-      this.channelForm.domains.push({
-        value: "",
-        key: Date.now(),
-      });
-    },
-
-    addDept() {
-      this.form.channels.push({ channel: "", link: "", name: "" });
-    },
-    delDept(index) {
-      this.form.channels.splice(index, 1);
+    // 删除渠道条目
+    delChannel(index) {
+      this.channelForm.channels.splice(index, 1);
     },
   },
 };
@@ -408,7 +447,7 @@ $formHeight: 28px;
       .upload-demo {
         width: 330px;
         height: 240px;
-        padding: 2px 10px 5px;
+        padding: 2px 10px 10px;
         border: 1px dashed #d9d9d9;
         border-radius: 6px;
         overflow: hidden;
@@ -487,13 +526,22 @@ $formHeight: 28px;
           .el-input {
             height: $formHeight;
             line-height: $formHeight;
-            width: 250px;
+            width: 300px;
             // 提示文字字体大小
             font-size: 12px;
             .el-input__inner {
               height: $formHeight;
               line-height: $formHeight;
             }
+            .el-select__caret.el-input__icon.el-icon-arrow-up {
+              margin-top: 4px;
+            }
+            .el-select__caret.el-input__icon.el-icon-arrow-up.is-reverse {
+              margin-top: -4px;
+            }
+          }
+          .el-select .el-input {
+            width: 150px;
           }
           // 错误文字字体大小
           .el-form-item__error {
@@ -508,6 +556,27 @@ $formHeight: 28px;
           }
         }
       }
+      .el-icon-remove-outline {
+        height: $formHeight;
+        line-height: $formHeight;
+        font-size: 24px;
+        cursor: pointer;
+      }
+    }
+    // 添加渠道按钮和按钮内字体大小
+    .buttons .el-button--medium {
+      font-size: 8px;
+    }
+    .addbtn {
+      margin-left: 100px;
+      margin-bottom: 80px;
+      height: 3vh;
+      width: 150px;
+      padding: 0;
+      background-color: #253647;
+      color: white;
+      border: none;
+      border-radius: 4px;
     }
   }
 }
