@@ -21,6 +21,19 @@
           >保存</el-button>
         </div>
       </div>
+      <el-dialog
+        title="保存素材"
+        :visible.sync="dialogVisible"
+        width="30%"
+        :before-close="handleClose"
+      >
+        <div style="width: 100%; padding-bottom: 30px; text-align: center;position: relative">
+          <div style="width: 100%;height:3vh;margin-top: 40px; font-size: 13px;background-color: #253647;color: white;text-align: center;line-height:3vh;position: absolute;bottom: 0;">
+            正在上传 请耐心等待
+          </div>
+
+        </div>
+      </el-dialog>
     </div>
 
     <!-- 主要内容显示区域 -->
@@ -86,7 +99,8 @@ export default {
       numberValidateForm: {
         name: '',
         image: ''
-      }
+      },
+      dialogVisible: false
     }
   },
 
@@ -101,7 +115,20 @@ export default {
       this.$router.go(-1)
     },
     handleSave() {
-      this.$router.go(-1)
+      this.dialogVisible = true
+    },
+    // 关闭保存素材弹窗
+    handleClose(done) {
+      this.$confirm('确认关闭？', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then((_) => {
+          done()
+        })
+        .catch((_) => {
+        })
     },
     // 上传照片
     uploadFile(file) {
@@ -214,6 +241,16 @@ export default {
         border: none;
       }
     }
+  }
+  .addbtn{
+    height: 3vh;
+    width: 14vw;
+    padding: 0;
+    background-color: #253647;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-top: 40px;
   }
 }
 

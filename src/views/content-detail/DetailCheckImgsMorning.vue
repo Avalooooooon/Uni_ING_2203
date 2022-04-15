@@ -64,7 +64,7 @@
           </div>
         </div>
       </div>
-      <div class="footer">
+      <div class="footer" v-if="showPag">
         <el-pagination
           background
           layout="prev, pager, next"
@@ -94,7 +94,7 @@ export default {
   data() {
     return {
       isDeleteing: false, // 删除状态
-
+      showPag: false,
       // 发送给后端的数据
       morningParams: {
         bizid: 'uniwarm',
@@ -139,6 +139,11 @@ export default {
         .then((response) => {
           console.log(response.data)
           this.imgsData = response.data
+          if (this.imgsData.length > 0) {
+            this.showPag = true
+          } else {
+            this.showPag = false
+          }
           this.total = response.total
           this.morningParams.page = this.morningParams.page + 1
         })
@@ -188,15 +193,18 @@ export default {
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === 'image/jpeg'
+      const isPNG = file.type === 'image/png'
       const isLt2M = file.size / 1024 / 1024 < 2
 
       if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!')
+        if (!isPNG) {
+          this.$message.error('上传图片只能是 JPG, PNG 格式!')
+        }
       }
       if (!isLt2M) {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
-      return isJPG && isLt2M
+      return isJPG || isPNG && isLt2M
     },
 
     // 关闭上传图片弹窗
@@ -448,11 +456,11 @@ export default {
 // 分页器
 .footer{
   width: 100%;
+  margin-top: 30px;
   //border: 1px solid black;
   text-align: center;
   .el-pagination{
     margin-bottom: 40px;
-    margin-top: 40px;
   }
 }
 </style>

@@ -2,29 +2,29 @@
   <div class="content-wrapper">
     <div class="topbar-wrapper">
       <el-form
+        ref="form"
         :inline="true"
         :model="form"
-        ref="form"
         label-width="60px"
         class="demo-dynamic"
       >
         <el-form-item label="投放名称" prop="title">
-          <el-input v-model="form.title" placeholder="请输入"></el-input>
+          <el-input v-model="form.title" placeholder="请输入" />
         </el-form-item>
 
         <el-form-item label="状态" prop="state">
-          <el-select class="input" v-model="form.state" placeholder="请选择">
+          <el-select v-model="form.state" class="input" placeholder="请选择">
             <el-option
               v-for="item in options"
               :key="item.value"
               :label="item.label"
               :value="item.value"
-            ></el-option>
+            />
           </el-select>
         </el-form-item>
 
         <el-form-item label="申请人" prop="name">
-          <el-input v-model="form.name" placeholder="请输入"></el-input>
+          <el-input v-model="form.name" placeholder="请输入" />
         </el-form-item>
 
         <el-form-item label="申请时间" prop="applydate">
@@ -56,23 +56,18 @@
 
     <div class="middle-wrapper">
       <el-table class="datalist" :data="modulesData">
-        <el-table-column prop="title" label="投放名称" width="140">
-        </el-table-column>
-        <el-table-column prop="name" label="申请人" width="120">
-        </el-table-column>
-        <el-table-column prop="requestdate" label="申请时间" width="140">
-        </el-table-column>
-        <el-table-column prop="usedate" label="使用时间" width="140">
-        </el-table-column>
-        <el-table-column prop="state" label="状态" width="140">
-        </el-table-column>
-        <el-table-column prop="finalOperate" label="最后操作人" width="140">
-        </el-table-column>
+        <el-table-column prop="title" label="投放名称" width="140" />
+        <el-table-column prop="name" label="申请人" width="120" />
+        <el-table-column prop="requestdate" label="申请时间" width="140" />
+        <el-table-column prop="usedate" label="使用时间" width="140" />
+        <el-table-column prop="state" label="状态" width="140" />
+        <el-table-column prop="finalOperate" label="最后操作人" width="140" />
         <el-table-column label="操作">
           <div class="buttons">
-            <el-button class="filterbtn" @click="toRecordDetail"
-              >查看</el-button
-            >
+            <el-button
+              class="filterbtn"
+              @click="toRecordDetail"
+            >查看</el-button>
             <el-button class="resetbtn" @click="withDraw">删除</el-button>
           </div>
         </el-table-column>
@@ -100,157 +95,157 @@
 //   materialListUpload,
 //   delDesignerListDetail,
 // } from "@/api/appmaterial";
-import { getToken } from "@/utils/auth";
-import axios from "axios";
+import { getToken } from '@/utils/auth'
+import axios from 'axios'
 
 export default {
-  name: "MatRecord",
+  name: 'MatRecord',
   data() {
     const item = {
-      date: "2016-05-02",
-      name: "王小虎",
-      address: "上海市普陀区金沙江路 1518 弄",
-    };
+      date: '2016-05-02',
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1518 弄'
+    }
     return {
       tableData: Array(20).fill(item),
 
       images: {
         // 占位图
-        emptyimg: require("@/assets/empty.jpg"),
+        emptyimg: require('@/assets/empty.jpg')
       },
-      url: "https://www.bizspace.cn",
-      imageUrl: "",
+      url: 'https://www.bizspace.cn',
+      imageUrl: '',
 
       // 传给投放申请的数据
       chooseId: -1,
-      chooseName: "",
+      chooseName: '',
 
       // 素材类型的可选值
       options: [
-        { value: "001", label: "订单审核" },
-        { value: "002", label: "审核通过" },
-        { value: "003", label: "停止审核" },
+        { value: '001', label: '订单审核' },
+        { value: '002', label: '审核通过' },
+        { value: '003', label: '停止审核' }
       ],
       // 投放的名称、状态、申请人、上传时间、使用时间
       form: {
-        title: "",
-        state: "",
-        name: "",
-        applydate: "",
-        usedate: "",
+        title: '',
+        state: '',
+        name: '',
+        applydate: '',
+        usedate: ''
       },
 
       // 发送给后端的数据
       materialParams: {
-        bizid: "uniwarm",
+        bizid: 'uniwarm',
         token: getToken(),
         listid: 8,
         itemid: this.detailid,
-        page: 8,
+        page: 8
       },
       materialParamsdel: {
-        bizid: "uniwarm",
+        bizid: 'uniwarm',
         token: getToken(),
-        itemid: "",
-        listid: 8,
+        itemid: '',
+        listid: 8
       },
 
       // 后端传来的数据
       modulesData: [
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '001'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "002",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '002'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "003",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '003'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "004",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '004'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "005",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '005'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '001'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '001'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '001'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '001'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
-        },
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '001'
+        }
       ],
       total: 300,
-      pagerow: 20,
-    };
+      pagerow: 20
+    }
   },
 
   created() {
@@ -261,20 +256,20 @@ export default {
     // 点击查看按钮，去素材详情页
     toRecordDetail(event) {
       this.$router.push({
-        name: "RecordDetail",
+        name: 'RecordDetail'
         // query: {
         //     matid: this.chooseId,
         //     matname: this.chooseName,
         //   },
-      });
+      })
     },
     // 点击删除按钮，去撤回页
     withDraw(event) {
       //   this.materialParamsDel.itemid = event.currentTarget.id;
-      this.$confirm("确定要删除该投放吗？", "提示", {
-        cancelButtonText: "取消",
-        confirmButtonText: "确定",
-        type: "warning",
+      this.$confirm('确定要删除该投放吗？', '提示', {
+        cancelButtonText: '取消',
+        confirmButtonText: '确定',
+        type: 'warning'
       })
         .then(() => {
           //   delNewsList(this.materialParamsDel)
@@ -286,61 +281,60 @@ export default {
           //       console.log(err);
           //     });
           this.$message({
-            type: "success",
-            message: "删除成功!",
-          });
+            type: 'success',
+            message: '删除成功!'
+          })
         })
         .catch(() => {
           this.$message({
-            type: "info",
-            message: "已取消删除",
-          });
-        });
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
       // this.$router.go(0)
     },
 
     // 重置表单
     reset() {
-      this.$refs["form"].resetFields();
+      this.$refs['form'].resetFields()
     },
 
     // 钩子函数：从后台拿数据
     getMaterialList() {
-      this.materialParamsFetch.page = this.materialParamsFetch.page - 1;
+      this.materialParamsFetch.page = this.materialParamsFetch.page - 1
       fetchMaterialList(this.materialParamsFetch)
         .then((response) => {
-          this.total = response.total;
-          this.modulesData = response.data;
-          this.materialParamsFetch.page = this.materialParamsFetch.page + 1;
+          this.total = response.total
+          this.modulesData = response.data
+          this.materialParamsFetch.page = this.materialParamsFetch.page + 1
         })
         .catch((err) => {
-          console.log(err);
-        });
+          console.log(err)
+        })
     },
     chooseMat(id, name) {
-      this.chooseId = id;
-      this.chooseName = name;
-      console.log(name);
+      this.chooseId = id
+      this.chooseName = name
+      console.log(name)
     },
 
     // 分页器
     handleCurrentChange(currentPage) {
-      console.log(currentPage);
-      this.materialParams.page = currentPage;
-      console.log(this.materialParams.page);
-      this.getMaterialList();
+      console.log(currentPage)
+      this.materialParams.page = currentPage
+      console.log(this.materialParams.page)
+      this.getMaterialList()
     },
 
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+      console.log(`每页 ${val} 条`)
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-    },
-  },
-};
+      console.log(`当前页: ${val}`)
+    }
+  }
+}
 </script>
-
 
 <style lang="scss" scoped>
 $formHeight: 28px;

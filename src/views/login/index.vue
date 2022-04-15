@@ -81,8 +81,8 @@ export default {
     }
     return {
       loginForm: {
-        username: 'dong',
-        password: 'donglichao',
+        username: '',
+        password: '',
         bizid: 'uniwarm'
       },
       checked: true,
@@ -153,6 +153,7 @@ export default {
             .then(() => {
               console.log('登录成功')
               this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+              sessionStorage.setItem('username', this.loginForm.username)
               this.$message.success('登陆成功')
               this.loading = false
             })

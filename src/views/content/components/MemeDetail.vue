@@ -56,7 +56,11 @@
         /> -->
         <img
           class="appimg"
-          :src="url + item.first"
+          :src="
+            item.first
+              ? 'https://www.bizspace.cn' + item.first
+              : images.emptyimg
+          "
         >
         <!-- <img class="appimg" :src="imgs.emptyimg"/> -->
         <div class="textversion">{{ item.se_name }}</div>
@@ -94,7 +98,7 @@ export default {
   data() {
     return {
       images: { // 占位图
-        emptyimg: require('@/assets/empty.jpg')
+        emptyimg: require('@/assets/memeEmpty.png')
       },
       searchKey: '', // 用户输入到搜索框中的关键字
       list: [], // 存放搜索前的所有数据

@@ -18,7 +18,7 @@
           <el-button
             type="primary"
             class="uploadlebtn"
-            @click="dialogVisible = true"
+            @click="openDialog"
           >上传图片</el-button>
           <el-button
             type="primary"
@@ -43,20 +43,42 @@
         width="30%"
         :before-close="handleClose"
       >
-        <div style="width: 100%; text-align: center">
+        <div style="width: 100%; padding-bottom: 30px; text-align: center;">
+          <!--          <el-upload-->
+          <!--            class="avatar-uploader"-->
+          <!--            list-type="picture-card"-->
+          <!--            action="/v3upload/admin_wx_wallpaper"-->
+          <!--            :show-file-list="false"-->
+          <!--            :on-success="handleAvatarSuccess"-->
+          <!--            :before-upload="beforeAvatarUpload"-->
+          <!--            :http-request="uploadFile"-->
+          <!--          >-->
+          <!--            <img v-if="imageUrl" :src="imageUrl" class="avatar">-->
+          <!--            <i v-else class="el-icon-plus avatar-uploader-icon" />-->
+          <!--          </el-upload>-->
+          <!--          <div style="width: 60%;height: 200px;background-color: rgb(0,0,0,0.5);margin: 0 auto;"></div>-->
+          <!--          <div style="width: 100%;margin-top: 30px">（上传格式：仅支持jpg格式、分辨率不超过200 * 200、大小不超过 299M）</div>-->
+          <!--          <el-button class="addbtn">上传图片</el-button>-->
+          <div v-if="showEmpty">
+            <div style="width: 60%;height: 200px;background-color: rgb(0,0,0,0.5);margin: 0 auto;"></div>
+            <div style="width: 100%;margin-top: 30px">（上传格式：仅支持jpg格式、分辨率不超过200 * 200、大小不超过 299M）</div>
+          </div>
           <el-upload
-            class="avatar-uploader"
-            list-type="picture-card"
-            action="/v3upload/admin_wx_wallpaper"
-            :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload"
+            class="upload-demo"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :before-remove="beforeRemove"
             :http-request="uploadFile"
+            multiple
+            auto-upload
+            :file-list="fileList"
           >
-            <img v-if="imageUrl" :src="imageUrl" class="avatar">
-            <i v-else class="el-icon-plus avatar-uploader-icon" />
+            <el-button v-if="showEmpty" class="addbtn" type="primary">点击上传</el-button>
+            <div class="continueBtn" v-if="showHave">
+              <el-button class="showHaveAddBtn" type="primary">添加图片</el-button>
+              <el-button class="showHaveAddBtn" type="primary" @click="handleUpload()">开始上传</el-button>
+            </div>
           </el-upload>
-          <div style="width: 100%;margin-top: 30px">分辨率推荐1125 x 2436像素（竖屏），大小不超过 2MB</div>
+<!--          <el-button class="showHaveUploadBtn" type="primary" @click="handleUpload()">开始上传</el-button>-->
         </div>
       </el-dialog>
 
@@ -100,6 +122,9 @@ export default {
     return {
       matId: '',
       dialogVisible: false,
+      fileList: [],
+      showEmpty: true,
+      showHave: false,
       imgsData: [
         {
           id: '1',
@@ -177,46 +202,75 @@ export default {
           })
         })
     },
-    // 上传图片
+    // // 文件列表移除文件时的钩子
+    // handleRemove(file, fileList) {
+    //   console.log(file, fileList)
+    // },
+    // // 点击文件列表中已上传的文件时的钩子
+    // handlePreview(file) {
+    //   console.log(file, '11')
+    // },
+    // 打开上传素材按钮
+    openDialog() {
+      this.dialogVisible = true
+      this.showEmpty = true
+      this.showHave = false
+    },
+    // 删除文件之前的钩子
+    beforeRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${file.name}？`)
+    },
     uploadFile(file) {
-      console.log(file)
-      // this.openFullScreen2()
-      var formData = new FormData()
-      formData.append('headimg', file.file)
-      // paperListUpload(this.paperParams1, formData).then((res) => {
-      //   console.log(res)
-      //   this.imageUrl = this.url + res.image
-      //   if (res.res === 0) {
-      //     this.dialogVisible = false
-      //     this.imageUrl = ''
-      //     this.getPaperList()
-      //     this.$message({
-      //       type: 'success',
-      //       message: '上传成功'
-      //     })
-      //   } else {
-      //     this.$message({
-      //       type: 'error',
-      //       message: '上传失败'
-      //     })
-      //   }
-      // })
+      console.log(file, '上传的文件')
+      this.fileList.push(file.file)
+      this.showEmpty = this.fileList.length <= 0
+      this.showHave = this.fileList.length > 0
+      console.log(this.fileList)
     },
-    handleAvatarSuccess(res, file) {
-      console.log(file)
+    // 选择完成 开始上传图片
+    handleUpload() {
+      console.log('111')
     },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg'
-      const isLt2M = file.size / 1024 / 1024 < 2
-
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!')
-      }
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!')
-      }
-      return isJPG && isLt2M
-    },
+    // // 上传图片
+    // uploadFile(file) {
+    //   console.log(file)
+    //   // this.openFullScreen2()
+    //   var formData = new FormData()
+    //   formData.append('headimg', file.file)
+    //   // paperListUpload(this.paperParams1, formData).then((res) => {
+    //   //   console.log(res)
+    //   //   this.imageUrl = this.url + res.image
+    //   //   if (res.res === 0) {
+    //   //     this.dialogVisible = false
+    //   //     this.imageUrl = ''
+    //   //     this.getPaperList()
+    //   //     this.$message({
+    //   //       type: 'success',
+    //   //       message: '上传成功'
+    //   //     })
+    //   //   } else {
+    //   //     this.$message({
+    //   //       type: 'error',
+    //   //       message: '上传失败'
+    //   //     })
+    //   //   }
+    //   // })
+    // },
+    // handleAvatarSuccess(res, file) {
+    //   console.log(file)
+    // },
+    // beforeAvatarUpload(file) {
+    //   const isJPG = file.type === 'image/jpeg'
+    //   const isLt2M = file.size / 1024 / 1024 < 2
+    //
+    //   if (!isJPG) {
+    //     this.$message.error('上传头像图片只能是 JPG 格式!')
+    //   }
+    //   if (!isLt2M) {
+    //     this.$message.error('上传头像图片大小不能超过 2MB!')
+    //   }
+    //   return isJPG && isLt2M
+    // },
 
     // 关闭上传图片弹窗
     handleClose(done) {
@@ -226,9 +280,12 @@ export default {
         type: 'warning'
       })
         .then((_) => {
+          this.fileList = []
           done()
         })
-        .catch((_) => {})
+        .catch((_) => {
+          this.fileList = []
+        })
     }
   }
 }
@@ -335,6 +392,51 @@ export default {
         margin-right: 0.5vw;
       }
     }
+  }
+  .upload-demo{
+    //border: 1px solid black;
+    position: relative;
+  }
+  .addbtn {
+    height: 3vh;
+    width: 14vw;
+    padding: 0;
+    background-color: #253647;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-top: 40px;
+    position: absolute;
+    bottom: -5vh;
+    right: calc(50% - 7vw);
+  }
+  .continueBtn{
+    width: 100%;
+    //border:1px solid black;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;//每个项目两侧的间隔相等align-items: center;
+    position: absolute;
+    bottom: -5vh;
+    right: 0;
+    .showHaveAddBtn{
+      width: 14vw;
+      height: 3vh;
+      padding: 0;
+      border: none;
+      background-color: #253647;
+      color: white;
+    }
+    //.showHaveUploadBtn{
+    //  width: 14vw;
+    //  height: 3vh;
+    //  padding: 0;
+    //  border: none;
+    //  background-color: #253647;
+    //  color: white;
+    //  display: flex;
+    //  justify-content: flex-end;
+    //}
   }
 }
 

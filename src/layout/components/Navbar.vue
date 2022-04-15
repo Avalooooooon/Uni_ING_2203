@@ -6,10 +6,9 @@
 
     <div class="right-menu">
       <template v-if="device!=='mobile'">
-        <error-log class="errLog-container right-menu-item hover-effect" />
-
-        <screenfull id="screenfull" class="right-menu-item hover-effect" />
-
+<!--        <error-log class="errLog-container right-menu-item hover-effect" />-->
+        <span class="right-menu-item hover-effect">{{ myUsername }}</span>
+<!--        <screenfull id="screenfull" class="right-menu-item hover-effect" />-->
 
       </template>
 
@@ -49,7 +48,8 @@ export default {
   data() {
     return {
       url: 'https://www.bizspace.cn',
-      headimg: ''
+      headimg: '',
+      myUsername: ''
     }
   },
   computed: {
@@ -61,6 +61,11 @@ export default {
   },
   created() {
     this.headimg = this.url + sessionStorage.getItem('headimg')
+    console.log(sessionStorage.getItem('username'), '123')
+    this.myUsername = sessionStorage.getItem('username')
+    // console.log(this.$route.query.acount)
+    // this.myUsername = this.$route.query.acount
+
   },
   methods: {
     toggleSideBar() {

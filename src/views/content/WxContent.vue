@@ -116,11 +116,12 @@ export default {
 // 主要内容区域（单个）
 .module-wrapper{
   display: flex;
+  justify-content: space-around;//每个项目两侧的间隔相等
+  align-items: center;
   flex-direction: column;
   flex-wrap: nowrap;
-  justify-content: space-between;
   align-content: flex-start;
-  //border: 1px solid red;
+  //border: 1px solid yellow;
   // width: 19.6%;  // (100-1*2)/5，根组件的左右margin为1%
   width: 50%;
   height: calc((100vh - 50px)/2);
@@ -131,17 +132,19 @@ export default {
   font-size: 14px;
 
   img{
-    width: 100%;
+    width: 38vw;
     //height: calc(100% - 50px);
-    height: 50vw;
+    height: 42vh;
+    max-height: calc((100vh - 50px)/2);
     //margin-bottom: 10px;
+    //border: 1px solid blue;
   }
   .contentName{
-    width: 100%;
-    height: 50px;
+    width: 38vw;
+    height: 5vh;
+    line-height: 5vh;
     cursor: pointer;
-    //border: 1px solid black;
-    line-height: 50px;
+    //border: 1px solid red;
     text-align: center;
   }
   img:hover{
