@@ -4,16 +4,10 @@
       <div class="title">素材库</div>
       <div class="btns">
         <div class="btnsimg">
-          <el-button
-            type="primary"
-            class="cancelbtn"
-            @click="toMaterialLib"
+          <el-button type="primary" class="cancelbtn" @click="toMaterialLib"
             >取消</el-button
           >
-          <el-button
-            type="primary"
-            class="submitbtn"
-            @click="submitMatApply"
+          <el-button type="primary" class="submitbtn" @click="submitMatApply"
             >提交</el-button
           >
         </div>
@@ -84,8 +78,9 @@
               <div class="buttons">
                 <!-- <el-button slot="trigger" type="primary" class="addbtn"
                   >添加素材</el-button> -->
-                  <el-button class="addbtn" @click="toApplyChooseMat"
-                  >添加素材</el-button>
+                <el-button class="addbtn" @click="toApplyChooseMat"
+                  >添加素材</el-button
+                >
                 <!-- <el-button
                 style="margin-left: 10px"
                 size="small"
@@ -183,6 +178,8 @@ import axios from "axios";
 
 export default {
   name: "MatApply",
+  props: ["matid", "matname"],
+
   data() {
     return {
       url: "https://www.bizspace.cn",
@@ -236,6 +233,11 @@ export default {
       // 后端传来的数据
       materialData: [],
     };
+  },
+
+  created() {
+    // this.getMaterialList();
+    this.fileList.push({ name: this.matname, url: this.matname })
   },
 
   methods: {
@@ -295,7 +297,6 @@ export default {
             message: "已取消上传",
           });
         });
-
     },
 
     // 点击添加素材按钮
@@ -308,9 +309,9 @@ export default {
     submitUpload() {
       this.$refs.upload.submit();
     },
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
+    // handleRemove(file, fileList) {
+    //   console.log(file, fileList);
+    // },
     handlePreview(file) {
       console.log(file);
     },

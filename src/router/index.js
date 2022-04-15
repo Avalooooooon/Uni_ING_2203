@@ -526,6 +526,12 @@ export const constantRoutes = [{
         title: '投放申请',
         icon: 'peoples',
         affix: true
+      },
+      props(route) {
+        return {
+          matid: route.query.matid,
+          matname: route.query.matname
+        }
       }
     },
     {
@@ -537,12 +543,12 @@ export const constantRoutes = [{
         title: '投放申请-选择素材',
         activeMenu: '/material/matapply'
       },
-      props(route) {
-        return {
-          matid: route.query.matid,
-          matname: route.query.matname
-        }
-      }
+      // props(route) {
+      //   return {
+      //     matid: route.query.matid,
+      //     matname: route.query.matname
+      //   }
+      // }
     },
 
     // 投放记录部分路由

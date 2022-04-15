@@ -59,18 +59,29 @@
     </div>
 
     <div class="middle-wrapper">
-      <div v-for="item in modulesData" :key="item.id" class="singlemoudle">
+      <div
+        v-for="item in modulesData"
+        :key="item.id"
+        class="singlemoudle"
+        @click="chooseMat(item.id, item.name)"
+      >
         <img
           class="appimg"
+          :class="{ appimgActive: chooseId == item.id }"
           :src="
             item.image
               ? 'https://www.bizspace.cn' + item.image
               : images.emptyimg
           "
+          :id="item.id"
         />
 
-        <div class="textversion">{{ item.name }}</div>
-        <div class="timeversion">{{ item.create_date }}</div>
+        <div class="textversion" :class="{ textActive: chooseId == item.id }">
+          {{ item.name }}
+        </div>
+        <div class="timeversion" :class="{ textActive: chooseId == item.id }">
+          {{ item.create_date }}
+        </div>
       </div>
     </div>
 
@@ -108,6 +119,11 @@ export default {
       },
       url: "https://www.bizspace.cn",
       imageUrl: "",
+
+      // 传给投放申请的数据
+      chooseId: -1,
+      chooseName: "",
+
       // 素材类型的可选值
       options: [
         { value: "001", label: "视频素材" },
@@ -129,7 +145,7 @@ export default {
         token: getToken(),
         listid: 8,
         itemid: this.detailid,
-        page:8,
+        page: 8,
       },
       materialParams1: {
         bizid: "uniwarm",
@@ -141,10 +157,27 @@ export default {
       modulesData: [
         {
           image: "/appsrc/biz/uniwarm/wechatweb/static/home/hello.png",
-          name: "品牌灵魂11123",
+          name: "品牌灵魂1",
           type: "视频",
           uploadName: "xxx",
           create_date: "2016-05-02",
+          id: "1",
+        },
+        {
+          image: "/appsrc/biz/uniwarm/wechatweb/static/home/hello.png",
+          name: "品牌灵魂2",
+          type: "视频",
+          uploadName: "xxx",
+          create_date: "2016-05-02",
+          id: "2",
+        },
+        {
+          image: "/appsrc/biz/uniwarm/wechatweb/static/home/hello.png",
+          name: "品牌灵魂3",
+          type: "视频",
+          uploadName: "xxx",
+          create_date: "2016-05-02",
+          id: "3",
         },
         {
           image: "/appsrc/biz/uniwarm/wechatweb/static/home/hello.png",
@@ -152,6 +185,7 @@ export default {
           type: "视频",
           uploadName: "xxx",
           create_date: "2016-05-02",
+          id: "4",
         },
         {
           image: "/appsrc/biz/uniwarm/wechatweb/static/home/hello.png",
@@ -159,6 +193,7 @@ export default {
           type: "视频",
           uploadName: "xxx",
           create_date: "2016-05-02",
+          id: "5",
         },
         {
           image: "/appsrc/biz/uniwarm/wechatweb/static/home/hello.png",
@@ -166,6 +201,7 @@ export default {
           type: "视频",
           uploadName: "xxx",
           create_date: "2016-05-02",
+          id: "6",
         },
         {
           image: "/appsrc/biz/uniwarm/wechatweb/static/home/hello.png",
@@ -173,20 +209,7 @@ export default {
           type: "视频",
           uploadName: "xxx",
           create_date: "2016-05-02",
-        },
-        {
-          image: "/appsrc/biz/uniwarm/wechatweb/static/home/hello.png",
-          name: "品牌灵魂11123",
-          type: "视频",
-          uploadName: "xxx",
-          create_date: "2016-05-02",
-        },
-        {
-          image: "/appsrc/biz/uniwarm/wechatweb/static/home/hello.png",
-          name: "品牌灵魂11123",
-          type: "视频",
-          uploadName: "xxx",
-          create_date: "2016-05-02",
+          id: "7",
         },
       ],
       total: 300,
@@ -199,9 +222,33 @@ export default {
   },
 
   methods: {
-    // 返回上一级
-    toback() {
-      this.$router.go(-1);
+    // 点击右上取消按钮，返回素材库页
+    toMaterialLib(event) {
+      this.$router.push({
+        name: "MatLib",
+      });
+    },
+    // 点击右上提交按钮，返回投放申请页
+    submitMatApply(event) {
+      if (this.chooseId && this.chooseName) {
+        this.$router.push({
+          name: "MatApply",
+          query: {
+            matid: this.chooseId,
+            matname: this.chooseName,
+          },
+        });
+      } else {
+        this.$message({
+          type: "error",
+          message: "未选择素材",
+        });
+      }
+    },
+
+    // 重置表单
+    reset() {
+      this.$refs["form"].resetFields();
     },
 
     // 钩子函数：从后台拿数据
@@ -217,6 +264,11 @@ export default {
           console.log(err);
         });
     },
+    chooseMat(id, name) {
+      this.chooseId = id;
+      this.chooseName = name;
+      console.log(name);
+    },
 
     // 分页器
     handleCurrentChange(currentPage) {
@@ -227,14 +279,15 @@ export default {
     },
 
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`)
+      console.log(`每页 ${val} 条`);
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`)
+      console.log(`当前页: ${val}`);
     },
   },
 };
 </script>
+
 
 <style lang="scss" scoped>
 $formHeight: 28px;
@@ -344,8 +397,13 @@ $formHeight: 28px;
               margin-top: -4px;
             }
           }
+          // 选择框大小
           .el-select .el-input {
-            width: 90px;
+            width: 100px;
+          }
+          // 日期框大小
+          .el-date-editor--date {
+            width: 135px;
           }
           // 错误文字字体大小
           .el-form-item__error {
@@ -423,8 +481,14 @@ $formHeight: 28px;
     .appimg {
       width: 100%;
       height: 100%;
-      // border: 1px solid red;
-      padding-bottom: 2px;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+    .appimgActive {
+      width: 100%;
+      height: 100%;
+      border: 2px solid #d79432;
+      cursor: pointer;
     }
     .textversion {
       font-size: 14px;
@@ -444,6 +508,9 @@ $formHeight: 28px;
       font-weight: bold;
       margin: 0;
       //margin: 1.5vh 0 1vh 0;
+    }
+    .textActive {
+      color: #d79432;
     }
   }
 }
