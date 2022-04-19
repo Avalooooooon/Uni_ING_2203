@@ -105,12 +105,22 @@
           align="center"
         />
         <el-table-column label="操作" align="center" min-width="140">
-          <div class="buttons">
-            <el-button class="filterbtn" @click="toRecordDetail"
-              >查看</el-button
-            >
-            <el-button class="resetbtn" @click="withDraw">删除</el-button>
-          </div>
+          <template slot-scope="scope">
+            <div class="buttons">
+              <el-button
+                class="filterbtn"
+                @click="showDetailDialog"
+                :id="scope.row.id"
+                >查看</el-button
+              >
+              <el-button
+                class="resetbtn"
+                @click="showWithdrawDialog"
+                :id="scope.row.id"
+                >删除</el-button
+              >
+            </div>
+          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -127,6 +137,14 @@
         @current-change="handleCurrentChange"
       />
     </div>
+
+    <!-- 使用弹窗组件 -->
+    <RecordDetail title="查看详情" v-if="openDetailDialog" ref="detailDialog" />
+    <RecordWithdraw
+      title="测试窗口"
+      v-if="openWithdrawDialog"
+      ref="withdrawDialog"
+    />
   </div>
 </template>
 
@@ -136,26 +154,24 @@
 //   materialListUpload,
 //   delDesignerListDetail,
 // } from "@/api/appmaterial";
+import RecordDetail from "./RecordDetail";
+import RecordWithdraw from "./RecordWithdraw";
+
 import { getToken } from "@/utils/auth";
 import axios from "axios";
 
 export default {
   name: "MatRecord",
+  // 注册组件
+  components: { RecordDetail, RecordWithdraw },
   data() {
-    const item = {
-      date: "2016-05-02",
-      name: "王小虎",
-      address: "上海市普陀区金沙江路 1518 弄",
-    };
     return {
-      tableData: Array(20).fill(item),
+      // 显示窗口
+      // openDetailDialog: false,
+      openDetailDialog: true,
+      openWithdrawDialog: false,
 
-      images: {
-        // 占位图
-        emptyimg: require("@/assets/empty.jpg"),
-      },
       url: "https://www.bizspace.cn",
-      imageUrl: "",
 
       // 传给投放申请的数据
       chooseId: -1,
@@ -167,7 +183,7 @@ export default {
         { value: "002", label: "审核通过" },
         { value: "003", label: "停止审核" },
       ],
-      // 投放的名称、状态、申请人、上传时间、使用时间
+      // 顶部：投放的名称、状态、申请人、上传时间、使用时间
       form: {
         title: "",
         state: "",
@@ -345,6 +361,10 @@ export default {
 
   created() {
     // this.getMaterialList();
+      this.openDetailDialog = true;
+      this.$nextTick(() => {
+        this.$refs.detailDialog.init("001");
+      });
   },
 
   methods: {
@@ -352,45 +372,28 @@ export default {
       return "transparent";
     },
 
-    // 点击查看按钮，去素材详情页
-    toRecordDetail(event) {
-      this.$router.push({
-        name: "RecordDetail",
-        // query: {
-        //     matid: this.chooseId,
-        //     matname: this.chooseName,
-        //   },
+    // 点击查看按钮，弹出素材详情
+    showDetailDialog(event) {
+      // this.$router.push({
+      // name: "RecordDetail",
+      // query: {
+      //     matid: this.chooseId,
+      //     matname: this.chooseName,
+      //   },
+      // });
+      const id = event.currentTarget.getAttribute("id");
+
+      this.openDetailDialog = true;
+      this.$nextTick(() => {
+        this.$refs.detailDialog.init(id);
       });
     },
-    // 点击删除按钮，去撤回页
-    withDraw(event) {
-      //   this.materialParamsDel.itemid = event.currentTarget.id;
-      this.$confirm("确定要删除该投放吗？", "提示", {
-        cancelButtonText: "取消",
-        confirmButtonText: "确定",
-        type: "warning",
-      })
-        .then(() => {
-          //   delNewsList(this.materialParamsDel)
-          //     .then((response) => {
-          //       console.log(response.data);
-          //       this.getNewsList();
-          //     })
-          //     .catch((err) => {
-          //       console.log(err);
-          //     });
-          this.$message({
-            type: "success",
-            message: "删除成功!",
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除",
-          });
-        });
-      // this.$router.go(0)
+    // 点击删除按钮，弹出撤回
+    showWithdrawDialog(event) {
+      this.openWithdrawDialog = true;
+      this.$nextTick(() => {
+        this.$refs.withdrawDialog.init(2);
+      });
     },
 
     // 重置表单
