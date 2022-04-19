@@ -55,19 +55,60 @@
     </div>
 
     <div class="middle-wrapper">
-      <el-table class="datalist" :data="modulesData">
-        <el-table-column prop="title" label="投放名称" width="140" />
-        <el-table-column prop="name" label="申请人" width="120" />
-        <el-table-column prop="requestdate" label="申请时间" width="140" />
-        <el-table-column prop="usedate" label="使用时间" width="140" />
-        <el-table-column prop="state" label="状态" width="140" />
-        <el-table-column prop="finalOperate" label="最后操作人" width="140" />
-        <el-table-column label="操作">
+      <el-table
+        class="datalist"
+        :data="modulesData"
+        style="width: 100%"
+        height="100%"
+        :header-cell-style="{
+          background: '#E9EBF4',
+          color: '#000000',
+          fontSize: '13px',
+        }"
+        :cell-style="{ color: '#616369', fontSize: '14px' }"
+        :row-class-name="tableRowClassName"
+      >
+        <el-table-column
+          prop="title"
+          label="投放名称"
+          min-width="140"
+          align="center"
+        />
+        <el-table-column
+          prop="name"
+          label="申请人"
+          min-width="100"
+          align="center"
+        />
+        <el-table-column
+          prop="requestdate"
+          label="申请时间"
+          min-width="150"
+          align="center"
+        />
+        <el-table-column
+          prop="usedate"
+          label="使用时间"
+          min-width="150"
+          align="center"
+        />
+        <el-table-column
+          prop="state"
+          label="状态"
+          min-width="120"
+          align="center"
+        />
+        <el-table-column
+          prop="finalOperate"
+          label="最后操作人"
+          min-width="160"
+          align="center"
+        />
+        <el-table-column label="操作" align="center" min-width="140">
           <div class="buttons">
-            <el-button
-              class="filterbtn"
-              @click="toRecordDetail"
-            >查看</el-button>
+            <el-button class="filterbtn" @click="toRecordDetail"
+              >查看</el-button
+            >
             <el-button class="resetbtn" @click="withDraw">删除</el-button>
           </div>
         </el-table-column>
@@ -95,157 +136,211 @@
 //   materialListUpload,
 //   delDesignerListDetail,
 // } from "@/api/appmaterial";
-import { getToken } from '@/utils/auth'
-import axios from 'axios'
+import { getToken } from "@/utils/auth";
+import axios from "axios";
 
 export default {
-  name: 'MatRecord',
+  name: "MatRecord",
   data() {
     const item = {
-      date: '2016-05-02',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }
+      date: "2016-05-02",
+      name: "王小虎",
+      address: "上海市普陀区金沙江路 1518 弄",
+    };
     return {
       tableData: Array(20).fill(item),
 
       images: {
         // 占位图
-        emptyimg: require('@/assets/empty.jpg')
+        emptyimg: require("@/assets/empty.jpg"),
       },
-      url: 'https://www.bizspace.cn',
-      imageUrl: '',
+      url: "https://www.bizspace.cn",
+      imageUrl: "",
 
       // 传给投放申请的数据
       chooseId: -1,
-      chooseName: '',
+      chooseName: "",
 
       // 素材类型的可选值
       options: [
-        { value: '001', label: '订单审核' },
-        { value: '002', label: '审核通过' },
-        { value: '003', label: '停止审核' }
+        { value: "001", label: "订单审核" },
+        { value: "002", label: "审核通过" },
+        { value: "003", label: "停止审核" },
       ],
       // 投放的名称、状态、申请人、上传时间、使用时间
       form: {
-        title: '',
-        state: '',
-        name: '',
-        applydate: '',
-        usedate: ''
+        title: "",
+        state: "",
+        name: "",
+        applydate: "",
+        usedate: "",
       },
 
       // 发送给后端的数据
       materialParams: {
-        bizid: 'uniwarm',
+        bizid: "uniwarm",
         token: getToken(),
         listid: 8,
         itemid: this.detailid,
-        page: 8
+        page: 8,
       },
       materialParamsdel: {
-        bizid: 'uniwarm',
+        bizid: "uniwarm",
         token: getToken(),
-        itemid: '',
-        listid: 8
+        itemid: "",
+        listid: 8,
       },
 
       // 后端传来的数据
       modulesData: [
         {
-          title: 'title1',
-          name: 'aaa',
-          requestdate: '2000-00-00 00:00',
-          usedate: '2000-01-01 01:00',
-          state: '订单审核',
-          finalOperate: 'me',
-          id: '001'
+          title: "title1",
+          name: "aaa",
+          requestdate: "2000-00-00 00:00",
+          usedate: "2000-01-01 01:00",
+          state: "订单审核",
+          finalOperate: "me",
+          id: "001",
         },
         {
-          title: 'title1',
-          name: 'aaa',
-          requestdate: '2000-00-00 00:00',
-          usedate: '2000-01-01 01:00',
-          state: '订单审核',
-          finalOperate: 'me',
-          id: '002'
+          title: "title1",
+          name: "aaa",
+          requestdate: "2000-00-00 00:00",
+          usedate: "2000-01-01 01:00",
+          state: "订单审核",
+          finalOperate: "me",
+          id: "001",
         },
         {
-          title: 'title1',
-          name: 'aaa',
-          requestdate: '2000-00-00 00:00',
-          usedate: '2000-01-01 01:00',
-          state: '订单审核',
-          finalOperate: 'me',
-          id: '003'
+          title: "title1",
+          name: "aaa",
+          requestdate: "2000-00-00 00:00",
+          usedate: "2000-01-01 01:00",
+          state: "订单审核",
+          finalOperate: "me",
+          id: "001",
         },
         {
-          title: 'title1',
-          name: 'aaa',
-          requestdate: '2000-00-00 00:00',
-          usedate: '2000-01-01 01:00',
-          state: '订单审核',
-          finalOperate: 'me',
-          id: '004'
+          title: "title1",
+          name: "aaa",
+          requestdate: "2000-00-00 00:00",
+          usedate: "2000-01-01 01:00",
+          state: "订单审核",
+          finalOperate: "me",
+          id: "001",
         },
         {
-          title: 'title1',
-          name: 'aaa',
-          requestdate: '2000-00-00 00:00',
-          usedate: '2000-01-01 01:00',
-          state: '订单审核',
-          finalOperate: 'me',
-          id: '005'
+          title: "title1",
+          name: "aaa",
+          requestdate: "2000-00-00 00:00",
+          usedate: "2000-01-01 01:00",
+          state: "订单审核",
+          finalOperate: "me",
+          id: "001",
         },
         {
-          title: 'title1',
-          name: 'aaa',
-          requestdate: '2000-00-00 00:00',
-          usedate: '2000-01-01 01:00',
-          state: '订单审核',
-          finalOperate: 'me',
-          id: '001'
+          title: "title1",
+          name: "aaa",
+          requestdate: "2000-00-00 00:00",
+          usedate: "2000-01-01 01:00",
+          state: "订单审核",
+          finalOperate: "me",
+          id: "001",
         },
         {
-          title: 'title1',
-          name: 'aaa',
-          requestdate: '2000-00-00 00:00',
-          usedate: '2000-01-01 01:00',
-          state: '订单审核',
-          finalOperate: 'me',
-          id: '001'
+          title: "title1",
+          name: "aaa",
+          requestdate: "2000-00-00 00:00",
+          usedate: "2000-01-01 01:00",
+          state: "订单审核",
+          finalOperate: "me",
+          id: "001",
         },
         {
-          title: 'title1',
-          name: 'aaa',
-          requestdate: '2000-00-00 00:00',
-          usedate: '2000-01-01 01:00',
-          state: '订单审核',
-          finalOperate: 'me',
-          id: '001'
+          title: "title1",
+          name: "aaa",
+          requestdate: "2000-00-00 00:00",
+          usedate: "2000-01-01 01:00",
+          state: "订单审核",
+          finalOperate: "me",
+          id: "002",
         },
         {
-          title: 'title1',
-          name: 'aaa',
-          requestdate: '2000-00-00 00:00',
-          usedate: '2000-01-01 01:00',
-          state: '订单审核',
-          finalOperate: 'me',
-          id: '001'
+          title: "title1",
+          name: "aaa",
+          requestdate: "2000-00-00 00:00",
+          usedate: "2000-01-01 01:00",
+          state: "订单审核",
+          finalOperate: "me",
+          id: "003",
         },
         {
-          title: 'title1',
-          name: 'aaa',
-          requestdate: '2000-00-00 00:00',
-          usedate: '2000-01-01 01:00',
-          state: '订单审核',
-          finalOperate: 'me',
-          id: '001'
-        }
+          title: "title1",
+          name: "aaa",
+          requestdate: "2000-00-00 00:00",
+          usedate: "2000-01-01 01:00",
+          state: "订单审核",
+          finalOperate: "me",
+          id: "004",
+        },
+        {
+          title: "title1",
+          name: "aaa",
+          requestdate: "2000-00-00 00:00",
+          usedate: "2000-01-01 01:00",
+          state: "订单审核",
+          finalOperate: "me",
+          id: "005",
+        },
+        {
+          title: "title1",
+          name: "aaa",
+          requestdate: "2000-00-00 00:00",
+          usedate: "2000-01-01 01:00",
+          state: "订单审核",
+          finalOperate: "me",
+          id: "001",
+        },
+        {
+          title: "title1",
+          name: "aaa",
+          requestdate: "2000-00-00 00:00",
+          usedate: "2000-01-01 01:00",
+          state: "订单审核",
+          finalOperate: "me",
+          id: "001",
+        },
+        {
+          title: "title1",
+          name: "aaa",
+          requestdate: "2000-00-00 00:00",
+          usedate: "2000-01-01 01:00",
+          state: "订单审核",
+          finalOperate: "me",
+          id: "001",
+        },
+        {
+          title: "title1",
+          name: "aaa",
+          requestdate: "2000-00-00 00:00",
+          usedate: "2000-01-01 01:00",
+          state: "订单审核",
+          finalOperate: "me",
+          id: "001",
+        },
+        {
+          title: "title1",
+          name: "aaa",
+          requestdate: "2000-00-00 00:00",
+          usedate: "2000-01-01 01:00",
+          state: "订单审核",
+          finalOperate: "me",
+          id: "001",
+        },
       ],
       total: 300,
-      pagerow: 20
-    }
+      pagerow: 20,
+    };
   },
 
   created() {
@@ -253,23 +348,27 @@ export default {
   },
 
   methods: {
+    tableRowClassName({ row, rowIndex }) {
+      return "transparent";
+    },
+
     // 点击查看按钮，去素材详情页
     toRecordDetail(event) {
       this.$router.push({
-        name: 'RecordDetail'
+        name: "RecordDetail",
         // query: {
         //     matid: this.chooseId,
         //     matname: this.chooseName,
         //   },
-      })
+      });
     },
     // 点击删除按钮，去撤回页
     withDraw(event) {
       //   this.materialParamsDel.itemid = event.currentTarget.id;
-      this.$confirm('确定要删除该投放吗？', '提示', {
-        cancelButtonText: '取消',
-        confirmButtonText: '确定',
-        type: 'warning'
+      this.$confirm("确定要删除该投放吗？", "提示", {
+        cancelButtonText: "取消",
+        confirmButtonText: "确定",
+        type: "warning",
       })
         .then(() => {
           //   delNewsList(this.materialParamsDel)
@@ -281,59 +380,59 @@ export default {
           //       console.log(err);
           //     });
           this.$message({
-            type: 'success',
-            message: '删除成功!'
-          })
+            type: "success",
+            message: "删除成功!",
+          });
         })
         .catch(() => {
           this.$message({
-            type: 'info',
-            message: '已取消删除'
-          })
-        })
+            type: "info",
+            message: "已取消删除",
+          });
+        });
       // this.$router.go(0)
     },
 
     // 重置表单
     reset() {
-      this.$refs['form'].resetFields()
+      this.$refs["form"].resetFields();
     },
 
     // 钩子函数：从后台拿数据
     getMaterialList() {
-      this.materialParamsFetch.page = this.materialParamsFetch.page - 1
+      this.materialParamsFetch.page = this.materialParamsFetch.page - 1;
       fetchMaterialList(this.materialParamsFetch)
         .then((response) => {
-          this.total = response.total
-          this.modulesData = response.data
-          this.materialParamsFetch.page = this.materialParamsFetch.page + 1
+          this.total = response.total;
+          this.modulesData = response.data;
+          this.materialParamsFetch.page = this.materialParamsFetch.page + 1;
         })
         .catch((err) => {
-          console.log(err)
-        })
+          console.log(err);
+        });
     },
     chooseMat(id, name) {
-      this.chooseId = id
-      this.chooseName = name
-      console.log(name)
+      this.chooseId = id;
+      this.chooseName = name;
+      console.log(name);
     },
 
     // 分页器
     handleCurrentChange(currentPage) {
-      console.log(currentPage)
-      this.materialParams.page = currentPage
-      console.log(this.materialParams.page)
-      this.getMaterialList()
+      console.log(currentPage);
+      this.materialParams.page = currentPage;
+      console.log(this.materialParams.page);
+      this.getMaterialList();
     },
 
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`)
+      console.log(`每页 ${val} 条`);
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`)
-    }
-  }
-}
+      console.log(`当前页: ${val}`);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -449,26 +548,35 @@ $formHeight: 28px;
 // 中部内容显示区
 .middle-wrapper {
   width: 100%;
-  height: 37%;
+  height: 82%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-content: flex-start;
-  padding: 0 2% 1%;
+  padding: 0 2% 0 0;
   //   margin-bottom: 10vh;
   // border: 1px solid black;
 
+  // ::v-deep .el-table .red{
+  //   background: red;
+  // }
   // 主要内容显示区域
   .datalist {
+    width: 100%;
     ::v-deep {
-      .el-table.datalist.el-table--fit.el-table--enable-row-hover.el-table--enable-row-transition.el-table--medium {
-        background-color: red;
+      width: 100%;
+      .el-table__header-wrapper .el-table__header tr th {
+        width: 110px !important;
+        border: 0;
       }
-      .el-table__header-wrapper.el-table__header{
-        color: red;
+      .el-table__body tr:hover > td {
+        background-color: #fff !important;
+      }
+      .transparent {
+        background: #e9ebf4;
+      }
 
-      }
       // 按钮样式
       .buttons .el-button--medium {
         font-size: 14px;
