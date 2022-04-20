@@ -1,4 +1,5 @@
 <template>
+  <!-- 素材投放——投放申请界面 -->
   <div class="content-wrapper">
     <div class="topbar-wrapper">
       <div class="title">素材库</div>
@@ -237,7 +238,7 @@ export default {
 
   created() {
     // this.getMaterialList();
-    this.fileList.push({ name: this.matname, url: this.matname })
+    this.fileList.push({ name: this.matname, url: this.matname });
   },
 
   methods: {

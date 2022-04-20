@@ -1,4 +1,5 @@
 <template>
+  <!-- 素材投放——投放记录 -->
   <div class="content-wrapper">
     <div class="topbar-wrapper">
       <el-form
@@ -167,9 +168,10 @@ export default {
   data() {
     return {
       // 显示窗口
-      // openDetailDialog: false,
-      openDetailDialog: true,
-      openWithdrawDialog: false,
+      openDetailDialog: false,
+      // openDetailDialog: true,
+      // openWithdrawDialog: false,
+      openWithdrawDialog: true,
 
       url: "https://www.bizspace.cn",
 
@@ -361,10 +363,10 @@ export default {
 
   created() {
     // this.getMaterialList();
-      this.openDetailDialog = true;
-      this.$nextTick(() => {
-        this.$refs.detailDialog.init("001");
-      });
+    this.openWithdrawDialog = true;
+    // this.$nextTick(() => {
+    this.$refs.withDrawDialog.init("id");
+    // });
   },
 
   methods: {
@@ -390,9 +392,11 @@ export default {
     },
     // 点击删除按钮，弹出撤回
     showWithdrawDialog(event) {
+      const id = event.currentTarget.getAttribute("id");
+
       this.openWithdrawDialog = true;
       this.$nextTick(() => {
-        this.$refs.withdrawDialog.init(2);
+        this.$refs.withdrawDialog.init(id);
       });
     },
 
