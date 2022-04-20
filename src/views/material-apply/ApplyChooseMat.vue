@@ -5,41 +5,45 @@
       <div class="title">选择素材</div>
       <div class="btns">
         <div class="btnsimg">
-          <el-button type="primary" class="cancelbtn" @click="toMaterialLib"
-            >取消</el-button
-          >
-          <el-button type="primary" class="submitbtn" @click="submitMatApply"
-            >选择</el-button
-          >
+          <el-button
+            type="primary"
+            class="cancelbtn"
+            @click="toMaterialLib"
+          >取消</el-button>
+          <el-button
+            type="primary"
+            class="submitbtn"
+            @click="submitMatApply"
+          >选择</el-button>
         </div>
       </div>
     </div>
 
     <div class="content-head">
       <el-form
+        ref="form"
         :inline="true"
         :model="form"
-        ref="form"
         label-width="100px"
         class="demo-dynamic"
       >
         <el-form-item label="素材名称" prop="title">
-          <el-input v-model="form.title" placeholder="请输入"></el-input>
+          <el-input v-model="form.title" placeholder="请输入" />
         </el-form-item>
 
         <el-form-item label="素材类型" prop="type">
-          <el-select class="input" v-model="form.type" placeholder="请选择">
+          <el-select v-model="form.type" class="input" placeholder="请选择">
             <el-option
               v-for="item in options"
               :key="item.value"
               :label="item.label"
               :value="item.value"
-            ></el-option>
+            />
           </el-select>
         </el-form-item>
 
         <el-form-item label="上传人" prop="name">
-          <el-input v-model="form.name" placeholder="请输入"></el-input>
+          <el-input v-model="form.name" placeholder="请输入" />
         </el-form-item>
 
         <el-form-item label="上传时间" prop="date">
@@ -67,6 +71,7 @@
         @click="chooseMat(item.id, item.name)"
       >
         <img
+          :id="item.id"
           class="appimg"
           :class="{ appimgActive: chooseId == item.id }"
           :src="
@@ -74,8 +79,7 @@
               ? 'https://www.bizspace.cn' + item.image
               : images.emptyimg
           "
-          :id="item.id"
-        />
+        >
 
         <div class="textversion" :class="{ textActive: chooseId == item.id }">
           {{ item.name }}
@@ -107,115 +111,115 @@
 //   materialListUpload,
 //   delDesignerListDetail,
 // } from "@/api/appmaterial";
-import { getToken } from "@/utils/auth";
-import axios from "axios";
+import { getToken } from '@/utils/auth'
+import axios from 'axios'
 
 export default {
-  name: "ApplyChooseMat",
+  name: 'ApplyChooseMat',
   data() {
     return {
       images: {
         // 占位图
-        emptyimg: require("@/assets/empty.jpg"),
+        emptyimg: require('@/assets/empty.jpg')
       },
-      url: "https://www.bizspace.cn",
-      imageUrl: "",
+      url: 'https://www.bizspace.cn',
+      imageUrl: '',
 
       // 传给投放申请的数据
       chooseId: -1,
-      chooseName: "",
+      chooseName: '',
 
       // 素材类型的可选值
       options: [
-        { value: "001", label: "视频素材" },
-        { value: "002", label: "图片素材" },
-        { value: "003", label: "图文素材" },
-        { value: "004", label: "图集素材" },
+        { value: '001', label: '视频素材' },
+        { value: '002', label: '图片素材' },
+        { value: '003', label: '图文素材' },
+        { value: '004', label: '图集素材' }
       ],
       // 素材的名称、类型、上传人、上传时间
       form: {
-        title: "",
-        type: "",
-        name: "",
-        date: "",
+        title: '',
+        type: '',
+        name: '',
+        date: ''
       },
 
       // 发送给后端的数据
       materialParams: {
-        bizid: "uniwarm",
+        bizid: 'uniwarm',
         token: getToken(),
         listid: 8,
         itemid: this.detailid,
-        page: 8,
+        page: 8
       },
       materialParams1: {
-        bizid: "uniwarm",
+        bizid: 'uniwarm',
         token: getToken(),
-        listid: 8,
+        listid: 8
       },
 
       // 后端传来的数据
       modulesData: [
         {
-          image: "/appsrc/biz/uniwarm/wechatweb/static/home/hello.png",
-          name: "品牌灵魂1",
-          type: "视频",
-          uploadName: "xxx",
-          create_date: "2016-05-02",
-          id: "1",
+          image: '/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
+          name: '品牌灵魂1',
+          type: '视频',
+          uploadName: 'xxx',
+          create_date: '2016-05-02',
+          id: '1'
         },
         {
-          image: "/appsrc/biz/uniwarm/wechatweb/static/home/hello.png",
-          name: "品牌灵魂2",
-          type: "视频",
-          uploadName: "xxx",
-          create_date: "2016-05-02",
-          id: "2",
+          image: '/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
+          name: '品牌灵魂2',
+          type: '视频',
+          uploadName: 'xxx',
+          create_date: '2016-05-02',
+          id: '2'
         },
         {
-          image: "/appsrc/biz/uniwarm/wechatweb/static/home/hello.png",
-          name: "品牌灵魂3",
-          type: "视频",
-          uploadName: "xxx",
-          create_date: "2016-05-02",
-          id: "3",
+          image: '/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
+          name: '品牌灵魂3',
+          type: '视频',
+          uploadName: 'xxx',
+          create_date: '2016-05-02',
+          id: '3'
         },
         {
-          image: "/appsrc/biz/uniwarm/wechatweb/static/home/hello.png",
-          name: "品牌灵魂11123",
-          type: "视频",
-          uploadName: "xxx",
-          create_date: "2016-05-02",
-          id: "4",
+          image: '/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
+          name: '品牌灵魂11123',
+          type: '视频',
+          uploadName: 'xxx',
+          create_date: '2016-05-02',
+          id: '4'
         },
         {
-          image: "/appsrc/biz/uniwarm/wechatweb/static/home/hello.png",
-          name: "品牌灵魂11123",
-          type: "视频",
-          uploadName: "xxx",
-          create_date: "2016-05-02",
-          id: "5",
+          image: '/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
+          name: '品牌灵魂11123',
+          type: '视频',
+          uploadName: 'xxx',
+          create_date: '2016-05-02',
+          id: '5'
         },
         {
-          image: "/appsrc/biz/uniwarm/wechatweb/static/home/hello.png",
-          name: "品牌灵魂11123",
-          type: "视频",
-          uploadName: "xxx",
-          create_date: "2016-05-02",
-          id: "6",
+          image: '/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
+          name: '品牌灵魂11123',
+          type: '视频',
+          uploadName: 'xxx',
+          create_date: '2016-05-02',
+          id: '6'
         },
         {
-          image: "/appsrc/biz/uniwarm/wechatweb/static/home/hello.png",
-          name: "品牌灵魂11123",
-          type: "视频",
-          uploadName: "xxx",
-          create_date: "2016-05-02",
-          id: "7",
-        },
+          image: '/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
+          name: '品牌灵魂11123',
+          type: '视频',
+          uploadName: 'xxx',
+          create_date: '2016-05-02',
+          id: '7'
+        }
       ],
       total: 300,
-      pagerow: 20,
-    };
+      pagerow: 20
+    }
   },
 
   created() {
@@ -226,69 +230,68 @@ export default {
     // 点击右上取消按钮，返回素材库页
     toMaterialLib(event) {
       this.$router.push({
-        name: "MatLib",
-      });
+        name: 'MatLib'
+      })
     },
     // 点击右上提交按钮，返回投放申请页
     submitMatApply(event) {
       if (this.chooseId && this.chooseName) {
         this.$router.push({
-          name: "MatApply",
+          name: 'MatApply',
           query: {
             matid: this.chooseId,
-            matname: this.chooseName,
-          },
-        });
+            matname: this.chooseName
+          }
+        })
       } else {
         this.$message({
-          type: "error",
-          message: "未选择素材",
-        });
+          type: 'error',
+          message: '未选择素材'
+        })
       }
     },
 
     // 重置表单
     reset() {
-      this.$refs["form"].resetFields();
+      this.$refs['form'].resetFields()
     },
 
     // 钩子函数：从后台拿数据
     getMaterialList() {
-      this.materialParamsFetch.page = this.materialParamsFetch.page - 1;
+      this.materialParamsFetch.page = this.materialParamsFetch.page - 1
       fetchMaterialList(this.materialParamsFetch)
         .then((response) => {
-          this.total = response.total;
-          this.modulesData = response.data;
-          this.materialParamsFetch.page = this.materialParamsFetch.page + 1;
+          this.total = response.total
+          this.modulesData = response.data
+          this.materialParamsFetch.page = this.materialParamsFetch.page + 1
         })
         .catch((err) => {
-          console.log(err);
-        });
+          console.log(err)
+        })
     },
     chooseMat(id, name) {
-      this.chooseId = id;
-      this.chooseName = name;
-      console.log(name);
+      this.chooseId = id
+      this.chooseName = name
+      console.log(name)
     },
 
     // 分页器
     handleCurrentChange(currentPage) {
-      console.log(currentPage);
-      this.materialParams.page = currentPage;
-      console.log(this.materialParams.page);
-      this.getMaterialList();
+      console.log(currentPage)
+      this.materialParams.page = currentPage
+      console.log(this.materialParams.page)
+      this.getMaterialList()
     },
 
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+      console.log(`每页 ${val} 条`)
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-    },
-  },
-};
+      console.log(`当前页: ${val}`)
+    }
+  }
+}
 </script>
-
 
 <style lang="scss" scoped>
 $formHeight: 28px;

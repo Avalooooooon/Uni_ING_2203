@@ -63,25 +63,27 @@
         center
       >
         <div class="dialogContent">
-          <div class="uploadType" @click="uploadPictureMat">
-            <div class="typeImg"></div>
-            <div class="typeTitle">图文素材</div>
-          </div>
+          <!--          <div class="uploadType" @click="uploadPictureMat">-->
+          <!--            <div class="typeImg"></div>-->
+          <!--            <div class="typeTitle">图文素材</div>-->
+          <!--          </div>-->
           <div class="uploadType" @click="uploadVideoMat">
-            <div class="typeImg"></div>
+            <div class="typeImg">
+              <!--              <img style="width: 50px;height: 50px;" src="../../assets/video.png" alt="">-->
+            </div>
             <div class="typeTitle">视频素材</div>
           </div>
-        </div>
-        <div class="dialogContent">
           <div class="uploadType" @click="uploadImagesMat">
-            <div class="typeImg"></div>
+            <div class="typeImg" />
             <div class="typeTitle">图集素材</div>
           </div>
-          <div class="uploadType">
-            <div class="typeImg"></div>
-            <div class="typeTitle">图片素材(暂无)</div>
-          </div>
         </div>
+        <!--        <div class="dialogContent">-->
+        <!--          <div class="uploadType">-->
+        <!--            <div class="typeImg"></div>-->
+        <!--            <div class="typeTitle">图片素材(暂无)</div>-->
+        <!--          </div>-->
+        <!--        </div>-->
         <span slot="footer" class="dialog-footer">
           <el-button class="resetlebtn" @click="centerDialogVisible = false">取 消</el-button>
           <el-button class="filterlebtn" type="primary" @click="centerDialogVisible = false">确 定</el-button>
@@ -92,10 +94,10 @@
     <!-- 主要内容显示区域 -->
     <div class="images-wrapper">
       <el-table
-        class="customer-table"
+        class="customer-no-border-table"
+        border
         :data="tableData"
         :show-header="false"
-        :border="true"
         style="width: 100%"
       >
         <el-table-column
@@ -140,12 +142,12 @@
           label="操作"
         >
           <template slot-scope="scope">
-<!--            <el-button style="color: #d79432;margin-right: 30px" type="text" @click="checkDetail(scope.row)">查看</el-button>-->
-            <el-link :underline="false" style="color: #d79432;margin-right: 30px" @click="checkDetail(scope.row)"><i class="el-icon-view el-icon--right"></i> 查看</el-link>
-<!--            <el-button style="color: #d79432;margin-right: 30px" type="text" @click="handleEdit(scope.row)">编辑</el-button>-->
-            <el-link :underline="false" style="color: #d79432;margin-right: 30px" @click="handleEdit(scope.row)" icon="el-icon-edit">编辑</el-link>
-            <el-link style="color: #f56c6c" icon="el-icon-delete">删除</el-link>
-<!--            <el-button style="color: #f56c6c" type="text">删除</el-button>-->
+            <!--            <el-button style="color: #d79432;margin-right: 30px" type="text" @click="checkDetail(scope.row)">查看</el-button>-->
+            <el-link :underline="false" style="color: #d79432;margin-right: 30px" @click="checkDetail(scope.row)"><i class="el-icon-view el-icon--right" /> 查看</el-link>
+            <!--            <el-button style="color: #d79432;margin-right: 30px" type="text" @click="handleEdit(scope.row)">编辑</el-button>-->
+            <el-link :underline="false" style="color: #d79432;margin-right: 30px" icon="el-icon-edit" @click="handleEdit(scope.row)">编辑</el-link>
+            <el-link :underline="false" style="color: #f56c6c" icon="el-icon-delete">删除</el-link>
+            <!--            <el-button style="color: #f56c6c" type="text">删除</el-button>-->
           </template>
         </el-table-column>
       </el-table>
@@ -206,7 +208,7 @@ export default {
       }, {
         image: 'https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
         title: '品牌灵魂xxxxxxx',
-        type: '图文',
+        type: '视频',
         uploadName: 'xxx',
         date: '2016-05-02'
       }, {
@@ -224,13 +226,13 @@ export default {
       }, {
         image: 'https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
         title: '品牌灵魂xxxxxxx',
-        type: '视频',
+        type: '图集',
         uploadName: 'xxx',
         date: '2016-05-02'
       }, {
         image: 'https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
         title: '品牌灵魂xxxxxxx',
-        type: '视频',
+        type: '图集',
         uploadName: 'xxx',
         date: '2016-05-02'
       }, {
@@ -311,7 +313,7 @@ export default {
         this.$router.push({ path: '/material/matlib/libcheckdetail', query: { id: row.id }})
       } else if (row.type === '视频') {
         this.$router.push({ path: '/material/matlib/libcheckVideo', query: { id: row.id }})
-      } else if(row.type === '图集') {
+      } else if (row.type === '图集') {
         this.$router.push({ path: '/material/matlib/libimageset', query: { id: row.id }})
       }
     },
@@ -636,6 +638,48 @@ export default {
   justify-content: flex-start;
   align-content: flex-start;
   margin-left: 2%;
+  /*去掉表格单元格边框*/
+  .customer-no-border-table th{
+    border:none;
+  }
+  .customer-no-border-table td,.customer-no-border-table th.is-leaf {
+    border:none;
+  }
+  /*表格最外边框*/
+  .customer-no-border-table .el-table--border, .el-table--group{
+    border: none;
+  }
+  /*头部边框*/
+  .customer-no-border-table thead tr th.is-leaf{
+    border: 0px solid #EBEEF5;
+    border-right: none;
+  }
+  .customer-no-border-table thead tr th:nth-last-of-type(2){
+    border-right: 0px solid #EBEEF5;
+  }
+  /*表格最外层边框-底部边框*/
+  .customer-no-border-table .el-table--border::after,.customer-no-border-table .el-table--group::after{
+    width: 0;
+  }
+  .customer-no-border-table::before{
+    width: 0;
+  }
+  .customer-no-border-table .el-table__fixed-right::before,.el-table__fixed::before{
+    width: 0;
+  }
+  .customer-no-border-table .el-table__header tr th{
+    background: #fff;
+    color: #333333 ;
+    padding: 3px ;
+    fontWeight: 550 ;
+    height: 36px ;
+    border: 0px;
+    font-size: 15px;
+  }
+  /*去掉鼠标悬停背景颜色*/
+  .el-table tbody tr:hover>td {
+    background-color:#ffffff!important
+  }
   .tableImg{
     width: 100%;
     height: 100%;

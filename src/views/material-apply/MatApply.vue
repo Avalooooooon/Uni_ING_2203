@@ -5,12 +5,16 @@
       <div class="title">素材库</div>
       <div class="btns">
         <div class="btnsimg">
-          <el-button type="primary" class="cancelbtn" @click="toMaterialLib"
-            >取消</el-button
-          >
-          <el-button type="primary" class="submitbtn" @click="submitMatApply"
-            >提交</el-button
-          >
+          <el-button
+            type="primary"
+            class="cancelbtn"
+            @click="toMaterialLib"
+          >取消</el-button>
+          <el-button
+            type="primary"
+            class="submitbtn"
+            @click="submitMatApply"
+          >提交</el-button>
         </div>
       </div>
     </div>
@@ -57,15 +61,14 @@
             v-model="matForm.time"
             type="date"
             placeholder="选择使用时间"
-          >
-          </el-date-picker>
+          />
         </el-form-item>
 
         <el-form-item label="选择素材" prop="material" required>
           <!-- action="/v3upload/admin_person2" -->
           <el-upload
-            class="upload-demo"
             ref="upload"
+            class="upload-demo"
             action="https://jsonplaceholder.typicode.com/posts/"
             :on-preview="handlePreview"
             :on-remove="handleRemove"
@@ -79,9 +82,10 @@
               <div class="buttons">
                 <!-- <el-button slot="trigger" type="primary" class="addbtn"
                   >添加素材</el-button> -->
-                <el-button class="addbtn" @click="toApplyChooseMat"
-                  >添加素材</el-button
-                >
+                <el-button
+                  class="addbtn"
+                  @click="toApplyChooseMat"
+                >添加素材</el-button>
                 <!-- <el-button
                 style="margin-left: 10px"
                 size="small"
@@ -105,9 +109,9 @@
 
     <div class="content-foot">
       <el-form
+        ref="channelForm"
         :inline="true"
         :model="channelForm"
-        ref="channelForm"
         label-width="100px"
         class="demo-dynamic"
       >
@@ -120,8 +124,8 @@
             ]"
           >
             <el-select
-              class="input"
               v-model="item.channel"
+              class="input"
               placeholder="请选择渠道"
             >
               <el-option
@@ -129,7 +133,7 @@
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
-              ></el-option>
+              />
             </el-select>
           </el-form-item>
 
@@ -140,7 +144,7 @@
               { required: true, message: '链接不能为空', trigger: 'blur' },
             ]"
           >
-            <el-input v-model="channelForm.link"></el-input>
+            <el-input v-model="channelForm.link" />
           </el-form-item>
 
           <el-form-item
@@ -150,14 +154,14 @@
               { required: true, message: '运营号不能为空', trigger: 'blur' },
             ]"
           >
-            <el-input v-model="channelForm.name"></el-input>
+            <el-input v-model="channelForm.name" />
           </el-form-item>
 
           <i
             v-if="channelForm.channels.length > 1"
             class="el-icon-remove-outline"
             @click="delChannel(index)"
-          ></i>
+          />
         </div>
       </el-form>
       <!-- <i class="el-icon-circle-plus" @click="addChannel"></i> -->
@@ -174,66 +178,66 @@
 //   materialListUpload,
 //   delDesignerListDetail,
 // } from "@/api/material";
-import { getToken } from "@/utils/auth";
-import axios from "axios";
+import { getToken } from '@/utils/auth'
+import axios from 'axios'
 
 export default {
-  name: "MatApply",
-  props: ["matid", "matname"],
+  name: 'MatApply',
+  props: ['matid', 'matname'],
 
   data() {
     return {
-      url: "https://www.bizspace.cn",
-      imageUrl: "",
+      url: 'https://www.bizspace.cn',
+      imageUrl: '',
       // 素材的投放名称、使用说明、使用时间
       matForm: {
-        name: "",
-        instruction: "",
-        time: "",
+        name: '',
+        instruction: '',
+        time: ''
       },
       // 上传的素材列表
       fileList: [
         {
-          name: "food.jpeg",
-          url: "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100",
+          name: 'food.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
         },
         {
-          name: "food2.jpeg",
-          url: "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100",
-        },
+          name: 'food2.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+        }
       ],
 
       // 渠道的名字、链接、运营号
       channelForm: {
         channels: [
-          { channel: "", link: "", name: "" },
-          { channel: "", link: "", name: "" },
-        ], //默认展示一行部门数据
+          { channel: '', link: '', name: '' },
+          { channel: '', link: '', name: '' }
+        ] // 默认展示一行部门数据
       },
       // 渠道的可选值
       options: [
-        { value: "001", label: "小红书" },
-        { value: "002", label: "抖音" },
-        { value: "003", label: "快手" },
-        { value: "004", label: "微博" },
+        { value: '001', label: '小红书' },
+        { value: '002', label: '抖音' },
+        { value: '003', label: '快手' },
+        { value: '004', label: '微博' }
       ],
 
       // 发送给后端的数据
       materialParams: {
-        bizid: "uniwarm",
+        bizid: 'uniwarm',
         token: getToken(),
         listid: 8,
-        itemid: this.detailid,
+        itemid: this.detailid
       },
       materialParams1: {
-        bizid: "uniwarm",
+        bizid: 'uniwarm',
         token: getToken(),
-        listid: 8,
+        listid: 8
       },
 
       // 后端传来的数据
-      materialData: [],
-    };
+      materialData: []
+    }
   },
 
   created() {
@@ -245,88 +249,88 @@ export default {
     // 点击右上取消按钮，返回素材库页面
     toMaterialLib(event) {
       this.$router.push({
-        name: "MatLib",
-      });
+        name: 'MatLib'
+      })
     },
 
     // 点击右上提交按钮
     submitMatApply(event) {
-      this.$confirm("确定提交本次申请？", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
+      this.$confirm('确定提交本次申请？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       })
         .then(() =>
           axios({
-            url: "/api/v3/person2/xxx",
-            method: "post",
+            url: '/api/v3/person2/xxx',
+            method: 'post',
             params: {
-              bizid: "uniwarm",
+              bizid: 'uniwarm',
               token: getToken(),
-              listid: this.listid,
+              listid: this.listid
             },
             data: this.numberValidateForm,
             headers: {
-              "Content-Type": "application/json",
-            },
+              'Content-Type': 'application/json'
+            }
           }).then((res) => {
-            console.log(this.materialParams);
-            console.log(this.numberValidateForm);
-            console.log(res);
+            console.log(this.materialParams)
+            console.log(this.numberValidateForm)
+            console.log(res)
             if (res.data.res === 0) {
-              this.$router.go(-1);
+              this.$router.go(-1)
               this.$message({
-                type: "success",
-                message: "上传成功",
-              });
+                type: 'success',
+                message: '上传成功'
+              })
               setTimeout(() => {
                 this.$router.push({
-                  name: "MatRecord",
-                });
-              }, "500");
+                  name: 'MatRecord'
+                })
+              }, '500')
             } else {
               this.$message({
-                type: "error",
-                message: "上传失败",
-              });
+                type: 'error',
+                message: '上传失败'
+              })
             }
           })
         )
         .catch(() => {
           this.$message({
-            type: "info",
-            message: "已取消上传",
-          });
-        });
+            type: 'info',
+            message: '已取消上传'
+          })
+        })
     },
 
     // 点击添加素材按钮
     toApplyChooseMat(event) {
       this.$router.push({
-        name: "ApplyChooseMat",
-      });
+        name: 'ApplyChooseMat'
+      })
     },
 
     submitUpload() {
-      this.$refs.upload.submit();
+      this.$refs.upload.submit()
     },
     // handleRemove(file, fileList) {
     //   console.log(file, fileList);
     // },
     handlePreview(file) {
-      console.log(file);
+      console.log(file)
     },
 
     // 增加渠道条目
     addChannel() {
-      this.channelForm.channels.push({ channel: "", link: "", name: "" });
+      this.channelForm.channels.push({ channel: '', link: '', name: '' })
     },
     // 删除渠道条目
     delChannel(index) {
-      this.channelForm.channels.splice(index, 1);
-    },
-  },
-};
+      this.channelForm.channels.splice(index, 1)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
