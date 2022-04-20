@@ -5,6 +5,7 @@
     <div class="main-wrapper">
       <div slot="title" class="dialogTitle">
         <span>{{ title }}</span>
+        <span class="green">{{ title }}</span>
       </div>
       <div class="titlebtn">
         <el-button class="downloadbtn" @click="downloadMat">下载素材</el-button>
@@ -264,6 +265,12 @@ $formHeight: 28px;
   flex-direction: row;
   position: absolute;
   top: 0px;
+
+  .green {
+    color: #67c23a;
+    font-size: 14px;
+    margin-left: 20px;
+  }
 }
 .titlebtn {
   height: $titleHeight;

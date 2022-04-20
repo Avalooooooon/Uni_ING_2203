@@ -5,9 +5,11 @@
     <div class="main-wrapper">
       <div slot="title" class="dialogTitle">
         <span>撤回{{ title }}</span>
+        <span class="green">{{ title }}</span>
       </div>
       <div class="titlebtn">
-        <el-button class="downloadbtn" @click="downloadMat">下载素材</el-button>
+        <el-button class="shenpibtn" @click="shenpiApply">审批</el-button>
+        <el-button class="withdrawbtn" @click="withdrawApply">撤回</el-button>
       </div>
       <div class="puretext">
         为配合项目销售工作，更好的提高项目知名度、美誉度，增加积客量，圆满的完成销售任务，特制定如下广告计划。
@@ -147,7 +149,7 @@ export default {
       // 弹出层标题
       title: "",
       // 是否显示弹出层
-      open: true,
+      open: false,
     };
   },
   methods: {
@@ -171,7 +173,8 @@ export default {
       this.open = false;
       this.reset();
     },
-    downloadMat() {},
+    shenpiApply() {},
+    withdrawApply() {},
     /** 提交按钮 */
     submitForm: function () {
       this.$refs["bizform"].validate((valid) => {
@@ -264,6 +267,12 @@ $formHeight: 28px;
   flex-direction: row;
   position: absolute;
   top: 0px;
+
+  .green {
+    color: #67c23a;
+    font-size: 14px;
+    margin-left: 20px;
+  }
 }
 .titlebtn {
   height: $titleHeight;
@@ -277,17 +286,26 @@ $formHeight: 28px;
   top: 0px;
   right: 60px;
 
-  .downloadbtn {
+  .shenpibtn {
     height: 3.5vh;
     width: 5vw;
     padding: 0;
     background-color: #253647;
     color: white;
-    border: none;
+    border: 1px solid #253647;
     border-radius: 2px;
   }
   .el-button--medium {
     font-size: 12px;
+  }
+  .withdrawbtn{
+    height: 3.5vh;
+    width: 5vw;
+    padding: 0;
+    background-color: transparent;
+    color: #253647;
+    border: 1px solid #253647;
+    border-radius: 2px;
   }
 }
 

@@ -169,9 +169,7 @@ export default {
     return {
       // 显示窗口
       openDetailDialog: false,
-      // openDetailDialog: true,
-      // openWithdrawDialog: false,
-      openWithdrawDialog: true,
+      openWithdrawDialog: false,
 
       url: "https://www.bizspace.cn",
 
@@ -363,10 +361,6 @@ export default {
 
   created() {
     // this.getMaterialList();
-    this.openWithdrawDialog = true;
-    // this.$nextTick(() => {
-    this.$refs.withDrawDialog.init("id");
-    // });
   },
 
   methods: {
