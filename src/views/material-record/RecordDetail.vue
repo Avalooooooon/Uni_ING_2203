@@ -1,15 +1,13 @@
 <template>
-  <!-- 添加或修改业务对话框 -->
+  <!-- 素材投放——投放记录——查看投放详情弹窗 -->
   <!--     :title="title" -->
   <el-dialog :visible.sync="open" width="75%" :close-on-click-modal="false">
     <div class="main-wrapper">
       <div slot="title" class="dialogTitle">
-        <!-- <el-button type="primary" @click="submitForm">确 定</el-button>
-        <el-button @click="cancel">取 消</el-button> -->
         <span>{{ title }}</span>
       </div>
       <div class="titlebtn">
-        <el-button class="downloadbtn" @click="cancel">下载素材</el-button>
+        <el-button class="downloadbtn" @click="downloadMat">下载素材</el-button>
       </div>
       <div class="puretext">
         为配合项目销售工作，更好的提高项目知名度、美誉度，增加积客量，圆满的完成销售任务，特制定如下广告计划。
@@ -32,18 +30,12 @@
       </div>
 
       <div class="matlist">
-        选择素材
+        <div>选择素材：</div>
         <el-upload
           class="upload-demo"
           ref="upload"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :on-preview="handlePreview"
-          :on-remove="handleRemove"
           :file-list="fileList"
           :auto-upload="false"
-          :on-success="handleAvatarSuccess"
-          :before-upload="beforeAvatarUpload"
-          :http-request="uploadFile"
         >
         </el-upload>
       </div>
@@ -52,31 +44,37 @@
         <el-table
           class="datalist"
           :data="modulesData2"
-          style="width: 100%"
+          style="width: 50%"
           height="100%"
           :header-cell-style="{
             color: '#000000',
             fontSize: '13px',
+            fontWight: 'normal',
           }"
-          :cell-style="{ color: '#616369', fontSize: '14px' }"
-          :row-class-name="tableRowClassName"
+          :cell-style="{ color: '#81838A', fontSize: '12px' }"
         >
           <el-table-column
-            prop="title"
-            label="投放名称"
-            min-width="140"
+            prop="id"
+            label="渠道id"
+            min-width="30"
             align="center"
           />
           <el-table-column
             prop="name"
-            label="申请人"
+            label="渠道名称"
+            min-width="40"
+            align="center"
+          />
+          <el-table-column
+            prop="url"
+            label="渠道地址"
             min-width="100"
             align="center"
           />
           <el-table-column
-            prop="requestdate"
-            label="申请时间"
-            min-width="150"
+            prop="account"
+            label="运营号"
+            min-width="50"
             align="center"
           />
         </el-table>
@@ -92,7 +90,7 @@ export default {
   name: "RecordDetail",
   data() {
     return {
-      // 后端传来的数据
+      // 后端传来的数据-中部单行列表
       modulesData: {
         title: "title1",
         name: "aaa",
@@ -102,70 +100,48 @@ export default {
         finalOperate: "me",
         id: "001",
       },
-      // 后端传来的数据
+      // 后端传来的数据-素材列表
+      fileList: [
+        {
+          name: "food.jpeg",
+          url: "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100",
+        },
+        {
+          name: "food2.jpeg",
+          url: "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100",
+        },
+      ],
+      // 后端传来的数据-下方渠道列表
       modulesData2: [
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
           id: "001",
+          url: "http://www.baidubaidu.com",
+          name: "aaa",
+          account: "小红",
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
-        },
-        {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
-        },
-        {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
           id: "002",
+          url: "http://www.baidubaidu.com",
+          name: "aaa",
+          account: "小红",
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
           id: "003",
+          url: "http://www.baidubaidu.com",
+          name: "aaa",
+          account: "小红",
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
           id: "004",
+          url: "http://www.baidubaidu.com",
+          name: "aaa",
+          account: "小红",
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
           id: "005",
+          url: "http://www.baidubaidu.com",
+          name: "aaa",
+          account: "小红",
         },
       ],
       // 弹出层标题
@@ -195,6 +171,7 @@ export default {
       this.open = false;
       this.reset();
     },
+    downloadMat() {},
     /** 提交按钮 */
     submitForm: function () {
       this.$refs["bizform"].validate((valid) => {
@@ -237,6 +214,9 @@ $formHeight: 28px;
 .el-dialog {
   position: relative;
 }
+::v-deep .el-dialog__body {
+  padding-bottom: 20px;
+}
 .main-wrapper {
   height: 60vh;
   overflow: auto;
@@ -271,6 +251,10 @@ $formHeight: 28px;
 
 // 标题区域
 .dialogTitle {
+  font-size: 18px;
+  font-weight: bolder;
+  color: #000000;
+
   height: $titleHeight;
   line-height: $titleHeight;
   display: flex;
@@ -280,19 +264,6 @@ $formHeight: 28px;
   flex-direction: row;
   position: absolute;
   top: 0px;
-
-  .downloadbtn {
-    height: 3.5vh;
-    width: 5vw;
-    padding: 0;
-    background-color: #253647;
-    color: white;
-    border: none;
-    border-radius: 2px;
-    position: absolute;
-
-    right: 0px;
-  }
 }
 .titlebtn {
   height: $titleHeight;
@@ -315,6 +286,9 @@ $formHeight: 28px;
     border: none;
     border-radius: 2px;
   }
+  .el-button--medium {
+    font-size: 12px;
+  }
 }
 
 // 纯文本区域
@@ -334,15 +308,20 @@ $formHeight: 28px;
 }
 
 // 选择素材区域
+.matlist {
+  display: flex;
+  flex-direction: row;
+  color: #333333;
+  font-size: 14px;
+}
 .matlist ::v-deep {
-  height: 20%;
-
   .upload-demo:hover {
     border-color: #409eff;
   }
   .upload-demo {
     width: 35%;
-    height: 100%;
+    height: 150px;
+
     padding: 2px 10px 10px;
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
@@ -353,309 +332,54 @@ $formHeight: 28px;
 
     // 三个内容位置及样式
     // 提示语
-    .el-upload__tip {
-      order: 2;
-      margin: 0;
-      height: 3vh;
-      line-height: 3vh;
-    }
+    // .el-upload__tip {
+    //   order: 2;
+    //   margin: 0;
+    //   height: 3vh;
+    //   line-height: 3vh;
+    // }
     // 文件列表
     .el-upload-list.el-upload-list--text {
-      order: -2;
+      order: -1;
       padding-bottom: 5px;
+    }
+
+    //
+    .el-upload-list__item-status-label,
+    .el-icon-close {
+      display: none;
+      cursor: pointer;
     }
   }
 }
 
 // 渠道列表区域
 .channellist {
+  height: 20%;
+  // 去掉表格最下方的灰色分割线
+  .el-table.datalist.el-table--fit.el-table--scrollable-y.el-table--enable-row-hover.el-table--enable-row-transition.el-table--medium::before {
+    display: none;
+  }
   .datalist {
-    width: 100%;
     ::v-deep {
-      width: 100%;
+      .hidden-columns ::before {
+        display: none;
+      }
+
       .el-table__header-wrapper .el-table__header tr th {
-        width: 110px !important;
         border: 0;
+        padding-bottom: 0;
+      }
+      .el-table__row td {
+        border: none;
+        padding: 5px 0;
       }
       .el-table__body tr:hover > td {
-        background-color: #fff !important;
+        background-color: #f4f5f9 !important;
       }
       .transparent {
         background: #e9ebf4;
       }
-
-      // 按钮样式
-      .buttons .el-button--medium {
-        font-size: 14px;
-      }
-      .buttons {
-        .filterbtn {
-          height: 3vh;
-          padding: 0;
-          background-color: transparent;
-          color: #d79432;
-          border: none;
-          margin-right: 10px;
-        }
-        .resetbtn {
-          height: 3vh;
-          padding: 0;
-          background-color: transparent;
-          color: #f56c6c;
-          border: none;
-        }
-      }
-    }
-  }
-}
-// 根组件
-.content-wrapper {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: no-wrap;
-  justify-content: flex-start;
-  align-content: flex-start;
-
-  width: 96%;
-  background-color: white;
-  height: calc(100vh - 50px);
-  overflow-y: scroll;
-  margin: 2% 2%;
-}
-
-// 头部
-.topbar-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 5vh;
-  padding: 3.5% 0 1% 3%;
-  .title {
-    font-size: 14px;
-    font-weight: bolder;
-  }
-
-  // 设置按钮内字体大小
-  ::v-deep {
-    .btnsimg .el-button--medium {
-      font-size: 12px;
-    }
-  }
-  .btns {
-    display: flex;
-
-    .btnsimg {
-      margin: 0 2vw 0;
-      .cancelbtn {
-        height: 3.5vh;
-        width: 5vw;
-        padding: 0;
-        background-color: #253647;
-        color: white;
-        border: none;
-        margin-right: 0.5vw;
-        border-radius: 2px;
-      }
-      .submitbtn {
-        height: 3.5vh;
-        width: 5vw;
-        padding: 0;
-        background-color: #d79432;
-        color: white;
-        border: none;
-        margin-right: 0.5vw;
-        border-radius: 2px;
-      }
-    }
-  }
-}
-
-// 上方列表
-.content-head {
-  display: flex;
-  flex-direction: column;
-  ::v-deep {
-    .el-form.demo-dynamic {
-      margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-      .el-form-item--medium {
-        margin-bottom: 10px;
-        .el-form-item__label {
-          height: $formHeight;
-          line-height: $formHeight;
-          // label字体大小
-          font-size: 12px;
-        }
-        .el-form-item__content {
-          line-height: $formHeight;
-          margin-bottom: 8px;
-
-          // 列表输入框
-          .el-input {
-            height: $formHeight;
-            line-height: $formHeight;
-            width: 330px;
-            // 提示文字字体大小
-            font-size: 12px;
-            .el-input__inner {
-              height: $formHeight;
-              line-height: $formHeight;
-            }
-          }
-          // 错误文字字体大小
-          .el-form-item__error {
-            font-size: 12px;
-            margin-left: 14px;
-          }
-          .el-date-editor {
-            .el-input__icon.el-icon-date {
-              margin-left: 4px;
-              line-height: $formHeight;
-            }
-          }
-        }
-      }
-
-      // 素材上传组件
-      .upload-demo:hover {
-        border-color: #409eff;
-      }
-      .upload-demo {
-        width: 330px;
-        height: 240px;
-        padding: 2px 10px 10px;
-        border: 1px dashed #d9d9d9;
-        border-radius: 6px;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
-        // 三个内容位置及样式
-        // 提示语
-        .el-upload__tip {
-          order: 2;
-          margin: 0;
-          height: 3vh;
-          line-height: 3vh;
-        }
-        // 文件列表
-        .el-upload-list.el-upload-list--text {
-          order: -2;
-          padding-bottom: 5px;
-        }
-        // 按钮和按钮内字体大小
-        .buttons .el-button--medium {
-          font-size: 8px;
-        }
-        .addbtn {
-          height: 3vh;
-          width: 14vw;
-          padding: 0;
-          background-color: #253647;
-          color: white;
-          border: none;
-          border-radius: 4px;
-        }
-      }
-    }
-  }
-}
-
-// 中部标题
-.middle-wrapper {
-  display: flex;
-  // flex-direction: row;
-  // justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 5vh;
-  padding: 3.5% 0 1% 3%;
-  .title {
-    font-size: 14px;
-    font-weight: bolder;
-  }
-}
-
-// 下方列表
-.content-foot {
-  display: flex;
-  flex-direction: column;
-  ::v-deep {
-    .el-form.demo-dynamic {
-      margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-      .el-form-item--medium {
-        margin-bottom: 10px;
-        .el-form-item__label {
-          height: $formHeight;
-          line-height: $formHeight;
-          // label字体大小
-          font-size: 12px;
-        }
-        .el-form-item__content {
-          line-height: $formHeight;
-          margin-bottom: 8px;
-
-          // 列表输入框
-          .el-input {
-            height: $formHeight;
-            line-height: $formHeight;
-            width: 300px;
-            // 提示文字字体大小
-            font-size: 12px;
-            .el-input__inner {
-              height: $formHeight;
-              line-height: $formHeight;
-            }
-            .el-select__caret.el-input__icon.el-icon-arrow-up {
-              margin-top: 4px;
-            }
-            .el-select__caret.el-input__icon.el-icon-arrow-up.is-reverse {
-              margin-top: -4px;
-            }
-          }
-          .el-select .el-input {
-            width: 150px;
-          }
-          // 错误文字字体大小
-          .el-form-item__error {
-            font-size: 12px;
-            margin-left: 14px;
-          }
-          .el-date-editor {
-            .el-input__icon.el-icon-date {
-              margin-left: 4px;
-              line-height: $formHeight;
-            }
-          }
-        }
-      }
-      .el-icon-remove-outline {
-        height: $formHeight;
-        line-height: $formHeight;
-        font-size: 24px;
-        cursor: pointer;
-      }
-    }
-    // 添加渠道按钮和按钮内字体大小
-    .buttons .el-button--medium {
-      font-size: 8px;
-    }
-    .addbtn {
-      margin-left: 100px;
-      margin-bottom: 80px;
-      height: 3vh;
-      width: 150px;
-      padding: 0;
-      background-color: #253647;
-      color: white;
-      border: none;
-      border-radius: 4px;
     }
   }
 }

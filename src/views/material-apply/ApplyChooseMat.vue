@@ -1,4 +1,5 @@
 <template>
+  <!-- 素材投放——投放申请——选择素材界面 -->
   <div class="content-wrapper">
     <div class="topbar-wrapper">
       <div class="title">选择素材</div>
