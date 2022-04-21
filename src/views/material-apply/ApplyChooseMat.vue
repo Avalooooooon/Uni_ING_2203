@@ -5,6 +5,7 @@
       <div class="title">选择素材</div>
       <div class="btns">
         <div class="btnsimg">
+<<<<<<< Updated upstream
           <el-button
             type="primary"
             class="cancelbtn"
@@ -15,6 +16,14 @@
             class="submitbtn"
             @click="submitMatApply"
           >选择</el-button>
+=======
+          <el-button type="primary" class="cancelbtn" @click="toMaterialApply"
+            >取消</el-button
+          >
+          <el-button type="primary" class="submitbtn" @click="submitMatApply"
+            >选择</el-button
+          >
+>>>>>>> Stashed changes
         </div>
       </div>
     </div>
@@ -228,10 +237,15 @@ export default {
 
   methods: {
     // 点击右上取消按钮，返回素材库页
-    toMaterialLib(event) {
+    toMaterialApply(event) {
       this.$router.push({
+<<<<<<< Updated upstream
         name: 'MatLib'
       })
+=======
+        name: "MatApply",
+      });
+>>>>>>> Stashed changes
     },
     // 点击右上提交按钮，返回投放申请页
     submitMatApply(event) {

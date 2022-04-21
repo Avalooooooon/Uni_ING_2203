@@ -137,22 +137,24 @@
             </el-select>
           </el-form-item>
 
-          <el-form-item
+          <!-- <el-form-item
             :label="'链接' + (index + 1)"
             :prop="'channels.' + index + '.link'"
             :rules="[
               { required: true, message: '链接不能为空', trigger: 'blur' },
             ]"
           >
+<<<<<<< Updated upstream
             <el-input v-model="channelForm.link" />
           </el-form-item>
+=======
+            <el-input v-model="channelForm.link"></el-input>
+          </el-form-item> -->
+>>>>>>> Stashed changes
 
           <el-form-item
             :label="'运营号' + (index + 1)"
             :prop="'channels.' + index + '.name'"
-            :rules="[
-              { required: true, message: '运营号不能为空', trigger: 'blur' },
-            ]"
           >
             <el-input v-model="channelForm.name" />
           </el-form-item>

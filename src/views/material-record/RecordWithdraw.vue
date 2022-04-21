@@ -47,7 +47,7 @@
           class="datalist"
           :data="modulesData2"
           style="width: 50%"
-          height="100%"
+          height="100px"
           :header-cell-style="{
             color: '#000000',
             fontSize: '13px',
@@ -212,7 +212,6 @@ export default {
 
 <style lang="scss" scoped>
 $titleHeight: 70px;
-$formHeight: 28px;
 // 弹窗内容外面的div
 .el-dialog {
   position: relative;
@@ -348,14 +347,6 @@ $formHeight: 28px;
     flex-direction: column;
     justify-content: space-between;
 
-    // 三个内容位置及样式
-    // 提示语
-    // .el-upload__tip {
-    //   order: 2;
-    //   margin: 0;
-    //   height: 3vh;
-    //   line-height: 3vh;
-    // }
     // 文件列表
     .el-upload-list.el-upload-list--text {
       order: -1;
@@ -373,7 +364,7 @@ $formHeight: 28px;
 
 // 渠道列表区域
 .channellist {
-  height: 20%;
+  // height: 20vh;
   // 去掉表格最下方的灰色分割线
   .el-table.datalist.el-table--fit.el-table--scrollable-y.el-table--enable-row-hover.el-table--enable-row-transition.el-table--medium::before {
     display: none;
@@ -382,6 +373,12 @@ $formHeight: 28px;
     ::v-deep {
       .hidden-columns ::before {
         display: none;
+      }
+      .el-table__header-wrapper{
+        height:33px;
+      }
+      .el-table__body-wrapper is-scrolling-none{
+        height:67px;
       }
 
       .el-table__header-wrapper .el-table__header tr th {
@@ -395,9 +392,7 @@ $formHeight: 28px;
       .el-table__body tr:hover > td {
         background-color: #f4f5f9 !important;
       }
-      .transparent {
-        background: #e9ebf4;
-      }
+
     }
   }
 }

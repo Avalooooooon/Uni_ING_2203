@@ -46,7 +46,7 @@
           class="datalist"
           :data="modulesData2"
           style="width: 50%"
-          height="100%"
+          height="100px"
           :header-cell-style="{
             color: '#000000',
             fontSize: '13px',
@@ -144,6 +144,18 @@ export default {
           name: "aaa",
           account: "小红",
         },
+        {
+          id: "006",
+          url: "http://www.baidubaidu.com",
+          name: "aaa",
+          account: "小红",
+        },
+        {
+          id: "007",
+          url: "http://www.baidubaidu.com",
+          name: "aaa",
+          account: "小红",
+        },
       ],
       // 弹出层标题
       title: "",
@@ -210,7 +222,6 @@ export default {
 
 <style lang="scss" scoped>
 $titleHeight: 70px;
-$formHeight: 28px;
 // 弹窗内容外面的div
 .el-dialog {
   position: relative;
@@ -220,7 +231,7 @@ $formHeight: 28px;
 }
 .main-wrapper {
   height: 60vh;
-  overflow: auto;
+  // overflow: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -302,7 +313,8 @@ $formHeight: 28px;
 .puretext {
   color: #949494;
   font-size: 12px;
-  line-height: 2;
+  line-height: 24px;
+  // height:20vh;
 }
 
 // 中部单行列表区域
@@ -337,21 +349,13 @@ $formHeight: 28px;
     flex-direction: column;
     justify-content: space-between;
 
-    // 三个内容位置及样式
-    // 提示语
-    // .el-upload__tip {
-    //   order: 2;
-    //   margin: 0;
-    //   height: 3vh;
-    //   line-height: 3vh;
-    // }
     // 文件列表
     .el-upload-list.el-upload-list--text {
       order: -1;
       padding-bottom: 5px;
     }
 
-    //
+    // 删除el-upload组件自带的文件行右侧图标
     .el-upload-list__item-status-label,
     .el-icon-close {
       display: none;
@@ -362,7 +366,7 @@ $formHeight: 28px;
 
 // 渠道列表区域
 .channellist {
-  height: 20%;
+  // height: 20vh;
   // 去掉表格最下方的灰色分割线
   .el-table.datalist.el-table--fit.el-table--scrollable-y.el-table--enable-row-hover.el-table--enable-row-transition.el-table--medium::before {
     display: none;
@@ -371,6 +375,12 @@ $formHeight: 28px;
     ::v-deep {
       .hidden-columns ::before {
         display: none;
+      }
+      .el-table__header-wrapper{
+        height:33px;
+      }
+      .el-table__body-wrapper is-scrolling-none{
+        height:67px;
       }
 
       .el-table__header-wrapper .el-table__header tr th {
@@ -384,9 +394,7 @@ $formHeight: 28px;
       .el-table__body tr:hover > td {
         background-color: #f4f5f9 !important;
       }
-      .transparent {
-        background: #e9ebf4;
-      }
+
     }
   }
 }
