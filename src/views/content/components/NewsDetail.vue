@@ -8,12 +8,12 @@
         {{ appname }}
       </div>
       <div class="edit">
-        <el-input
-          v-model="searchkey"
-          placeholder="请输入关键词搜索"
-          suffix-icon="el-icon-search"
-        />
-        <i class="el-icon-sort" />
+        <!--        <el-input-->
+        <!--          v-model="searchkey"-->
+        <!--          placeholder="请输入关键词搜索"-->
+        <!--          suffix-icon="el-icon-search"-->
+        <!--        />-->
+        <!--        <i class="el-icon-sort" />-->
         <i class="el-icon-plus" listid="1" @click="toAddNews" />
       </div>
     </div>
@@ -28,7 +28,7 @@
               ? 'https://www.bizspace.cn' + item.image
               : images.emptyimg
           "
-        />
+        >
 
         <div class="textversion">{{ item.name }}</div>
         <div class="timeversion">{{ item.create_date }}</div>
@@ -40,16 +40,14 @@
             :detailid="item.id"
             :detailname="item.name"
             @click="checkdetail"
-            >查看</el-button
-          >
+          >查看</el-button>
           <el-button
             :id="item.id"
             type="primary"
             class="deletebtn"
             :detailid="item.id"
             @click="deletealert"
-            >删除</el-button
-          >
+          >删除</el-button>
         </div>
       </div>
       <div class="footer">
@@ -67,19 +65,19 @@
 </template>
 
 <script>
-import { fetchNewsList, addNewsList, delNewsList } from "@/api/appnews";
-import { getToken } from "@/utils/auth";
+import { fetchNewsList, addNewsList, delNewsList } from '@/api/appnews'
+import { getToken } from '@/utils/auth'
 
 export default {
-  name: "AppDetail",
-  props: ["appid", "appname"],
+  name: 'AppDetail',
+  props: ['appid', 'appname'],
   data() {
     return {
       images: {
         // 占位图
-        emptyimg: require("@/assets/empty.jpg"),
+        emptyimg: require('@/assets/empty.jpg')
       },
-      searchkey: "", // 用户输入到搜索框中的关键字
+      searchkey: '', // 用户输入到搜索框中的关键字
       list: [], // 存放搜索前的所有数据
       newlist: [], // 存放搜索结果
 
@@ -90,110 +88,110 @@ export default {
 
       // 发送给后端的数据
       newsParamsFetch: {
-        bizid: "uniwarm",
+        bizid: 'uniwarm',
         token: getToken(),
         listid: 1,
-        page: 1,
+        page: 1
       },
       newsParamsDel: {
-        bizid: "uniwarm",
+        bizid: 'uniwarm',
         token: getToken(),
         listid: 1,
-        itemid: "",
-      },
-    };
+        itemid: ''
+      }
+    }
   },
 
   created() {
-    this.getNewsList();
+    this.getNewsList()
   },
 
   methods: {
     // 返回上一级
     toback() {
-      this.$router.go(-1);
+      this.$router.go(-1)
     },
 
     // 钩子函数：从后台拿数据
     getNewsList() {
-      this.newsParamsFetch.page = this.newsParamsFetch.page - 1;
+      this.newsParamsFetch.page = this.newsParamsFetch.page - 1
       fetchNewsList(this.newsParamsFetch)
         .then((response) => {
-          this.total = response.total;
-          this.modulesData = response.data;
-          this.newsParamsFetch.page = this.newsParamsFetch.page + 1;
+          this.total = response.total
+          this.modulesData = response.data
+          this.newsParamsFetch.page = this.newsParamsFetch.page + 1
         })
         .catch((err) => {
-          console.log(err);
-        });
+          console.log(err)
+        })
     },
 
     // 点击顶部加号添加新系列
     toAddNews(event) {
-      const listid = event.currentTarget.getAttribute("listid");
+      const listid = event.currentTarget.getAttribute('listid')
 
       this.$router.push({
-        name: "AddNews",
+        name: 'AddNews',
         query: {
-          listid: listid,
-        },
-      });
+          listid: listid
+        }
+      })
     },
 
     // 分页器
     handleCurrentChange(currentPage) {
-      console.log(currentPage);
-      this.newsParams.page = currentPage;
-      console.log(this.newsParams.page);
-      this.getNewsList();
+      console.log(currentPage)
+      this.newsParams.page = currentPage
+      console.log(this.newsParams.page)
+      this.getNewsList()
     },
 
     // 删除当前系列
     deletealert(event) {
-      this.newsParamsDel.itemid = event.currentTarget.id;
-      this.$confirm("确定要删除该资源吗？", "提示", {
-        cancelButtonText: "取消",
-        confirmButtonText: "确定",
-        type: "warning",
+      this.newsParamsDel.itemid = event.currentTarget.id
+      this.$confirm('确定要删除该资源吗？', '提示', {
+        cancelButtonText: '取消',
+        confirmButtonText: '确定',
+        type: 'warning'
       })
         .then(() => {
           delNewsList(this.newsParamsDel)
             .then((response) => {
-              console.log(response.data);
-              this.getNewsList();
+              console.log(response.data)
+              this.getNewsList()
             })
             .catch((err) => {
-              console.log(err);
-            });
+              console.log(err)
+            })
           this.$message({
-            type: "success",
-            message: "删除成功!",
-          });
+            type: 'success',
+            message: '删除成功!'
+          })
         })
         .catch(() => {
           this.$message({
-            type: "info",
-            message: "已取消删除",
-          });
-        });
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
       // this.$router.go(0)
     },
 
     // 点击当前系列的查看按钮
     checkdetail(event) {
-      const detailid = event.currentTarget.getAttribute("detailid");
-      const detailname = event.currentTarget.getAttribute("detailname");
+      const detailid = event.currentTarget.getAttribute('detailid')
+      const detailname = event.currentTarget.getAttribute('detailname')
 
       this.$router.push({
-        name: "DetailCheckImgsNews",
+        name: 'DetailCheckImgsNews',
         query: {
           detailid: detailid,
-          detailname: detailname,
-        },
-      });
-    },
-  },
-};
+          detailname: detailname
+        }
+      })
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -236,7 +234,7 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 32%;
+    //width: 32%;
     height: 7vh;
     color: #989a9e;
     i {
@@ -270,7 +268,6 @@ export default {
   flex-wrap: wrap;
   justify-content: flex-start;
   align-content: flex-start;
-
 
   // border: 1px solid black;
 

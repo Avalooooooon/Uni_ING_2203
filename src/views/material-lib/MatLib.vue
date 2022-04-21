@@ -4,11 +4,11 @@
     <div class="topbar-wrapper">
       <div class="back" style="font-size: 13px">
         <div>
-          素材名称 :
+          素材名称
           <el-input v-model="form.title" size="mini" class="filterBox" placeholder="请输入" />
         </div>
         <div style="margin-left: 30px">
-          素材类型 :
+          素材类型
           <el-select
             v-model="form.type"
             class="filterBox"
@@ -25,11 +25,11 @@
           </el-select>
         </div>
         <div style="margin-left: -10px">
-          上传人 :
+          上传人
           <el-input v-model="form.name" size="mini" class="filterBox" placeholder="请输入" />
         </div>
         <div style="margin-left: 30px">
-          上传时间 :
+          上传时间
           <el-date-picker
             v-model="form.date"
             size="mini"
@@ -549,6 +549,7 @@ export default {
     .filterBox{
       width: 150px;
       min-width: 150px;
+      margin-left: 10px;
     }
   }
   .back:hover {
@@ -638,48 +639,6 @@ export default {
   justify-content: flex-start;
   align-content: flex-start;
   margin-left: 2%;
-  /*去掉表格单元格边框*/
-  .customer-no-border-table th{
-    border:none;
-  }
-  .customer-no-border-table td,.customer-no-border-table th.is-leaf {
-    border:none;
-  }
-  /*表格最外边框*/
-  .customer-no-border-table .el-table--border, .el-table--group{
-    border: none;
-  }
-  /*头部边框*/
-  .customer-no-border-table thead tr th.is-leaf{
-    border: 0px solid #EBEEF5;
-    border-right: none;
-  }
-  .customer-no-border-table thead tr th:nth-last-of-type(2){
-    border-right: 0px solid #EBEEF5;
-  }
-  /*表格最外层边框-底部边框*/
-  .customer-no-border-table .el-table--border::after,.customer-no-border-table .el-table--group::after{
-    width: 0;
-  }
-  .customer-no-border-table::before{
-    width: 0;
-  }
-  .customer-no-border-table .el-table__fixed-right::before,.el-table__fixed::before{
-    width: 0;
-  }
-  .customer-no-border-table .el-table__header tr th{
-    background: #fff;
-    color: #333333 ;
-    padding: 3px ;
-    fontWeight: 550 ;
-    height: 36px ;
-    border: 0px;
-    font-size: 15px;
-  }
-  /*去掉鼠标悬停背景颜色*/
-  .el-table tbody tr:hover>td {
-    background-color:#ffffff!important
-  }
   .tableImg{
     width: 100%;
     height: 100%;

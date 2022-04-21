@@ -33,12 +33,11 @@
       <div class="matlist">
         <div>选择素材：</div>
         <el-upload
-          class="upload-demo"
           ref="upload"
+          class="upload-demo"
           :file-list="fileList"
           :auto-upload="false"
-        >
-        </el-upload>
+        />
       </div>
 
       <div class="channellist">
@@ -88,85 +87,85 @@
 // import {getById, addBizDefine, updateBizDefine} from "@/api/funds/routecenter/bizdefine";
 
 export default {
-  name: "RecordDetail",
+  name: 'RecordDetail',
   data() {
     return {
       // 后端传来的数据-中部单行列表
       modulesData: {
-        title: "title1",
-        name: "aaa",
-        requestdate: "2000-00-00 00:00",
-        usedate: "2000-01-01 01:00",
-        state: "订单审核",
-        finalOperate: "me",
-        id: "001",
+        title: 'title1',
+        name: 'aaa',
+        requestdate: '2000-00-00 00:00',
+        usedate: '2000-01-01 01:00',
+        state: '订单审核',
+        finalOperate: 'me',
+        id: '001'
       },
       // 后端传来的数据-素材列表
       fileList: [
         {
-          name: "food.jpeg",
-          url: "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100",
+          name: 'food.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
         },
         {
-          name: "food2.jpeg",
-          url: "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100",
-        },
+          name: 'food2.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+        }
       ],
       // 后端传来的数据-下方渠道列表
       modulesData2: [
         {
-          id: "001",
-          url: "http://www.baidubaidu.com",
-          name: "aaa",
-          account: "小红",
+          id: '001',
+          url: 'http://www.baidubaidu.com',
+          name: 'aaa',
+          account: '小红'
         },
         {
-          id: "002",
-          url: "http://www.baidubaidu.com",
-          name: "aaa",
-          account: "小红",
+          id: '002',
+          url: 'http://www.baidubaidu.com',
+          name: 'aaa',
+          account: '小红'
         },
         {
-          id: "003",
-          url: "http://www.baidubaidu.com",
-          name: "aaa",
-          account: "小红",
+          id: '003',
+          url: 'http://www.baidubaidu.com',
+          name: 'aaa',
+          account: '小红'
         },
         {
-          id: "004",
-          url: "http://www.baidubaidu.com",
-          name: "aaa",
-          account: "小红",
+          id: '004',
+          url: 'http://www.baidubaidu.com',
+          name: 'aaa',
+          account: '小红'
         },
         {
-          id: "005",
-          url: "http://www.baidubaidu.com",
-          name: "aaa",
-          account: "小红",
+          id: '005',
+          url: 'http://www.baidubaidu.com',
+          name: 'aaa',
+          account: '小红'
         },
         {
-          id: "006",
-          url: "http://www.baidubaidu.com",
-          name: "aaa",
-          account: "小红",
+          id: '006',
+          url: 'http://www.baidubaidu.com',
+          name: 'aaa',
+          account: '小红'
         },
         {
-          id: "007",
-          url: "http://www.baidubaidu.com",
-          name: "aaa",
-          account: "小红",
-        },
+          id: '007',
+          url: 'http://www.baidubaidu.com',
+          name: 'aaa',
+          account: '小红'
+        }
       ],
       // 弹出层标题
-      title: "",
+      title: '',
       // 是否显示弹出层
-      open: false,
-    };
+      open: false
+    }
   },
   methods: {
     // 窗口初始化方法，nextTick方法可以添加逻辑，如打开窗口时查询数据填充
     init(bizId) {
-      this.open = true;
+      this.open = true
       //   this.$nextTick(() => {
       //     // getById(bizId).then(response => {
       //     //     this.bizform = response.data;
@@ -177,48 +176,47 @@ export default {
       //     this.open = true;
       //     this.title = "bizId";
       //   });
-      this.title = bizId;
+      this.title = bizId
     },
     // 取消按钮
     cancel() {
-      this.open = false;
-      this.reset();
+      this.open = false
+      this.reset()
     },
     downloadMat() {},
     /** 提交按钮 */
-    submitForm: function () {
-      this.$refs["bizform"].validate((valid) => {
+    submitForm: function() {
+      this.$refs['bizform'].validate((valid) => {
         if (valid) {
           if (this.bizform.id != undefined) {
             updateBizDefine(this.bizform).then((response) => {
               if (response.data) {
-                this.msgSuccess("修改成功");
-                this.open = false;
+                this.msgSuccess('修改成功')
+                this.open = false
                 // 调用主页面的getList方法刷新主页面
-                this.$parent.getList();
+                this.$parent.getList()
               } else {
-                this.msgError(response.resultMsg);
+                this.msgError(response.resultMsg)
               }
-            });
+            })
           } else {
             addBizDefine(this.bizform).then((response) => {
               if (response.data) {
-                this.msgSuccess("新增成功");
-                this.open = false;
+                this.msgSuccess('新增成功')
+                this.open = false
                 // 调用主页面的getList方法刷新主页面
-                this.$parent.getList();
+                this.$parent.getList()
               } else {
-                this.msgError(response.resultMsg);
+                this.msgError(response.resultMsg)
               }
-            });
+            })
           }
         }
-      });
-    },
-  },
-};
+      })
+    }
+  }
+}
 </script>
-
 
 <style lang="scss" scoped>
 $titleHeight: 70px;

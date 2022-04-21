@@ -109,17 +109,16 @@
           <template slot-scope="scope">
             <div class="buttons">
               <el-button
+                :id="scope.row.id"
                 class="filterbtn"
                 @click="showDetailDialog"
-                :id="scope.row.id"
-                >查看</el-button
-              >
+              ><i class="el-icon-view el-icon--right" /> 查看</el-button>
               <el-button
+                :id="scope.row.id"
                 class="resetbtn"
                 @click="showWithdrawDialog"
-                :id="scope.row.id"
-                >删除</el-button
-              >
+                icon="el-icon-delete"
+              >删除</el-button>
             </div>
           </template>
         </el-table-column>
@@ -140,11 +139,11 @@
     </div>
 
     <!-- 使用弹窗组件 -->
-    <RecordDetail title="查看详情" v-if="openDetailDialog" ref="detailDialog" />
+    <RecordDetail v-if="openDetailDialog" ref="detailDialog" title="查看详情" />
     <RecordWithdraw
-      title="测试窗口"
       v-if="openWithdrawDialog"
       ref="withdrawDialog"
+      title="测试窗口"
     />
   </div>
 </template>
@@ -155,14 +154,14 @@
 //   materialListUpload,
 //   delDesignerListDetail,
 // } from "@/api/appmaterial";
-import RecordDetail from "./RecordDetail";
-import RecordWithdraw from "./RecordWithdraw";
+import RecordDetail from './RecordDetail'
+import RecordWithdraw from './RecordWithdraw'
 
-import { getToken } from "@/utils/auth";
-import axios from "axios";
+import { getToken } from '@/utils/auth'
+import axios from 'axios'
 
 export default {
-  name: "MatRecord",
+  name: 'MatRecord',
   // 注册组件
   components: { RecordDetail, RecordWithdraw },
   data() {
@@ -171,192 +170,192 @@ export default {
       openDetailDialog: false,
       openWithdrawDialog: false,
 
-      url: "https://www.bizspace.cn",
+      url: 'https://www.bizspace.cn',
 
       // 传给投放申请的数据
       chooseId: -1,
-      chooseName: "",
+      chooseName: '',
 
       // 素材类型的可选值
       options: [
-        { value: "001", label: "订单审核" },
-        { value: "002", label: "审核通过" },
-        { value: "003", label: "停止审核" },
+        { value: '001', label: '订单审核' },
+        { value: '002', label: '审核通过' },
+        { value: '003', label: '停止审核' }
       ],
       // 顶部：投放的名称、状态、申请人、上传时间、使用时间
       form: {
-        title: "",
-        state: "",
-        name: "",
-        applydate: "",
-        usedate: "",
+        title: '',
+        state: '',
+        name: '',
+        applydate: '',
+        usedate: ''
       },
 
       // 发送给后端的数据
       materialParams: {
-        bizid: "uniwarm",
+        bizid: 'uniwarm',
         token: getToken(),
         listid: 8,
         itemid: this.detailid,
-        page: 8,
+        page: 8
       },
       materialParamsdel: {
-        bizid: "uniwarm",
+        bizid: 'uniwarm',
         token: getToken(),
-        itemid: "",
-        listid: 8,
+        itemid: '',
+        listid: 8
       },
 
       // 后端传来的数据
       modulesData: [
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '001'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '001'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '001'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '001'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '001'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '001'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '001'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "002",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '002'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "003",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '003'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "004",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '004'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "005",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '005'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '001'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '001'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '001'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '001'
         },
         {
-          title: "title1",
-          name: "aaa",
-          requestdate: "2000-00-00 00:00",
-          usedate: "2000-01-01 01:00",
-          state: "订单审核",
-          finalOperate: "me",
-          id: "001",
-        },
+          title: 'title1',
+          name: 'aaa',
+          requestdate: '2000-00-00 00:00',
+          usedate: '2000-01-01 01:00',
+          state: '订单审核',
+          finalOperate: 'me',
+          id: '001'
+        }
       ],
       total: 300,
-      pagerow: 20,
-    };
+      pagerow: 20
+    }
   },
 
   created() {
@@ -365,7 +364,7 @@ export default {
 
   methods: {
     tableRowClassName({ row, rowIndex }) {
-      return "transparent";
+      return 'transparent'
     },
 
     // 点击查看按钮，弹出素材详情
@@ -377,63 +376,63 @@ export default {
       //     matname: this.chooseName,
       //   },
       // });
-      const id = event.currentTarget.getAttribute("id");
+      const id = event.currentTarget.getAttribute('id')
 
-      this.openDetailDialog = true;
+      this.openDetailDialog = true
       this.$nextTick(() => {
-        this.$refs.detailDialog.init(id);
-      });
+        this.$refs.detailDialog.init(id)
+      })
     },
     // 点击删除按钮，弹出撤回
     showWithdrawDialog(event) {
-      const id = event.currentTarget.getAttribute("id");
+      const id = event.currentTarget.getAttribute('id')
 
-      this.openWithdrawDialog = true;
+      this.openWithdrawDialog = true
       this.$nextTick(() => {
-        this.$refs.withdrawDialog.init(id);
-      });
+        this.$refs.withdrawDialog.init(id)
+      })
     },
 
     // 重置表单
     reset() {
-      this.$refs["form"].resetFields();
+      this.$refs['form'].resetFields()
     },
 
     // 钩子函数：从后台拿数据
     getMaterialList() {
-      this.materialParamsFetch.page = this.materialParamsFetch.page - 1;
+      this.materialParamsFetch.page = this.materialParamsFetch.page - 1
       fetchMaterialList(this.materialParamsFetch)
         .then((response) => {
-          this.total = response.total;
-          this.modulesData = response.data;
-          this.materialParamsFetch.page = this.materialParamsFetch.page + 1;
+          this.total = response.total
+          this.modulesData = response.data
+          this.materialParamsFetch.page = this.materialParamsFetch.page + 1
         })
         .catch((err) => {
-          console.log(err);
-        });
+          console.log(err)
+        })
     },
     chooseMat(id, name) {
-      this.chooseId = id;
-      this.chooseName = name;
-      console.log(name);
+      this.chooseId = id
+      this.chooseName = name
+      console.log(name)
     },
 
     // 分页器
     handleCurrentChange(currentPage) {
-      console.log(currentPage);
-      this.materialParams.page = currentPage;
-      console.log(this.materialParams.page);
-      this.getMaterialList();
+      console.log(currentPage)
+      this.materialParams.page = currentPage
+      console.log(this.materialParams.page)
+      this.getMaterialList()
     },
 
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+      console.log(`每页 ${val} 条`)
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-    },
-  },
-};
+      console.log(`当前页: ${val}`)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -565,6 +564,7 @@ $formHeight: 28px;
   // 主要内容显示区域
   .datalist {
     width: 100%;
+    margin-top: 30px;
     ::v-deep {
       width: 100%;
       .el-table__header-wrapper .el-table__header tr th {

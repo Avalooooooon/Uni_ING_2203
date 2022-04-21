@@ -342,9 +342,9 @@ $formHeight: 28px;
 
   width: 96%;
   background-color: white;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 130px);
   overflow-y: scroll;
-  margin: 2% 2%;
+  margin: 40px 2%;
 }
 
 // 头部

@@ -8,12 +8,12 @@
         {{ appname }}
       </div>
       <div class="edit">
-        <el-input
-          v-model="searchkey"
-          placeholder="请输入关键词搜索"
-          suffix-icon="el-icon-search"
-        />
-        <i class="el-icon-sort" />
+<!--        <el-input-->
+<!--          v-model="searchkey"-->
+<!--          placeholder="请输入关键词搜索"-->
+<!--          suffix-icon="el-icon-search"-->
+<!--        />-->
+<!--        <i class="el-icon-sort" />-->
         <i class="el-icon-plus" listid="8" @click="toAddDesigner" />
 
       </div>
@@ -239,7 +239,7 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 32%;
+    //width: 32%;
     height: 7vh;
     color: #989a9e;
     i {

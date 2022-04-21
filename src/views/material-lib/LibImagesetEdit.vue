@@ -3,7 +3,7 @@
   <div class="content-wrapper">
     <div class="topbar-wrapper">
       <div class="back">
-        <span style=" color: black; width: 150px;font-size: 13px">请输入标题 : </span>
+        <span style="color: black; width: 80px;font-size: 13px">请输入标题</span>
         <el-input style="width: 300px" v-model="input" placeholder="请输入封面标题"></el-input>
       </div>
       <div class="btns">
@@ -181,6 +181,9 @@ export default {
     color: #d79432;
     font-size: 16px;
     padding: 0;
+    line-height: 5vh;
+    //border: 1px solid black;
+    display: flex;
     .el-icon-arrow-left {
       font-weight: bolder;
     }

@@ -9,12 +9,12 @@
       </div>
       <div v-show="appname !== '早安晚安'" class="edit">
         <!-- @input="searchEvent" -->
-        <el-input
-          v-model="searchKey"
-          placeholder="请输入关键词搜索"
-          suffix-icon="el-icon-search"
-        />
-        <i class="el-icon-sort" />
+<!--        <el-input-->
+<!--          v-model="searchKey"-->
+<!--          placeholder="请输入关键词搜索"-->
+<!--          suffix-icon="el-icon-search"-->
+<!--        />-->
+<!--        <i class="el-icon-sort" />-->
         <i class="el-icon-plus" @click="dialogVisible = true" />
 
         <!-- 编辑弹窗 -->
@@ -305,7 +305,7 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 32%;
+    //width: 32%;
     height: 7vh;
     color: #989a9e;
     i {
