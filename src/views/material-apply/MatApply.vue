@@ -144,13 +144,8 @@
               { required: true, message: '链接不能为空', trigger: 'blur' },
             ]"
           >
-<<<<<<< Updated upstream
-            <el-input v-model="channelForm.link" />
-          </el-form-item>
-=======
             <el-input v-model="channelForm.link"></el-input>
           </el-form-item> -->
->>>>>>> Stashed changes
 
           <el-form-item
             :label="'运营号' + (index + 1)"
