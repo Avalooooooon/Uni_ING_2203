@@ -94,7 +94,7 @@
       </div>
       <div v-for="item in imgsData" :key="item.id" class="singleimage">
         <div class="block">
-          <img class="appimg" :src="'https://www.bizspace.cn' + item.image">
+          <img class="appimg" :src="item.image">
           <div v-if="isDeleteing" ref="imgDelete" class="delete-img">
             <i class="el-icon-delete" @click="deleteimg(item)" />
           </div>
@@ -128,7 +128,7 @@ export default {
       imgsData: [
         {
           id: '1',
-          image: '/appsrc/biz/uniwarm/wechatweb/static/home/hello.png'
+          image: '/appsrc/biz/uniwarm/wechatweb/static/home/wallpaper.png'
         },
         {
           id: '2',
@@ -136,7 +136,7 @@ export default {
         },
         {
           id: '3',
-          image: '/appsrc/biz/uniwarm/wechatweb/static/home/hello.png'
+          image: '/appsrc/biz/uniwarm/wechatweb/static/home/wallpaper.png'
         },
         {
           id: '4',
@@ -470,8 +470,9 @@ export default {
       //border: 1px solid red;
       // 模块主图
       .appimg {
-        width: 100%;
+        //width: 100%;
         height:85%;
+        //border: 1px solid red;
       }
       // 删除状态下的删除栏
       .delete-img {

@@ -36,6 +36,7 @@
                   placeholder="密码"
                   class="input"
                   show-password
+                  @keyup.enter.native="handleLogin()"
                 />
               </el-form-item>
               <!--              <el-checkbox v-model="checked" class="check">-->
