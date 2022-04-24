@@ -69,13 +69,15 @@
           <!--          </div>-->
           <div class="uploadType" @click="uploadVideoMat">
             <div class="typeImg">
-              <!--              <img style="width: 50px;height: 50px;" src="../../assets/video.png" alt="">-->
+              <img style="width: 30px;height: 30px;vertical-align:middle; margin-bottom: 20px" src="../../assets/video.png" alt=""><br>
+              <span>视频素材</span>
             </div>
-            <div class="typeTitle">视频素材</div>
           </div>
           <div class="uploadType" @click="uploadImagesMat">
-            <div class="typeImg" />
-            <div class="typeTitle">图集素材</div>
+            <div class="typeImg">
+              <img style="width: 30px;height: 30px;vertical-align:middle; margin-bottom: 20px" src="../../assets/tuji.png" alt=""><br>
+              <span>图集素材</span>
+            </div>
           </div>
         </div>
         <!--        <div class="dialogContent">-->
@@ -177,11 +179,7 @@
 </template>
 
 <script>
-import {
-  fetchPaperListDetail,
-  paperListUpload,
-  delPaperListDetail
-} from '@/api/wxwallpaper'
+import {} from '@/api/materiallib'
 import { getToken } from '@/utils/auth'
 // import axios from 'axios'
 
@@ -197,6 +195,7 @@ export default {
         name: '',
         date: ''
       },
+      token: getToken(),
       matId: '',
       centerDialogVisible: false,
       tableData: [{
@@ -613,9 +612,14 @@ export default {
       cursor: pointer;
       //border: 1px solid red;
       .typeImg{
-        width: 100%;
         height: 150px;
-        background-color: rgb(0,0,0,0.5);
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        overflow: hidden;
+        display: table-cell;
+        width: 250px;
+        vertical-align: middle;
+        //background-color: rgb(0,0,0,0.5);
       }
       .typeTitle{
         width: 100%;

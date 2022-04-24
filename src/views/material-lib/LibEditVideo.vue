@@ -26,6 +26,21 @@
         </div>
       </div>
     </div>
+    <el-dialog
+      title="保存素材"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :before-close="handleClose"
+    >
+      <div style="width: 300px;margin: 0 auto;text-align: center">
+        <div class="typeImg">
+          <img style="width: 40px;height: 40px;vertical-align:middle; margin-bottom: 20px" src="../../assets/loading.png" alt="">
+          <img style="width: 40px;height: 40px;vertical-align:middle; margin-bottom: 20px" src="../../assets/success.png" alt="">
+          <div>正在上传，请耐心等待...</div>
+          <div>上传成功</div>
+        </div>
+      </div>
+    </el-dialog>
 
     <!-- 主要内容显示区域 -->
     <div class="images-wrapper">
@@ -37,10 +52,7 @@
 </template>
 
 <script>
-import {
-  paperListUpload,
-  delPaperListDetail
-} from '@/api/wxwallpaper'
+import {} from '@/api/materiallib'
 import { getToken } from '@/utils/auth'
 // import Tinymce from '@/components/Tinymce'
 // import axios from 'axios'
@@ -52,6 +64,8 @@ export default {
 
   data() {
     return {
+      dialogVisible: false,
+      token: getToken()
     }
   },
 
@@ -66,7 +80,21 @@ export default {
     },
     // 编辑图文素材保存
     handleSave() {
-      this.$router.go(-1)
+      this.dialogVisible = true
+      // this.$router.go(-1)
+    },
+    // 关闭保存素材弹窗
+    handleClose(done) {
+      this.$confirm('确认关闭？', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then((_) => {
+          done()
+        })
+        .catch((_) => {
+        })
     }
   }
 }
@@ -151,6 +179,14 @@ export default {
       }
     }
   }
+}
+.typeImg{
+  height: 150px;
+  border-radius: 5px;
+  overflow: hidden;
+  display: table-cell;
+  width: 300px;
+  vertical-align: middle;
 }
 
 // 主要内容区域（多个）

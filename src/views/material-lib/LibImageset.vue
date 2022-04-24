@@ -59,10 +59,13 @@
           <!--          <div style="width: 60%;height: 200px;background-color: rgb(0,0,0,0.5);margin: 0 auto;"></div>-->
           <!--          <div style="width: 100%;margin-top: 30px">（上传格式：仅支持jpg格式、分辨率不超过200 * 200、大小不超过 299M）</div>-->
           <!--          <el-button class="addbtn">上传图片</el-button>-->
-          <div v-if="showEmpty">
-            <div style="width: 60%;height: 200px;background-color: rgb(0,0,0,0.5);margin: 0 auto;"></div>
-            <div style="width: 100%;margin-top: 30px">（上传格式：仅支持jpg格式、分辨率不超过200 * 200、大小不超过 299M）</div>
+          <div v-if="showEmpty" style="width: 300px;margin: 0 auto;">
+            <div class="typeImg">
+              <img style="width: 30px;height: 30px;vertical-align:middle; margin-bottom: 20px" src="../../assets/tupian.png" alt=""><br>
+              <span>点击选择图片</span>
+            </div>
           </div>
+          <div style="width: 100%;margin-top: 30px;">（上传格式：仅支持jpg格式，分辨率不超过 200 * 200，大小不超过 299M</div>
           <el-upload
             class="upload-demo"
             action="https://jsonplaceholder.typicode.com/posts/"
@@ -105,16 +108,13 @@
 </template>
 
 <script>
-import {
-  paperListUpload,
-  delPaperListDetail
-} from '@/api/wxwallpaper'
+import {} from '@/api/materiallib'
 import { getToken } from '@/utils/auth'
 // import Tinymce from '@/components/Tinymce'
 // import axios from 'axios'
 
 export default {
-  name: 'LibCheckVideo',
+  name: 'LibImageset',
   props: ['detailid', 'detailname'],
   // components: { Tinymce },
 
@@ -125,6 +125,7 @@ export default {
       fileList: [],
       showEmpty: true,
       showHave: false,
+      token: getToken(),
       imgsData: [
         {
           id: '1',
@@ -393,13 +394,22 @@ export default {
       }
     }
   }
+  .typeImg{
+    height: 150px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    overflow: hidden;
+    display: table-cell;
+    width: 300px;
+    vertical-align: middle;
+  }
   .upload-demo{
     //border: 1px solid black;
     position: relative;
   }
   .addbtn {
     height: 3vh;
-    width: 14vw;
+    width: 10vw;
     padding: 0;
     background-color: #253647;
     color: white;
@@ -408,7 +418,7 @@ export default {
     margin-top: 40px;
     position: absolute;
     bottom: -5vh;
-    right: calc(50% - 7vw);
+    right: calc(50% - 5vw);
   }
   .continueBtn{
     width: 100%;

@@ -27,11 +27,13 @@
         width="30%"
         :before-close="handleClose"
       >
-        <div style="width: 100%; padding-bottom: 30px; text-align: center;position: relative">
-          <div style="width: 100%;height:3vh;margin-top: 40px; font-size: 13px;background-color: #253647;color: white;text-align: center;line-height:3vh;position: absolute;bottom: 0;">
-            正在上传 请耐心等待
+        <div style="width: 300px;margin: 0 auto;text-align: center">
+          <div class="typeImg">
+            <img style="width: 40px;height: 40px;vertical-align:middle; margin-bottom: 20px" src="../../assets/loading.png" alt="">
+            <img style="width: 40px;height: 40px;vertical-align:middle; margin-bottom: 20px" src="../../assets/success.png" alt="">
+            <div>正在上传，请耐心等待...</div>
+            <div>上传成功</div>
           </div>
-
         </div>
       </el-dialog>
     </div>
@@ -78,14 +80,8 @@
 </template>
 
 <script>
-import {
-  paperListUpload,
-  delPaperListDetail
-} from '@/api/wxwallpaper'
+import {} from '@/api/materiallib'
 import { getToken } from '@/utils/auth'
-import {designerListUpload} from "@/api/appdesigner";
-// import Tinymce from '@/components/Tinymce'
-// import axios from 'axios'
 
 export default {
   name: 'LibImagesetAdd',
@@ -98,7 +94,8 @@ export default {
       url: 'https://www.bizspace.cn',
       numberValidateForm: {
         name: '',
-        image: ''
+        image: '',
+        token: getToken()
       },
       dialogVisible: false
     }
@@ -135,17 +132,17 @@ export default {
       console.log(file)
       var formData = new FormData()
       formData.append('headimg', file.file)
-      designerListUpload(this.designerParams1, formData).then((res) => {
-        console.log(res)
-        this.numberValidateForm.image = res.image
-        if (res.res === 0) {
-          this.$message({
-            type: 'success',
-            message: '上传成功'
-          })
-          // this.getDesignerList()
-        }
-      })
+      // designerListUpload(this.designerParams1, formData).then((res) => {
+      //   console.log(res)
+      //   this.numberValidateForm.image = res.image
+      //   if (res.res === 0) {
+      //     this.$message({
+      //       type: 'success',
+      //       message: '上传成功'
+      //     })
+      //     // this.getDesignerList()
+      //   }
+      // })
     },
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw)
@@ -241,6 +238,14 @@ export default {
         border: none;
       }
     }
+  }
+  .typeImg{
+    height: 150px;
+    border-radius: 5px;
+    overflow: hidden;
+    display: table-cell;
+    width: 300px;
+    vertical-align: middle;
   }
   .addbtn{
     height: 3vh;

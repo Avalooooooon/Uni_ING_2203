@@ -158,7 +158,7 @@ import RecordDetail from './RecordDetail'
 import RecordWithdraw from './RecordWithdraw'
 
 import { getToken } from '@/utils/auth'
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
   name: 'MatRecord',
