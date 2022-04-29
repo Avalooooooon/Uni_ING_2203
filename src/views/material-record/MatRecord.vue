@@ -40,10 +40,10 @@
 
         <el-form-item label="使用时间" prop="usedate">
           <el-date-picker
-            v-model="form.date"
+            v-model="form.usedate"
             size="mini"
             class="filterBox"
-            type="usedate"
+            type="date"
             placeholder="选择日期"
           />
         </el-form-item>
