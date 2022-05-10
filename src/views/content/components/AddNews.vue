@@ -13,8 +13,7 @@
             class="uploadsinglebtn"
             listid="1"
             @click="saveAppDetail('numberValidateForm')"
-            >提交</el-button
-          >
+          >提交</el-button>
         </div>
       </div>
     </div>
@@ -51,7 +50,7 @@
               :http-request="uploadFile"
               :on-change="handlePictureCardPreview"
             >
-              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+              <img v-if="imageUrl" :src="imageUrl" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon" />
             </el-upload>
           </el-form-item>
@@ -83,7 +82,6 @@
             />
           </el-form-item> -->
 
-
         </el-form>
       </div>
       <div class="content-right">
@@ -103,26 +101,26 @@
 import {
   addNewsList,
   newsListUpload,
-  setNewsImage,
-} from "@/api/appnews";
-import { getToken } from "@/utils/auth";
-import Tinymce from "@/components/Tinymce";
-import axios from "axios";
+  setNewsImage
+} from '@/api/appnews'
+import { getToken } from '@/utils/auth'
+import Tinymce from '@/components/Tinymce'
+import axios from 'axios'
 
 // import axios from 'axios'
 
 export default {
-  name: "AddNews",
+  name: 'AddNews',
   components: { Tinymce },
-  props: ["listid"],
+  props: ['listid'],
   data() {
     return {
-      url: "https://www.bizspace.cn",
-      imageUrl: "",
+      url: 'https://www.bizspace.cn',
+      imageUrl: '',
       numberValidateForm: {
-        name: "",
-        content: "",
-        image: "",
+        name: '',
+        content: '',
+        image: ''
         // major: "",
         // position: "",
         // country: "",
@@ -130,30 +128,30 @@ export default {
       // 上传列表
       filelist: [],
       rules: {
-        name: [{ required: true, message: "名称不能为空", trigger: "blur" }],
-        image: [{ required: true, message: " ", trigger: "blur" }],
+        name: [{ required: true, message: '名称不能为空', trigger: 'blur' }],
+        image: [{ required: true, message: ' ', trigger: 'blur' }]
       },
 
       // 发送给后端的数据
       newsParams: {
-        bizid: "uniwarm",
+        bizid: 'uniwarm',
         token: getToken(),
-        listid: this.listid,
+        listid: this.listid
       },
       newsParams1: {
-        bizid: "uniwarm",
+        bizid: 'uniwarm',
         token: getToken(),
-        listid: 1,
+        listid: 1
       },
 
       // 后端传来的数据
-      newsData: [],
-    };
+      newsData: []
+    }
   },
 
   methods: {
     toback() {
-      this.$router.go(-1);
+      this.$router.go(-1)
     },
 
     // 点击保存按钮
@@ -162,126 +160,126 @@ export default {
         // if (valid) {
         if (this.numberValidateForm.name) {
           if (this.numberValidateForm.image) {
-            this.$confirm("确定提交本次新增？", "提示", {
-              confirmButtonText: "确定",
-              cancelButtonText: "取消",
-              type: "warning",
+            this.$confirm('确定提交本次新增？', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'warning'
             })
               .then(() =>
                 axios({
-                  url: "/api/v3/news/erp_add",
-                  method: "post",
+                  url: '/api/v3/news/erp_add',
+                  method: 'post',
                   params: {
-                    bizid: "uniwarm",
+                    bizid: 'uniwarm',
                     token: getToken(),
-                    listid: this.listid,
+                    listid: this.listid
                   },
                   data: this.numberValidateForm,
                   headers: {
-                    "Content-Type": "application/json",
-                  },
+                    'Content-Type': 'application/json'
+                  }
                 }).then((res) => {
-                  console.log(this.newsParams);
-                  console.log(this.numberValidateForm);
-                  console.log(res);
+                  console.log(this.newsParams)
+                  console.log(this.numberValidateForm)
+                  console.log(res)
                   if (res.data.res === 0) {
-                    this.$router.go(-1);
+                    this.$router.go(-1)
                     this.$message({
-                      type: "success",
-                      message: "上传成功",
-                    });
+                      type: 'success',
+                      message: '上传成功'
+                    })
                   } else {
                     this.$message({
-                      type: "error",
-                      message: "上传失败",
-                    });
+                      type: 'error',
+                      message: '上传失败'
+                    })
                   }
                 })
               )
               .catch(() => {
                 this.$message({
-                  type: "info",
-                  message: "已取消上传",
-                });
-              });
+                  type: 'info',
+                  message: '已取消上传'
+                })
+              })
           } else {
-            this.$alert("请上传资讯照片");
-            return false;
+            this.$alert('请上传资讯照片')
+            return false
           }
         } else {
-          console.log("error submit!!");
-          return false;
+          console.log('error submit!!')
+          return false
         }
-      });
+      })
     },
 
     uploadFile(file) {
-      console.log(file);
-      var formData = new FormData();
+      console.log(file)
+      var formData = new FormData()
       // formData.append("headimg", file.file);
-      formData.append("headimg", this.filelist[0].raw);
+      formData.append('headimg', this.filelist[0].raw)
       newsListUpload(this.newsParams1, formData).then((res) => {
-        console.log(res);
-        this.numberValidateForm.image = res.image;
-        this.imageUrl = this.url + res.image;
-        console.log(this.imageUrl);
+        console.log(res)
+        this.numberValidateForm.image = res.image
+        this.imageUrl = this.url + res.image
+        console.log(this.imageUrl)
         if (res.res === 0) {
           this.$message({
-            type: "success",
-            message: "上传成功",
-          });
+            type: 'success',
+            message: '上传成功'
+          })
         }
-      });
+      })
     },
 
     handleAvatarSuccess() {
-      this.numberValidateForm.image = this.url + res.image;
+      this.numberValidateForm.image = this.url + res.image
       // this.$refs.numberValidateForm.resetFields(); //清除图片校验文字
     },
 
     // on-change事件，判断图片类型、大小、尺寸是否符合要求
     handlePictureCardPreview(file) {
-      const isJPG = file.raw.type === "image/jpeg" || 'image/png';
-      const isLt5M = file.raw.size / 1024 / 1024 < 5;
+      const isJPG = file.raw.type === 'image/jpeg' || 'image/png'
+      const isLt5M = file.raw.size / 1024 / 1024 < 5
 
       if (!isJPG) {
-        this.$message.error("上传的照片只能是 JPG 格式!");
-        this.filelist.pop();
-        return false;
+        this.$message.error('上传的照片只能是 JPG 格式!')
+        this.filelist.pop()
+        return false
       }
       if (!isLt5M) {
-        this.$message.error("上传的照片大小不能超过 5MB!");
-        this.filelist.pop();
-        return false;
+        this.$message.error('上传的照片大小不能超过 5MB!')
+        this.filelist.pop()
+        return false
       }
 
-      let url = URL.createObjectURL(file.raw);
-      new Promise(function (resolve, reject) {
-        let width = 300;
-        let height = 400;
-        let img = new Image();
-        img.onload = function () {
-          let valid = img.width === width && img.height === height;
-          valid ? resolve() : reject();
-        };
-        img.src = url;
+      const url = URL.createObjectURL(file.raw)
+      new Promise(function(resolve, reject) {
+        const width = 300
+        const height = 400
+        const img = new Image()
+        img.onload = function() {
+          const valid = img.width === width && img.height === height
+          valid ? resolve() : reject()
+        }
+        img.src = url
       }).then(
         () => {
-          this.filelist.push(file);
-          let truefile = this.filelist[0];
-          console.log(truefile);
-          this.uploadFile(truefile);
-          return file;
+          this.filelist.push(file)
+          const truefile = this.filelist[0]
+          console.log(truefile)
+          this.uploadFile(truefile)
+          return file
         },
         () => {
-          this.$message.error("上传图片尺寸只能是 750*1000px !");
-          this.filelist.pop();
-          return Promise.reject();
+          this.$message.error('上传图片尺寸只能是 750*1000px !')
+          this.filelist.pop()
+          return Promise.reject()
         }
-      );
-    },
-  },
-};
+      )
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

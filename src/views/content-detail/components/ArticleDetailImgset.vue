@@ -1,6 +1,6 @@
 <template>
-<!-- Dropzone将查找所有的 class 属性中包含 dropzone 的表单元素,自动把自己加入到表单元素上-->
-<!-- 并且拖拽进的这些上传文件将被发送到 action 这个特殊的参数. 这些上传文件将被正常处理  -->
+  <!-- Dropzone将查找所有的 class 属性中包含 dropzone 的表单元素,自动把自己加入到表单元素上-->
+  <!-- 并且拖拽进的这些上传文件将被发送到 action 这个特殊的参数. 这些上传文件将被正常处理  -->
   <div :id="id" :ref="id" :action="url" class="dropzone">
     <input type="file" name="file">
   </div>
@@ -23,7 +23,7 @@ export default {
       type: String,
       required: true
     },
-    clickable: {  //设置 true, dropzone 元素本身将可以点击, 如果设置 false dropzone没有地方可供点击. 
+    clickable: { // 设置 true, dropzone 元素本身将可以点击, 如果设置 false dropzone没有地方可供点击.
       type: Boolean,
       default: true
     },
@@ -31,15 +31,15 @@ export default {
       type: String,
       default: '上传图片'
     },
-    acceptedFiles: {  //上传的类型
+    acceptedFiles: { // 上传的类型
       type: String,
       default: ''
     },
-    thumbnailHeight: {  // 就像 thumbnailWidth一样. 如果为空, 将不能重置尺寸.
+    thumbnailHeight: { // 就像 thumbnailWidth一样. 如果为空, 将不能重置尺寸.
       type: Number,
       default: 200
     },
-    thumbnailWidth: {  // 默认 null, 设置缩略图的缩略比[设置width，配合上面的thumbnailHeight一起使用].
+    thumbnailWidth: { // 默认 null, 设置缩略图的缩略比[设置width，配合上面的thumbnailHeight一起使用].
       type: Number,
       default: 200
     },
@@ -47,15 +47,15 @@ export default {
       type: Boolean,
       default: true
     },
-    maxFilesize: {  //MB
+    maxFilesize: { // MB
       type: Number,
       default: 2
     },
-    maxFiles: { //一次性上传的文件数量上限
+    maxFiles: { // 一次性上传的文件数量上限
       type: Number,
       default: 3
     },
-    autoProcessQueue: {  // 当设置 false 你必须自己像这样 myDropzone.processQueue() 的调用来上传队列中的上传文件. 请参阅有关处理队列的详细信息.
+    autoProcessQueue: { // 当设置 false 你必须自己像这样 myDropzone.processQueue() 的调用来上传队列中的上传文件. 请参阅有关处理队列的详细信息.
       type: Boolean,
       default: true
     },

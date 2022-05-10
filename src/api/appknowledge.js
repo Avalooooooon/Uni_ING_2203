@@ -57,8 +57,6 @@ export function delKnowledgeList(knowledgeParams) {
   })
 }
 
-
-
 // 上传图片
 export function knowledgeListUpload(knowledgeParams1, headimg) {
   // console.log(knowledgeParams1)

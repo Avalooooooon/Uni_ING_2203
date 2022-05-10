@@ -104,7 +104,7 @@ import {
 } from '@/api/appdesigner'
 import { getToken } from '@/utils/auth'
 import Tinymce from '@/components/Tinymce'
-import axios from "axios";
+import axios from 'axios'
 // import axios from 'axios'
 
 export default {

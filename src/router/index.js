@@ -542,7 +542,7 @@ export const constantRoutes = [{
       meta: {
         title: '投放申请-选择素材',
         activeMenu: '/material/matapply'
-      },
+      }
       // props(route) {
       //   return {
       //     matid: route.query.matid,

@@ -57,8 +57,6 @@ export function delDesignerList(designerParams) {
   })
 }
 
-
-
 // 上传图片
 export function designerListUpload(designerParams1, headimg) {
   // console.log(designerParams1)

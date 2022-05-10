@@ -116,8 +116,8 @@
               <el-button
                 :id="scope.row.id"
                 class="resetbtn"
-                @click="showWithdrawDialog"
                 icon="el-icon-delete"
+                @click="showWithdrawDialog"
               >删除</el-button>
             </div>
           </template>

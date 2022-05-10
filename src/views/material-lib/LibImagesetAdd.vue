@@ -4,8 +4,8 @@
     <div class="topbar-wrapper">
       <div class="back" @click="toback">
         <!-- <span class="lt">&lt;&nbsp;</span>  -->
-<!--        <i class="el-icon-arrow-left" />-->
-<!--        素材详情-->
+        <!--        <i class="el-icon-arrow-left" />-->
+        <!--        素材详情-->
       </div>
       <div class="btns">
         <div class="btnsimg">
@@ -70,7 +70,7 @@
             :before-upload="beforeAvatarUpload"
             :http-request="uploadFile"
           >
-<!--            <img v-if="numberValidateForm" :src="url + numberValidateForm.image" class="avatar">-->
+            <!--            <img v-if="numberValidateForm" :src="url + numberValidateForm.image" class="avatar">-->
             <i class="el-icon-plus avatar-uploader-icon" />
           </el-upload>
         </el-form-item>

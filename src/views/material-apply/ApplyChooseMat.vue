@@ -5,12 +5,16 @@
       <div class="title">选择素材</div>
       <div class="btns">
         <div class="btnsimg">
-          <el-button type="primary" class="cancelbtn" @click="toMaterialApply"
-            >取消</el-button
-          >
-          <el-button type="primary" class="submitbtn" @click="submitMatApply"
-            >选择</el-button
-          >
+          <el-button
+            type="primary"
+            class="cancelbtn"
+            @click="toMaterialApply"
+          >取消</el-button>
+          <el-button
+            type="primary"
+            class="submitbtn"
+            @click="submitMatApply"
+          >选择</el-button>
         </div>
       </div>
     </div>
@@ -226,8 +230,8 @@ export default {
     // 点击右上取消按钮，返回素材库页
     toMaterialApply(event) {
       this.$router.push({
-        name: "MatApply",
-      });
+        name: 'MatApply'
+      })
     },
     // 点击右上提交按钮，返回投放申请页
     submitMatApply(event) {

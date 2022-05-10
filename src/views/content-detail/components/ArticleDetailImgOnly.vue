@@ -17,14 +17,13 @@
                   </MDinput>
                 </el-form-item>
               </el-col>
-              <el-col :span="14">
-              </el-col>
+              <el-col :span="14" />
 
               <el-col class="twobutton" :span="4">
-                <el-button class="cancelbtn" v-loading="loading" type="warning" @click="cancelForm">
+                <el-button v-loading="loading" class="cancelbtn" type="warning" @click="cancelForm">
                   取消
                 </el-button>
-                <el-button class="donebtn" v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm">
+                <el-button v-loading="loading" class="donebtn" style="margin-left: 10px;" type="success" @click="submitForm">
                   完成
                 </el-button>
               </el-col>
@@ -57,7 +56,6 @@
           </el-col>
         </el-row>
 
-
       </div>
     </el-form>
   </div>
@@ -84,7 +82,7 @@ const defaultForm = {
 
 export default {
   name: 'ArticleDetail',
-  components: { MDinput, Upload},
+  components: { MDinput, Upload },
   props: {
     isEdit: {
       type: Boolean,
@@ -125,7 +123,7 @@ export default {
       rules: {
         image_uri: [{ validator: validateRequire }],
         title: [{ validator: validateRequire }],
-        content: [{ validator: validateRequire }],
+        content: [{ validator: validateRequire }]
       },
       tempRoute: {}
     }
@@ -154,6 +152,9 @@ export default {
     // Because if you enter this page and quickly switch tag, may be in the execution of the setTagsViewTitle function, this.$route is no longer pointing to the current page
     // https://github.com/PanJiaChen/vue-element-admin/issues/1221
     this.tempRoute = Object.assign({}, this.$route)
+  },
+  beforeDestroy() {
+    this._timer && clearTimeout(this._timer)
   },
   methods: {
     fetchData(id) {
@@ -202,23 +203,23 @@ export default {
     },
     cancelForm() {
       this.$confirm('确定要取消编辑吗？', '提示', {
-          cancelButtonText: '取消',
-          confirmButtonText: '确定',
-          type: 'warning'
-        }).then(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消编辑',
-            showClose: true,
-            duration: 1000
-          });
-          setTimeout(()=>{this.$router.go(-1);},"500");
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '取消操作'
-          });          
-        });
+        cancelButtonText: '取消',
+        confirmButtonText: '确定',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消编辑',
+          showClose: true,
+          duration: 1000
+        })
+        setTimeout(() => { this.$router.go(-1) }, '500')
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消操作'
+        })
+      })
 
       // this.postForm.status = 'draft'
     },
@@ -228,9 +229,6 @@ export default {
         this.userListOptions = response.data.items.map(v => v.name)
       })
     }
-  },
-  beforeDestroy() {
-    this._timer && clearTimeout(this._timer);
   }
 }
 </script>
@@ -253,7 +251,7 @@ $upload-height: 13vw;
       ::v-deep .el-form-item{
         margin:0;
       }
-      
+
       // 调整输入的文字的大小和输入框位置
       ::v-deep .material-input{
           font-size:14px;
@@ -351,8 +349,6 @@ $upload-height: 13vw;
         height: $upload-height;
       }
     }
-
-
 
     .postInfo-container {
       position: relative;

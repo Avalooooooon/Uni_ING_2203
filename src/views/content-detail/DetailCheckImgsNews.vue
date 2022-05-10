@@ -82,7 +82,6 @@
             />
           </el-form-item> -->
 
-
         </el-form>
       </div>
       <div class="content-right">
@@ -106,7 +105,7 @@ import {
 } from '@/api/appnews'
 import { getToken } from '@/utils/auth'
 import Tinymce from '@/components/Tinymce'
-import axios from "axios";
+import axios from 'axios'
 // import axios from 'axios'
 
 export default {
@@ -120,7 +119,7 @@ export default {
       numberValidateForm: {
         name: '',
         content: '',
-        image: '',
+        image: ''
         // major: '',
         // position: '',
         // country: ''

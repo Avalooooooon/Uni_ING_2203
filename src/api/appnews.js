@@ -57,8 +57,6 @@ export function delNewsList(newsParams) {
   })
 }
 
-
-
 // 上传图片
 export function newsListUpload(newsParams1, headimg) {
   console.log(newsParams1)
