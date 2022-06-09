@@ -262,7 +262,7 @@ export default {
 
 .moudle-wrapper {
   width: 100%;
-  height: 47%;
+  height: 35%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -278,9 +278,9 @@ export default {
     flex-wrap: nowrap;
     justify-content: space-between;
     align-content: flex-start;
-    // border: 1px solid blue;
+     //border: 1px solid blue;
 
-    width: 16%;
+    width: 20%;
     height: 100%;
     padding: 1% 5px 0 5px;
     text-align: center;
@@ -289,13 +289,13 @@ export default {
     // background-color: antiquewhite;
     .appimg {
       width: 100%;
-      height: 79%;
-      // border: 1px solid red;
+      height: 60%;
+       //border: 1px solid red;
       padding-bottom: 2px;
     }
     .textversion {
       font-size: 14px;
-      height: 9%;
+      height: 15%;
       display: flex;
       justify-content: center;
       flex-direction: column;
@@ -306,7 +306,8 @@ export default {
     }
     .timeversion {
       font-size: 12px;
-      height: 5%;
+      height: 10%;
+      line-height: 10%;
       //border: 1px solid red;
       font-weight: bold;
       margin: 0;

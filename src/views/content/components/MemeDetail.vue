@@ -18,12 +18,15 @@
         <i class="el-icon-plus" @click="dialogVisible = true" />
 
         <!-- 编辑弹窗 -->
-        <el-dialog title="新增系列" :visible.sync="dialogVisible">
+        <el-dialog title="新增系列" :close-on-click-modal="false" :visible.sync="dialogVisible">
           <el-form :model="form">
             <el-form-item label="系列名称：" :label-width="formLabelWidth">
               <el-input
+                type="textarea"
                 v-model="form.newSetName"
                 placeholder="请输入新系列名称（40字以内）"
+                maxlength="40"
+                show-word-limit
                 autocomplete="off"
               />
             </el-form-item>
@@ -33,7 +36,6 @@
             <el-button
               type="primary"
               @click="
-                dialogVisible = false;
                 adddetailimgset();
               "
             >确 定</el-button>
@@ -168,22 +170,30 @@ export default {
 
     // 添加新系列
     adddetailimgset() {
-      this.memeParamsAdd.se_name = this.form.newSetName
-      addMemeList(this.memeParamsAdd)
-        .then((response) => {
-          // console.log(response.data);
-          fetchMemeList(this.memeParamsFetch)
-            .then((response) => {
-              this.modulesData = response.data
-            })
-            .catch((err) => {
-              console.log(err)
-            })
+      if (this.form.newSetName === '') {
+        this.$message({
+          message: '系列名称不能为空',
+          type: 'warning'
         })
-        .catch((err) => {
-          console.log(err)
-        })
-      this.form.newSetName = ''
+      } else {
+        this.memeParamsAdd.se_name = this.form.newSetName
+        addMemeList(this.memeParamsAdd)
+          .then((response) => {
+            // console.log(response.data);
+            fetchMemeList(this.memeParamsFetch)
+              .then((response) => {
+                this.modulesData = response.data
+                this.dialogVisible = false
+              })
+              .catch((err) => {
+                console.log(err)
+              })
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+        this.form.newSetName = ''
+      }
     },
 
     // 删除当前系列
@@ -376,9 +386,16 @@ export default {
 
     // 模块主图下的两行文字
     .textversion {
+      width: 100%;
+      //border: 1px solid black;
+      word-wrap:break-word;
+      overflow:hidden; //超出的文本隐藏
+      text-overflow:ellipsis; //溢出用省略号显示
+      white-space:nowrap; //溢出不换行
       font-size: 14px;
       font-weight: bold;
       margin: 1.5vh 0 1vh 0;
+      padding-bottom: 5px;
     }
     .texttime {
       font-size: 10px;

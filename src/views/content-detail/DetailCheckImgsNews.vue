@@ -354,15 +354,15 @@ export default {
         .avatar-uploader-icon {
           font-size: 28px;
           color: #8c939d;
-          width: 200px;
-          height: 278px;
-          line-height: 278px;
+          width: 350px;
+          height: 200px;
+          line-height: 200px;
           text-align: center;
         }
         // 主图
         .avatar {
-          width: 200px;
-          height: 278px;
+          width: 350px;
+          height: 200px;
           display: block;
         }
 

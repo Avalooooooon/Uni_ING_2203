@@ -57,11 +57,11 @@ export const constantRoutes = [{
   component: () => import('@/views/login/auth-redirect'),
   hidden: true
 },
-{
-  path: '/404',
-  component: () => import('@/views/error-page/404'),
-  hidden: true
-},
+// {
+//   path: '/404',
+//   component: () => import('@/views/error-page/404'),
+//   hidden: true
+// },
 {
   path: '/401',
   component: () => import('@/views/error-page/401'),
@@ -542,7 +542,7 @@ export const constantRoutes = [{
       meta: {
         title: '投放申请-选择素材',
         activeMenu: '/material/matapply'
-      },
+      }
       // props(route) {
       //   return {
       //     matid: route.query.matid,

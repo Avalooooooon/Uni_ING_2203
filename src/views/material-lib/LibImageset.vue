@@ -65,7 +65,7 @@
               <span>点击选择图片</span>
             </div>
           </div>
-          <div style="width: 100%;margin-top: 30px;">（上传格式：仅支持jpg格式，分辨率不超过 200 * 200，大小不超过 299M</div>
+          <div style="width: 100%;margin-top: 30px;">（ 上传格式：仅支持jpg格式，分辨率不超过 200 * 200，大小不超过 299M ）</div>
           <el-upload
             class="upload-demo"
             action="https://jsonplaceholder.typicode.com/posts/"

@@ -161,6 +161,9 @@ export default {
             .catch((e) => {
               this.tool.log(e)
               this.loading = false
+              if (e.response) {
+                this.$message.warning('账号或者密码输入有误')
+              }
             })
             .catch(() => {
               this.loading = false

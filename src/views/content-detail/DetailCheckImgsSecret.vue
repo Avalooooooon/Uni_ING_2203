@@ -8,12 +8,12 @@
       </div>
       <div class="btns">
         <div class="btnsimg">
-          <el-button
-            v-if="isDeleteing"
-            type="primary"
-            class="uploadsinglebtn"
-            @click="savedetail"
-          >保存</el-button>
+          <!--          <el-button-->
+          <!--            v-if="isDeleteing"-->
+          <!--            type="primary"-->
+          <!--            class="uploadsinglebtn"-->
+          <!--            @click="savedetail"-->
+          <!--          >保存</el-button>-->
           <el-button
             type="primary"
             class="uploadsinglebtn"
@@ -21,11 +21,11 @@
             detailname="品牌灵魂v2"
             @click="dialogVisible = true"
           >上传图片</el-button>
-          <el-button
-            type="primary"
-            class="deletesinglebtn"
-            @click="isdeleteimg"
-          >删除图片</el-button>
+          <!--          <el-button-->
+          <!--            type="primary"-->
+          <!--            class="deletesinglebtn"-->
+          <!--            @click="isdeleteimg"-->
+          <!--          >删除图片</el-button>-->
         </div>
         <!--        <div class="btnsset">-->
         <!--          <el-button-->
@@ -43,27 +43,77 @@
       </div>
     </div>
 
+    <!--    &lt;!&ndash;上传图片弹窗&ndash;&gt;-->
+    <!--    <el-dialog-->
+    <!--      title="上传图片"-->
+    <!--      :visible.sync="dialogVisible"-->
+    <!--      width="30%"-->
+    <!--      :before-close="handleClose"-->
+    <!--    >-->
+    <!--      <div style="width: 100%; text-align: center">-->
+    <!--        <el-upload-->
+    <!--          class="avatar-uploader"-->
+    <!--          list-type="picture-card"-->
+    <!--          action="/v3upload/admin_wx_wallpaper"-->
+    <!--          :show-file-list="false"-->
+    <!--          :on-success="handleAvatarSuccess"-->
+    <!--          :before-upload="beforeAvatarUpload"-->
+    <!--          :http-request="uploadFile"-->
+    <!--        >-->
+    <!--          <img v-if="imageUrl" :src="imageUrl" class="avatar">-->
+    <!--          <i v-else class="el-icon-plus avatar-uploader-icon" />-->
+    <!--        </el-upload>-->
+    <!--        <div style="width: 100%;margin-top: 30px">分辨率推荐1125 x 2436像素（竖屏），大小不超过 2MB</div>-->
+    <!--      </div>-->
+    <!--    </el-dialog>-->
+
     <!--上传图片弹窗-->
     <el-dialog
       title="上传图片"
       :visible.sync="dialogVisible"
       width="30%"
       :before-close="handleClose"
+      :close-on-click-modal="false"
     >
-      <div style="width: 100%; text-align: center">
-        <el-upload
-          class="avatar-uploader"
-          list-type="picture-card"
-          action="/v3upload/admin_wx_wallpaper"
-          :show-file-list="false"
-          :on-success="handleAvatarSuccess"
-          :before-upload="beforeAvatarUpload"
-          :http-request="uploadFile"
-        >
-          <img v-if="imageUrl" :src="imageUrl" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon" />
-        </el-upload>
-        <div style="width: 100%;margin-top: 30px">分辨率推荐1125 x 2436像素（竖屏），大小不超过 2MB</div>
+      <div style="width: 100%; padding-bottom: 50px; text-align: center;">
+
+        <div v-if="beforeUp" class="beforeUp">
+          <div v-if="showEmpty" class="showEmpty">
+            <div class="typeImg">
+              <img style="width: 30px;height: 30px;vertical-align:middle; margin-bottom: 20px" src="../../assets/tupian.png" alt=""><br>
+              <!--<span>点击选择图片</span>-->
+            </div>
+          </div>
+          <div v-if="showEmpty" style="width: 100%;margin-top: 30px;">（ 上传格式：仅支持jpg格式，分辨率不超过 200 * 200，大小不超过 299M ）</div>
+
+          <el-upload
+            ref="upload"
+            class="upload-demo"
+            action="/v3upload/admin_wx_wallpaper"
+            :before-remove="beforeRemove"
+            multiple
+            :auto-upload="false"
+            :file-list="fileList"
+            :on-change="handleChange"
+            :on-remove="onRemove"
+          >
+            <el-button v-if="showEmpty" class="addbtn" type="primary">点击上传</el-button>
+            <div v-if="showHave" class="continueBtn">
+              <el-button class="showHaveAdd" type="primary">添加图片</el-button>
+            </div>
+          </el-upload>
+          <div v-if="showHave" class="uploadBtn" style="width: 100%; margin-top: 10vh;">
+            <el-button class="showHaveAddBtn" type="primary" @click="submitUpload()">开始上传</el-button>
+          </div>
+        </div>
+        <div v-if="loading" style="width: 100%">正在上传图片，请耐心等待...</div>
+        <div v-if="afterUp" style="width: 300px;margin: 0 auto;text-align: center">
+          <div class="typeImg">
+            <img style="width: 60px;height: 60px;vertical-align:middle; margin-bottom: 40px" src="../../assets/success.png" alt="">
+            <div>上传成功</div>
+          </div>
+        </div>
+
       </div>
     </el-dialog>
 
@@ -77,11 +127,11 @@
           </div>
         </div>
       </div>
-      <div class="footer" v-if="showPag">
+      <div v-if="showPag" class="footer">
         <el-pagination
           background
           layout="prev, pager, next"
-          :current-page="secretParams.page"
+          :current-page="page"
           :page-size="pagerow"
           :total="total"
           @current-change="handleCurrentChange"
@@ -98,6 +148,7 @@ import {
   delSecretListDetail
 } from '@/api/wxsecret'
 import { getToken } from '@/utils/auth'
+import { morningListUpload } from '@/api/wxmorning'
 // import axios from 'axios'
 
 export default {
@@ -106,13 +157,19 @@ export default {
 
   data() {
     return {
-      isDeleteing: false, // 删除状态
+      isDeleteing: true, // 删除状态
       showPag: false,
+      showEmpty: true,
+      showHave: false,
+      beforeUp: true,
+      afterUp: false,
+      hidden: true,
+      loading: false,
       // 发送给后端的数据
       secretParams: {
         bizid: 'uniwarm',
         token: getToken(),
-        page: 1
+        page: 0
       },
       secretParams1: {
         bizid: 'uniwarm',
@@ -130,9 +187,10 @@ export default {
       imgsData: [],
       total: 0,
       pagerow: 20,
-
+      page: 1,
       dialogVisible: false, // 上传图片弹窗
-      imageUrl: ''
+      imageUrl: '',
+      fileList: []
     }
   },
 
@@ -160,7 +218,7 @@ export default {
     },
 
     getSecretList() {
-      this.secretParams.page = this.secretParams.page - 1
+      this.secretParams.page = this.page - 1
       fetchSecretListDetail(this.secretParams)
         .then((response) => {
           console.log(response.data)
@@ -172,7 +230,7 @@ export default {
           } else {
             this.showPag = false
           }
-          this.secretParams.page = this.secretParams.page + 1
+          // this.secretParams.page = this.secretParams.page + 1
         })
         .catch((err) => {
           console.log(err)
@@ -181,7 +239,7 @@ export default {
     // 分页器
     handleCurrentChange(currentPage) {
       console.log(currentPage)
-      this.secretParams.page = currentPage
+      this.page = currentPage
       console.log(this.secretParams.page)
       this.getSecretList()
     },
@@ -197,23 +255,63 @@ export default {
     // }
     // },
 
-    uploadFile(file) {
-      console.log(file)
-      var formData = new FormData()
-      formData.append('headimg', file.file)
-      secretListUpload(this.secretParams1, formData).then((res) => {
-        console.log(res)
-        this.imageUrl = this.url + res.image
-        if (res.res === 0) {
-          this.$message({
-            type: 'success',
-            message: '上传成功'
-          })
-          this.dialogVisible = false
-          this.imageUrl = ''
-          this.getSecretList()
-        }
-      })
+    handleChange(file) {
+      console.log('tett', this.fileList)
+      console.log('handleChange::file', file)
+      this.fileList.push(file)
+      console.log('handleChange', this.fileList)
+      this.showEmpty = this.fileList.length === 0
+      if (this.fileList.length !== 0) {
+        this.showHave = true
+      }
+      console.log(this.showEmpty)
+    },
+    // 删除文件之前的钩子
+    beforeRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${file.name}？`)
+    },
+    onRemove(file, fileList) {
+      this.fileList = fileList
+      this.showEmpty = this.fileList.length === 0
+    },
+    // 延迟的方法
+    sleep(numberMillis) {
+      var now = new Date()
+      var exitTime = now.getTime() + numberMillis
+      // eslint-disable-next-line no-constant-condition
+      while (true) {
+        now = new Date()
+        if (now.getTime() > exitTime) return
+      }
+    },
+    submitUpload() {
+      this.beforeUp = false
+      this.afterUp = true
+      console.log('fileList', this.fileList)
+      for (let i = 0; i < this.fileList.length; i++) {
+        const file = this.fileList[i]
+        const formData = new FormData()
+        formData.append('headimg', file.raw)
+        console.log(formData)
+        secretListUpload(this.secretParams1, formData).then((res) => {
+          console.log(res)
+          if (res.res === 0) {
+            this.getSecretList()
+            this.fileList.length = 0
+            this.fileList = []
+            this.showEmpty = true
+          } else {
+            this.$message({
+              type: 'error',
+              message: '上传失败'
+            })
+          }
+        })
+      }
+      this.sleep(2000)
+      // this.loading = false
+      this.afterUp = true
+      this.beforeUp = false
     },
     handleAvatarSuccess(res, file) {
       console.log(file)
@@ -236,15 +334,14 @@ export default {
 
     // 关闭上传图片弹窗
     handleClose(done) {
-      this.$confirm('确认关闭？', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then((_) => {
-          done()
-        })
-        .catch((_) => {})
+      done()
+      this.fileList.length = 0
+      this.fileList = []
+      this.showEmpty = true
+      this.showHave = false
+      this.beforeUp = true
+      this.afterUp = false
+      this.loading = false
     },
 
     // 点击删除图片按键
@@ -294,6 +391,9 @@ export default {
                 message: '删除成功'
               })
               this.dialogVisible = false
+              const totalPage = Math.ceil((this.total - 1) / this.pagerow)
+              const currentPage = this.page > totalPage ? totalPage : this.page
+              this.page = currentPage < 0 ? 0 : currentPage
               this.getSecretList()
             }
           })
@@ -346,6 +446,88 @@ export default {
   height: calc(100vh - 50px);
   overflow-y: scroll;
   margin: 0 1%;
+}
+
+.showEmpty{
+  width: 50%;
+  //border: 1px solid blue;
+  margin: 0 auto;
+  .typeImg{
+    width: 100%;
+    height: 150px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    line-height: 150px;
+    //overflow: hidden;
+    //display: table-cell;
+    //vertical-align: middle;
+    //padding-bottom: 30px;
+  }
+}
+.upload-demo{
+  //border: 1px solid black;
+  position: relative;
+  .addbtn {
+    height: 3vh;
+    width: 10vw;
+    padding: 0;
+    background-color: #253647;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-top: 40px;
+    position: absolute;
+    bottom: -5vh;
+    right: calc(50% - 5vw);
+  }
+  .continueBtn{
+    width: 100%;
+    //border:1px solid black;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;//每个项目两侧的间隔相等align-items: center;
+    position: absolute;
+    bottom: -8vh;
+    right: 0;
+    .showHaveAdd{
+      width: 14vw;
+      height: 3vh;
+      padding: 0;
+      border: none;
+      border: 1px solid #253647;
+      background-color: white;
+      color: #253647;
+    }
+    .showHaveAddBtn{
+      width: 14vw;
+      height: 3vh;
+      padding: 0;
+      border: none;
+      background-color: #253647;
+      color: white;
+    }
+    //.showHaveUploadBtn{
+    //  width: 14vw;
+    //  height: 3vh;
+    //  padding: 0;
+    //  border: none;
+    //  background-color: #253647;
+    //  color: white;
+    //  display: flex;
+    //  justify-content: flex-end;
+    //}
+  }
+}
+
+.uploadBtn{
+  .showHaveAddBtn{
+    width: 14vw;
+    height: 3vh;
+    padding: 0;
+    border: none;
+    background-color: #253647;
+    color: white;
+  }
 }
 
 // 顶部区域
@@ -459,11 +641,13 @@ export default {
         flex-direction: column;
         justify-content: center;
 
-        width: 100%;
+        width: 40px;
         position: absolute;
-        bottom: 0px;
-        height: 30px;
-        line-height: 30px;
+        top: 0;
+        right: 0;
+        border-radius: 50%;
+        height: 40px;
+        line-height: 40px;
         margin: 0;
         background: rgba(59, 60, 61, 0.5);
         z-index: 999;

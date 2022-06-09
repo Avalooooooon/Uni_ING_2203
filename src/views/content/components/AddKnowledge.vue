@@ -4,7 +4,7 @@
     <div class="topbar-wrapper">
       <div class="back" @click="toback">
         <i class="el-icon-arrow-left" />
-        新增：保养小知识
+        新增保养小知识
       </div>
       <div class="btns">
         <div class="btnsimg">
@@ -53,6 +53,7 @@
               <img v-if="imageUrl" :src="imageUrl" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon" />
             </el-upload>
+            <div style="margin-top: 20px">（ 上传图片推荐尺寸：700 * 395 分辨率 ） </div>
           </el-form-item>
 
           <!-- <el-form-item label="专业" prop="major">
@@ -255,8 +256,8 @@ export default {
 
       const url = URL.createObjectURL(file.raw)
       new Promise(function(resolve, reject) {
-        const width = 300
-        const height = 400
+        const width = 700
+        const height = 394
         const img = new Image()
         img.onload = function() {
           const valid = img.width === width && img.height === height
@@ -272,7 +273,7 @@ export default {
           return file
         },
         () => {
-          this.$message.error('上传图片尺寸只能是 750*1000px !')
+          this.$message.error('上传图片推荐尺寸为 700 * 395 且为 jpg 格式 !')
           this.filelist.pop()
           return Promise.reject()
         }
@@ -362,27 +363,27 @@ export default {
 
         // 照片上传组件
         .avatar-uploader .el-upload {
-          border: 1px dashed #d9d9d9;
+          border: 1px dashed gray;
           border-radius: 6px;
           cursor: pointer;
           position: relative;
           overflow: hidden;
         }
         .avatar-uploader .el-upload:hover {
-          border-color: #409eff;
+          border-color: lightgray;
         }
         .avatar-uploader-icon {
           font-size: 28px;
           color: #8c939d;
-          width: 200px;
-          height: 278px;
-          line-height: 278px;
+          width: 350px;
+          height: 200px;
+          line-height: 200px;
           text-align: center;
         }
         // 主图
         .avatar {
-          width: 200px;
-          height: 278px;
+          width: 350px;
+          height: 200px;
           display: block;
         }
       }

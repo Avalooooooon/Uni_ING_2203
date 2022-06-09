@@ -51,12 +51,21 @@ const actions = {
       }
       // 请求服务器
       user.login(payload).then(response => {
-        commit('SET_TOKEN', response.token)
-        setToken(response.token)
-        sessionStorage.setItem('headimg', response.headimg)
-        resolve()
+        console.log('112233')
+        console.log(response)
+        if (response.res === 0) {
+          commit('SET_TOKEN', response.token)
+          setToken(response.token)
+          sessionStorage.setItem('headimg', response.headimg)
+          resolve()
+        } else {
+          console.log('登陆账号错误')
+          this.$router.push('/login')
+          console.log('账号密码错误已返回')
+        }
       }).catch(error => {
         reject(error)
+        console.log('错误')
       })
     })
   },
