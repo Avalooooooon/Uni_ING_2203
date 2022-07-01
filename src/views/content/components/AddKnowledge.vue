@@ -257,7 +257,7 @@ export default {
       const url = URL.createObjectURL(file.raw)
       new Promise(function(resolve, reject) {
         const width = 700
-        const height = 394
+        const height = 395
         const img = new Image()
         img.onload = function() {
           const valid = img.width === width && img.height === height

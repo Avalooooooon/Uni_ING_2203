@@ -33,7 +33,7 @@
             :rules="[{ required: true, message: '名称不能为空' }]"
           >
             <el-input
-              v-model.number="numberValidateForm.name"
+              v-model="numberValidateForm.name"
               placeholder="请输入名称"
               type="name"
               ocomplete="off"
@@ -53,11 +53,12 @@
               <img v-if="numberValidateForm" :src="url + numberValidateForm.image" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon" />
             </el-upload>
+            <div style="margin-top: 20px">（ 上传图片推荐尺寸：750 * 1000 分辨率 ） </div>
           </el-form-item>
 
           <el-form-item label="专业" prop="major">
             <el-input
-              v-model.number="numberValidateForm.major"
+              v-model="numberValidateForm.major"
               placeholder="请输入专业名称"
               type="age"
               ocomplete="off"
@@ -66,7 +67,7 @@
 
           <el-form-item label="任职" prop="position">
             <el-input
-              v-model.number="numberValidateForm.position"
+              v-model="numberValidateForm.position"
               placeholder="请输入职位名称"
               type="age"
               ocomplete="off"
@@ -75,7 +76,7 @@
 
           <el-form-item label="所在国家" prop="country">
             <el-input
-              v-model.number="numberValidateForm.country"
+              v-model="numberValidateForm.country"
               placeholder="请输入国家名称"
               type="age"
               ocomplete="off"
@@ -173,52 +174,64 @@ export default {
 
     // 点击保存按钮
     saveAppDetail() {
-      this.$confirm('确定保存本次编辑？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then(() => {
-          axios({
-            url: '/api/v3/person2/erp_edit',
-            method: 'post',
-            params: {
-              bizid: 'uniwarm',
-              token: getToken(),
-              listid: this.listid,
-              itemid: this.detailid
-            },
-            data: this.numberValidateForm,
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          }).then((res) => {
-            console.log(this.designerParams)
-            console.log(this.numberValidateForm)
-            console.log(res)
-            if (res.data.res === 0) {
-              this.$router.go(-1)
-              this.$message({
-                type: 'success',
-                message: '保存成功'
-              })
-            } else {
-              this.$message({
-                type: 'error',
-                message: '保存失败'
-              })
-            }
-          })
+      if (this.numberValidateForm.name === '') {
+        this.$message({
+          type: 'warning',
+          message: '姓名不能为空！'
+        })
+      } else if (this.numberValidateForm.image === '') {
+        this.$message({
+          type: 'warning',
+          message: '图片不能为空！'
+        })
+      } else {
+        this.$confirm('确定保存本次编辑？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        })
+          .then(() => {
+            axios({
+              url: '/api/v3/person2/erp_edit',
+              method: 'post',
+              params: {
+                bizid: 'uniwarm',
+                token: getToken(),
+                listid: this.listid,
+                itemid: this.detailid
+              },
+              data: this.numberValidateForm,
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            }).then((res) => {
+              console.log(this.designerParams)
+              console.log(this.numberValidateForm)
+              console.log(res)
+              if (res.data.res === 0) {
+                this.$router.go(-1)
+                this.$message({
+                  type: 'success',
+                  message: '保存成功'
+                })
+              } else {
+                this.$message({
+                  type: 'error',
+                  message: '保存失败'
+                })
+              }
+            })
 
-          // this.$refs.img.src = this.uploadImage
-          // this.$refs.imgDelete.style.display = 'none'
-        })
-        .catch(() => {
-          this.$message({
-            type: 'info',
-            message: '取消保存'
+            // this.$refs.img.src = this.uploadImage
+            // this.$refs.imgDelete.style.display = 'none'
           })
-        })
+          .catch(() => {
+            this.$message({
+              type: 'info',
+              message: '取消保存'
+            })
+          })
+      }
     },
 
     // 上传照片

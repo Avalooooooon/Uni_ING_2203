@@ -106,11 +106,19 @@
             <el-button class="showHaveAddBtn" type="primary" @click="submitUpload()">开始上传</el-button>
           </div>
         </div>
-        <div v-if="loading" style="width: 100%">正在上传图片，请耐心等待...</div>
+        <div v-if="loading" style="width: 100%">
+          正在上传图片 {{ this.num }} / {{ this.fileListTotal }} ，请耐心等待...
+        </div>
         <div v-if="afterUp" style="width: 300px;margin: 0 auto;text-align: center">
           <div class="typeImg">
             <img style="width: 60px;height: 60px;vertical-align:middle; margin-bottom: 40px" src="../../assets/success.png" alt="">
-            <div>上传成功</div>
+            <div>上传完成</div>
+          </div>
+          <div v-if="errorList" style="width: 100%;padding: 30px;">
+            <span style="width: 100%;text-align: center;margin-bottom: 15px;font-weight: bold;">部分图片上传失败，请查阅</span><br>
+            <div style="width: 100%;text-align: center;margin-top: 10px" v-for="item in errorFileName" :key="item">
+              <div style="color: red; margin-top: 3px">{{item}}</div><br>
+            </div>
           </div>
         </div>
 
@@ -122,8 +130,8 @@
       <div v-for="item in imgsData" :key="item.id" class="singleimage">
         <div class="block">
           <img class="appimg" :src="'https://www.bizspace.cn' + item.image">
-          <div v-if="isDeleteing" ref="imgDelete" class="delete-img">
-            <i class="el-icon-delete" @click="deleteimg(item)" />
+          <div v-if="isDeleteing" ref="imgDelete" class="delete-img" @click="deleteimg(item)">
+            <i class="el-icon-delete" />
           </div>
         </div>
       </div>
@@ -193,7 +201,15 @@ export default {
       pagerow: 20,
 
       dialogVisible: false, // 上传图片弹窗
-      imageUrl: ''
+      imageUrl: '',
+      nowTag: '',
+      fileTotal: '',
+      num: 1,
+      tag: '',
+      fileListTotal: '',
+      errorList: false,
+      errorFileName: [],
+      fileName: ''
     }
   },
 
@@ -288,27 +304,58 @@ export default {
     },
     submitUpload() {
       this.beforeUp = false
-      this.afterUp = true
-      console.log('fileList', this.fileList)
-      for (let i = 0; i < this.fileList.length; i++) {
-        const file = this.fileList[i]
-        const formData = new FormData()
-        formData.append('headimg', file.raw)
-        console.log(formData)
-        memeListUpload(this.memeParams1, formData).then((res) => {
-          console.log(res)
-          if (res.res === 0) {
-            this.getMemeList()
-            this.fileList.length = 0
-            this.fileList = []
-            this.showEmpty = true
-          }
-        })
-      }
-      this.sleep(2000)
-      // this.loading = false
-      this.afterUp = true
-      this.beforeUp = false
+      this.loading = true
+      this.fileListTotal = this.fileList.length
+      // 定义定时器开始时间为1
+      let num = 1
+      // 顶一个定时器
+      const timer = setInterval(() => {
+        this.num = num
+        // 变量一直++
+        num++
+        // 清除定时器
+        if (num > this.fileList.length) {
+          clearInterval(timer)
+          setTimeout(() => {
+            for (let i = 0; i < this.fileList.length; i++) {
+              const file = this.fileList[i]
+              const formData = new FormData()
+              formData.append('headimg', file.raw)
+              this.fileName = file.raw.name
+              console.log(this.fileName)
+              memeListUpload(this.memeParams1, formData).then((res) => {
+                console.log('morningListUpload => res', res)
+                if (res.res === 0) {
+                  this.getMemeList()
+                  this.fileList.length = 0
+                  this.fileList = []
+                  this.num = 1
+                  this.loading = false
+                  this.afterUp = true
+                  setTimeout(() => {
+                    this.dialogVisible = false
+                    this.showEmpty = true
+                    this.showHave = false
+                    this.beforeUp = true
+                    this.afterUp = false
+                    this.loading = false
+                  }, 2000)
+                }
+              })
+                .catch(() => {
+                  console.log(file.raw.name)
+                  this.$message.error('部分图片上传失败！')
+                  this.errorFileName.push(file.raw.name)
+                  console.log(this.errorFileName)
+                  this.errorList = true
+                  this.loading = false
+                  this.afterUp = true
+                  this.num = 1
+                })
+            }
+          }, 2000)
+        }
+      }, 500)
     },
     handleAvatarSuccess(res, file) {
       console.log(file)
@@ -339,6 +386,8 @@ export default {
       this.beforeUp = true
       this.afterUp = false
       this.loading = false
+      this.errorList = false
+      this.errorFileName = []
     },
 
     // 点击删除图片按键
@@ -391,7 +440,28 @@ export default {
               const totalPage = Math.ceil((this.total - 1) / this.pagerow)
               const currentPage = this.page > totalPage ? totalPage : this.page
               this.page = currentPage < 0 ? 0 : currentPage
-              this.getMemeList()
+              console.log(this.imgsData)
+              console.log(this.imgsData.length)
+              if (this.imgsData.length === 1) {
+                console.log('该系列暂无内容')
+                fetchMemeListDetail(this.memeParams)
+                  .then((response) => {
+                    console.log(response.data)
+                    this.total = response.total
+                    this.imgsData = response.data
+                    if (this.imgsData.length > 0) {
+                      this.showPag = true
+                    } else {
+                      this.showPag = false
+                    }
+                    // this.memeParams.page = this.memeParams.page + 1
+                  })
+                  .catch((err) => {
+                    console.log(err)
+                  })
+              } else if (this.imgsData.length > 1) {
+                this.getMemeList()
+              }
             }
           })
         })

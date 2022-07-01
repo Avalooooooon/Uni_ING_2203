@@ -2,7 +2,7 @@
   <div class="sidebar-logo-container" :class="{'collapse':collapse}">
     <transition name="sidebarLogoFade">
       <div class="sidebar-logo-link">
-        <img src="../../../assets/logo.jpg" style="width: 100%">
+        <img src="../../../assets/title.png" style="width: 50%;vertical-align: middle;">
       <!--        <h1 v-else class="sidebar-title">{{ title }} </h1>-->
       </div>
       <!--      <router-link v-else key="expand" class="sidebar-logo-link" to="/">-->
@@ -53,8 +53,9 @@ export default {
   & .sidebar-logo-link {
     height: 100%;
     width: 100%;
-    display: flex;
-    align-items: center;
+    //display: flex;
+    text-align: center;
+    vertical-align: middle;
 
     & .sidebar-logo {
       width: 100%;

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
+import router from '../router/index.js'
 import { getToken, removeToken } from '@/utils/auth'
 
 // create an axios instance
@@ -46,9 +47,16 @@ service.interceptors.response.use(
     const res = response.data
 
     // if the custom code is not 20000, it is judged as an error.
+    console.log(res.res)
     if (res.res === 402) {
       window.location.href = '/login'
       removeToken()
+    }
+    if (res.res === 5) {
+      // this.$router.push({path: '/login'})
+      router.replace('/login')
+      removeToken()
+      return
     }
     if (res.res !== 0) {
       Message({

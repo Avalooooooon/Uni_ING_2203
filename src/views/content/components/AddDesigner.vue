@@ -58,7 +58,7 @@
 
           <el-form-item label="专业" prop="major">
             <el-input
-              v-model.number="numberValidateForm.major"
+              v-model="numberValidateForm.major"
               placeholder="请输入专业名称"
               type="age"
               ocomplete="off"
@@ -67,7 +67,7 @@
 
           <el-form-item label="任职" prop="position">
             <el-input
-              v-model.number="numberValidateForm.position"
+              v-model="numberValidateForm.position"
               placeholder="请输入职位名称"
               type="age"
               ocomplete="off"
@@ -76,7 +76,7 @@
 
           <el-form-item label="所在国家" prop="country">
             <el-input
-              v-model.number="numberValidateForm.country"
+              v-model="numberValidateForm.country"
               placeholder="请输入国家名称"
               type="age"
               ocomplete="off"
