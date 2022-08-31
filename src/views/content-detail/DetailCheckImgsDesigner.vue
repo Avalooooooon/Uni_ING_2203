@@ -114,7 +114,7 @@ export default {
   props: ['detailid', 'detailname'],
   data() {
     return {
-      url: 'https://www.bizspace.cn',
+      url: 'https://www.uniwarm.net',
       imageUrl: '',
       numberValidateForm: {
         name: '',
@@ -192,7 +192,7 @@ export default {
         })
           .then(() => {
             axios({
-              url: '/api/v3/person2/erp_edit',
+              url: '/erp/v3/person2/erp_edit',
               method: 'post',
               params: {
                 bizid: 'uniwarm',

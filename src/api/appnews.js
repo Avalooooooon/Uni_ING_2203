@@ -5,7 +5,7 @@ import request from '@/utils/request'
 export function fetchNewsList(newsParams) {
   console.log(newsParams)
   return request({
-    url: '/api/v3/news/erp_listall',
+    url: '/erp/v3/news/erp_listall',
     method: 'get',
     params: newsParams,
     headers: {
@@ -18,7 +18,7 @@ export function fetchNewsList(newsParams) {
 export function fetchNewsListDetail(newsParams) {
   console.log(newsParams)
   return request({
-    url: '/api/v3/news/erp_detail',
+    url: '/erp/v3/news/erp_detail',
     method: 'get',
     params: newsParams,
     headers: {
@@ -48,7 +48,7 @@ export function fetchNewsListDetail(newsParams) {
 export function delNewsList(newsParams) {
   console.log(newsParams)
   return request({
-    url: '/api/v3/news/erp_delete',
+    url: '/erp/v3/news/erp_delete',
     method: 'get',
     params: newsParams,
     headers: {

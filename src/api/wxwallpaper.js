@@ -5,7 +5,7 @@ import request from '@/utils/request'
 export function fetchPaperList(paperParams) {
   console.log(paperParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_wp_se',
+    url: '/erp/wechatweb/v1/service/get_wp_se',
     method: 'get',
     params: paperParams,
     headers: {
@@ -18,7 +18,7 @@ export function fetchPaperList(paperParams) {
 export function fetchPaperListDetail(paperParams) {
   console.log(paperParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_wp_se_detail',
+    url: '/erp/wechatweb/v1/service/get_wp_se_detail',
     method: 'get',
     params: paperParams,
     headers: {
@@ -31,7 +31,7 @@ export function fetchPaperListDetail(paperParams) {
 export function addPaperList(paperParams) {
   console.log(paperParams)
   return request({
-    url: '/api/wechatweb/v1/service/add_wp_se',
+    url: '/erp/wechatweb/v1/service/add_wp_se',
     method: 'get',
     params: paperParams,
     headers: {
@@ -44,7 +44,7 @@ export function addPaperList(paperParams) {
 export function delPaperList(paperParams) {
   console.log(paperParams)
   return request({
-    url: '/api/wechatweb/v1/service/delete_wp_se',
+    url: '/erp/wechatweb/v1/service/delete_wp_se',
     method: 'get',
     params: paperParams,
     headers: {
@@ -57,7 +57,7 @@ export function delPaperList(paperParams) {
 export function setPaperListFirst(paperParams) {
   console.log(paperParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_wp_se_detail',
+    url: '/erp/wechatweb/v1/service/get_wp_se_detail',
     method: 'get',
     params: paperParams,
     headers: {
@@ -70,7 +70,7 @@ export function setPaperListFirst(paperParams) {
 export function delPaperListDetail(paperParams) {
   console.log(paperParams)
   return request({
-    url: '/api/wechatweb/v1/service/delete_wp_img',
+    url: '/erp/wechatweb/v1/service/delete_wp_img',
     method: 'get',
     params: paperParams,
     headers: {

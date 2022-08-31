@@ -50,7 +50,7 @@
           class="appimg"
           :src="
             item.first
-              ? 'https://www.bizspace.cn' + item.first
+              ? 'https://www.uniwarm.net' + item.first
               : images.emptyimg
           "
         >

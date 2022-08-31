@@ -364,295 +364,280 @@ export const constantRoutes = [
       }
     }
     ]
-  }
+  },
   // //////////////////内容管理end
 
   // //////////////////素材投放start
-  // {
-  //   path: '/material',
-  //   component: Layout,
-  //   redirect: '/material/matlib',
-  //   meta: {
-  //     title: '素材投放',
-  //     icon: 'clipboard',
-  //     affix: true
-  //   },
-  //   children: [
-  //     // 素材库部分路由
-  //     {
-  //       path: 'matlib',
-  //       component: () => import('@/views/material-lib/MatLib'),
-  //       name: 'MatLib',
-  //       meta: {
-  //         title: '素材库',
-  //         icon: 'tree-table',
-  //         affix: true
-  //       }
-  //     },
-  //     {
-  //       path: '/material/matlib/libcheckVideo',
-  //       hidden: true,
-  //       component: () => import('@/views/material-lib/LibCheckVideo'),
-  //       name: 'LibCheckDetail',
-  //       meta: {
-  //         title: '查看视频',
-  //         activeMenu: '/material/matlib'
-  //       },
-  //       props(route) {
-  //         return {
-  //           matid: route.query.matid,
-  //           matname: route.query.matname
-  //         }
-  //       }
-  //     },
-  //     {
-  //       path: '/material/matlib/libcheckdetail',
-  //       hidden: true,
-  //       component: () => import('@/views/material-lib/LibCheckDetail'),
-  //       name: 'LibCheckDetail',
-  //       meta: {
-  //         title: '查看详情',
-  //         activeMenu: '/material/matlib'
-  //       },
-  //       props(route) {
-  //         return {
-  //           matid: route.query.matid,
-  //           matname: route.query.matname
-  //         }
-  //       }
-  //     },
-  //     {
-  //       path: '/material/matlib/libedit',
-  //       hidden: true,
-  //       component: () => import('@/views/material-lib/LibEdit'),
-  //       name: 'LibEdit',
-  //       meta: {
-  //         title: '编辑素材',
-  //         activeMenu: '/material/matlib'
-  //       },
-  //       props(route) {
-  //         return {
-  //           matid: route.query.matid,
-  //           matname: route.query.matname
-  //         }
-  //       }
-  //     },
-  //     {
-  //       path: '/material/matlib/libeditvideo',
-  //       hidden: true,
-  //       component: () => import('@/views/material-lib/LibEditVideo'),
-  //       name: 'LibEditVideo',
-  //       meta: {
-  //         title: '编辑视频',
-  //         activeMenu: '/material/matlib'
-  //       },
-  //       props(route) {
-  //         return {
-  //           matid: route.query.matid,
-  //           matname: route.query.matname
-  //         }
-  //       }
-  //     },
-  //     {
-  //       path: '/material/matlib/libimageset',
-  //       hidden: true,
-  //       component: () => import('@/views/material-lib/LibImageset'),
-  //       name: 'LibImageset',
-  //       meta: {
-  //         title: '查看图集',
-  //         activeMenu: '/material/matlib'
-  //       },
-  //       props(route) {
-  //         return {
-  //           matid: route.query.matid,
-  //           matname: route.query.matname
-  //         }
-  //       }
-  //     },
-  //     {
-  //       path: '/material/matlib/libimagesetadd',
-  //       hidden: true,
-  //       component: () => import('@/views/material-lib/LibImagesetAdd'),
-  //       name: 'LibImagesetAdd',
-  //       meta: {
-  //         title: '编辑新图集（上传图集）',
-  //         activeMenu: '/material/matlib'
-  //       },
-  //       props(route) {
-  //         return {
-  //           matid: route.query.matid,
-  //           matname: route.query.matname
-  //         }
-  //       }
-  //     },
-  //     {
-  //       path: '/material/matlib/libimagesetedit',
-  //       hidden: true,
-  //       component: () => import('@/views/material-lib/LibImagesetEdit'),
-  //       name: 'LibImagesetEdit',
-  //       meta: {
-  //         title: '编辑已上传图集',
-  //         activeMenu: '/material/matlib'
-  //       },
-  //       props(route) {
-  //         return {
-  //           matid: route.query.matid,
-  //           matname: route.query.matname
-  //         }
-  //       }
-  //     },
-  //     {
-  //       path: '/material/matlib/libimagesetdel',
-  //       hidden: true,
-  //       component: () => import('@/views/material-lib/LibImagesetDel'),
-  //       name: 'LibImagesetDel',
-  //       meta: {
-  //         title: '删除图集',
-  //         activeMenu: '/material/matlib'
-  //       },
-  //       props(route) {
-  //         return {
-  //           matid: route.query.matid,
-  //           matname: route.query.matname
-  //         }
-  //       }
-  //     },
-  //
-  //     // 投放申请部分路由
-  //     {
-  //       path: 'matapply',
-  //       component: () => import('@/views/material-apply/MatApply'),
-  //       name: 'MatApply',
-  //       meta: {
-  //         title: '投放申请',
-  //         icon: 'peoples',
-  //         affix: true
-  //       },
-  //       props(route) {
-  //         return {
-  //           matid: route.query.matid,
-  //           matname: route.query.matname
-  //         }
-  //       }
-  //     },
-  //     {
-  //       path: '/material/matapply/applychoosemat',
-  //       hidden: true,
-  //       component: () => import('@/views/material-apply/ApplyChooseMat'),
-  //       name: 'ApplyChooseMat',
-  //       meta: {
-  //         title: '投放申请-选择素材',
-  //         activeMenu: '/material/matapply'
-  //       }
-  //       // props(route) {
-  //       //   return {
-  //       //     matid: route.query.matid,
-  //       //     matname: route.query.matname
-  //       //   }
-  //       // }
-  //     },
-  //
-  //     // 投放记录部分路由
-  //     {
-  //       path: 'matrecord',
-  //       component: () => import('@/views/material-record/MatRecord'),
-  //       name: 'MatRecord',
-  //       meta: {
-  //         title: '投放记录',
-  //         icon: 'edit',
-  //         affix: true
-  //       }
-  //     },
-  //     {
-  //       path: '/material/matlib/recorddetail',
-  //       hidden: true,
-  //       component: () => import('@/views/material-record/RecordDetail'),
-  //       name: 'RecordDetail',
-  //       meta: {
-  //         title: '投放记录-详情',
-  //         activeMenu: '/material/matrecord'
-  //       },
-  //       props(route) {
-  //         return {
-  //           matid: route.query.matid,
-  //           matname: route.query.matname
-  //         }
-  //       }
-  //     },
-  //     {
-  //       path: '/material/matlib/recordwithdraw',
-  //       hidden: true,
-  //       component: () => import('@/views/material-record/RecordWithdraw'),
-  //       name: 'RecordWithdraw',
-  //       meta: {
-  //         title: '投放记录-撤回',
-  //         activeMenu: '/material/matrecord'
-  //       },
-  //       props(route) {
-  //         return {
-  //           matid: route.query.matid,
-  //           matname: route.query.matname
-  //         }
-  //       }
-  //     }
-  //
-  //   ]
-  // }
+  {
+    path: '/material',
+    component: Layout,
+    redirect: '/material/matlib',
+    meta: {
+      title: '素材投放',
+      icon: 'clipboard',
+      affix: true
+    },
+    children: [
+      // 素材库部分路由
+      {
+        path: 'matlib',
+        component: () => import('@/views/material-lib/MatLib'),
+        name: 'MatLib',
+        meta: {
+          title: '素材库',
+          icon: 'tree-table',
+          affix: true
+        }
+      },
+      {
+        path: '/material/matlib/libcheckVideo',
+        hidden: true,
+        component: () => import('@/views/material-lib/LibCheckVideo'),
+        name: 'LibCheckDetail',
+        meta: {
+          title: '查看视频',
+          activeMenu: '/material/matlib'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+      {
+        path: '/material/matlib/libcheckdetail',
+        hidden: true,
+        component: () => import('@/views/material-lib/LibCheckDetail'),
+        name: 'LibCheckDetail',
+        meta: {
+          title: '查看详情',
+          activeMenu: '/material/matlib'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+      {
+        path: '/material/matlib/libedit',
+        hidden: true,
+        component: () => import('@/views/material-lib/LibEdit'),
+        name: 'LibEdit',
+        meta: {
+          title: '编辑素材',
+          activeMenu: '/material/matlib'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+      {
+        path: '/material/matlib/libeditvideo',
+        hidden: true,
+        component: () => import('@/views/material-lib/LibEditVideo'),
+        name: 'LibEditVideo',
+        meta: {
+          title: '编辑视频',
+          activeMenu: '/material/matlib'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+      {
+        path: '/material/matlib/libimageset',
+        hidden: true,
+        component: () => import('@/views/material-lib/LibImageset'),
+        name: 'LibImageset',
+        meta: {
+          title: '查看图集',
+          activeMenu: '/material/matlib'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+      {
+        path: '/material/matlib/libimagesetadd',
+        hidden: true,
+        component: () => import('@/views/material-lib/LibImagesetAdd'),
+        name: 'LibImagesetAdd',
+        meta: {
+          title: '编辑新图集（上传图集）',
+          activeMenu: '/material/matlib'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+      {
+        path: '/material/matlib/libimagesetedit',
+        hidden: true,
+        component: () => import('@/views/material-lib/LibImagesetEdit'),
+        name: 'LibImagesetEdit',
+        meta: {
+          title: '编辑已上传图集',
+          activeMenu: '/material/matlib'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+      {
+        path: '/material/matlib/libimagesetdel',
+        hidden: true,
+        component: () => import('@/views/material-lib/LibImagesetDel'),
+        name: 'LibImagesetDel',
+        meta: {
+          title: '删除图集',
+          activeMenu: '/material/matlib'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+
+      // 投放申请部分路由
+      {
+        path: 'matapply',
+        component: () => import('@/views/material-apply/MatApply'),
+        name: 'MatApply',
+        meta: {
+          title: '投放申请',
+          icon: 'peoples',
+          affix: true
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+      {
+        path: '/material/matapply/applychoosemat',
+        hidden: true,
+        component: () => import('@/views/material-apply/ApplyChooseMat'),
+        name: 'ApplyChooseMat',
+        meta: {
+          title: '投放申请-选择素材',
+          activeMenu: '/material/matapply'
+        }
+        // props(route) {
+        //   return {
+        //     matid: route.query.matid,
+        //     matname: route.query.matname
+        //   }
+        // }
+      },
+
+      // 投放记录部分路由
+      {
+        path: 'matrecord',
+        component: () => import('@/views/material-record/MatRecord'),
+        name: 'MatRecord',
+        meta: {
+          title: '投放记录',
+          icon: 'edit',
+          affix: true
+        }
+      },
+      {
+        path: '/material/matlib/recorddetail',
+        hidden: true,
+        component: () => import('@/views/material-record/RecordDetail'),
+        name: 'RecordDetail',
+        meta: {
+          title: '投放记录-详情',
+          activeMenu: '/material/matrecord'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      },
+      {
+        path: '/material/matlib/recordwithdraw',
+        hidden: true,
+        component: () => import('@/views/material-record/RecordWithdraw'),
+        name: 'RecordWithdraw',
+        meta: {
+          title: '投放记录-撤回',
+          activeMenu: '/material/matrecord'
+        },
+        props(route) {
+          return {
+            matid: route.query.matid,
+            matname: route.query.matname
+          }
+        }
+      }
+
+    ]
+  },
   // //////////////////素材投放end
-
-  // {
-  //   path: '/new',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/new/index'),
-  //       name: 'New',
-  //       meta: { title: '新增页面', icon: 'dashboard', affix: true }
   //
-  //     }
-  //   ]
-  // },
-
-  // {
-  //   path: '/documentation',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/documentation/index'),
-  //       name: 'Documentation',
-  //       meta: { title: 'Documentation', icon: 'documentation', affix: true }
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/guide',
-  //   component: Layout,
-  //   redirect: '/guide/index',
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/guide/index'),
-  //       name: 'Guide',
-  //       meta: { title: 'Guide', icon: 'guide', noCache: true }
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/profile',
-  //   component: Layout,
-  //   redirect: '/profile/index',
-  //   hidden: true,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/profile/index'),
-  //       name: 'Profile',
-  //       meta: { title: 'Profile', icon: 'user', noCache: true }
-  //     }
-  //   ]
-  // }
+  //
+  //
+  //
+  // //////////////////社区管理start
+  {
+    path: '/community',
+    component: Layout,
+    redirect: '/community/CommunityList',
+    meta: {
+      title: '社区管理',
+      icon: 'tree',
+      affix: true
+    },
+    alwaysShow: true,
+    children: [
+      {
+        path: '/community/CommunityList',
+        component: () => import('@/views/community/CommunityList'),
+        name: 'CommunityList',
+        meta: {
+          title: '社区帖子',
+          icon: 'clipboard',
+          affix: true
+        }
+      },
+      {
+        path: '/community/CommunityList/DetailCommunity',
+        hidden: true,
+        component: () => import('@/views/community/DetailCommunity'),
+        name: 'DetailCommunity',
+        meta: {
+          title: '帖子详情',
+          activeMenu: '/community/CommunityList'
+        }
+      }
+    ]
+  }
+  // //////////////////社区管理end
 ]
 
 /**
@@ -660,260 +645,6 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
-  // {
-  //   path: '/permission',
-  //   component: Layout,
-  //   redirect: '/permission/page',
-  //   alwaysShow: true, // will always show the root menu
-  //   name: 'Permission',
-  //   meta: {
-  //     title: 'Permission',
-  //     icon: 'lock',
-  //     roles: ['admin', 'editor'] // you can set roles in root nav
-  //   },
-  //   children: [
-  //     {
-  //       path: 'page',
-  //       component: () => import('@/views/permission/page'),
-  //       name: 'PagePermission',
-  //       meta: {
-  //         title: 'Page Permission',
-  //         roles: ['admin'] // or you can only set roles in sub nav
-  //       }
-  //     },
-  //     {
-  //       path: 'directive',
-  //       component: () => import('@/views/permission/directive'),
-  //       name: 'DirectivePermission',
-  //       meta: {
-  //         title: 'Directive Permission'
-  //         // if do not set roles, means: this page does not require permission
-  //       }
-  //     },
-  //     {
-  //       path: 'role',
-  //       component: () => import('@/views/permission/role'),
-  //       name: 'RolePermission',
-  //       meta: {
-  //         title: 'Role Permission',
-  //         roles: ['admin']
-  //       }
-  //     }
-  //   ]
-  // },
-
-  // {
-  //   path: '/icon',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/icons/index'),
-  //       name: 'Icons',
-  //       meta: { title: 'Icons', icon: 'icon', noCache: true }
-  //     }
-  //   ]
-  // },
-
-  /** when your routing map is too long, you can split it into small modules **/
-  // componentsRouter,
-  // chartsRouter,
-  // nestedRouter,
-  // tableRouter,
-
-  // {
-  //   path: '/example',
-  //   component: Layout,
-  //   redirect: '/example/list',
-  //   name: 'Example',
-  //   meta: {
-  //     title: 'Example',
-  //     icon: 'el-icon-s-help'
-  //   },
-  //   children: [
-  //     {
-  //       path: 'create',
-  //       component: () => import('@/views/example/create'),
-  //       name: 'CreateArticle',
-  //       meta: { title: 'Create Article', icon: 'edit' }
-  //     },
-  //     {
-  //       path: 'edit/:id(\\d+)',
-  //       component: () => import('@/views/example/edit'),
-  //       name: 'EditArticle',
-  //       meta: { title: 'Edit Article', noCache: true, activeMenu: '/example/list' },
-  //       hidden: true
-  //     },
-  //     {
-  //       path: 'list',
-  //       component: () => import('@/views/example/list'),
-  //       name: 'ArticleList',
-  //       meta: { title: 'Article List', icon: 'list' }
-  //     }
-  //   ]
-  // },
-
-  // {
-  //   path: '/tab',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/tab/index'),
-  //       name: 'Tab',
-  //       meta: { title: 'Tab', icon: 'tab' }
-  //     }
-  //   ]
-  // },
-
-  // {
-  //   path: '/error',
-  //   component: Layout,
-  //   redirect: 'noRedirect',
-  //   name: 'ErrorPages',
-  //   meta: {
-  //     title: 'Error Pages',
-  //     icon: '404'
-  //   },
-  //   children: [
-  //     {
-  //       path: '401',
-  //       component: () => import('@/views/error-page/401'),
-  //       name: 'Page401',
-  //       meta: { title: '401', noCache: true }
-  //     },
-  //     {
-  //       path: '404',
-  //       component: () => import('@/views/error-page/404'),
-  //       name: 'Page404',
-  //       meta: { title: '404', noCache: true }
-  //     }
-  //   ]
-  // },
-  //
-  // {
-  //   path: '/error-log',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'log',
-  //       component: () => import('@/views/error-log/index'),
-  //       name: 'ErrorLog',
-  //       meta: { title: 'Error Log', icon: 'bug' }
-  //     }
-  //   ]
-  // },
-
-  // {
-  //   path: '/excel',
-  //   component: Layout,
-  //   redirect: '/excel/export-excel',
-  //   name: 'Excel',
-  //   meta: {
-  //     title: 'Excel',
-  //     icon: 'excel'
-  //   },
-  //   children: [
-  //     {
-  //       path: 'export-excel',
-  //       component: () => import('@/views/excel/export-excel'),
-  //       name: 'ExportExcel',
-  //       meta: { title: 'Export Excel' }
-  //     },
-  //     {
-  //       path: 'export-selected-excel',
-  //       component: () => import('@/views/excel/select-excel'),
-  //       name: 'SelectExcel',
-  //       meta: { title: 'Export Selected' }
-  //     },
-  //     {
-  //       path: 'export-merge-header',
-  //       component: () => import('@/views/excel/merge-header'),
-  //       name: 'MergeHeader',
-  //       meta: { title: 'Merge Header' }
-  //     },
-  //     {
-  //       path: 'upload-excel',
-  //       component: () => import('@/views/excel/upload-excel'),
-  //       name: 'UploadExcel',
-  //       meta: { title: 'Upload Excel' }
-  //     }
-  //   ]
-  // },
-
-  // {
-  //   path: '/zip',
-  //   component: Layout,
-  //   redirect: '/zip/download',
-  //   alwaysShow: true,
-  //   name: 'Zip',
-  //   meta: { title: 'Zip', icon: 'zip' },
-  //   children: [
-  //     {
-  //       path: 'download',
-  //       component: () => import('@/views/zip/index'),
-  //       name: 'ExportZip',
-  //       meta: { title: 'Export Zip' }
-  //     }
-  //   ]
-  // },
-
-  // {
-  //   path: '/pdf',
-  //   component: Layout,
-  //   redirect: '/pdf/index',
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/pdf/index'),
-  //       name: 'PDF',
-  //       meta: { title: 'PDF', icon: 'pdf' }
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/pdf/download',
-  //   component: () => import('@/views/pdf/download'),
-  //   hidden: true
-  // },
-  //
-  // {
-  //   path: '/theme',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/theme/index'),
-  //       name: 'Theme',
-  //       meta: { title: 'Theme', icon: 'theme' }
-  //     }
-  //   ]
-  // },
-
-  // {
-  //   path: '/clipboard',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/clipboard/index'),
-  //       name: 'ClipboardDemo',
-  //       meta: { title: 'Clipboard', icon: 'clipboard' }
-  //     }
-  //   ]
-  // },
-  //
-  // {
-  //   path: 'external-link',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'https://github.com/PanJiaChen/vue-element-admin',
-  //       meta: { title: 'External Link', icon: 'link' }
-  //     }
-  //   ]
-  // },
-
   // 404 page must be placed at the end !!!
   {
     path: '*',

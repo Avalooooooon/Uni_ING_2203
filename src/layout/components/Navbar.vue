@@ -47,7 +47,7 @@ export default {
   },
   data() {
     return {
-      url: 'https://www.bizspace.cn',
+      url: 'https://www.uniwarm.net',
       headimg: '',
       myUsername: ''
     }

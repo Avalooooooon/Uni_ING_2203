@@ -170,7 +170,7 @@ export default {
       openDetailDialog: false,
       openWithdrawDialog: false,
 
-      url: 'https://www.bizspace.cn',
+      url: 'https://www.uniwarm.net',
 
       // 传给投放申请的数据
       chooseId: -1,

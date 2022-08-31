@@ -5,7 +5,7 @@ import request from '@/utils/request'
 export function fetchDesignerList(designerParams) {
   // console.log(designerParams)
   return request({
-    url: '/api/v3/person2/erp_listall',
+    url: '/erp/v3/person2/erp_listall',
     method: 'get',
     params: designerParams,
     headers: {
@@ -18,7 +18,7 @@ export function fetchDesignerList(designerParams) {
 export function fetchDesignerListDetail(designerParams) {
   // console.log(designerParams)
   return request({
-    url: '/api/v3/person2/erp_detail',
+    url: '/erp/v3/person2/erp_detail',
     method: 'get',
     params: designerParams,
     headers: {
@@ -48,7 +48,7 @@ export function fetchDesignerListDetail(designerParams) {
 export function delDesignerList(designerParams) {
   // console.log(designerParams)
   return request({
-    url: '/api/v3/person2/erp_delete',
+    url: '/erp/v3/person2/erp_delete',
     method: 'get',
     params: designerParams,
     headers: {

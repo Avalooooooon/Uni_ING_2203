@@ -5,7 +5,7 @@ import request from '@/utils/request'
 export function fetchMemeList(memeParams) {
   console.log(memeParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_st_se',
+    url: '/erp/wechatweb/v1/service/get_st_se',
     method: 'get',
     params: memeParams,
     headers: {
@@ -18,7 +18,7 @@ export function fetchMemeList(memeParams) {
 export function fetchMemeListDetail(memeParams) {
   console.log(memeParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_st_se_detail',
+    url: '/erp/wechatweb/v1/service/get_st_se_detail',
     method: 'get',
     params: memeParams,
     headers: {
@@ -31,7 +31,7 @@ export function fetchMemeListDetail(memeParams) {
 export function addMemeList(memeParamsAdd) {
   console.log(memeParamsAdd)
   return request({
-    url: '/api/wechatweb/v1/service/add_st_se',
+    url: '/erp/wechatweb/v1/service/add_st_se',
     method: 'get',
     params: memeParamsAdd,
     headers: {
@@ -44,7 +44,7 @@ export function addMemeList(memeParamsAdd) {
 export function delMemeList(memeParams) {
   console.log(memeParams)
   return request({
-    url: '/api/wechatweb/v1/service/delete_st_se',
+    url: '/erp/wechatweb/v1/service/delete_st_se',
     method: 'get',
     params: memeParams,
     headers: {
@@ -57,7 +57,7 @@ export function delMemeList(memeParams) {
 export function setMemeListFirst(memeParams) {
   console.log(memeParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_wp_se_detail',
+    url: '/erp/wechatweb/v1/service/get_wp_se_detail',
     method: 'get',
     params: memeParams,
     headers: {
@@ -70,7 +70,7 @@ export function setMemeListFirst(memeParams) {
 export function delMemeListDetail(memeParams) {
   console.log(memeParams)
   return request({
-    url: '/api/wechatweb/v1/service/delete_st_img',
+    url: '/erp/wechatweb/v1/service/delete_st_img',
     method: 'get',
     params: memeParams,
     headers: {

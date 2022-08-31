@@ -32,7 +32,7 @@
 <!--      </div>-->
       <div v-for="item in imgsData" :key="item.id" class="singleimage">
         <div class="block">
-          <img class="appimg" :src="'https://www.bizspace.cn' + item.image">
+          <img class="appimg" :src="'https://www.uniwarm.net' + item.image">
           <div v-if="isDeleteing" ref="imgDelete" class="delete-img">
             <i class="el-icon-delete" @click="deleteimg(item)" />
           </div>

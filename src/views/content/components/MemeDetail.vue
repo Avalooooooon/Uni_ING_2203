@@ -52,7 +52,7 @@
           class="appimg"
           :src="
             item.first
-              ? 'https://www.bizspace.cn' + item.first
+              ? 'https://www.uniwarm.net' + item.first
               : images.emptyimg
           "
         /> -->
@@ -60,7 +60,7 @@
           class="appimg"
           :src="
             item.first
-              ? 'https://www.bizspace.cn' + item.first
+              ? 'https://www.uniwarm.net' + item.first
               : images.emptyimg
           "
         >
@@ -122,7 +122,7 @@ export default {
         token: getToken(),
         se_id: ''
       },
-      url: 'https://www.bizspace.cn',
+      url: 'https://www.uniwarm.net',
 
       dialogVisible: false, // 弹窗显隐
       form: {

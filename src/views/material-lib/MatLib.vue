@@ -199,43 +199,43 @@ export default {
       matId: '',
       centerDialogVisible: false,
       tableData: [{
-        image: 'https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
+        image: 'https://www.uniwarm.net/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
         title: '品牌灵魂xxxxxxx',
         type: '视频',
         uploadName: 'xxx',
         date: '2016-05-02'
       }, {
-        image: 'https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
+        image: 'https://www.uniwarm.net/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
         title: '品牌灵魂xxxxxxx',
         type: '视频',
         uploadName: 'xxx',
         date: '2016-05-02'
       }, {
-        image: 'https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
+        image: 'https://www.uniwarm.net/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
         title: '品牌灵魂xxxxxxx',
         type: '图集',
         uploadName: 'xxx',
         date: '2016-05-02'
       }, {
-        image: 'https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
+        image: 'https://www.uniwarm.net/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
         title: '品牌灵魂xxxxxxx',
         type: '视频',
         uploadName: 'xxx',
         date: '2016-05-02'
       }, {
-        image: 'https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
+        image: 'https://www.uniwarm.net/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
         title: '品牌灵魂xxxxxxx',
         type: '图集',
         uploadName: 'xxx',
         date: '2016-05-02'
       }, {
-        image: 'https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
+        image: 'https://www.uniwarm.net/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
         title: '品牌灵魂xxxxxxx',
         type: '图集',
         uploadName: 'xxx',
         date: '2016-05-02'
       }, {
-        image: 'https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
+        image: 'https://www.uniwarm.net/appsrc/biz/uniwarm/wechatweb/static/home/hello.png',
         title: '品牌灵魂xxxxxxx',
         type: '视频',
         uploadName: 'xxx',

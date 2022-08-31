@@ -5,7 +5,7 @@ import request from '@/utils/request'
 export function fetchKnowledgeList(knowledgeParams) {
   // console.log(knowledgeParams)
   return request({
-    url: '/api/v3/news/erp_listall',
+    url: '/erp/v3/news/erp_listall',
     method: 'get',
     params: knowledgeParams,
     headers: {
@@ -18,7 +18,7 @@ export function fetchKnowledgeList(knowledgeParams) {
 export function fetchKnowledgeListDetail(knowledgeParams) {
   // console.log(knowledgeParams)
   return request({
-    url: '/api/v3/news/erp_detail',
+    url: '/erp/v3/news/erp_detail',
     method: 'get',
     params: knowledgeParams,
     headers: {
@@ -48,7 +48,7 @@ export function fetchKnowledgeListDetail(knowledgeParams) {
 export function delKnowledgeList(knowledgeParams) {
   // console.log(knowledgeParams)
   return request({
-    url: '/api/v3/news/erp_delete',
+    url: '/erp/v3/news/erp_delete',
     method: 'get',
     params: knowledgeParams,
     headers: {

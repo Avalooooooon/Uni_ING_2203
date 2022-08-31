@@ -24,8 +24,8 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
-  // publicPath: '/uniwarm_ops/',
-  publicPath: './',
+  publicPath: '/uniwarm_ops/',
+  // publicPath: './',
   outputDir: 'dist',
   assetsDir: 'static',
   // lintOnSave: process.env.NODE_ENV === 'development',
@@ -41,7 +41,8 @@ module.exports = {
     // before: require('./mock/mock-server.js')
     proxy: {
       [process.env.VUE_APP_BASE_API]: {
-        target: 'http://www.bizspace.cn:8690',
+        target: 'http://www.uniwarm.net:8690',
+        // http://www.uniwarm.net:8690
         // target: 'http://192.168.1.119:8081',
         // target: 'http://192.168.1.253:8081',
         changeOrigin: true,

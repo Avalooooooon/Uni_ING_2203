@@ -75,12 +75,12 @@ export default {
         {
           id: '0',
           name: '早安',
-          image: 'https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/hello/morning.png'
+          image: 'https://www.uniwarm.net/appsrc/biz/uniwarm/wechatweb/static/hello/morning.png'
         },
         {
           id: '1',
           name: '晚安',
-          image: 'https://www.bizspace.cn/appsrc/biz/uniwarm/wechatweb/static/hello/night.png'
+          image: 'https://www.uniwarm.net/appsrc/biz/uniwarm/wechatweb/static/hello/night.png'
         }
       ]
     }

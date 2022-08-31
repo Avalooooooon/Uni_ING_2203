@@ -5,7 +5,7 @@ import request from '@/utils/request'
 export function fetchMorningList(morningParams) {
   console.log(morningParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_wp_se',
+    url: '/erp/wechatweb/v1/service/get_wp_se',
     method: 'get',
     params: morningParams,
     headers: {
@@ -18,7 +18,7 @@ export function fetchMorningList(morningParams) {
 export function fetchMorningListDetail(morningParams) {
   console.log(morningParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_hello_se_detail',
+    url: '/erp/wechatweb/v1/service/get_hello_se_detail',
     method: 'get',
     params: morningParams,
     headers: {
@@ -31,7 +31,7 @@ export function fetchMorningListDetail(morningParams) {
 export function addMorningList(morningParams) {
   console.log(morningParams)
   return request({
-    url: '/api/wechatweb/v1/service/add_wp_se',
+    url: '/erp/wechatweb/v1/service/add_wp_se',
     method: 'get',
     params: morningParams,
     headers: {
@@ -44,7 +44,7 @@ export function addMorningList(morningParams) {
 export function delMorningList(morningParams) {
   console.log(morningParams)
   return request({
-    url: '/api/wechatweb/v1/service/delete_wp_se',
+    url: '/erp/wechatweb/v1/service/delete_wp_se',
     method: 'get',
     params: morningParams,
     headers: {
@@ -57,7 +57,7 @@ export function delMorningList(morningParams) {
 export function setMorningListFirst(morningParams) {
   console.log(morningParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_wp_se_detail',
+    url: '/erp/wechatweb/v1/service/get_wp_se_detail',
     method: 'get',
     params: morningParams,
     headers: {
@@ -70,7 +70,7 @@ export function setMorningListFirst(morningParams) {
 export function delMorningListDetail(morningParams) {
   console.log(morningParams)
   return request({
-    url: '/api/wechatweb/v1/service/delete_hello_img',
+    url: '/erp/wechatweb/v1/service/delete_hello_img',
     method: 'get',
     params: morningParams,
     headers: {

@@ -129,7 +129,7 @@
     <div class="images-wrapper">
       <div v-for="item in imgsData" :key="item.id" class="singleimage">
         <div class="block">
-          <img class="appimg" :src="'https://www.bizspace.cn' + item.image">
+          <img class="appimg" :src="'https://www.uniwarm.net' + item.image">
           <div v-if="isDeleteing" ref="imgDelete" class="delete-img" @click="deleteimg(item)">
             <i class="el-icon-delete" />
           </div>
@@ -156,7 +156,6 @@ import {
   delSecretListDetail
 } from '@/api/wxsecret'
 import { getToken } from '@/utils/auth'
-import { morningListUpload } from '@/api/wxmorning'
 // import axios from 'axios'
 
 export default {
@@ -184,7 +183,7 @@ export default {
         token: getToken(),
         locked: 'no'
       },
-      url: 'https://www.bizspace.cn',
+      url: 'https://www.uniwarm.net',
       secretParams2: {
         bizid: 'uniwarm',
         token: getToken(),

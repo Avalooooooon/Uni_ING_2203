@@ -25,7 +25,7 @@
           class="appimg"
           :src="
             item.image
-              ? 'https://www.bizspace.cn' + item.image
+              ? 'https://www.uniwarm.net' + item.image
               : images.emptyimg
           "
         >

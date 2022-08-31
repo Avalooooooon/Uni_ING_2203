@@ -82,8 +82,8 @@ export default {
     }
     return {
       loginForm: {
-        username: '',
-        password: '',
+        username: 'dong',
+        password: 'donglichao',
         bizid: 'uniwarm'
       },
       checked: true,

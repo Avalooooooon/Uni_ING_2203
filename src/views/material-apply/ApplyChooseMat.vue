@@ -72,7 +72,7 @@
           :class="{ appimgActive: chooseId == item.id }"
           :src="
             item.image
-              ? 'https://www.bizspace.cn' + item.image
+              ? 'https://www.uniwarm.net' + item.image
               : images.emptyimg
           "
         >
@@ -118,7 +118,7 @@ export default {
         // 占位图
         emptyimg: require('@/assets/empty.jpg')
       },
-      url: 'https://www.bizspace.cn',
+      url: 'https://www.uniwarm.net',
       imageUrl: '',
 
       // 传给投放申请的数据

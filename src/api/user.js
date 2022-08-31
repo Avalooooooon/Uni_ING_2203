@@ -5,7 +5,7 @@ export function login(data) {
   data = qs.stringify(data)
   console.log(data)
   return request({
-    url: '/api/wechatweb/v1/service/login',
+    url: '/erp/wechatweb/v1/service/login',
     method: 'post',
     data,
     headers: {

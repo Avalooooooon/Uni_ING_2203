@@ -5,7 +5,7 @@ import request from '@/utils/request'
 export function fetchSecretList(secretParams) {
   console.log(secretParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_wp_se',
+    url: '/erp/wechatweb/v1/service/get_wp_se',
     method: 'get',
     params: secretParams,
     headers: {
@@ -18,7 +18,7 @@ export function fetchSecretList(secretParams) {
 export function fetchSecretListDetail(secretParams) {
   console.log(secretParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_secret_detail',
+    url: '/erp/wechatweb/v1/service/get_secret_detail',
     method: 'get',
     params: secretParams,
     headers: {
@@ -31,7 +31,7 @@ export function fetchSecretListDetail(secretParams) {
 export function setSecretListFirst(secretParams) {
   console.log(secretParams)
   return request({
-    url: '/api/wechatweb/v1/service/get_wp_se_detail',
+    url: '/erp/wechatweb/v1/service/get_wp_se_detail',
     method: 'get',
     params: secretParams,
     headers: {
@@ -44,7 +44,7 @@ export function setSecretListFirst(secretParams) {
 export function delSecretListDetail(secretParams2) {
   console.log(secretParams2)
   return request({
-    url: '/api/wechatweb/v1/service/delete_secret_img',
+    url: '/erp/wechatweb/v1/service/delete_secret_img',
     method: 'get',
     params: secretParams2,
     headers: {

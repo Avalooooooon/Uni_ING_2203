@@ -116,7 +116,7 @@
     <div class="images-wrapper">
       <div v-for="item in imgsData" :key="item.id" class="singleimage">
         <div class="block">
-          <img class="appimg" :src="'https://www.bizspace.cn' + item.image">
+          <img class="appimg" :src="'https://www.uniwarm.net' + item.image">
           <div v-if="isDeleteing" ref="imgDelete" class="delete-img" @click="deleteimg(item)">
             <i class="el-icon-delete" />
           </div>
@@ -143,7 +143,6 @@ import {
   delMorningListDetail
 } from '@/api/wxmorning'
 import { getToken } from '@/utils/auth'
-// import { paperListUpload } from '@/api/wxwallpaper'
 // import axios from 'axios'
 
 export default {
@@ -173,7 +172,6 @@ export default {
         token: getToken(),
         s_id: this.detailid
       },
-      url: 'https://www.bizspace.cn',
       morningParams2: {
         bizid: 'uniwarm',
         token: getToken(),
@@ -623,7 +621,7 @@ export default {
       // 模块主图
       .appimg {
         width: 100%;
-        height: 95%;
+        height: 100%;
       }
       // 删除状态下的删除栏
       .delete-img {

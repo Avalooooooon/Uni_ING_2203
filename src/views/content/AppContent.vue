@@ -2,15 +2,15 @@
   <!-- “APP内容管理”主界面，显示的是三个系列 -->
   <div class="content-wrapper">
     <div class="module-wrapper" appid="003" appname="设计师" @click="toDesignerDetail">
-      <img class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/erp/ops/static/design.png">
+      <img class="appimg" src="https://www.uniwarm.net/appsrc/biz/uniwarm/erp/ops/static/design.png">
       <div class="contentName">设计师</div>
     </div>
     <div class="module-wrapper" appid="004" appname="资讯" @click="toNewsDetail">
-      <img class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/erp/ops/static/news.png">
+      <img class="appimg" src="https://www.uniwarm.net/appsrc/biz/uniwarm/erp/ops/static/news.png">
       <div class="contentName">资讯</div>
     </div>
     <div class="module-wrapper" appid="005" appname="保养小知识" @click="toKnowledgeDetail">
-      <img class="appimg" src="https://www.bizspace.cn/appsrc/biz/uniwarm/erp/ops/static/maintain.png">
+      <img class="appimg" src="https://www.uniwarm.net/appsrc/biz/uniwarm/erp/ops/static/maintain.png">
       <div class="contentName">保养小知识</div>
     </div>
   </div>
