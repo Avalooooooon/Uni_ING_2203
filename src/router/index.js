@@ -609,11 +609,11 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/community/CommunityList',
     meta: {
-      title: '社区管理',
+      title: '',
       icon: 'tree',
       affix: true
     },
-    alwaysShow: true,
+    // alwaysShow: true,
     children: [
       {
         path: '/community/CommunityList',
@@ -636,8 +636,33 @@ export const constantRoutes = [
         }
       }
     ]
-  }
+  },
   // //////////////////社区管理end
+
+  // //////////////////反馈管理start
+  {
+    path: '/feedback',
+    component: Layout,
+    redirect: '/feedback/feedBackList',
+    meta: {
+      title: '',
+      icon: 'tree',
+      affix: true
+    },
+    // alwaysShow: true,
+    children: [
+      {
+        path: '/feedBackList',
+        component: () => import('@/views/feedback/feedBackList'),
+        name: 'FeedBackList',
+        meta: {
+          title: '反馈管理',
+          icon: 'email',
+          affix: true
+        }
+      }
+    ]
+  }
 ]
 
 /**

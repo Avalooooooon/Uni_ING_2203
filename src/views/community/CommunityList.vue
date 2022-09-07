@@ -1,5 +1,5 @@
 <template>
-  <!-- 素材投放——投放申请界面 -->
+  <!-- 社区管理-社区帖子 -->
   <div class="content-wrapper">
     <div class="topbar-wrapper">
       <div class="btns">
