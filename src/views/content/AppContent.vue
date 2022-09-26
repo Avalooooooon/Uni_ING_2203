@@ -13,6 +13,10 @@
       <img class="appimg" src="https://www.uniwarm.net/appsrc/biz/uniwarm/erp/ops/static/maintain.png">
       <div class="contentName">保养小知识</div>
     </div>
+    <div class="module-wrapper" appid="006" appname="云资源" @click="toCloudDetail">
+      <img class="appimg" src="https://www.uniwarm.net/appsrc/biz/uniwarm/wechatweb/static/home/sticker.png">
+      <div class="contentName">云资源</div>
+    </div>
   </div>
 </template>
 
@@ -51,6 +55,18 @@ export default {
 
       this.$router.push({
         name: 'KnowledgeDetail',
+        query: {
+          appid: appid,
+          appname: appname
+        }
+      })
+    },
+    toCloudDetail(event) {
+      const appid = event.currentTarget.getAttribute('appid')
+      const appname = event.currentTarget.getAttribute('appname')
+
+      this.$router.push({
+        name: 'CloudDetail',
         query: {
           appid: appid,
           appname: appname

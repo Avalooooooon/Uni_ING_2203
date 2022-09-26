@@ -362,7 +362,41 @@ export const constantRoutes = [
           listid: route.query.listid
         }
       }
-    }
+    },
+
+    {
+      path: '/content/appcontent/clouddetail',
+      hidden: true,
+      component: () => import('@/views/content/components/CloudDetail'),
+      name: 'CloudDetail',
+      meta: {
+        title: '云资源',
+        activeMenu: '/content/appcontent'
+      },
+      props(route) {
+        return {
+          appid: route.query.appid,
+          appname: route.query.appname
+        }
+      }
+    },
+    {
+      path: '/content/appcontent/designerdetail/detailcheckimgscloud',
+      hidden: true,
+      component: () => import('@/views/content-detail/DetailCheckImgsCloud'),
+      name: 'DetailCheckImgsCloud',
+      meta: {
+        title: '云资源系列详情',
+        activeMenu: '/content/appcontent'
+      },
+      props(route) {
+        return {
+          detailid: route.query.detailid,
+          detailname: route.query.detailname
+        }
+      }
+    },
+
     ]
   },
   // //////////////////内容管理end
