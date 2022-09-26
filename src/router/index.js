@@ -217,7 +217,7 @@ export const constantRoutes = [
       name: 'AppContent',
       meta: {
         title: 'APP内容管理',
-        icon: 'international',
+        icon: 'app',
         affix: true,
         activeMenu: '/content/appcontent'
       }
@@ -374,7 +374,7 @@ export const constantRoutes = [
     redirect: '/material/matlib',
     meta: {
       title: '素材投放',
-      icon: 'clipboard',
+      icon: 'sucai',
       affix: true
     },
     children: [
@@ -385,7 +385,7 @@ export const constantRoutes = [
         name: 'MatLib',
         meta: {
           title: '素材库',
-          icon: 'tree-table',
+          icon: 'cangku',
           affix: true
         }
       },
@@ -525,7 +525,7 @@ export const constantRoutes = [
         name: 'MatApply',
         meta: {
           title: '投放申请',
-          icon: 'peoples',
+          icon: 'shenqing',
           affix: true
         },
         props(route) {
@@ -610,7 +610,7 @@ export const constantRoutes = [
     redirect: '/community/CommunityList',
     meta: {
       title: '',
-      icon: 'tree',
+      icon: 'shequ',
       affix: true
     },
     // alwaysShow: true,
@@ -621,7 +621,7 @@ export const constantRoutes = [
         name: 'CommunityList',
         meta: {
           title: '社区帖子',
-          icon: 'clipboard',
+          icon: 'shequ',
           affix: true
         }
       },
@@ -657,7 +657,7 @@ export const constantRoutes = [
         name: 'FeedBackList',
         meta: {
           title: '反馈管理',
-          icon: 'email',
+          icon: 'fankui',
           affix: true
         }
       }

@@ -36,7 +36,7 @@
           </div>
         </div>
       </div>
-      <div style="width: 1%;height: 95%;margin-top: 1.25%;border-left: 1px solid #e3e5ed;"></div>
+      <div style="width: 1%;height: 95%;margin-top: 1.25%;border-left: 1px solid #e3e5ed;" />
       <div style="width: 69%;padding: 0 20px 20px 40px;">
         <h4>评论 (100)</h4>
         <div class="Comment-list">
